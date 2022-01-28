@@ -50,16 +50,16 @@ class AccountInvoice(models.Model):
 
     def get_mail_template_certificate(self):
         if self.partner_id.member:
-            mail_template = "easy_my_coop.email_template_certificat_increase"
+            mail_template = "cooperator.email_template_certificat_increase"
         else:
-            mail_template = "easy_my_coop.email_template_certificat"
+            mail_template = "cooperator.email_template_certificat"
         return self.env.ref(mail_template)
 
     def get_sequence_register(self):
-        return self.env.ref("easy_my_coop.sequence_subscription", False)
+        return self.env.ref("cooperator.sequence_subscription", False)
 
     def get_sequence_operation(self):
-        return self.env.ref("easy_my_coop.sequence_register_operation", False)
+        return self.env.ref("cooperator.sequence_register_operation", False)
 
     def get_share_line_vals(self, line, effective_date):
         return {
@@ -187,7 +187,7 @@ class AccountInvoice(models.Model):
         return True
 
     def _get_capital_release_mail_template(self):
-        return self.env.ref("easy_my_coop.email_template_release_capital", False)
+        return self.env.ref("cooperator.email_template_release_capital", False)
 
     def send_capital_release_request_mail(self):
         if self.company_id.send_capital_release_email:

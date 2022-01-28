@@ -1,6 +1,7 @@
 from odoo import api, models
 
 
+# no need for a wizard here, a server action would do the trick
 class ValidateSubscriptionRequest(models.TransientModel):
     _name = "validate.subscription.request"
     _description = "Validate subscription request"

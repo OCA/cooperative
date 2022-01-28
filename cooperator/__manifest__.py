@@ -5,9 +5,9 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Easy My Coop",
-    "summary": "Manage your cooperative shares",
-    "version": "12.0.3.3.2",
+    "name": "Cooperators",
+    "summary": "Manage your cooperators",
+    "version": "12.0.4.0.0",
     "depends": [
         "base",
         "web",

@@ -50,9 +50,9 @@ class SubscriptionRequest(models.Model):
 
     def get_mail_template_notif(self, is_company=False):
         if is_company:
-            mail_template = "easy_my_coop.email_template_confirmation_company"
+            mail_template = "cooperator.email_template_confirmation_company"
         else:
-            mail_template = "easy_my_coop.email_template_confirmation"
+            mail_template = "cooperator.email_template_confirmation"
         return self.env.ref(mail_template, False)
 
     def is_member(self, vals, cooperator):
@@ -533,7 +533,7 @@ class SubscriptionRequest(models.Model):
         return res
 
     def get_journal(self):
-        return self.env.ref("easy_my_coop.subscription_journal")
+        return self.env.ref("cooperator.subscription_journal")
 
     def get_accounting_account(self):
         account_obj = self.env["account.account"]
@@ -784,7 +784,7 @@ class SubscriptionRequest(models.Model):
     def _send_waiting_list_mail(self):
         if self.company_id.send_waiting_list_email:
             waiting_list_mail_template = self.env.ref(
-                "easy_my_coop.email_template_waiting_list", False
+                "cooperator.email_template_waiting_list", False
             )
             waiting_list_mail_template.send_mail(self.id, True)
 

@@ -72,7 +72,7 @@
 
     <template
         id="emc_external_layout_larger_logo"
-        inherit_id="easy_my_coop.emc_external_layout_standard"
+        inherit_id="cooperator.emc_external_layout_standard"
         primary="True"
     >
         <!--

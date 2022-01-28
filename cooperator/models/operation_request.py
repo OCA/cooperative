@@ -283,10 +283,10 @@ class OperationRequest(models.Model):
                 )
 
     def _get_share_transfer_mail_template(self):
-        return self.env.ref("easy_my_coop.email_template_share_transfer", False)
+        return self.env.ref("cooperator.email_template_share_transfer", False)
 
     def _get_share_update_mail_template(self):
-        return self.env.ref("easy_my_coop.email_template_share_update", False)
+        return self.env.ref("cooperator.email_template_share_update", False)
 
     def _send_share_transfer_mail(
         self, sub_register_line
@@ -359,7 +359,7 @@ class OperationRequest(models.Model):
                     _("Converting just part of the" " shares is not yet implemented")
                 )
         elif self.operation_type == "transfer":
-            sequence_id = self.env.ref("easy_my_coop.sequence_subscription", False)
+            sequence_id = self.env.ref("cooperator.sequence_subscription", False)
             partner_vals = {"member": True}
             if self.receiver_not_member:
                 partner = self.subscription_request.create_coop_partner()
@@ -401,7 +401,7 @@ class OperationRequest(models.Model):
             raise ValidationError(_("This operation is not yet" " implemented."))
 
         sequence_operation = self.env.ref(
-            "easy_my_coop.sequence_register_operation", False
+            "cooperator.sequence_register_operation", False
         )  # noqa
         sub_reg_operation = sequence_operation.next_by_id()
 

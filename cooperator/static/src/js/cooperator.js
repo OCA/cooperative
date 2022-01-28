@@ -1,4 +1,4 @@
-odoo.define("easy_my_coop.oe_easymy_coop", function (require) {
+odoo.define("cooperator.oe_easymy_coop", function (require) {
     $(document).ready(function () {
         "use strict";
         var ajax = require("web.ajax");

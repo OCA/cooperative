@@ -8,8 +8,8 @@
             model="account.invoice"
             string="Capital release request"
             report_type="qweb-pdf"
-            name="easy_my_coop.theme_invoice_G002"
-            file="easy_my_coop.cooperator_invoice_G002.xml"
+            name="cooperator.theme_invoice_G002"
+            file="cooperator.cooperator_invoice_G002.xml"
             attachment="(object.state in ('open','paid')) and ('SUBJ'+(object.number or '').replace('/','')+'.pdf')"
         />
 
@@ -18,8 +18,8 @@
             model="subscription.register"
             string="Subscription Register Report"
             report_type="qweb-pdf"
-            name="easy_my_coop.cooperator_subscription_G001"
-            file="easy_my_coop.cooperator_subscription_G001.xml"
+            name="cooperator.cooperator_subscription_G001"
+            file="cooperator.cooperator_subscription_G001.xml"
             multi="True"
             menu="True"
         />
@@ -29,8 +29,8 @@
             model="res.partner"
             string="Cooperator certificat"
             report_type="qweb-pdf"
-            name="easy_my_coop.cooperator_certificat_G001"
-            file="easy_my_coop.cooperator_certificat_G001.xml"
+            name="cooperator.cooperator_certificat_G001"
+            file="cooperator.cooperator_certificat_G001.xml"
             multi="True"
             menu="True"
         />
@@ -40,8 +40,8 @@
             model="res.partner"
             string="Cooperator register"
             report_type="qweb-pdf"
-            name="easy_my_coop.cooperator_register_G001"
-            file="easy_my_coop.cooperator_register_G001.xml"
+            name="cooperator.cooperator_register_G001"
+            file="cooperator.cooperator_register_G001.xml"
             multi="True"
             menu="True"
         />

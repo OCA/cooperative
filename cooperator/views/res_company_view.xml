@@ -9,7 +9,7 @@
                 <group
                     name="coop_grp"
                     string="EasyMy Coop"
-                    groups="easy_my_coop.group_easy_my_coop_user"
+                    groups="cooperator.group_easy_my_coop_user"
                 >
                     <field name="unmix_share_type" />
                     <field name="allow_id_card_upload" />

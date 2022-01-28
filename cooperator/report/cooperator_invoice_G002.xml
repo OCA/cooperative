@@ -273,7 +273,7 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t
-                    t-call="easy_my_coop.theme_invoice_G002_document"
+                    t-call="cooperator.theme_invoice_G002_document"
                     t-lang="o.partner_id.lang"
                 />
             </t>
