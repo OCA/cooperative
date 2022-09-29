@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import warnings
-from datetime import datetime
+from datetime import date
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
@@ -344,7 +344,7 @@ class SubscriptionRequest(models.Model):
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
-        default=lambda self: datetime.strftime(datetime.now(), "%Y-%m-%d"),
+        default=lambda _: date.today(),
     )
     company_id = fields.Many2one(
         "res.company",
