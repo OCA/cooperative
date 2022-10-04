@@ -10,9 +10,9 @@
         "cooperator",
         "website",
     ],
-    "author": "Coop IT Easy SC",
+    "author": "Coop IT Easy SC, Odoo Community Association (OCA)",
     "category": "Cooperative management",
-    "website": "https://coopiteasy.be",
+    "website": "https://github.com/OCA/cooperative",
     "license": "AGPL-3",
     "summary": """
     This module adds the cooperator subscription form
