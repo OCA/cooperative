@@ -12,10 +12,10 @@
         "website",
     ],
     "summary": "Show cooperator information in the website portal",
-    "author": "Coop IT Easy SC",
+    "author": "Coop IT Easy SC, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Cooperative Management",
-    "website": "https://coopiteasy.be",
+    "website": "https://github.com/OCA/cooperative",
     "data": [
         "views/portal_templates.xml",
     ],
