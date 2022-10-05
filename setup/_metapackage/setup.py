@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo12-addon-cooperator',
+        'odoo12-addon-cooperator_website',
     ],
     classifiers=[
         'Programming Language :: Python',
