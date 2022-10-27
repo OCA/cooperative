@@ -46,16 +46,15 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         self.assertEqual(self.subscription_request_1.type, "new")
         self.assertTrue(len(self.subscription_request_1.capital_release_request) >= 1)
         self.assertEqual(
-            self.subscription_request_1.capital_release_request.state, "open"
+            self.subscription_request_1.capital_release_request.state, "posted"
         )
-        self.assertTrue(self.subscription_request_1.capital_release_request.sent)
 
     @users("user-cooperator")
     def test_capital_release_request_name(self):
         self.subscription_request_1.validate_subscription_request()
         invoice = self.subscription_request_1.capital_release_request
         self.assertEqual(
-            invoice.number,
+            invoice.name,
             "SUBJ/{year}/001".format(year=date.today().year),
         )
 
@@ -66,21 +65,19 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
             "payment_method_id": self.payment_method.id,
         }
         if payment_date is not None:
-            register_payment_vals["payment_date"] = payment_date
+            register_payments_vals["payment_date"] = payment_date
         register_payment = (
             self.env["account.payment.register"]
             .with_context(ctx)
-            .create(register_payment_vals)
+            .create(register_payments_vals)
         )
         register_payment.action_create_payments()
 
     @users("user-cooperator")
     def test_register_payment_for_capital_release(self):
-        self.subscription_request_1.validate_subscription_request()
+        self._validate_subscription_request_and_pay(self.subscription_request_1)
         invoice = self.subscription_request_1.capital_release_request
-
-        self._pay_invoice(invoice)
-        self.assertEqual(invoice.state, "paid")
+        self.assertEqual(invoice.state, "posted")
 
         partner = self.subscription_request_1.partner_id
         self.assertFalse(partner.coop_candidate)
@@ -109,7 +106,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         user_demo = self.env.ref("base.user_demo")
         # class object was loaded with root user and its rights
         # so we need to reload it with demo user rights
-        request_as_user = self.subscription_request_1.sudo(user_demo)
+        request_as_user = self.subscription_request_1.with_user(user_demo)
         with self.assertRaises(AccessError):
             request_as_user.name = "test write request"
         with self.assertRaises(AccessError):
@@ -118,7 +115,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         with self.assertRaises(AccessError):
             request_as_user.unlink()
 
-        share_line_as_user = self.share_line.sudo(user_demo)
+        share_line_as_user = self.share_line.with_user(user_demo)
         with self.assertRaises(AccessError):
             share_line_as_user.share_number = 3
 
@@ -126,19 +123,19 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
     def test_cooperator_access_rules(self):
         cooperator_user = self.ref("cooperator.res_users_user_cooperator_demo")
         # cf comment in test_user_access_rules
-        resquest_as_cooperator = self.subscription_request_1.sudo(cooperator_user)
+        resquest_as_cooperator = self.subscription_request_1.with_user(cooperator_user)
         resquest_as_cooperator.name = "test write request"
         create_values = self._get_dummy_subscription_requests_vals()
         create_request = self.env["subscription.request"].create(create_values)
         with self.assertRaises(AccessError):
             create_request.unlink()
 
-        share_line_as_cooperator_user = self.share_line.sudo(cooperator_user)
+        share_line_as_cooperator_user = self.share_line.with_user(cooperator_user)
         share_line_as_cooperator_user.share_number = 3
         with self.assertRaises(AccessError):
             share_line_as_cooperator_user.unlink()
 
-        share_type_as_cooperator_user = self.share_x.sudo(cooperator_user)
+        share_type_as_cooperator_user = self.share_x.with_user(cooperator_user)
         share_type_as_cooperator_user.list_price = 30
         with self.assertRaises(AccessError):
             self.env["product.template"].create(
@@ -156,7 +153,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
     def test_cooperator_manager_access_rules(self):
         cooperator_manager = self.ref("cooperator.res_users_manager_cooperator_demo")
         # cf comment in test_user_access_rules
-        request_as_cooperator_manager = self.subscription_request_1.sudo(
+        request_as_cooperator_manager = self.subscription_request_1.with_user(
             cooperator_manager
         )
         request_as_cooperator_manager.name = "test write request"
