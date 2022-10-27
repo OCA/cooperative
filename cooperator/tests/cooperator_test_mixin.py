@@ -12,21 +12,7 @@ class CooperatorTestMixin:
         # accounting data needs to be created even if created in module data
         # because when launching tests, accounting data will be deleted when odoo loads
         # a test chart of account.
-        # cf load_for_current_company in chart_template.py in account module
-
-        # if these properties are not set, odoo thinks the chart of account was not
-        # loaded. The test CAO does not set those properties
-        # cf AccountingTestCase
-
-        cls._ensure_account_property_is_set(
-            "res.partner", "property_account_receivable_id"
-        )
-        cls._ensure_account_property_is_set(
-            "res.partner", "property_account_payable_id"
-        )
-        cls._ensure_account_property_is_set(
-            "product.template", "property_account_income_id"
-        )
+        # cf _load in chart_template.py in account module
 
         account_model = cls.env["account.account"]
         cls.company = cls.env.user.company_id
@@ -52,15 +38,11 @@ class CooperatorTestMixin:
                 "reconcile": True,
             }
         )
-        subscription_journal_sequence = cls.env.ref(
-            "cooperator.sequence_subscription_journal"
-        )
         cls.subscription_journal = cls.env["account.journal"].create(
             {
                 "name": "Subscriptions Test",
                 "code": "SUBJT",
                 "type": "sale",
-                "sequence_id": subscription_journal_sequence.id,
             }
         )
 
@@ -109,43 +91,3 @@ class CooperatorTestMixin:
                 "skip_iban_control": True,
             }
         )
-
-    @classmethod
-    def _ensure_account_property_is_set(cls, model, property_name):
-        """Ensure the ir.property is set.
-        In case it's not: create it with a random account.
-        This is useful when testing with partially defined localization
-        (especially test chart of account).
-
-        :param model: the name of the model the property is set on
-        :param property_name: The name of the property.
-        """
-        company_id = cls.env.user.company_id
-        field_id = cls.env["ir.model.fields"].search(
-            [("model", "=", model), ("name", "=", property_name)],
-            limit=1,
-        )
-        property_id = cls.env["ir.property"].search(
-            [
-                ("company_id", "=", company_id.id),
-                ("name", "=", property_name),
-                ("res_id", "=", None),
-                ("fields_id", "=", field_id.id),
-            ],
-            limit=1,
-        )
-        account_id = cls.env["account.account"].search(
-            [("company_id", "=", company_id.id)], limit=1
-        )
-        value_reference = "account.account,%d" % account_id.id
-        if property_id and not property_id.value_reference:
-            property_id.value_reference = value_reference
-        else:
-            cls.env["ir.property"].create(
-                {
-                    "name": property_name,
-                    "company_id": company_id.id,
-                    "fields_id": field_id.id,
-                    "value_reference": value_reference,
-                }
-            )
