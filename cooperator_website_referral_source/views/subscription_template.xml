@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="referral_source_template" name="referral_source_template">
+        <div
+            class="form-group field-referral_source_id"
+            t-attf-class="form-group #{error and 'referral_source_id' in error and 'has-error' or ''}"
+            name="referral_source_id_container"
+        >
+            <label for="referral_source_id">How did you hear about us?</label>
+            <select
+                class="form-control form-control-sm"
+                id="referral_source_id"
+                name="referral_source_id"
+                required="True"
+                t-att-readonly="logged"
+            >
+                <option value="">Please select an option...</option>
+                <t t-foreach="referral_sources or []" t-as="referral_source">
+                    <option t-att-value="referral_source.id">
+                        <t t-esc="referral_source.name" />
+                    </option>
+                </t>
+            </select>
+        </div>
+    </template>
+
+    <template
+        id="rules_template"
+        inherit_id="cooperator_website.rules_template"
+        name="rules_template"
+    >
+        <xpath expr="//div[@id='data_policy_approved']" position="before">
+            <t t-call="cooperator_website_referral_source.referral_source_template" />
+        </xpath>
+    </template>
+
+</odoo>
