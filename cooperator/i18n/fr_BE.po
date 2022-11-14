@@ -18,12 +18,15 @@ msgstr ""
 #: model:mail.template,body_html:cooperator.email_template_waiting_list
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "\n"
 "    <p>Hello ${object.firstname},</p>\n"
 "\n"
-"    <p>Thank you for your subscription request. There are currently no project to raise funds for, thus we added it on waiting list.\n"
-"        We will contact you as soon as the subscription requests are re-opened.\n"
+"    <p>Thank you for your subscription request. There are currently no "
+"project to raise funds for, thus we added it on waiting list.\n"
+"        We will contact you as soon as the subscription requests are re-"
+"opened.\n"
 "     </p>\n"
 "\n"
 "    <br/>\n"
@@ -43,7 +46,8 @@ msgid ""
 "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id."
+"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.phone:\n"
 "        Phone:&nbsp; ${object.company_id.phone}\n"
@@ -51,7 +55,8 @@ msgid ""
 "\n"
 "    % if object.company_id.website:\n"
 "        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
 "        </div>\n"
 "    %endif\n"
 "\n"
@@ -66,13 +71,17 @@ msgstr ""
 #: model:mail.template,body_html:cooperator.email_template_confirmation_company
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "\n"
 "    <p>Hello ${object.firstname},</p>\n"
 "\n"
-"    <p>We have received your subscription request for ${object.company_id.name}. Thank you for your support.</p>\n"
+"    <p>We have received your subscription request for ${object.company_id."
+"name}. Thank you for your support.</p>\n"
 "\n"
-"    <p>Your request will be soon processed by our team. If all the provided info are correct you will soon receive the payment information in another email.</p>\n"
+"    <p>Your request will be soon processed by our team. If all the provided "
+"info are correct you will soon receive the payment information in another "
+"email.</p>\n"
 "\n"
 "    <br/>\n"
 "    <p>If you have any question, do not hesitate to contact us.</p>\n"
@@ -91,7 +100,8 @@ msgid ""
 "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id."
+"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.phone:\n"
 "        Phone:&nbsp; ${object.company_id.phone}\n"
@@ -99,7 +109,8 @@ msgid ""
 "\n"
 "    % if object.company_id.website:\n"
 "        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
 "        </div>\n"
 "    %endif\n"
 "\n"
@@ -114,11 +125,14 @@ msgstr ""
 #: model:mail.template,body_html:cooperator.email_template_confirmation
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "\n"
 "    <p>Hello ${object.firstname},</p>\n"
 "\n"
-"    <p>Your request will be soon processed by our team. If all the provided info are correct you will soon receive the payment information in another email.</p>\n"
+"    <p>Your request will be soon processed by our team. If all the provided "
+"info are correct you will soon receive the payment information in another "
+"email.</p>\n"
 "\n"
 "    <br/>\n"
 "    <p>If you have any question, do not hesitate to contact us.</p>\n"
@@ -137,7 +151,8 @@ msgid ""
 "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id."
+"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.phone:\n"
 "        Phone:&nbsp; ${object.company_id.phone}\n"
@@ -145,7 +160,8 @@ msgid ""
 "\n"
 "    % if object.company_id.website:\n"
 "        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
 "        </div>\n"
 "    %endif\n"
 "\n"
@@ -160,13 +176,17 @@ msgstr ""
 #: model:mail.template,body_html:cooperator.email_template_release_capital
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "\n"
 "    <p>Hello ${object.subscription_request.firstname},</p>\n"
 "\n"
-"    <p>You will find in attachment all the necessary information for the payment. We kindly remind you that your subscription will be effective only once we received the payment.</p>\n"
+"    <p>You will find in attachment all the necessary information for the "
+"payment. We kindly remind you that your subscription will be effective only "
+"once we received the payment.</p>\n"
 "\n"
-"    <p>Do not forget to add the structured communication to the payment.</p>\n"
+"    <p>Do not forget to add the structured communication to the payment.</"
+"p>\n"
 "\n"
 "    <p>Sustainably your,</p>\n"
 "    <p>${object.company_id.name}.</p>\n"
@@ -181,7 +201,8 @@ msgid ""
 "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id."
+"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.phone:\n"
 "        Phone:&nbsp; ${object.company_id.phone}\n"
@@ -189,7 +210,8 @@ msgid ""
 "\n"
 "    % if object.company_id.website:\n"
 "        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
 "        </div>\n"
 "    %endif\n"
 "\n"
@@ -200,13 +222,18 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "\n"
 "    <p>Bonjour ${object.subscription_request.firstname},</p>\n"
 "\n"
-"    <p>Vous trouverez en pièce jointe toutes les informations nécessaires pour le paiement des parts souscrites. Nous vous rappelons que votre inscription sera effective lorsque vous aurez libéré le paiement sur notre compte en banque.</p>\n"
+"    <p>Vous trouverez en pièce jointe toutes les informations nécessaires "
+"pour le paiement des parts souscrites. Nous vous rappelons que votre "
+"inscription sera effective lorsque vous aurez libéré le paiement sur notre "
+"compte en banque.</p>\n"
 "\n"
-"    <p>Pour faciliter notre gestion administrative, n’oubliez pas d’utiliser la communication structurée.</p>\n"
+"    <p>Pour faciliter notre gestion administrative, n’oubliez pas d’utiliser "
+"la communication structurée.</p>\n"
 "\n"
 "    <p>Coopérativement,</p>\n"
 "    <p>${object.company_id.name}.</p>\n"
@@ -221,7 +248,8 @@ msgstr ""
 "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id."
+"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.phone:\n"
 "        Phone:&nbsp; ${object.company_id.phone}\n"
@@ -229,7 +257,8 @@ msgstr ""
 "\n"
 "    % if object.company_id.website:\n"
 "        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
 "        </div>\n"
 "    %endif\n"
 "\n"
@@ -243,11 +272,13 @@ msgstr ""
 #: model:mail.template,body_html:cooperator.email_template_certificat_increase
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "\n"
 "    <p>Hello ${object.subscription_request_ids[0].firstname},</p>\n"
 "\n"
-"    <p>We confirm the reception of you payment for the new share(s) you have taken.</p>\n"
+"    <p>We confirm the reception of you payment for the new share(s) you have "
+"taken.</p>\n"
 "\n"
 "    <br/>\n"
 "    <p>Find in attachment your ${object.company_id.name} certificate.</p>\n"
@@ -266,7 +297,8 @@ msgid ""
 "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id."
+"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.phone:\n"
 "        Phone:&nbsp; ${object.company_id.phone}\n"
@@ -274,7 +306,8 @@ msgid ""
 "\n"
 "    % if object.company_id.website:\n"
 "        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
 "        </div>\n"
 "    %endif\n"
 "\n"
@@ -289,11 +322,13 @@ msgstr ""
 #: model:mail.template,body_html:cooperator.email_template_certificat
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "\n"
 "    <p>Hello ${object.subscription_request_ids[0].firstname},</p>\n"
 "\n"
-"    <p>We confirm the reception of you payment. You are now shareholder of our cooperative.</p>\n"
+"    <p>We confirm the reception of you payment. You are now shareholder of "
+"our cooperative.</p>\n"
 "\n"
 "    <br/>\n"
 "    <p>Find in attachment your ${object.company_id.name} certificate.</p>\n"
@@ -312,7 +347,8 @@ msgid ""
 "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id."
+"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.phone:\n"
 "        Phone:&nbsp; ${object.company_id.phone}\n"
@@ -320,7 +356,8 @@ msgid ""
 "\n"
 "    % if object.company_id.website:\n"
 "        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
 "        </div>\n"
 "    %endif\n"
 "\n"
@@ -335,11 +372,14 @@ msgstr ""
 #: model:mail.template,body_html:cooperator.email_template_share_update
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "\n"
 "    <p>Hello ${object.subscription_request_ids[0].firstname},</p>\n"
 "\n"
-"    <p>We confirm you that the adaptation on shares portfolio has been succesfully performed. Your cooperator certificate has been adapted accordingly.</p>\n"
+"    <p>We confirm you that the adaptation on shares portfolio has been "
+"succesfully performed. Your cooperator certificate has been adapted "
+"accordingly.</p>\n"
 "\n"
 "    <br/>\n"
 "    <p>Find in attachment your ${object.company_id.name} certificate.</p>\n"
@@ -358,7 +398,8 @@ msgid ""
 "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id."
+"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.phone:\n"
 "        Phone:&nbsp; ${object.company_id.phone}\n"
@@ -366,7 +407,8 @@ msgid ""
 "\n"
 "    % if object.company_id.website:\n"
 "        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
 "        </div>\n"
 "    %endif\n"
 "\n"
@@ -381,11 +423,13 @@ msgstr ""
 #: model:mail.template,body_html:cooperator.email_template_share_transfer
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "\n"
 "    <p>Hello ${object.subscription_request_ids[0].firstname},</p>\n"
 "\n"
-"    <p>We confirm you that the shares have been transfered to you. If you was not already cooperator, you are now shareholder of our cooperative.</p>\n"
+"    <p>We confirm you that the shares have been transfered to you. If you "
+"was not already cooperator, you are now shareholder of our cooperative.</p>\n"
 "\n"
 "    <br/>\n"
 "    <p>Find in attachment your ${object.company_id.name} certificate.</p>\n"
@@ -404,7 +448,8 @@ msgid ""
 "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id."
+"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.phone:\n"
 "        Phone:&nbsp; ${object.company_id.phone}\n"
@@ -412,7 +457,8 @@ msgid ""
 "\n"
 "    % if object.company_id.website:\n"
 "        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
 "        </div>\n"
 "    %endif\n"
 "\n"
@@ -425,22 +471,26 @@ msgstr ""
 
 #. module: cooperator
 #: model:mail.template,report_name:cooperator.email_template_release_capital
-msgid "${(object.number or \"capital_release_request\").replace(\"/\", \"_\")}${object.state == \"draft\" and \"_draft\" or \"\"}"
+msgid ""
+"${(object.number or \"capital_release_request\").replace(\"/\", \"_"
+"\")}${object.state == \"draft\" and \"_draft\" or \"\"}"
 msgstr ""
 
 #. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_release_capital
-msgid "${object.company_id.name} Request to Release Capital (Ref ${object.number or 'n/a'})"
+msgid ""
+"${object.company_id.name} Request to Release Capital (Ref ${object.number or "
+"'n/a'})"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:65
+#: code:addons/cooperator/models/subscription_request.py:66
 #, python-format
 msgid "%s is not available to companies"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:70
+#: code:addons/cooperator/models/subscription_request.py:71
 #, python-format
 msgid "%s is not available to individuals"
 msgstr ""
@@ -451,7 +501,8 @@ msgid ""
 "<span groups=\"account.group_show_line_subtotals_tax_excluded\">\n"
 "                                    Amount\n"
 "                                </span>\n"
-"                                <span groups=\"account.group_show_line_subtotals_tax_included\">\n"
+"                                <span groups=\"account."
+"group_show_line_subtotals_tax_included\">\n"
 "                                    Total Price\n"
 "                                </span>"
 msgstr ""
@@ -573,11 +624,6 @@ msgid "Account Number"
 msgstr ""
 
 #. module: cooperator
-#: sql_constraint:res.partner.bank:0
-msgid "Account Number must be unique!"
-msgstr "Le numéro de compte en banque doit-être unique !"
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_needaction
 msgid "Action Needed"
 msgstr ""
@@ -620,6 +666,12 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__address
 msgid "Address"
+msgstr ""
+
+#. module: cooperator
+#: model:ir.model.fields,field_description:cooperator.field_res_partner__type
+#: model:ir.model.fields,field_description:cooperator.field_res_users__type
+msgid "Address Type"
 msgstr ""
 
 #. module: cooperator
@@ -671,11 +723,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_attachment_count
 msgid "Attachment Count"
 msgstr ""
-
-#. module: cooperator
-#: model:ir.model,name:cooperator.model_res_partner_bank
-msgid "Bank Accounts"
-msgstr "Comptes en banque"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__bank_account
@@ -794,22 +841,26 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__display_data_policy_approval
-msgid "Choose to display a data policy checkbox on the cooperator website form."
+msgid ""
+"Choose to display a data policy checkbox on the cooperator website form."
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__display_financial_risk_approval
-msgid "Choose to display a financial risk checkbox on the cooperator website form."
+msgid ""
+"Choose to display a financial risk checkbox on the cooperator website form."
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__display_internal_rules_approval
-msgid "Choose to display an internal rules checkbox on the cooperator website form."
+msgid ""
+"Choose to display an internal rules checkbox on the cooperator website form."
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__display_generic_rules_approval
-msgid "Choose to display generic rules checkbox on the cooperator website form."
+msgid ""
+"Choose to display generic rules checkbox on the cooperator website form."
 msgstr ""
 
 #. module: cooperator
@@ -894,6 +945,7 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_res_partner
+#: selection:res.partner,type:0
 msgid "Contact"
 msgstr ""
 
@@ -1048,7 +1100,9 @@ msgstr ""
 
 #. module: cooperator
 #: model_terms:ir.actions.act_window,help:cooperator.account_invoice_action
-msgid "Create invoices, register payments and keep track of the discussions with your customers."
+msgid ""
+"Create invoices, register payments and keep track of the discussions with "
+"your customers."
 msgstr ""
 
 #. module: cooperator
@@ -1251,7 +1305,7 @@ msgid "Execute"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:207
+#: code:addons/cooperator/models/subscription_request.py:211
 #: selection:subscription.request,gender:0
 #, python-format
 msgid "Female"
@@ -1366,7 +1420,8 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__unmix_share_type
-msgid "If checked, A cooperator will be authorised to have only one type of share"
+msgid ""
+"If checked, A cooperator will be authorised to have only one type of share"
 msgstr ""
 
 #. module: cooperator
@@ -1381,7 +1436,9 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_operation_request__subscription_request
-msgid "In case on a transfer of share. If the share receiver isn't a effective member then a subscription form should be filled."
+msgid ""
+"In case on a transfer of share. If the share receiver isn't a effective "
+"member then a subscription form should be filled."
 msgstr ""
 
 #. module: cooperator
@@ -1409,6 +1466,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_operation_request__invoice
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "Invoice"
+msgstr ""
+
+#. module: cooperator
+#: selection:res.partner,type:0
+msgid "Invoice address"
 msgstr ""
 
 #. module: cooperator
@@ -1551,7 +1613,7 @@ msgid "Main Attachment"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:207
+#: code:addons/cooperator/models/subscription_request.py:211
 #: selection:subscription.request,gender:0
 #, python-format
 msgid "Male"
@@ -1664,7 +1726,7 @@ msgid "Number of share"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:698
+#: code:addons/cooperator/models/subscription_request.py:702
 #, python-format
 msgid "Number of share must be greater than 0."
 msgstr ""
@@ -1691,19 +1753,19 @@ msgid "Old cooperator"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:780
+#: code:addons/cooperator/models/subscription_request.py:784
 #, python-format
 msgid "Only blocked requests can be unblocked."
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:802
+#: code:addons/cooperator/models/subscription_request.py:806
 #, python-format
 msgid "Only draft request can be put on the waiting list."
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:773
+#: code:addons/cooperator/models/subscription_request.py:777
 #, python-format
 msgid "Only draft requests can be blocked."
 msgstr ""
@@ -1768,10 +1830,15 @@ msgid "Operation requests"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:207
+#: code:addons/cooperator/models/subscription_request.py:211
 #: selection:subscription.request,gender:0
 #, python-format
 msgid "Other"
+msgstr ""
+
+#. module: cooperator
+#: selection:res.partner,type:0
+msgid "Other address"
 msgstr ""
 
 #. module: cooperator
@@ -1825,9 +1892,11 @@ msgid "Planned"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:518
+#: code:addons/cooperator/models/subscription_request.py:522
 #, python-format
-msgid "Please define income account for this product: \"%s\" (id:%d) - or for its category: \"%s\"."
+msgid ""
+"Please define income account for this product: \"%s\" (id:%d) - or for its "
+"category: \"%s\"."
 msgstr ""
 
 #. module: cooperator
@@ -1841,6 +1910,11 @@ msgstr ""
 #: model:ir.model.fields,help:cooperator.field_partner_create_subscription__share_unit_price
 #: model:ir.model.fields,help:cooperator.field_subscription_request__share_unit_price
 msgid "Price at which the product is sold to customers."
+msgstr ""
+
+#. module: cooperator
+#: selection:res.partner,type:0
+msgid "Private Address"
 msgstr ""
 
 #. module: cooperator
@@ -1903,6 +1977,11 @@ msgstr ""
 #. module: cooperator
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_main_reporting
 msgid "Reporting"
+msgstr ""
+
+#. module: cooperator
+#: selection:res.partner,type:0
+msgid "Representative"
 msgstr ""
 
 #. module: cooperator
@@ -2132,6 +2211,11 @@ msgid "Shares"
 msgstr ""
 
 #. module: cooperator
+#: selection:res.partner,type:0
+msgid "Shipping address"
+msgstr ""
+
+#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_product_product__short_name
 #: model:ir.model.fields,field_description:cooperator.field_product_template__short_name
 msgid "Short name"
@@ -2285,7 +2369,7 @@ msgid "Text to display aside the checkbox to approve the generic rules."
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:706
+#: code:addons/cooperator/models/subscription_request.py:710
 #, python-format
 msgid "The checkbox already cooperator is checked please select a cooperator."
 msgstr ""
@@ -2299,7 +2383,9 @@ msgstr ""
 #. module: cooperator
 #: code:addons/cooperator/models/operation_request.py:211
 #, python-format
-msgid "The cooperator doesn't own this share type. Please choose the appropriate share type."
+msgid ""
+"The cooperator doesn't own this share type. Please choose the appropriate "
+"share type."
 msgstr ""
 
 #. module: cooperator
@@ -2311,37 +2397,46 @@ msgstr ""
 #. module: cooperator
 #: code:addons/cooperator/models/operation_request.py:277
 #, python-format
-msgid "The information of the receiver are not correct. Please correct the information before submitting"
+msgid ""
+"The information of the receiver are not correct. Please correct the "
+"information before submitting"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:692
+#: code:addons/cooperator/models/subscription_request.py:696
 #, python-format
 msgid "The request must be in draft or on waiting list to be validated"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:746
+#: code:addons/cooperator/models/subscription_request.py:750
 #: code:addons/cooperator/wizard/create_subscription_from_partner.py:196
 #, python-format
-msgid "There is two different persons with the same national register number. Please proceed to a merge before to continue"
+msgid ""
+"There is two different persons with the same national register number. "
+"Please proceed to a merge before to continue"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__property_cooperator_account
-msgid "This account will be the default one as the receivable account for the cooperators"
+msgid ""
+"This account will be the default one as the receivable account for the "
+"cooperators"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:754
+#: code:addons/cooperator/models/subscription_request.py:758
 #, python-format
-msgid "This contact person is already defined for another company. Please select another contact"
+msgid ""
+"This contact person is already defined for another company. Please select "
+"another contact"
 msgstr ""
 
 #. module: cooperator
 #: code:addons/cooperator/models/operation_request.py:172
 #, python-format
-msgid "This operation can't be executed if the cooperator is not an effective member"
+msgid ""
+"This operation can't be executed if the cooperator is not an effective member"
 msgstr ""
 
 #. module: cooperator
@@ -2495,6 +2590,14 @@ msgid "Update info"
 msgstr ""
 
 #. module: cooperator
+#: model:ir.model.fields,help:cooperator.field_res_partner__type
+#: model:ir.model.fields,help:cooperator.field_res_users__type
+msgid ""
+"Used by Sales and Purchase Apps to select the relevant address depending on "
+"the context."
+msgstr ""
+
+#. module: cooperator
 #: model:res.groups,name:cooperator.cooperator_group_user
 msgid "User"
 msgstr ""
@@ -2574,7 +2677,7 @@ msgid "You can't convert the share to the same share type."
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:787
+#: code:addons/cooperator/models/subscription_request.py:791
 #, python-format
 msgid "You cannot cancel a request in this state."
 msgstr ""
@@ -2586,7 +2689,7 @@ msgid "You must convert all the shares to the selected type."
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:547
+#: code:addons/cooperator/models/subscription_request.py:551
 #, python-format
 msgid "You must set a cooperator account on your company."
 msgstr ""
@@ -2621,3 +2724,9 @@ msgstr ""
 #: selection:subscription.request,state:0
 msgid "paid"
 msgstr ""
+
+#~ msgid "Account Number must be unique!"
+#~ msgstr "Le numéro de compte en banque doit-être unique !"
+
+#~ msgid "Bank Accounts"
+#~ msgstr "Comptes en banque"

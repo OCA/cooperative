@@ -19,15 +19,6 @@ msgstr ""
 "X-Generator: Poedit 2.2.1\n"
 
 #. module: cooperator
-#: model:mail.template,report_name:cooperator.email_template_release_capital
-msgid ""
-"\n"
-"                ${(object.number or '').replace('/','_')}_${object.state == "
-"'draft' and 'draft' or ''}\n"
-"            "
-msgstr ""
-
-#. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_waiting_list
 #, fuzzy
 msgid ""
@@ -128,392 +119,7 @@ msgstr ""
 "            "
 
 #. module: cooperator
-#: model:mail.template,body_html:cooperator.email_template_certificat_increase
-#, fuzzy
-msgid ""
-"\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
-"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"\n"
-"    <p>Hello ${object.firstname},</p>\n"
-"\n"
-"    <p>We confirm the reception of you payment for the new share(s) you have "
-"taken.</p>\n"
-"\n"
-"    <br/>\n"
-"    <p>Find in attachment your ${object.company_id.name} certificate.</p>\n"
-"    <p>Thank you for trusting ${object.company_id.name or 'us'}!</p>\n"
-"    <br/>\n"
-"    <p>Sustainably your,</p>\n"
-"    <p>${object.company_id.name}.</p>\n"
-"\n"
-"    % if object.company_id.street:\n"
-"        ${object.company_id.street}\n"
-"    % endif\n"
-"    % if object.company_id.street2:\n"
-"        ${object.company_id.street2}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.city or object.company_id.zip:\n"
-"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id."
-"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.phone:\n"
-"        Phone:&nbsp; ${object.company_id.phone}\n"
-"    % endif\n"
-"\n"
-"    % if object.company_id.website:\n"
-"        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
-"company_id.website}</a>\n"
-"        </div>\n"
-"    %endif\n"
-"\n"
-"    <div>\n"
-"        <img src=${object.company_id.logo_url}>\n"
-"    </div>\n"
-"</div>\n"
-"            "
-msgstr ""
-"\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
-"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"\n"
-"    <p>Hola ${object.name},</p>\n"
-"\n"
-"    <p>Hem rebut el teu pagament per les noves participacions que has "
-"adquirit.</p>\n"
-"\n"
-"    <br/>\n"
-"    <p>N'adjuntem el certificat de ${object.company_id.name}</p>\n"
-"    <p>Gràcies per confiar en ${object.company_id.name or 'nosaltres'}!</p>\n"
-"    <br/>\n"
-"    <p>Cooperativament,</p>\n"
-"    <p>${object.company_id.name}.</p>\n"
-"\n"
-"    % if object.company_id.street:\n"
-"        ${object.company_id.street}\n"
-"    % endif\n"
-"    % if object.company_id.street2:\n"
-"        ${object.company_id.street2}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.city or object.company_id.zip:\n"
-"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id."
-"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.phone:\n"
-"        Telèfon:&nbsp; ${object.company_id.phone}\n"
-"    % endif\n"
-"\n"
-"    % if object.company_id.website:\n"
-"        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
-"company_id.website}</a>\n"
-"        </div>\n"
-"    %endif\n"
-"\n"
-"    <div>\n"
-"        <img src=${object.company_id.logo_url}>\n"
-"    </div>\n"
-"</div>\n"
-"            "
-
-#. module: cooperator
-#: model:mail.template,body_html:cooperator.email_template_certificat
-#, fuzzy
-msgid ""
-"\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
-"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"\n"
-"    <p>Hello ${object.firstname},</p>\n"
-"\n"
-"    <p>We confirm the reception of you payment. You are now shareholder of "
-"our cooperative</p>\n"
-"\n"
-"    <br/>\n"
-"    <p>Find in attachment your ${object.company_id.name} certificate.</p>\n"
-"    <p>Thank you for choosing ${object.company_id.name or 'us'}!</p>\n"
-"    <br/>\n"
-"    <p>Sustainably your,</p>\n"
-"    <p>${object.company_id.name}.</p>\n"
-"\n"
-"    % if object.company_id.street:\n"
-"        ${object.company_id.street}\n"
-"    % endif\n"
-"    % if object.company_id.street2:\n"
-"        ${object.company_id.street2}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.city or object.company_id.zip:\n"
-"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id."
-"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.phone:\n"
-"        Phone:&nbsp; ${object.company_id.phone}\n"
-"    % endif\n"
-"\n"
-"    % if object.company_id.website:\n"
-"        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
-"company_id.website}</a>\n"
-"        </div>\n"
-"    %endif\n"
-"\n"
-"    <div>\n"
-"        <img src=${object.company_id.logo_url}>\n"
-"    </div>\n"
-"</div>\n"
-"            "
-msgstr ""
-"\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
-"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"\n"
-"    <p>Hola ${object.name},</p>\n"
-"\n"
-"    <p>Hem rebut el teu pagament. Ja ets soci/a de la cooperativa!</p>\n"
-"\n"
-"    <br/>\n"
-"    <p>T'adjuntem el certificat de ${object.company_id.name}.</p>\n"
-"    <p>Gràcies per confiar en ${object.company_id.name or 'nosaltres'}!</p>\n"
-"    <br/>\n"
-"    <p>Cooperativament,</p>\n"
-"    <p>${object.company_id.name}.</p>\n"
-"\n"
-"    % if object.company_id.street:\n"
-"        ${object.company_id.street}\n"
-"    % endif\n"
-"    % if object.company_id.street2:\n"
-"        ${object.company_id.street2}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.city or object.company_id.zip:\n"
-"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id."
-"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.phone:\n"
-"        Telèfon:&nbsp; ${object.company_id.phone}\n"
-"    % endif\n"
-"\n"
-"    % if object.company_id.website:\n"
-"        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
-"company_id.website}</a>\n"
-"        </div>\n"
-"    %endif\n"
-"\n"
-"    <div>\n"
-"        <img src=${object.company_id.logo_url}>\n"
-"    </div>\n"
-"</div>\n"
-"            "
-
-#. module: cooperator
-#: model:mail.template,body_html:cooperator.email_template_share_update
-#, fuzzy
-msgid ""
-"\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
-"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"\n"
-"    <p>Hello ${object.firstname},</p>\n"
-"\n"
-"    <p>We confirm you that the adaptation on shares portfolio has been "
-"succesfully performed. Your cooperator certificate has been adapted "
-"accordingly</p>\n"
-"\n"
-"    <br/>\n"
-"    <p>Find in attachment your ${object.company_id.name} certificate.</p>\n"
-"    <p>Thank you for choosing ${object.company_id.name or 'us'}!</p>\n"
-"    <br/>\n"
-"    <p>Sustainably your,</p>\n"
-"    <p>${object.company_id.name}.</p>\n"
-"\n"
-"    % if object.company_id.street:\n"
-"        ${object.company_id.street}\n"
-"    % endif\n"
-"    % if object.company_id.street2:\n"
-"        ${object.company_id.street2}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.city or object.company_id.zip:\n"
-"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id."
-"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.phone:\n"
-"        Phone:&nbsp; ${object.company_id.phone}\n"
-"    % endif\n"
-"\n"
-"    % if object.company_id.website:\n"
-"        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
-"company_id.website}</a>\n"
-"        </div>\n"
-"    %endif\n"
-"\n"
-"     <div>\n"
-"         <img src=${object.company_id.logo_url}>\n"
-"     </div>\n"
-"</div>\n"
-"            "
-msgstr ""
-"\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
-"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"\n"
-"    <p>Hola ${object.name},</p>\n"
-"\n"
-"    <p>Confirmem els canvis de participacions que has fet recentment. Hem "
-"actualitzat el certificact de cooperacióper reflectir aquests canvis</p>\n"
-"\n"
-"    <br/>\n"
-"    <p>T'adjuntem el certificat de ${object.company_id.name}.</p>\n"
-"    <p>Gràcies per confiar en ${object.company_id.name or 'nosaltres'}!</p>\n"
-"    <br/>\n"
-"    <p>Cooperativament,</p>\n"
-"    <p>${object.company_id.name}.</p>\n"
-"\n"
-"    % if object.company_id.street:\n"
-"        ${object.company_id.street}\n"
-"    % endif\n"
-"    % if object.company_id.street2:\n"
-"        ${object.company_id.street2}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.city or object.company_id.zip:\n"
-"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id."
-"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.phone:\n"
-"        Telèfon:&nbsp; ${object.company_id.phone}\n"
-"    % endif\n"
-"\n"
-"    % if object.company_id.website:\n"
-"        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
-"company_id.website}</a>\n"
-"        </div>\n"
-"    %endif\n"
-"\n"
-"     <div>\n"
-"         <img src=${object.company_id.logo_url}>\n"
-"     </div>\n"
-"</div>\n"
-"            "
-
-#. module: cooperator
-#: model:mail.template,body_html:cooperator.email_template_share_transfer
-#, fuzzy
-msgid ""
-"\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
-"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"\n"
-"    <p>Hello ${object.firstname},</p>\n"
-"\n"
-"    <p>We confirm you that the shares have been transfered to you. If you "
-"was not already cooperator, you are now shareholder of our cooperative</p>\n"
-"\n"
-"    <br/>\n"
-"    <p>Find in attachment your ${object.company_id.name} certificate.</p>\n"
-"    <p>Thank you for choosing ${object.company_id.name or 'us'}!</p>\n"
-"    <br/>\n"
-"    <p>Sustainably your,</p>\n"
-"    <p>${object.company_id.name}.</p>\n"
-"\n"
-"    % if object.company_id.street:\n"
-"        ${object.company_id.street}\n"
-"    % endif\n"
-"    % if object.company_id.street2:\n"
-"        ${object.company_id.street2}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.city or object.company_id.zip:\n"
-"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id."
-"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.phone:\n"
-"        Phone:&nbsp; ${object.company_id.phone}\n"
-"    % endif\n"
-"\n"
-"    % if object.company_id.website:\n"
-"        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
-"company_id.website}</a>\n"
-"        </div>\n"
-"    %endif\n"
-"\n"
-"    <div>\n"
-"        <img src=${object.company_id.logo_url}>\n"
-"    </div>\n"
-"</div>\n"
-"            "
-msgstr ""
-"\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
-"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"\n"
-"    <p>Hola ${object.name},</p>\n"
-"\n"
-"    <p>Et confirmem que se t'han transferit participacions de la "
-"cooperativa. Si encara no eres soci/a, ara ja ho ets!</p>\n"
-"\n"
-"    <br/>\n"
-"    <p>T'adjuntem el certificat de ${object.company_id.name}.</p>\n"
-"    <p>Gràcies per confiar en ${object.company_id.name or 'nosaltres'}!</p>\n"
-"    <br/>\n"
-"    <p>Cooperativament,</p>\n"
-"    <p>${object.company_id.name}.</p>\n"
-"\n"
-"    % if object.company_id.street:\n"
-"        ${object.company_id.street}\n"
-"    % endif\n"
-"    % if object.company_id.street2:\n"
-"        ${object.company_id.street2}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.city or object.company_id.zip:\n"
-"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id."
-"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.phone:\n"
-"        Telèfon:&nbsp; ${object.company_id.phone}\n"
-"    % endif\n"
-"\n"
-"    % if object.company_id.website:\n"
-"        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
-"company_id.website}</a>\n"
-"        </div>\n"
-"    %endif\n"
-"\n"
-"    <div>\n"
-"        <img src=${object.company_id.logo_url}>\n"
-"    </div>\n"
-"</div>\n"
-"            "
-
-#. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_confirmation_company
-#, fuzzy
 msgid ""
 "\n"
 "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
@@ -524,9 +130,9 @@ msgid ""
 "    <p>We have received your subscription request for ${object.company_id."
 "name}. Thank you for your support.</p>\n"
 "\n"
-"    <p>Your request will be soon processed by our team \"gestion et "
-"participation des membres\". If all the provided info are correct you will "
-"soon receive the payment information in another email</p>\n"
+"    <p>Your request will be soon processed by our team. If all the provided "
+"info are correct you will soon receive the payment information in another "
+"email.</p>\n"
 "\n"
 "    <br/>\n"
 "    <p>If you have any question, do not hesitate to contact us.</p>\n"
@@ -565,58 +171,9 @@ msgid ""
 "</div>\n"
 "            "
 msgstr ""
-"\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
-"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"\n"
-"    <p>Hola ${object.name},</p>\n"
-"\n"
-"    <p>Hem rebut la teva soŀlicitud de subscripció a ${object.company_id."
-"name}. Moltes gràcies pel teu suport!</p>\n"
-"\n"
-"    <p>Processarem aviat la soŀlicitud. Si totes les dades són correctes, "
-"rebràs un altre correu amb informació sobre com procedir al pagament.</p>\n"
-"\n"
-"    <br/>\n"
-"    <p>No dubtis en contactar-nos per qualsevol aclariment.</p>\n"
-"    <br/>\n"
-"\n"
-"    <p>Cooperativament,</p>\n"
-"    <p>${object.company_id.name}.</p>\n"
-"\n"
-"    % if object.company_id.street:\n"
-"        ${object.company_id.street}\n"
-"    % endif\n"
-"    % if object.company_id.street2:\n"
-"        ${object.company_id.street2}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.city or object.company_id.zip:\n"
-"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id."
-"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.phone:\n"
-"        Phone:&nbsp; ${object.company_id.phone}\n"
-"    % endif\n"
-"\n"
-"    % if object.company_id.website:\n"
-"        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
-"company_id.website}</a>\n"
-"        </div>\n"
-"    %endif\n"
-"\n"
-"    <div>\n"
-"        <img src=${object.company_id.logo_url}>\n"
-"    </div>\n"
-"</div>\n"
-"            "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_confirmation
-#, fuzzy
 msgid ""
 "\n"
 "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
@@ -626,7 +183,7 @@ msgid ""
 "\n"
 "    <p>Your request will be soon processed by our team. If all the provided "
 "info are correct you will soon receive the payment information in another "
-"email</p>\n"
+"email.</p>\n"
 "\n"
 "    <br/>\n"
 "    <p>If you have any question, do not hesitate to contact us.</p>\n"
@@ -665,62 +222,15 @@ msgid ""
 "</div>\n"
 "            "
 msgstr ""
-"\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
-"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"\n"
-"    <p>Hola ${object.name},</p>\n"
-"\n"
-"    <p>Processarem aviat la teva soŀlicitud. Si és correcta tota la "
-"informació que ens has proporcionat, rebràs un altre correu amb la "
-"informació de com procedir amb el pagament.</p>\n"
-"\n"
-"    <br/>\n"
-"    <p>Per qualsevol pregunta, no dubtis en contactar-nos.</p>\n"
-"    <br/>\n"
-"\n"
-"    <p>Cooperativament,</p>\n"
-"    <p>${object.company_id.name}.</p>\n"
-"\n"
-"    % if object.company_id.street:\n"
-"        ${object.company_id.street}\n"
-"    % endif\n"
-"    % if object.company_id.street2:\n"
-"        ${object.company_id.street2}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.city or object.company_id.zip:\n"
-"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id."
-"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.phone:\n"
-"        Telèfon:&nbsp; ${object.company_id.phone}\n"
-"    % endif\n"
-"\n"
-"    % if object.company_id.website:\n"
-"        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
-"company_id.website}</a>\n"
-"        </div>\n"
-"    %endif\n"
-"\n"
-"    <div>\n"
-"        <img src=${object.company_id.logo_url}>\n"
-"    </div>\n"
-"</div>\n"
-"            "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_release_capital
-#, fuzzy
 msgid ""
 "\n"
 "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
 "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "\n"
-"    <p>Hello ${object.partner_id.firstname},</p>\n"
+"    <p>Hello ${object.subscription_request.firstname},</p>\n"
 "\n"
 "    <p>You will find in attachment all the necessary information for the "
 "payment. We kindly remind you that your subscription will be effective only "
@@ -762,19 +272,24 @@ msgid ""
 "</div>\n"
 "            "
 msgstr ""
+
+#. module: cooperator
+#: model:mail.template,body_html:cooperator.email_template_certificat_increase
+msgid ""
 "\n"
 "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
 "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "\n"
-"    <p>Hola ${object.partner_id.name},</p>\n"
+"    <p>Hello ${object.subscription_request_ids[0].firstname},</p>\n"
 "\n"
-"    <p>Pots trobar adjunta tota la informació per fer el pagament.  Recorda "
-"si us plau que la subscripció només es farà efectiva un cop haguem rebut el "
-"pagament.</p>\n"
+"    <p>We confirm the reception of you payment for the new share(s) you have "
+"taken.</p>\n"
 "\n"
-"    <p>Comprova les instruccions adjuntes si us plau!</p>\n"
-"\n"
-"    <p>Cooperativament,</p>\n"
+"    <br/>\n"
+"    <p>Find in attachment your ${object.company_id.name} certificate.</p>\n"
+"    <p>Thank you for trusting ${object.company_id.name or 'us'}!</p>\n"
+"    <br/>\n"
+"    <p>Sustainably your,</p>\n"
 "    <p>${object.company_id.name}.</p>\n"
 "\n"
 "    % if object.company_id.street:\n"
@@ -791,7 +306,7 @@ msgstr ""
 "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
 "    % endif\n"
 "    % if object.company_id.phone:\n"
-"        Telèfon:&nbsp; ${object.company_id.phone}\n"
+"        Phone:&nbsp; ${object.company_id.phone}\n"
 "    % endif\n"
 "\n"
 "    % if object.company_id.website:\n"
@@ -806,23 +321,181 @@ msgstr ""
 "    </div>\n"
 "</div>\n"
 "            "
+msgstr ""
 
 #. module: cooperator
-#: model:mail.template,subject:cooperator.email_template_release_capital
+#: model:mail.template,body_html:cooperator.email_template_certificat
 msgid ""
-"${object.company_id.name} Request to Release\n"
-"                Capital (Ref ${object.number or 'n/a'})\n"
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Hello ${object.subscription_request_ids[0].firstname},</p>\n"
+"\n"
+"    <p>We confirm the reception of you payment. You are now shareholder of "
+"our cooperative.</p>\n"
+"\n"
+"    <br/>\n"
+"    <p>Find in attachment your ${object.company_id.name} certificate.</p>\n"
+"    <p>Thank you for choosing ${object.company_id.name or 'us'}!</p>\n"
+"    <br/>\n"
+"    <p>Sustainably your,</p>\n"
+"    <p>${object.company_id.name}.</p>\n"
+"\n"
+"    % if object.company_id.street:\n"
+"        ${object.company_id.street}\n"
+"    % endif\n"
+"    % if object.company_id.street2:\n"
+"        ${object.company_id.street2}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.city or object.company_id.zip:\n"
+"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.country_id:\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id."
+"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.phone:\n"
+"        Phone:&nbsp; ${object.company_id.phone}\n"
+"    % endif\n"
+"\n"
+"    % if object.company_id.website:\n"
+"        <div>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
+"        </div>\n"
+"    %endif\n"
+"\n"
+"    <div>\n"
+"        <img src=${object.company_id.logo_url}>\n"
+"    </div>\n"
+"</div>\n"
 "            "
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:70
+#: model:mail.template,body_html:cooperator.email_template_share_update
+msgid ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Hello ${object.subscription_request_ids[0].firstname},</p>\n"
+"\n"
+"    <p>We confirm you that the adaptation on shares portfolio has been "
+"succesfully performed. Your cooperator certificate has been adapted "
+"accordingly.</p>\n"
+"\n"
+"    <br/>\n"
+"    <p>Find in attachment your ${object.company_id.name} certificate.</p>\n"
+"    <p>Thank you for choosing ${object.company_id.name or 'us'}!</p>\n"
+"    <br/>\n"
+"    <p>Sustainably your,</p>\n"
+"    <p>${object.company_id.name}.</p>\n"
+"\n"
+"    % if object.company_id.street:\n"
+"        ${object.company_id.street}\n"
+"    % endif\n"
+"    % if object.company_id.street2:\n"
+"        ${object.company_id.street2}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.city or object.company_id.zip:\n"
+"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.country_id:\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id."
+"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.phone:\n"
+"        Phone:&nbsp; ${object.company_id.phone}\n"
+"    % endif\n"
+"\n"
+"    % if object.company_id.website:\n"
+"        <div>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
+"        </div>\n"
+"    %endif\n"
+"\n"
+"     <div>\n"
+"         <img src=${object.company_id.logo_url}>\n"
+"     </div>\n"
+"</div>\n"
+"            "
+msgstr ""
+
+#. module: cooperator
+#: model:mail.template,body_html:cooperator.email_template_share_transfer
+msgid ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Hello ${object.subscription_request_ids[0].firstname},</p>\n"
+"\n"
+"    <p>We confirm you that the shares have been transfered to you. If you "
+"was not already cooperator, you are now shareholder of our cooperative.</p>\n"
+"\n"
+"    <br/>\n"
+"    <p>Find in attachment your ${object.company_id.name} certificate.</p>\n"
+"    <p>Thank you for choosing ${object.company_id.name or 'us'}!</p>\n"
+"    <br/>\n"
+"    <p>Sustainably your,</p>\n"
+"    <p>${object.company_id.name}.</p>\n"
+"\n"
+"    % if object.company_id.street:\n"
+"        ${object.company_id.street}\n"
+"    % endif\n"
+"    % if object.company_id.street2:\n"
+"        ${object.company_id.street2}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.city or object.company_id.zip:\n"
+"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.country_id:\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id."
+"state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.phone:\n"
+"        Phone:&nbsp; ${object.company_id.phone}\n"
+"    % endif\n"
+"\n"
+"    % if object.company_id.website:\n"
+"        <div>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
+"        </div>\n"
+"    %endif\n"
+"\n"
+"    <div>\n"
+"        <img src=${object.company_id.logo_url}>\n"
+"    </div>\n"
+"</div>\n"
+"            "
+msgstr ""
+
+#. module: cooperator
+#: model:mail.template,report_name:cooperator.email_template_release_capital
+msgid ""
+"${(object.number or \"capital_release_request\").replace(\"/\", \"_"
+"\")}${object.state == \"draft\" and \"_draft\" or \"\"}"
+msgstr ""
+
+#. module: cooperator
+#: model:mail.template,subject:cooperator.email_template_release_capital
+msgid ""
+"${object.company_id.name} Request to Release Capital (Ref ${object.number or "
+"'n/a'})"
+msgstr ""
+
+#. module: cooperator
+#: code:addons/cooperator/models/subscription_request.py:66
 #, python-format
 msgid "%s is not available to companies"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:75
+#: code:addons/cooperator/models/subscription_request.py:71
 #, python-format
 msgid "%s is not available to individuals"
 msgstr ""
@@ -952,26 +625,15 @@ msgid "<strong>Your Contact:</strong>"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/wizard/create_subscription_from_partner.py:190
+#: code:addons/cooperator/wizard/create_subscription_from_partner.py:205
 #, python-format
 msgid "A person can't be representative of two different companies."
-msgstr ""
-
-#. module: cooperator
-#: selection:res.partner,legal_form:0
-#: selection:subscription.request,company_type:0
-msgid "ASBL"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__iban
 msgid "Account Number"
 msgstr "Número de compte"
-
-#. module: cooperator
-#: sql_constraint:res.partner.bank:0
-msgid "Account Number must be unique!"
-msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_needaction
@@ -1019,6 +681,12 @@ msgid "Address"
 msgstr "Adreça"
 
 #. module: cooperator
+#: model:ir.model.fields,field_description:cooperator.field_res_partner__type
+#: model:ir.model.fields,field_description:cooperator.field_res_users__type
+msgid "Address Type"
+msgstr ""
+
+#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__allow_id_card_upload
 msgid "Allow ID Card upload"
 msgstr ""
@@ -1064,20 +732,9 @@ msgid "Archived"
 msgstr ""
 
 #. module: cooperator
-#: selection:res.partner,legal_form:0
-#: selection:subscription.request,company_type:0
-msgid "Association"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_attachment_count
 msgid "Attachment Count"
 msgstr ""
-
-#. module: cooperator
-#: model:ir.model,name:cooperator.model_res_partner_bank
-msgid "Bank Accounts"
-msgstr "Comptes bancaris"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__bank_account
@@ -1089,11 +746,6 @@ msgstr "Compte bancari"
 #: model:ir.model.fields,field_description:cooperator.field_product_template__customer
 msgid "Become customer"
 msgstr "Fes-te client/a"
-
-#. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_subscription_request__birthdate
-msgid "Birthdate"
-msgstr "Data de naixement"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_tree
@@ -1146,7 +798,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
 #: model_terms:ir.ui.view,arch_db:cooperator.view_create_subscription
-#: model_terms:ir.ui.view,arch_db:cooperator.view_update_partner_info
 #: model_terms:ir.ui.view,arch_db:cooperator.view_update_share_line_info
 #: model_terms:ir.ui.view,arch_db:cooperator.view_validate_subscription_request
 msgid "Cancel"
@@ -1174,10 +825,7 @@ msgstr ""
 #: model:mail.template,report_name:cooperator.email_template_certificat_increase
 #: model:mail.template,report_name:cooperator.email_template_share_transfer
 #: model:mail.template,report_name:cooperator.email_template_share_update
-msgid ""
-"Certificat\n"
-"                ${(object.cooperator_register_number or '')}\n"
-"            "
+msgid "Certificate ${(object.cooperator_register_number or '')}"
 msgstr ""
 
 #. module: cooperator
@@ -1196,6 +844,11 @@ msgstr ""
 #: model:ir.model.fields,help:cooperator.field_res_partner__old_member
 #: model:ir.model.fields,help:cooperator.field_res_users__old_member
 msgid "Check this box if this cooperator is no more an effective member."
+msgstr ""
+
+#. module: cooperator
+#: model:ir.model.fields,help:cooperator.field_subscription_request__skip_iban_control
+msgid "Check to bypass iban format control."
 msgstr ""
 
 #. module: cooperator
@@ -1297,19 +950,14 @@ msgid "Company type"
 msgstr "Tipus de companyia"
 
 #. module: cooperator
-#: selection:res.partner,legal_form:0
-#: selection:subscription.request,company_type:0
-msgid "Company under public law"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_config
-#: model_terms:ir.ui.view,arch_db:cooperator.product_template_share_form_view
+#: model_terms:ir.ui.view,arch_db:cooperator.product_template_form_view
 msgid "Configuration"
 msgstr "Configuració"
 
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_res_partner
+#: selection:res.partner,type:0
 msgid "Contact"
 msgstr "Contacte"
 
@@ -1347,8 +995,7 @@ msgid "Converting just part of the shares is not yet implemented"
 msgstr ""
 
 #. module: cooperator
-#: selection:res.partner,legal_form:0
-#: selection:subscription.request,company_type:0
+#: model_terms:ir.ui.view,arch_db:cooperator.view_company_form
 msgid "Cooperative"
 msgstr ""
 
@@ -1360,7 +1007,6 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_operation_request__partner_id
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__cooperator
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_partner__cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_users__cooperator
 #: model:ir.model.fields,field_description:cooperator.field_share_line__partner_id
@@ -1424,14 +1070,20 @@ msgid "Cooperator certificat"
 msgstr ""
 
 #. module: cooperator
+#: model:ir.model.fields,field_description:cooperator.field_email_template_preview__is_cooperator_template
+#: model:ir.model.fields,field_description:cooperator.field_mail_template__is_cooperator_template
+msgid "Cooperator mail template"
+msgstr ""
+
+#. module: cooperator
 #: model:ir.actions.report,name:cooperator.action_report_cooperator_register
 msgid "Cooperator register"
 msgstr ""
 
 #. module: cooperator
-#: model:account.account,name:cooperator.account_cooperator_demo
 #: model:ir.actions.act_window,name:cooperator.action_partner_cooperator_form
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_cooperator
+#: model:ir.ui.menu,name:cooperator.menu_cooperator_main
 #: model_terms:ir.ui.view,arch_db:cooperator.view_res_partner_filter
 msgid "Cooperators"
 msgstr ""
@@ -1461,8 +1113,8 @@ msgstr ""
 #. module: cooperator
 #: model_terms:ir.actions.act_window,help:cooperator.account_invoice_action
 msgid ""
-"Create invoices, register payments and keep track of the\n"
-"                discussions with your customers."
+"Create invoices, register payments and keep track of the discussions with "
+"your customers."
 msgstr ""
 
 #. module: cooperator
@@ -1473,7 +1125,6 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_operation_request__create_uid
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__create_uid
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__create_uid
 #: model:ir.model.fields,field_description:cooperator.field_share_line__create_uid
 #: model:ir.model.fields,field_description:cooperator.field_share_line_update_info__create_uid
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__create_uid
@@ -1485,7 +1136,6 @@ msgstr "Creat per"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_operation_request__create_date
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__create_date
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__create_date
 #: model:ir.model.fields,field_description:cooperator.field_share_line__create_date
 #: model:ir.model.fields,field_description:cooperator.field_share_line_update_info__create_date
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__create_date
@@ -1511,6 +1161,16 @@ msgid "Data Policy Approved"
 msgstr ""
 
 #. module: cooperator
+#: model:ir.model.fields,field_description:cooperator.field_subscription_request__birthdate
+msgid "Date of birth"
+msgstr ""
+
+#. module: cooperator
+#: model:ir.model.fields,field_description:cooperator.field_res_company__default_capital_release_request_payment_term
+msgid "Default Payment Term"
+msgstr ""
+
+#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__default_country_id
 msgid "Default country"
 msgstr ""
@@ -1518,6 +1178,11 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__default_lang_id
 msgid "Default lang"
+msgstr ""
+
+#. module: cooperator
+#: model:ir.model.fields,help:cooperator.field_res_company__default_capital_release_request_payment_term
+msgid "Default payment term to use for capital release requests"
 msgstr ""
 
 #. module: cooperator
@@ -1549,7 +1214,6 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_operation_request__display_name
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__display_name
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__display_name
 #: model:ir.model.fields,field_description:cooperator.field_share_line__display_name
 #: model:ir.model.fields,field_description:cooperator.field_share_line_update_info__display_name
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__display_name
@@ -1593,23 +1257,6 @@ msgid "Draft Invoice"
 msgstr "Factura esborrany"
 
 #. module: cooperator
-#: selection:res.partner,legal_form:0
-#: selection:subscription.request,company_type:0
-msgid "EURL / Entreprise individuelle"
-msgstr ""
-
-#. module: cooperator
-#: selection:subscription.request,source:0
-msgid "Cooperator API"
-msgstr ""
-
-#. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_email_template_preview__is_cooperator_template
-#: model:ir.model.fields,field_description:cooperator.field_mail_template__is_cooperator_template
-msgid "Cooperator mail template"
-msgstr ""
-
-#. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperator_register_G001
 msgid ""
 "Effective\n"
@@ -1649,7 +1296,7 @@ msgid "Email Templates"
 msgstr "Plantilles de correu electrònic"
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.emc_external_layout_standard
+#: model_terms:ir.ui.view,arch_db:cooperator.external_layout_standard
 #, fuzzy
 msgid "Email:"
 msgstr "Correu electrònic"
@@ -1657,11 +1304,6 @@ msgstr "Correu electrònic"
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_register_filter
 msgid "Entry type"
-msgstr ""
-
-#. module: cooperator
-#: model:account.account,name:cooperator.account_equity_demo
-msgid "Equity"
 msgstr ""
 
 #. module: cooperator
@@ -1676,7 +1318,7 @@ msgid "Execute"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:190
+#: code:addons/cooperator/models/subscription_request.py:211
 #: selection:subscription.request,gender:0
 #, python-format
 msgid "Female"
@@ -1694,7 +1336,7 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__firstname
-msgid "Firstname"
+msgid "First name"
 msgstr ""
 
 #. module: cooperator
@@ -1720,20 +1362,13 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_product_product__force_min_qty
 #: model:ir.model.fields,field_description:cooperator.field_product_template__force_min_qty
-msgid "Force Min Qty"
+msgid "Force minimum quantity?"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__capital_release_request_date
 msgid "Force the capital release request date"
 msgstr ""
-
-#. module: cooperator
-#: selection:res.partner,legal_form:0
-#: selection:subscription.request,company_type:0
-#, fuzzy
-msgid "Foundation"
-msgstr "Funció"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__contact_person_function
@@ -1768,7 +1403,7 @@ msgid "Get general payments?"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.share_product_filter
+#: model_terms:ir.ui.view,arch_db:cooperator.product_template_search_view
 #: model_terms:ir.ui.view,arch_db:cooperator.view_share_line_filter
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_register_filter
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_request_filter
@@ -1783,7 +1418,6 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_operation_request__id
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__id
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__id
 #: model:ir.model.fields,field_description:cooperator.field_share_line__id
 #: model:ir.model.fields,field_description:cooperator.field_share_line_update_info__id
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__id
@@ -1826,20 +1460,18 @@ msgid "Increase number of share"
 msgstr ""
 
 #. module: cooperator
-#: selection:res.partner,legal_form:0
-#: selection:subscription.request,company_type:0
-#, fuzzy
-msgid "Individual company"
-msgstr "És una companyia?"
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.product_template_share_form_view
+#: model_terms:ir.ui.view,arch_db:cooperator.product_template_form_view
 msgid "Info"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__internal_rules_approval_text
 msgid "Internal Rules Approval Text"
+msgstr ""
+
+#. module: cooperator
+#: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_request_filter
+msgid "Invalid IBAN"
 msgstr ""
 
 #. module: cooperator
@@ -1850,14 +1482,14 @@ msgid "Invoice"
 msgstr "Factura"
 
 #. module: cooperator
+#: selection:res.partner,type:0
+msgid "Invoice address"
+msgstr ""
+
+#. module: cooperator
 #: model:ir.model,name:cooperator.model_account_invoice_report
 msgid "Invoices Statistics"
 msgstr "Estadístiques de factures"
-
-#. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__is_company
-msgid "Is Company"
-msgstr "Es empresa"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_is_follower
@@ -1875,8 +1507,8 @@ msgid "Is an operation"
 msgstr ""
 
 #. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__is_company
-msgid "Is company"
+#: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__is_company
+msgid "Is company?"
 msgstr ""
 
 #. module: cooperator
@@ -1923,7 +1555,6 @@ msgstr "Llengua"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_operation_request____last_update
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription____last_update
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info____last_update
 #: model:ir.model.fields,field_description:cooperator.field_share_line____last_update
 #: model:ir.model.fields,field_description:cooperator.field_share_line_update_info____last_update
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register____last_update
@@ -1935,7 +1566,6 @@ msgstr "Última modificació el "
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_operation_request__write_uid
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__write_uid
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__write_uid
 #: model:ir.model.fields,field_description:cooperator.field_share_line__write_uid
 #: model:ir.model.fields,field_description:cooperator.field_share_line_update_info__write_uid
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__write_uid
@@ -1947,7 +1577,6 @@ msgstr "Última actualització per"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_operation_request__write_date
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__write_date
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__write_date
 #: model:ir.model.fields,field_description:cooperator.field_share_line__write_date
 #: model:ir.model.fields,field_description:cooperator.field_share_line_update_info__write_date
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__write_date
@@ -1958,7 +1587,7 @@ msgstr "Última actualització el"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__lastname
-msgid "Lastname"
+msgid "Last name"
 msgstr ""
 
 #. module: cooperator
@@ -1997,7 +1626,7 @@ msgid "Main Attachment"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:190
+#: code:addons/cooperator/models/subscription_request.py:211
 #: selection:subscription.request,gender:0
 #, python-format
 msgid "Male"
@@ -2066,11 +1695,6 @@ msgid "Next Activity Type"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_request_filter
-msgid "Not Validated"
-msgstr ""
-
-#. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperator_register_G001
 msgid "Number"
 msgstr "Número"
@@ -2115,7 +1739,7 @@ msgid "Number of share"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:677
+#: code:addons/cooperator/models/subscription_request.py:702
 #, python-format
 msgid "Number of share must be greater than 0."
 msgstr ""
@@ -2142,19 +1766,19 @@ msgid "Old cooperator"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:759
+#: code:addons/cooperator/models/subscription_request.py:784
 #, python-format
 msgid "Only blocked requests can be unblocked."
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:781
+#: code:addons/cooperator/models/subscription_request.py:806
 #, python-format
 msgid "Only draft request can be put on the waiting list."
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:752
+#: code:addons/cooperator/models/subscription_request.py:777
 #, python-format
 msgid "Only draft requests can be blocked."
 msgstr ""
@@ -2219,10 +1843,15 @@ msgid "Operation requests"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:190
+#: code:addons/cooperator/models/subscription_request.py:211
 #: selection:subscription.request,gender:0
 #, python-format
 msgid "Other"
+msgstr ""
+
+#. module: cooperator
+#: selection:res.partner,type:0
+msgid "Other address"
 msgstr ""
 
 #. module: cooperator
@@ -2231,7 +1860,7 @@ msgid "Overdue"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.emc_external_layout_standard
+#: model_terms:ir.ui.view,arch_db:cooperator.external_layout_standard
 msgid ""
 "Page:\n"
 "                            <span class=\"page\"/>\n"
@@ -2255,13 +1884,6 @@ msgid "Part B - Worker"
 msgstr ""
 
 #. module: cooperator
-#: selection:res.partner,legal_form:0
-#: selection:subscription.request,company_type:0
-#, fuzzy
-msgid "Partnership"
-msgstr "Quantitat a adquirir"
-
-#. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_certificat
 #: model:mail.template,subject:cooperator.email_template_certificat_increase
 msgid "Payment Received Confirmation"
@@ -2273,7 +1895,7 @@ msgid "Phone"
 msgstr "Telèfon"
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.emc_external_layout_standard
+#: model_terms:ir.ui.view,arch_db:cooperator.external_layout_standard
 #, fuzzy
 msgid "Phone:"
 msgstr "Telèfon"
@@ -2284,7 +1906,7 @@ msgid "Planned"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:505
+#: code:addons/cooperator/models/subscription_request.py:522
 #, python-format
 msgid ""
 "Please define income account for this product: \"%s\" (id:%d) - or for its "
@@ -2293,8 +1915,8 @@ msgstr ""
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "Please use the following communication for your payment :"
-msgstr "Si us plau utilitzeu la següent comunicació per al vostre pagament:"
+msgid "Please use the following communication for your payment:"
+msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_operation_request__share_to_unit_price
@@ -2302,6 +1924,11 @@ msgstr "Si us plau utilitzeu la següent comunicació per al vostre pagament:"
 #: model:ir.model.fields,help:cooperator.field_partner_create_subscription__share_unit_price
 #: model:ir.model.fields,help:cooperator.field_subscription_request__share_unit_price
 msgid "Price at which the product is sold to customers."
+msgstr ""
+
+#. module: cooperator
+#: selection:res.partner,type:0
+msgid "Private Address"
 msgstr ""
 
 #. module: cooperator
@@ -2338,7 +1965,6 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__register_number
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__register_number
 msgid "Register Company Number"
 msgstr ""
 
@@ -2368,13 +1994,23 @@ msgid "Reporting"
 msgstr "Informes"
 
 #. module: cooperator
+#: selection:res.partner,type:0
+msgid "Representative"
+msgstr ""
+
+#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__representative_email
 msgid "Representative email"
 msgstr ""
 
 #. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__representative_name
-msgid "Representative name"
+#: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__representative_firstname
+msgid "Representative first name"
+msgstr ""
+
+#. module: cooperator
+#: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__representative_lastname
+msgid "Representative last name"
 msgstr ""
 
 #. module: cooperator
@@ -2390,9 +2026,7 @@ msgstr ""
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid ""
-"Request to Release\n"
-"                        Capital"
+msgid "Request to Release Capital"
 msgstr ""
 
 #. module: cooperator
@@ -2412,30 +2046,6 @@ msgstr "Responsable"
 #, fuzzy
 msgid "Responsible User"
 msgstr "Responsable"
-
-#. module: cooperator
-#: selection:res.partner,legal_form:0
-#: selection:subscription.request,company_type:0
-msgid "SA / SAS"
-msgstr ""
-
-#. module: cooperator
-#: selection:res.partner,legal_form:0
-#: selection:subscription.request,company_type:0
-msgid "SARL"
-msgstr ""
-
-#. module: cooperator
-#: selection:res.partner,legal_form:0
-#: selection:subscription.request,company_type:0
-msgid "SCRL"
-msgstr ""
-
-#. module: cooperator
-#: selection:res.partner,legal_form:0
-#: selection:subscription.request,company_type:0
-msgid "SPRL"
-msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__same_address
@@ -2500,16 +2110,6 @@ msgid "Send confirmation email"
 msgstr "Confirma el correu"
 
 #. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__representative_function
-msgid "Set function"
-msgstr ""
-
-#. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__legal_form
-msgid "Set legal form"
-msgstr ""
-
-#. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperator_subscription_G001
 msgid ""
 "Share\n"
@@ -2517,7 +2117,7 @@ msgid ""
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.product_template_share_form_view
+#: model_terms:ir.ui.view,arch_db:cooperator.product_template_form_view
 msgid "Share Information"
 msgstr ""
 
@@ -2628,14 +2228,19 @@ msgid "Shares"
 msgstr ""
 
 #. module: cooperator
+#: selection:res.partner,type:0
+msgid "Shipping address"
+msgstr ""
+
+#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_product_product__short_name
 #: model:ir.model.fields,field_description:cooperator.field_product_template__short_name
 msgid "Short name"
 msgstr "Nom curt"
 
 #. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_subscription_request__skip_control_ng
-msgid "Skip control"
+#: model:ir.model.fields,field_description:cooperator.field_subscription_request__skip_iban_control
+msgid "Skip IBAN Control"
 msgstr ""
 
 #. module: cooperator
@@ -2666,7 +2271,7 @@ msgstr "Desa"
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_register_filter
 #: selection:operation.request,operation_type:0
-#: selection:subscription.register,type:0 selection:subscription.request,type:0
+#: selection:subscription.register,type:0
 msgid "Subscription"
 msgstr ""
 
@@ -2681,11 +2286,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__date
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_register_filter
 msgid "Subscription Date"
-msgstr ""
-
-#. module: cooperator
-#: model:account.journal,name:cooperator.subscription_journal
-msgid "Subscription Journal"
 msgstr ""
 
 #. module: cooperator
@@ -2708,8 +2308,8 @@ msgstr ""
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
-#: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_tree
+#: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
 msgid "Subscription Requests"
 msgstr ""
 
@@ -2738,9 +2338,7 @@ msgstr ""
 
 #. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_waiting_list
-msgid ""
-"Subscription request added on waiting list.\n"
-"            "
+msgid "Subscription request added on waiting list"
 msgstr ""
 
 #. module: cooperator
@@ -2753,7 +2351,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:cooperator.view_create_subscription
 msgid ""
 "Subscription request will be created with data from the\n"
-"                        partner."
+"                    partner."
 msgstr ""
 
 #. module: cooperator
@@ -2788,7 +2386,7 @@ msgid "Text to display aside the checkbox to approve the generic rules."
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:685
+#: code:addons/cooperator/models/subscription_request.py:710
 #, python-format
 msgid "The checkbox already cooperator is checked please select a cooperator."
 msgstr ""
@@ -2822,14 +2420,14 @@ msgid ""
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:671
+#: code:addons/cooperator/models/subscription_request.py:696
 #, python-format
 msgid "The request must be in draft or on waiting list to be validated"
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:725
-#: code:addons/cooperator/wizard/create_subscription_from_partner.py:181
+#: code:addons/cooperator/models/subscription_request.py:750
+#: code:addons/cooperator/wizard/create_subscription_from_partner.py:196
 #, python-format
 msgid ""
 "There is two different persons with the same national register number. "
@@ -2844,7 +2442,7 @@ msgid ""
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:733
+#: code:addons/cooperator/models/subscription_request.py:758
 #, python-format
 msgid ""
 "This contact person is already defined for another company. Please select "
@@ -2988,25 +2586,8 @@ msgid "Unread Messages Counter"
 msgstr ""
 
 #. module: cooperator
-#: model:ir.actions.act_window,name:cooperator.action_view_update_partner_info
-#: model_terms:ir.ui.view,arch_db:cooperator.view_update_partner_info
-msgid "Update Cooperator Info"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.view_update_partner_info
-msgid "Update Cooperator Info."
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.view_update_partner_info
 #: model_terms:ir.ui.view,arch_db:cooperator.view_update_share_line_info
 msgid "Update Info"
-msgstr ""
-
-#. module: cooperator
-#: model:ir.model,name:cooperator.model_partner_update_info
-msgid "Update Partner Info"
 msgstr ""
 
 #. module: cooperator
@@ -3021,25 +2602,16 @@ msgid "Update Share Line Info."
 msgstr ""
 
 #. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__all
-msgid "Update all info"
-msgstr ""
-
-#. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__birthdate
-#, fuzzy
-msgid "Update birth date"
-msgstr "Data de naixement"
-
-#. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_partner_update_info__from_sub_req
-msgid "Update from subscription request"
-msgstr ""
-
-#. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.share_line_form
-#: model_terms:ir.ui.view,arch_db:cooperator.view_partner_form
 msgid "Update info"
+msgstr ""
+
+#. module: cooperator
+#: model:ir.model.fields,help:cooperator.field_res_partner__type
+#: model:ir.model.fields,help:cooperator.field_res_users__type
+msgid ""
+"Used by Sales and Purchase Apps to select the relevant address depending on "
+"the context."
 msgstr ""
 
 #. module: cooperator
@@ -3048,13 +2620,13 @@ msgid "User"
 msgstr "Usuari"
 
 #. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_subscription_request__validated
-msgid "Valid Subscription request?"
+#: model:ir.model.fields,field_description:cooperator.field_subscription_request__is_valid_iban
+msgid "Valid IBAN?"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_tree
+#: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
 #: model_terms:ir.ui.view,arch_db:cooperator.view_validate_subscription_request
 msgid "Validate"
 msgstr "Validar"
@@ -3096,7 +2668,7 @@ msgid "Waiting list"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.emc_external_layout_standard
+#: model_terms:ir.ui.view,arch_db:cooperator.external_layout_standard
 msgid "Web:"
 msgstr ""
 
@@ -3122,7 +2694,7 @@ msgid "You can't convert the share to the same share type."
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:766
+#: code:addons/cooperator/models/subscription_request.py:791
 #, python-format
 msgid "You cannot cancel a request in this state."
 msgstr ""
@@ -3134,9 +2706,9 @@ msgid "You must convert all the shares to the selected type."
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:538
+#: code:addons/cooperator/models/subscription_request.py:551
 #, python-format
-msgid "You must set a cooperator account on you company."
+msgid "You must set a cooperator account on your company."
 msgstr ""
 
 #. module: cooperator
@@ -3147,14 +2719,6 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_share_line_update_info__effective_date
 msgid "effective date"
-msgstr ""
-
-#. module: cooperator
-#: model:ir.model.fields,help:cooperator.field_subscription_request__skip_control_ng
-msgid ""
-"if this field is checked then no control will be done on the national "
-"register number and on the iban bank account. To be done in case of the id "
-"card is from abroad or in case of a passport"
 msgstr ""
 
 #. module: cooperator
@@ -3177,6 +2741,724 @@ msgstr ""
 #: selection:subscription.request,state:0
 msgid "paid"
 msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hello ${object.firstname},</p>\n"
+#~ "\n"
+#~ "    <p>We confirm the reception of you payment for the new share(s) you "
+#~ "have taken.</p>\n"
+#~ "\n"
+#~ "    <br/>\n"
+#~ "    <p>Find in attachment your ${object.company_id.name} certificate.</"
+#~ "p>\n"
+#~ "    <p>Thank you for trusting ${object.company_id.name or 'us'}!</p>\n"
+#~ "    <br/>\n"
+#~ "    <p>Sustainably your,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Phone:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "    <div>\n"
+#~ "        <img src=${object.company_id.logo_url}>\n"
+#~ "    </div>\n"
+#~ "</div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hola ${object.name},</p>\n"
+#~ "\n"
+#~ "    <p>Hem rebut el teu pagament per les noves participacions que has "
+#~ "adquirit.</p>\n"
+#~ "\n"
+#~ "    <br/>\n"
+#~ "    <p>N'adjuntem el certificat de ${object.company_id.name}</p>\n"
+#~ "    <p>Gràcies per confiar en ${object.company_id.name or 'nosaltres'}!</"
+#~ "p>\n"
+#~ "    <br/>\n"
+#~ "    <p>Cooperativament,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Telèfon:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "    <div>\n"
+#~ "        <img src=${object.company_id.logo_url}>\n"
+#~ "    </div>\n"
+#~ "</div>\n"
+#~ "            "
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hello ${object.firstname},</p>\n"
+#~ "\n"
+#~ "    <p>We confirm the reception of you payment. You are now shareholder "
+#~ "of our cooperative</p>\n"
+#~ "\n"
+#~ "    <br/>\n"
+#~ "    <p>Find in attachment your ${object.company_id.name} certificate.</"
+#~ "p>\n"
+#~ "    <p>Thank you for choosing ${object.company_id.name or 'us'}!</p>\n"
+#~ "    <br/>\n"
+#~ "    <p>Sustainably your,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Phone:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "    <div>\n"
+#~ "        <img src=${object.company_id.logo_url}>\n"
+#~ "    </div>\n"
+#~ "</div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hola ${object.name},</p>\n"
+#~ "\n"
+#~ "    <p>Hem rebut el teu pagament. Ja ets soci/a de la cooperativa!</p>\n"
+#~ "\n"
+#~ "    <br/>\n"
+#~ "    <p>T'adjuntem el certificat de ${object.company_id.name}.</p>\n"
+#~ "    <p>Gràcies per confiar en ${object.company_id.name or 'nosaltres'}!</"
+#~ "p>\n"
+#~ "    <br/>\n"
+#~ "    <p>Cooperativament,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Telèfon:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "    <div>\n"
+#~ "        <img src=${object.company_id.logo_url}>\n"
+#~ "    </div>\n"
+#~ "</div>\n"
+#~ "            "
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hello ${object.firstname},</p>\n"
+#~ "\n"
+#~ "    <p>We confirm you that the adaptation on shares portfolio has been "
+#~ "succesfully performed. Your cooperator certificate has been adapted "
+#~ "accordingly</p>\n"
+#~ "\n"
+#~ "    <br/>\n"
+#~ "    <p>Find in attachment your ${object.company_id.name} certificate.</"
+#~ "p>\n"
+#~ "    <p>Thank you for choosing ${object.company_id.name or 'us'}!</p>\n"
+#~ "    <br/>\n"
+#~ "    <p>Sustainably your,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Phone:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "     <div>\n"
+#~ "         <img src=${object.company_id.logo_url}>\n"
+#~ "     </div>\n"
+#~ "</div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hola ${object.name},</p>\n"
+#~ "\n"
+#~ "    <p>Confirmem els canvis de participacions que has fet recentment. Hem "
+#~ "actualitzat el certificact de cooperacióper reflectir aquests canvis</p>\n"
+#~ "\n"
+#~ "    <br/>\n"
+#~ "    <p>T'adjuntem el certificat de ${object.company_id.name}.</p>\n"
+#~ "    <p>Gràcies per confiar en ${object.company_id.name or 'nosaltres'}!</"
+#~ "p>\n"
+#~ "    <br/>\n"
+#~ "    <p>Cooperativament,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Telèfon:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "     <div>\n"
+#~ "         <img src=${object.company_id.logo_url}>\n"
+#~ "     </div>\n"
+#~ "</div>\n"
+#~ "            "
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hello ${object.firstname},</p>\n"
+#~ "\n"
+#~ "    <p>We confirm you that the shares have been transfered to you. If you "
+#~ "was not already cooperator, you are now shareholder of our cooperative</"
+#~ "p>\n"
+#~ "\n"
+#~ "    <br/>\n"
+#~ "    <p>Find in attachment your ${object.company_id.name} certificate.</"
+#~ "p>\n"
+#~ "    <p>Thank you for choosing ${object.company_id.name or 'us'}!</p>\n"
+#~ "    <br/>\n"
+#~ "    <p>Sustainably your,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Phone:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "    <div>\n"
+#~ "        <img src=${object.company_id.logo_url}>\n"
+#~ "    </div>\n"
+#~ "</div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hola ${object.name},</p>\n"
+#~ "\n"
+#~ "    <p>Et confirmem que se t'han transferit participacions de la "
+#~ "cooperativa. Si encara no eres soci/a, ara ja ho ets!</p>\n"
+#~ "\n"
+#~ "    <br/>\n"
+#~ "    <p>T'adjuntem el certificat de ${object.company_id.name}.</p>\n"
+#~ "    <p>Gràcies per confiar en ${object.company_id.name or 'nosaltres'}!</"
+#~ "p>\n"
+#~ "    <br/>\n"
+#~ "    <p>Cooperativament,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Telèfon:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "    <div>\n"
+#~ "        <img src=${object.company_id.logo_url}>\n"
+#~ "    </div>\n"
+#~ "</div>\n"
+#~ "            "
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hello ${object.firstname},</p>\n"
+#~ "\n"
+#~ "    <p>We have received your subscription request for ${object.company_id."
+#~ "name}. Thank you for your support.</p>\n"
+#~ "\n"
+#~ "    <p>Your request will be soon processed by our team \"gestion et "
+#~ "participation des membres\". If all the provided info are correct you "
+#~ "will soon receive the payment information in another email</p>\n"
+#~ "\n"
+#~ "    <br/>\n"
+#~ "    <p>If you have any question, do not hesitate to contact us.</p>\n"
+#~ "    <br/>\n"
+#~ "\n"
+#~ "    <p>Sustainably your,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Phone:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "    <div>\n"
+#~ "        <img src=${object.company_id.logo_url}>\n"
+#~ "    </div>\n"
+#~ "</div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hola ${object.name},</p>\n"
+#~ "\n"
+#~ "    <p>Hem rebut la teva soŀlicitud de subscripció a ${object.company_id."
+#~ "name}. Moltes gràcies pel teu suport!</p>\n"
+#~ "\n"
+#~ "    <p>Processarem aviat la soŀlicitud. Si totes les dades són correctes, "
+#~ "rebràs un altre correu amb informació sobre com procedir al pagament.</"
+#~ "p>\n"
+#~ "\n"
+#~ "    <br/>\n"
+#~ "    <p>No dubtis en contactar-nos per qualsevol aclariment.</p>\n"
+#~ "    <br/>\n"
+#~ "\n"
+#~ "    <p>Cooperativament,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Phone:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "    <div>\n"
+#~ "        <img src=${object.company_id.logo_url}>\n"
+#~ "    </div>\n"
+#~ "</div>\n"
+#~ "            "
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hello ${object.firstname},</p>\n"
+#~ "\n"
+#~ "    <p>Your request will be soon processed by our team. If all the "
+#~ "provided info are correct you will soon receive the payment information "
+#~ "in another email</p>\n"
+#~ "\n"
+#~ "    <br/>\n"
+#~ "    <p>If you have any question, do not hesitate to contact us.</p>\n"
+#~ "    <br/>\n"
+#~ "\n"
+#~ "    <p>Sustainably your,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Phone:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "    <div>\n"
+#~ "        <img src=${object.company_id.logo_url}>\n"
+#~ "    </div>\n"
+#~ "</div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hola ${object.name},</p>\n"
+#~ "\n"
+#~ "    <p>Processarem aviat la teva soŀlicitud. Si és correcta tota la "
+#~ "informació que ens has proporcionat, rebràs un altre correu amb la "
+#~ "informació de com procedir amb el pagament.</p>\n"
+#~ "\n"
+#~ "    <br/>\n"
+#~ "    <p>Per qualsevol pregunta, no dubtis en contactar-nos.</p>\n"
+#~ "    <br/>\n"
+#~ "\n"
+#~ "    <p>Cooperativament,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Telèfon:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "    <div>\n"
+#~ "        <img src=${object.company_id.logo_url}>\n"
+#~ "    </div>\n"
+#~ "</div>\n"
+#~ "            "
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hello ${object.partner_id.firstname},</p>\n"
+#~ "\n"
+#~ "    <p>You will find in attachment all the necessary information for the "
+#~ "payment. We kindly remind you that your subscription will be effective "
+#~ "only once we received the payment.</p>\n"
+#~ "\n"
+#~ "    <p>Do not forget to add the structured communication to the payment.</"
+#~ "p>\n"
+#~ "\n"
+#~ "    <p>Sustainably your,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Phone:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "    <div>\n"
+#~ "        <img src=${object.company_id.logo_url}>\n"
+#~ "    </div>\n"
+#~ "</div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+#~ "serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; "
+#~ "\">\n"
+#~ "\n"
+#~ "    <p>Hola ${object.partner_id.name},</p>\n"
+#~ "\n"
+#~ "    <p>Pots trobar adjunta tota la informació per fer el pagament.  "
+#~ "Recorda si us plau que la subscripció només es farà efectiva un cop "
+#~ "haguem rebut el pagament.</p>\n"
+#~ "\n"
+#~ "    <p>Comprova les instruccions adjuntes si us plau!</p>\n"
+#~ "\n"
+#~ "    <p>Cooperativament,</p>\n"
+#~ "    <p>${object.company_id.name}.</p>\n"
+#~ "\n"
+#~ "    % if object.company_id.street:\n"
+#~ "        ${object.company_id.street}\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.street2:\n"
+#~ "        ${object.company_id.street2}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.city or object.company_id.zip:\n"
+#~ "        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.country_id:\n"
+#~ "        ${object.company_id.state_id and ('%s, ' % object.company_id."
+#~ "state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+#~ "    % endif\n"
+#~ "    % if object.company_id.phone:\n"
+#~ "        Telèfon:&nbsp; ${object.company_id.phone}\n"
+#~ "    % endif\n"
+#~ "\n"
+#~ "    % if object.company_id.website:\n"
+#~ "        <div>\n"
+#~ "            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+#~ "company_id.website}</a>\n"
+#~ "        </div>\n"
+#~ "    %endif\n"
+#~ "\n"
+#~ "    <div>\n"
+#~ "        <img src=${object.company_id.logo_url}>\n"
+#~ "    </div>\n"
+#~ "</div>\n"
+#~ "            "
+
+#~ msgid "Bank Accounts"
+#~ msgstr "Comptes bancaris"
+
+#~ msgid "Birthdate"
+#~ msgstr "Data de naixement"
+
+#, fuzzy
+#~ msgid "Foundation"
+#~ msgstr "Funció"
+
+#, fuzzy
+#~ msgid "Individual company"
+#~ msgstr "És una companyia?"
+
+#~ msgid "Is Company"
+#~ msgstr "Es empresa"
+
+#, fuzzy
+#~ msgid "Partnership"
+#~ msgstr "Quantitat a adquirir"
+
+#~ msgid "Please use the following communication for your payment :"
+#~ msgstr "Si us plau utilitzeu la següent comunicació per al vostre pagament:"
+
+#, fuzzy
+#~ msgid "Update birth date"
+#~ msgstr "Data de naixement"
 
 #~ msgid "&amp;times;"
 #~ msgstr "&amp;times;"
