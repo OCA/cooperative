@@ -215,7 +215,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
             "lang": "en_US",
             "gender": "other",
             "birthdate": "1980-01-01",
-            "iban": "BE71096123456769",
+            "iban": "BE60096123456870",
             "source": "manual",
         }
 
