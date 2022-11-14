@@ -522,11 +522,6 @@ msgid "Account Number"
 msgstr ""
 
 #. module: cooperator
-#: sql_constraint:res.partner.bank:0
-msgid "Account Number must be unique!"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_needaction
 msgid "Action Needed"
 msgstr ""
@@ -625,11 +620,6 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
-
-#. module: cooperator
-#: model:ir.model,name:cooperator.model_res_partner_bank
-msgid "Bank Accounts"
 msgstr ""
 
 #. module: cooperator
