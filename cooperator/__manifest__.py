@@ -7,7 +7,7 @@
 {
     "name": "Cooperators",
     "summary": "Manage your cooperators",
-    "version": "14.0.1.4.0",
+    "version": "14.0.1.5.0",
     "depends": [
         "base",
         "web",
