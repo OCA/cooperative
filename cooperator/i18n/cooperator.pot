@@ -537,11 +537,6 @@ msgid "Account Number"
 msgstr ""
 
 #. module: cooperator
-#: model:ir.model.constraint,message:cooperator.constraint_res_partner_bank_unique_number
-msgid "Account Number must be unique!"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_needaction
 msgid "Action Needed"
 msgstr ""
@@ -650,11 +645,6 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
-
-#. module: cooperator
-#: model:ir.model,name:cooperator.model_res_partner_bank
-msgid "Bank Accounts"
 msgstr ""
 
 #. module: cooperator
@@ -1129,7 +1119,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_product_template__display_name
 #: model:ir.model.fields,field_description:cooperator.field_res_company__display_name
 #: model:ir.model.fields,field_description:cooperator.field_res_partner__display_name
-#: model:ir.model.fields,field_description:cooperator.field_res_partner_bank__display_name
 #: model:ir.model.fields,field_description:cooperator.field_share_line__display_name
 #: model:ir.model.fields,field_description:cooperator.field_share_line_update_info__display_name
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__display_name
@@ -1345,7 +1334,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_product_template__id
 #: model:ir.model.fields,field_description:cooperator.field_res_company__id
 #: model:ir.model.fields,field_description:cooperator.field_res_partner__id
-#: model:ir.model.fields,field_description:cooperator.field_res_partner_bank__id
 #: model:ir.model.fields,field_description:cooperator.field_share_line__id
 #: model:ir.model.fields,field_description:cooperator.field_share_line_update_info__id
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__id
@@ -1504,7 +1492,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_product_template____last_update
 #: model:ir.model.fields,field_description:cooperator.field_res_company____last_update
 #: model:ir.model.fields,field_description:cooperator.field_res_partner____last_update
-#: model:ir.model.fields,field_description:cooperator.field_res_partner_bank____last_update
 #: model:ir.model.fields,field_description:cooperator.field_share_line____last_update
 #: model:ir.model.fields,field_description:cooperator.field_share_line_update_info____last_update
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register____last_update
