@@ -91,3 +91,87 @@ class CooperatorTestMixin:
                 "skip_iban_control": True,
             }
         )
+        cls.bank_journal = cls.env["account.journal"].create(
+            {"name": "Bank", "type": "bank", "code": "BNK67"}
+        )
+        cls.payment_method = cls.env.ref("account.account_payment_method_manual_in")
+
+    def pay_invoice(self, invoice, payment_date=None):
+        ctx = {"active_model": "account.move", "active_ids": [invoice.id]}
+        register_payments_vals = {
+            "journal_id": self.bank_journal.id,
+            "payment_method_id": self.payment_method.id,
+        }
+        if payment_date is not None:
+            register_payments_vals["payment_date"] = payment_date
+        register_payment = (
+            self.env["account.payment.register"]
+            .with_context(ctx)
+            .create(register_payments_vals)
+        )
+        register_payment.action_create_payments()
+
+    def get_dummy_subscription_requests_vals(self):
+        return {
+            "share_product_id": self.share_y.id,
+            "ordered_parts": 2,
+            "firstname": "first name",
+            "lastname": "last name",
+            "email": "email@example.net",
+            "phone": "dummy phone",
+            "address": "dummy street",
+            "zip_code": "dummy zip",
+            "city": "dummy city",
+            "country_id": self.ref("base.be"),
+            "lang": "en_US",
+            "gender": "other",
+            "birthdate": "1980-01-01",
+            "iban": "BE60096123456870",
+            "source": "manual",
+        }
+
+    def get_dummy_company_subscription_requests_vals(self):
+        vals = self.get_dummy_subscription_requests_vals()
+        vals["is_company"] = True
+        vals["company_name"] = "dummy company"
+        vals["company_email"] = "companyemail@example.net"
+        vals["company_register_number"] = "dummy company register number"
+        vals["contact_person_function"] = "dummy contact person function"
+        return vals
+
+    def create_dummy_subscription_from_partner(self, partner):
+        vals = self.get_dummy_subscription_requests_vals()
+        vals["partner_id"] = partner.id
+        return self.env["subscription.request"].create(vals)
+
+    def create_dummy_subscription_from_company_partner(self, partner):
+        vals = self.get_dummy_company_subscription_requests_vals()
+        vals["partner_id"] = partner.id
+        return self.env["subscription.request"].create(vals)
+
+    def validate_subscription_request_and_pay(self, subscription_request):
+        subscription_request.validate_subscription_request()
+        self.pay_invoice(subscription_request.capital_release_request)
+
+    def create_dummy_cooperator(self):
+        partner = self.env["res.partner"].create(
+            {
+                "name": "dummy partner 1",
+            }
+        )
+        subscription_request = self.create_dummy_subscription_from_partner(partner)
+        self.validate_subscription_request_and_pay(subscription_request)
+        return partner
+
+    def create_dummy_company_cooperator(self):
+        partner = self.env["res.partner"].create(
+            {
+                "name": "dummy company partner 1",
+                "is_company": True,
+            }
+        )
+        subscription_request = self.create_dummy_subscription_from_company_partner(
+            partner
+        )
+        self.validate_subscription_request_and_pay(subscription_request)
+        return partner
