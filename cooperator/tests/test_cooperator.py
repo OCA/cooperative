@@ -16,10 +16,6 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
     def setUpClass(cls):
         super().setUpClass()
         cls.set_up_cooperator_test_data()
-        cls.bank_journal = cls.env["account.journal"].create(
-            {"name": "Bank", "type": "bank", "code": "BNK67"}
-        )
-        cls.payment_method = cls.env.ref("account.account_payment_method_manual_in")
         cls.share_line = cls.env["share.line"].create(
             {
                 "share_product_id": cls.share_x.id,
@@ -59,27 +55,12 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
             "SUBJ/{year}/001".format(year=date.today().year),
         )
 
-    def _pay_invoice(self, invoice, payment_date=None):
-        ctx = {"active_model": "account.invoice", "active_ids": [invoice.id]}
-        register_payments_vals = {
-            "journal_id": self.bank_journal.id,
-            "payment_method_id": self.payment_method.id,
-        }
-        if payment_date is not None:
-            register_payments_vals["payment_date"] = payment_date
-        register_payments = (
-            self.env["account.register.payments"]
-            .with_context(ctx)
-            .create(register_payments_vals)
-        )
-        register_payments.create_payments()
-
     @users("user-cooperator")
     def test_register_payment_for_capital_release(self):
         self.subscription_request_1.validate_subscription_request()
         invoice = self.subscription_request_1.capital_release_request
 
-        self._pay_invoice(invoice)
+        self.pay_invoice(invoice)
         self.assertEqual(invoice.state, "paid")
 
         partner = self.subscription_request_1.partner_id
@@ -99,7 +80,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
     def test_effective_date_from_payment_date(self):
         self.subscription_request_1.validate_subscription_request()
         invoice = self.subscription_request_1.capital_release_request
-        self._pay_invoice(invoice, date(2022, 6, 21))
+        self.pay_invoice(invoice, date(2022, 6, 21))
 
         partner = self.subscription_request_1.partner_id
         self.assertEqual(partner.effective_date, date(2022, 6, 21))
@@ -113,7 +94,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         with self.assertRaises(AccessError):
             request_as_user.name = "test write request"
         with self.assertRaises(AccessError):
-            create_values = self._get_dummy_subscription_requests_vals()
+            create_values = self.get_dummy_subscription_requests_vals()
             self.env["subscription.request"].create(create_values)
         with self.assertRaises(AccessError):
             request_as_user.unlink()
@@ -128,7 +109,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         # cf comment in test_user_access_rules
         resquest_as_cooperator = self.subscription_request_1.sudo(cooperator_user)
         resquest_as_cooperator.name = "test write request"
-        create_values = self._get_dummy_subscription_requests_vals()
+        create_values = self.get_dummy_subscription_requests_vals()
         create_request = self.env["subscription.request"].create(create_values)
         with self.assertRaises(AccessError):
             create_request.unlink()
@@ -160,7 +141,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
             cooperator_manager
         )
         request_as_cooperator_manager.name = "test write request"
-        create_values = self._get_dummy_subscription_requests_vals()
+        create_values = self.get_dummy_subscription_requests_vals()
         create_request = self.env["subscription.request"].create(create_values)
         with self.assertRaises(AccessError):
             create_request.unlink()
@@ -203,78 +184,13 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         self.subscription_request_1.iban = False
         self.assertTrue(self.subscription_request_1.is_valid_iban)
 
-    def _get_dummy_subscription_requests_vals(self):
-        return {
-            "share_product_id": self.share_y.id,
-            "ordered_parts": 2,
-            "firstname": "first name",
-            "lastname": "last name",
-            "email": "email@example.net",
-            "phone": "dummy phone",
-            "address": "dummy street",
-            "zip_code": "dummy zip",
-            "city": "dummy city",
-            "country_id": self.ref("base.be"),
-            "lang": "en_US",
-            "gender": "other",
-            "birthdate": "1980-01-01",
-            "iban": "BE60096123456870",
-            "source": "manual",
-        }
-
-    def _get_dummy_company_subscription_requests_vals(self):
-        vals = self._get_dummy_subscription_requests_vals()
-        vals["is_company"] = True
-        vals["company_name"] = "dummy company"
-        vals["company_email"] = "companyemail@example.net"
-        vals["company_register_number"] = "dummy company register number"
-        vals["contact_person_function"] = "dummy contact person function"
-        return vals
-
-    def _create_dummy_subscription_from_partner(self, partner):
-        vals = self._get_dummy_subscription_requests_vals()
-        vals["partner_id"] = partner.id
-        return self.env["subscription.request"].create(vals)
-
-    def _create_dummy_subscription_from_company_partner(self, partner):
-        vals = self._get_dummy_company_subscription_requests_vals()
-        vals["partner_id"] = partner.id
-        return self.env["subscription.request"].create(vals)
-
-    def _validate_subscription_request_and_pay(self, subscription_request):
-        subscription_request.validate_subscription_request()
-        self._pay_invoice(subscription_request.capital_release_request)
-
-    def _create_dummy_cooperator(self):
-        partner = self.env["res.partner"].create(
-            {
-                "name": "dummy partner 1",
-            }
-        )
-        subscription_request = self._create_dummy_subscription_from_partner(partner)
-        self._validate_subscription_request_and_pay(subscription_request)
-        return partner
-
-    def _create_dummy_company_cooperator(self):
-        partner = self.env["res.partner"].create(
-            {
-                "name": "dummy company partner 1",
-                "is_company": True,
-            }
-        )
-        subscription_request = self._create_dummy_subscription_from_company_partner(
-            partner
-        )
-        self._validate_subscription_request_and_pay(subscription_request)
-        return partner
-
     def test_create_subscription_from_non_cooperator_partner(self):
         partner = self.env["res.partner"].create(
             {
                 "name": "dummy partner 1",
             }
         )
-        subscription_request = self._create_dummy_subscription_from_partner(partner)
+        subscription_request = self.create_dummy_subscription_from_partner(partner)
         self.assertTrue(partner.cooperator)
         self.assertFalse(partner.coop_candidate)
         self.assertFalse(partner.member)
@@ -282,7 +198,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         self.assertTrue(partner.cooperator)
         self.assertTrue(partner.coop_candidate)
         self.assertFalse(partner.member)
-        self._pay_invoice(subscription_request.capital_release_request)
+        self.pay_invoice(subscription_request.capital_release_request)
         self.assertTrue(partner.cooperator)
         self.assertFalse(partner.coop_candidate)
         self.assertTrue(partner.member)
@@ -294,7 +210,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "is_company": True,
             }
         )
-        subscription_request = self._create_dummy_subscription_from_company_partner(
+        subscription_request = self.create_dummy_subscription_from_company_partner(
             partner
         )
         self.assertTrue(partner.cooperator)
@@ -304,7 +220,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         self.assertTrue(partner.cooperator)
         self.assertTrue(partner.coop_candidate)
         self.assertFalse(partner.member)
-        self._pay_invoice(subscription_request.capital_release_request)
+        self.pay_invoice(subscription_request.capital_release_request)
         self.assertTrue(partner.cooperator)
         self.assertFalse(partner.coop_candidate)
         self.assertTrue(partner.member)
@@ -319,9 +235,9 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "name": "dummy partner 1",
             }
         )
-        subscription_request = self._create_dummy_subscription_from_partner(partner)
+        subscription_request = self.create_dummy_subscription_from_partner(partner)
         self.assertEqual(subscription_request.type, "new")
-        subscription_request2 = self._create_dummy_subscription_from_partner(partner)
+        subscription_request2 = self.create_dummy_subscription_from_partner(partner)
         self.assertEqual(subscription_request2.type, "increase")
 
     def test_create_multiple_subscriptions_from_non_cooperator_company_partner(self):
@@ -335,11 +251,11 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "is_company": True,
             }
         )
-        subscription_request = self._create_dummy_subscription_from_company_partner(
+        subscription_request = self.create_dummy_subscription_from_company_partner(
             partner
         )
         self.assertEqual(subscription_request.type, "new")
-        subscription_request2 = self._create_dummy_subscription_from_company_partner(
+        subscription_request2 = self.create_dummy_subscription_from_company_partner(
             partner
         )
         self.assertEqual(subscription_request2.type, "increase")
@@ -349,8 +265,8 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         Test that creating a subscription from a cooperator partner creates a
         subscription request with the correct type.
         """
-        partner = self._create_dummy_cooperator()
-        subscription_request = self._create_dummy_subscription_from_partner(partner)
+        partner = self.create_dummy_cooperator()
+        subscription_request = self.create_dummy_subscription_from_partner(partner)
         self.assertEqual(subscription_request.type, "increase")
 
     def test_create_subscription_from_cooperator_company_partner(self):
@@ -358,15 +274,15 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         Test that creating a subscription from a cooperator company partner
         creates a subscription request with the correct type.
         """
-        partner = self._create_dummy_company_cooperator()
-        subscription_request = self._create_dummy_subscription_from_company_partner(
+        partner = self.create_dummy_company_cooperator()
+        subscription_request = self.create_dummy_subscription_from_company_partner(
             partner
         )
         self.assertEqual(subscription_request.type, "increase")
 
     def test_create_subscription_without_partner(self):
         subscription_request = self.env["subscription.request"].create(
-            self._get_dummy_subscription_requests_vals()
+            self.get_dummy_subscription_requests_vals()
         )
         self.assertEqual(subscription_request.type, "new")
         self.assertEqual(subscription_request.name, "first name last name")
@@ -390,7 +306,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         self.assertTrue(partner.cooperator)
 
     def test_create_subscription_for_company_without_partner(self):
-        vals = self._get_dummy_company_subscription_requests_vals()
+        vals = self.get_dummy_company_subscription_requests_vals()
         subscription_request = self.env["subscription.request"].create(vals)
         self.assertEqual(subscription_request.type, "new")
         self.assertEqual(subscription_request.name, "dummy company")
@@ -439,7 +355,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "email": "dummy@example.net",
             }
         )
-        vals = self._get_dummy_subscription_requests_vals()
+        vals = self.get_dummy_subscription_requests_vals()
         vals["email"] = "dummy@example.net"
         subscription_request = self.env["subscription.request"].create(vals)
         self.assertEqual(subscription_request.partner_id, partner)
@@ -458,7 +374,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "cooperator": True,
             }
         )
-        vals = self._get_dummy_subscription_requests_vals()
+        vals = self.get_dummy_subscription_requests_vals()
         vals["email"] = "dummy@example.net"
         subscription_request = self.env["subscription.request"].create(vals)
         # if there are multiple email matches, take the one that is a
@@ -472,7 +388,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "email": "",
             }
         )
-        vals = self._get_dummy_subscription_requests_vals()
+        vals = self.get_dummy_subscription_requests_vals()
         vals["email"] = ""
         subscription_request = self.env["subscription.request"].create(vals)
         self.assertNotEqual(subscription_request.partner_id, partner)
@@ -484,7 +400,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "email": "",
             }
         )
-        vals = self._get_dummy_subscription_requests_vals()
+        vals = self.get_dummy_subscription_requests_vals()
         vals["email"] = " "
         subscription_request = self.env["subscription.request"].create(vals)
         self.assertNotEqual(subscription_request.partner_id, partner)
@@ -506,7 +422,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "is_company": True,
             }
         )
-        vals = self._get_dummy_company_subscription_requests_vals()
+        vals = self.get_dummy_company_subscription_requests_vals()
         vals["email"] = "dummy@example.net"
         subscription_request = self.env["subscription.request"].create(vals)
         partner = subscription_request.partner_id
@@ -532,7 +448,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "cooperator": True,
             }
         )
-        vals = self._get_dummy_company_subscription_requests_vals()
+        vals = self.get_dummy_company_subscription_requests_vals()
         subscription_request = self.env["subscription.request"].create(vals)
         partner = subscription_request.partner_id
         # if there are multiple company register number matches, take the one
@@ -548,7 +464,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "is_company": True,
             }
         )
-        vals = self._get_dummy_company_subscription_requests_vals()
+        vals = self.get_dummy_company_subscription_requests_vals()
         vals["company_register_number"] = ""
         subscription_request = self.env["subscription.request"].create(vals)
         partner = subscription_request.partner_id
@@ -563,7 +479,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "is_company": True,
             }
         )
-        vals = self._get_dummy_company_subscription_requests_vals()
+        vals = self.get_dummy_company_subscription_requests_vals()
         vals["company_register_number"] = " "
         subscription_request = self.env["subscription.request"].create(vals)
         partner = subscription_request.partner_id
@@ -577,7 +493,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "is_company": True,
             }
         )
-        vals = self._get_dummy_company_subscription_requests_vals()
+        vals = self.get_dummy_company_subscription_requests_vals()
         del vals["company_register_number"]
         subscription_request = self.env["subscription.request"].create(vals)
         partner = subscription_request.partner_id
