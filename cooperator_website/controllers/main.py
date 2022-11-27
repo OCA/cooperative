@@ -458,11 +458,9 @@ class WebsiteSubscription(http.Controller):
             for field_value in post_file:
                 attachment_value = {
                     "name": field_value.filename,
-                    "res_name": field_value.filename,
                     "res_model": "subscription.request",
                     "res_id": subscription_id,
                     "datas": base64.encodestring(field_value.read()),
-                    "datas_fname": field_value.filename,
                 }
                 attach_obj.sudo().create(attachment_value)
 
