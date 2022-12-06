@@ -111,6 +111,39 @@ class CooperatorTestMixin:
         )
         register_payment.action_create_payments()
 
+    def create_payment_account_move(self, invoice, date, amount=None):
+        if amount is None:
+            amount = invoice.line_ids[0].credit
+        am = self.env["account.move"].create(
+            {
+                "journal_id": self.bank_journal.id,
+                "date": date,
+                "line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": invoice.name,
+                            "account_id": self.bank_journal.default_account_id.id,
+                            "debit": amount,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "name": invoice.payment_reference,
+                            "account_id": self.company.property_cooperator_account.id,
+                            "credit": amount,
+                        },
+                    ),
+                ],
+            }
+        )
+        am.action_post()
+        (invoice.line_ids[1] + am.line_ids[1]).reconcile()
+        return am
+
     def get_dummy_subscription_requests_vals(self):
         return {
             "share_product_id": self.share_y.id,

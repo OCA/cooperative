@@ -161,6 +161,13 @@ class AccountMove(models.Model):
             ("invoice_origin", "=", invoice.name),
         ]
 
+    def _get_payment_account_moves(self):
+        reconciled_lines = self.line_ids.filtered(
+            lambda line: line.account_id.user_type_id.type == "receivable"
+        )
+        reconciled_amls = reconciled_lines.mapped("matched_credit_ids.credit_move_id")
+        return reconciled_amls.move_id
+
     def action_invoice_paid(self):
         super().action_invoice_paid()
         for invoice in self:
@@ -180,10 +187,10 @@ class AccountMove(models.Model):
                 # by default the confirmation date is the payment date
                 effective_date = datetime.now()
 
-                payments = [p for p in self._get_reconciled_payments()]
-                if payments:
-                    payments.sort(key=lambda p: p.date)
-                    effective_date = payments[-1].date
+                payment_moves = [am for am in self._get_payment_account_moves()]
+                if payment_moves:
+                    payment_moves.sort(key=lambda p: p.date)
+                    effective_date = payment_moves[-1].date
 
                 invoice.subscription_request.state = "paid"
                 invoice.post_process_confirm_paid(effective_date)
