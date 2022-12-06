@@ -82,6 +82,27 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         partner = self.subscription_request_1.partner_id
         self.assertEqual(partner.effective_date, date(2022, 6, 21))
 
+    @users("user-cooperator")
+    def test_effective_date_from_account_move_date(self):
+        # the effective date should also work with an account.move without an
+        # account.payment.
+        self.subscription_request_1.validate_subscription_request()
+        invoice = self.subscription_request_1.capital_release_request
+        self.create_payment_account_move(invoice, date(2022, 6, 21))
+        partner = self.subscription_request_1.partner_id
+        self.assertEqual(partner.effective_date, date(2022, 6, 21))
+
+    @users("user-cooperator")
+    def test_effective_date_from_multiple_moves(self):
+        # the effective date should come from the most recent account.move.
+        self.subscription_request_1.validate_subscription_request()
+        invoice = self.subscription_request_1.capital_release_request
+        amount = invoice.line_ids[0].credit / 2
+        self.create_payment_account_move(invoice, date(2022, 6, 18), amount)
+        self.create_payment_account_move(invoice, date(2022, 6, 21), amount)
+        partner = self.subscription_request_1.partner_id
+        self.assertEqual(partner.effective_date, date(2022, 6, 21))
+
     @users("demo")
     def test_user_access_rules(self):
         user_demo = self.env.ref("base.user_demo")
