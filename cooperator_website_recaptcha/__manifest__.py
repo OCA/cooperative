@@ -6,8 +6,8 @@
     "summary": "Add reCAPTCHA to Subscription Request Form",
     "version": "14.0.1.1.0",
     "category": "Cooperative management",
-    "website": "https://coopiteasy.be",
-    "author": "Coop IT Easy SC",
+    "website": "https://github.com/OCA/cooperative",
+    "author": "Coop IT Easy SC, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "depends": [
         "cooperator_website",
