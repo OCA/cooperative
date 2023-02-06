@@ -39,7 +39,7 @@ class SubscriptionRequest(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
     def get_required_field(self):
-        required_fields = _REQUIRED
+        required_fields = _REQUIRED.copy()
         company = self.env.company
         if company.data_policy_approval_required:
             required_fields.append("data_policy_approved")
