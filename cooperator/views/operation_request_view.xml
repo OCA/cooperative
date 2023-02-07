@@ -100,13 +100,13 @@
                             <field
                                 name="share_product_id"
                                 attrs="{'readonly':[('state','!=','draft')]}"
-                                widget="selection"
+                                options="{'no_create':True}"
                             />
                             <field name="share_short_name" readonly="True" />
                             <field
                                 name="share_to_product_id"
                                 attrs="{'invisible':[('operation_type','!=','convert')],'required':[('operation_type','=','convert')],'readonly':[('state','!=','draft')]}"
-                                widget="selection"
+                                options="{'no_create':True}"
                             />
                             <field name="share_to_short_name" readonly="True" />
                             <field
