@@ -3,7 +3,6 @@ from odoo.addons.cooperator_website.controllers.main import WebsiteSubscription
 
 
 class WebsiteSubscription(WebsiteSubscription):
-
     def get_values_from_user(self, values, is_company):
         values = super().get_values_from_user(values, is_company)
         if request.env.user.login != "public":
@@ -12,10 +11,10 @@ class WebsiteSubscription(WebsiteSubscription):
             if not is_company and company.require_national_number:
                 national_number_id_category = request.env.ref(
                     "l10n_be_national_number.l10n_be_national_number_category"
-                    ).id
+                ).id
                 national_number = partner.id_numbers.filtered(
                     lambda id_num: id_num.category_id.id == national_number_id_category
-                    ).name
+                ).name
                 values["national_number"] = national_number
         return values
 
