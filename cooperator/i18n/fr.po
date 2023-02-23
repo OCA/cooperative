@@ -957,6 +957,12 @@ msgid "A person can't be representative of two different companies."
 msgstr "Une personne ne peut pas représenter deux sociétés différentes."
 
 #. module: cooperator
+#: selection:res.partner,legal_form:0
+#: selection:subscription.request,company_type:0
+msgid "ASBL"
+msgstr ""
+
+#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__iban
 msgid "Account Number"
 msgstr "Numéro de compte"
@@ -1415,6 +1421,7 @@ msgid "Cooperator register"
 msgstr "Registre des coopérateurs"
 
 #. module: cooperator
+#: model:account.account,name:cooperator.account_cooperator_demo
 #: model:ir.actions.act_window,name:cooperator.action_partner_cooperator_form
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_cooperator
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_main
@@ -1643,6 +1650,11 @@ msgstr "Courriel :"
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_register_filter
 msgid "Entry type"
 msgstr "Type d'entrée"
+
+#. module: cooperator
+#: model:account.account,name:cooperator.account_equity_demo
+msgid "Equity"
+msgstr ""
 
 #. module: cooperator
 #: code:addons/cooperator/wizard/update_share_line.py:45
@@ -2391,6 +2403,24 @@ msgid "Responsible User"
 msgstr "Responsable"
 
 #. module: cooperator
+#: selection:res.partner,legal_form:0
+#: selection:subscription.request,company_type:0
+msgid "SA"
+msgstr ""
+
+#. module: cooperator
+#: selection:res.partner,legal_form:0
+#: selection:subscription.request,company_type:0
+msgid "SCRL"
+msgstr ""
+
+#. module: cooperator
+#: selection:res.partner,legal_form:0
+#: selection:subscription.request,company_type:0
+msgid "SPRL"
+msgstr ""
+
+#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__same_address
 msgid "Same address"
 msgstr "Adresse identique"
@@ -2632,6 +2662,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_register_filter
 msgid "Subscription Date"
 msgstr "Date de la souscription"
+
+#. module: cooperator
+#: model:account.journal,name:cooperator.subscription_journal
+msgid "Subscription Journal"
+msgstr ""
 
 #. module: cooperator
 #: model:ir.actions.act_window,name:cooperator.subscription_register_action

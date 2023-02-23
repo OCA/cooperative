@@ -575,6 +575,12 @@ msgid "A person can't be representative of two different companies."
 msgstr ""
 
 #. module: cooperator
+#: selection:res.partner,legal_form:0
+#: selection:subscription.request,company_type:0
+msgid "ASBL"
+msgstr ""
+
+#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__iban
 msgid "Account Number"
 msgstr "Rekeningnummer"
@@ -1025,6 +1031,7 @@ msgid "Cooperator register"
 msgstr ""
 
 #. module: cooperator
+#: model:account.account,name:cooperator.account_cooperator_demo
 #: model:ir.actions.act_window,name:cooperator.action_partner_cooperator_form
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_cooperator
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_main
@@ -1247,6 +1254,11 @@ msgstr "E-mail:"
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_register_filter
 msgid "Entry type"
+msgstr ""
+
+#. module: cooperator
+#: model:account.account,name:cooperator.account_equity_demo
+msgid "Equity"
 msgstr ""
 
 #. module: cooperator
@@ -1989,6 +2001,24 @@ msgid "Responsible User"
 msgstr "Verantwoordelijke gebruiker"
 
 #. module: cooperator
+#: selection:res.partner,legal_form:0
+#: selection:subscription.request,company_type:0
+msgid "SA"
+msgstr ""
+
+#. module: cooperator
+#: selection:res.partner,legal_form:0
+#: selection:subscription.request,company_type:0
+msgid "SCRL"
+msgstr ""
+
+#. module: cooperator
+#: selection:res.partner,legal_form:0
+#: selection:subscription.request,company_type:0
+msgid "SPRL"
+msgstr ""
+
+#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__same_address
 msgid "Same address"
 msgstr ""
@@ -2229,6 +2259,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__date
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_register_filter
 msgid "Subscription Date"
+msgstr ""
+
+#. module: cooperator
+#: model:account.journal,name:cooperator.subscription_journal
+msgid "Subscription Journal"
 msgstr ""
 
 #. module: cooperator
