@@ -110,6 +110,14 @@ known_caveats: the cooperator localization modules will have to be splitted in o
 Changelog
 =========
 
+14.0.1.6.0 (2023-02-23)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Removed all selection widgets. (`#55 <https://github.com/OCA/cooperative/issues/55>`_)
+
+
 12.0.5.3.0 (2022-09-05)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
