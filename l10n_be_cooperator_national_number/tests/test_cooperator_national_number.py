@@ -30,7 +30,8 @@ class TestCooperatorNationalNumber(SavepointCase, CooperatorTestMixin):
         subscription_request.validate_subscription_request()
         partner = subscription_request.partner_id
         created_id_number = self.env["res.partner.id_number"].search(
-            [('name', '=', id_number)])
+            [("name", "=", id_number)]
+        )
         self.assertTrue(created_id_number)
         self.assertEqual(created_id_number.partner_id, partner)
 
