@@ -1,0 +1,2 @@
+Removed all selection widgets.
+
