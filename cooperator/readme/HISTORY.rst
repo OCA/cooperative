@@ -1,3 +1,11 @@
+12.0.6.4.0 (2023-02-23)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Removed all selection widgets. (`#54 <https://github.com/OCA/cooperative/issues/54>`_)
+
+
 12.0.6.0.0 (2022-09-27)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
