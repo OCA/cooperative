@@ -2094,7 +2094,6 @@ msgid "Number of share"
 msgstr "Nombre de parts"
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:702
 #: code:addons/cooperator/models/subscription_request.py:707
 #, python-format
 msgid "Number of share must be greater than 0."
@@ -2122,21 +2121,18 @@ msgid "Old cooperator"
 msgstr "Ancien coopérateur"
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:784
 #: code:addons/cooperator/models/subscription_request.py:790
 #, python-format
 msgid "Only blocked requests can be unblocked."
 msgstr ""
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:806
 #: code:addons/cooperator/models/subscription_request.py:812
 #, python-format
 msgid "Only draft request can be put on the waiting list."
 msgstr "Demande de souscription ajoutée sur liste d'attente."
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:777
 #: code:addons/cooperator/models/subscription_request.py:783
 #, python-format
 msgid "Only draft requests can be blocked."
@@ -2778,7 +2774,6 @@ msgstr ""
 "générales"
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:710
 #: code:addons/cooperator/models/subscription_request.py:716
 #, python-format
 msgid "The checkbox already cooperator is checked please select a cooperator."
@@ -2818,14 +2813,12 @@ msgid ""
 msgstr "Les informations du receveur ne sont pas correctes."
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:696
 #: code:addons/cooperator/models/subscription_request.py:701
 #, python-format
 msgid "The request must be in draft or on waiting list to be validated"
 msgstr "La demande doit être en brouillon ou en attente pour être validée"
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:750
 #: code:addons/cooperator/models/subscription_request.py:756
 #: code:addons/cooperator/wizard/create_subscription_from_partner.py:196
 #, python-format
@@ -2846,7 +2839,6 @@ msgstr ""
 "coopérateurs."
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:758
 #: code:addons/cooperator/models/subscription_request.py:764
 #, python-format
 msgid ""
@@ -3104,7 +3096,6 @@ msgstr ""
 "Vous ne pouvez pas convertir un type de part dans le même type de part."
 
 #. module: cooperator
-#: code:addons/cooperator/models/subscription_request.py:791
 #: code:addons/cooperator/models/subscription_request.py:797
 #, python-format
 msgid "You cannot cancel a request in this state."
