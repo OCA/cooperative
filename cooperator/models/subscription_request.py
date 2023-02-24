@@ -681,6 +681,11 @@ class SubscriptionRequest(models.Model):
         # To be overridden
         return True
 
+    def update_partner_info(self):
+        # To be overiden to update specific partner information based
+        # on subscription request
+        pass
+
     def _get_partner_domain(self):
         if self.email:
             return [("email", "=", self.email)]
@@ -702,6 +707,7 @@ class SubscriptionRequest(models.Model):
             raise UserError(_("Number of share must be greater than 0."))
         if self.partner_id:
             partner = self.partner_id
+            self.update_partner_info()  # hook
         else:
             partner = None
             domain = []
