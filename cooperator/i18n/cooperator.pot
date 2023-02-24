@@ -1630,6 +1630,7 @@ msgstr ""
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:702
+#: code:addons/cooperator/models/subscription_request.py:707
 #, python-format
 msgid "Number of share must be greater than 0."
 msgstr ""
@@ -1657,18 +1658,21 @@ msgstr ""
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:784
+#: code:addons/cooperator/models/subscription_request.py:790
 #, python-format
 msgid "Only blocked requests can be unblocked."
 msgstr ""
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:806
+#: code:addons/cooperator/models/subscription_request.py:812
 #, python-format
 msgid "Only draft request can be put on the waiting list."
 msgstr ""
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:777
+#: code:addons/cooperator/models/subscription_request.py:783
 #, python-format
 msgid "Only draft requests can be blocked."
 msgstr ""
@@ -2286,6 +2290,7 @@ msgstr ""
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:710
+#: code:addons/cooperator/models/subscription_request.py:716
 #, python-format
 msgid "The checkbox already cooperator is checked please select a cooperator."
 msgstr ""
@@ -2316,12 +2321,14 @@ msgstr ""
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:696
+#: code:addons/cooperator/models/subscription_request.py:701
 #, python-format
 msgid "The request must be in draft or on waiting list to be validated"
 msgstr ""
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:750
+#: code:addons/cooperator/models/subscription_request.py:756
 #: code:addons/cooperator/wizard/create_subscription_from_partner.py:196
 #, python-format
 msgid "There is two different persons with the same national register number. Please proceed to a merge before to continue"
@@ -2334,6 +2341,7 @@ msgstr ""
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:758
+#: code:addons/cooperator/models/subscription_request.py:764
 #, python-format
 msgid "This contact person is already defined for another company. Please select another contact"
 msgstr ""
@@ -2582,6 +2590,7 @@ msgstr ""
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:791
+#: code:addons/cooperator/models/subscription_request.py:797
 #, python-format
 msgid "You cannot cancel a request in this state."
 msgstr ""
