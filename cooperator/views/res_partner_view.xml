@@ -9,6 +9,7 @@
             <field name="name">view_partner_form</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="mode">primary</field>
             <field name="arch" type="xml">
                 <sheet position="before">
                     <header>
@@ -137,6 +138,7 @@
             <field name="name">view_partner_tree</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_tree" />
+            <field name="mode">primary</field>
             <field name="arch" type="xml">
                 <xpath expr="/tree/field[@name='display_name']" position='after'>
                     <field name="cooperator_register_number" />
@@ -150,6 +152,7 @@
             <field name="name">res.partner.select</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="account.res_partner_view_search" />
+            <field name="mode">primary</field>
             <field name="arch" type="xml">
                 <filter name="supplier" position='after'>
                     <filter
@@ -185,6 +188,7 @@
             <field name="name">Cooperators</field>
             <field name="res_model">res.partner</field>
             <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_res_partner_filter" />
             <field name="domain">[('member','=',True)]</field>
             <field name="context">{'create':False}</field>
             <field name="help" type="html">
@@ -201,6 +205,35 @@
         </record>
 
         <record
+            id="action_view_kanban_partner_cooperator"
+            model="ir.actions.act_window.view"
+        >
+            <field name="act_window_id" ref="action_partner_cooperator_form" />
+            <field name="view_mode">kanban</field>
+            <field name="sequence">0</field>
+        </record>
+
+        <record
+            id="action_view_tree_partner_cooperator"
+            model="ir.actions.act_window.view"
+        >
+            <field name="act_window_id" ref="action_partner_cooperator_form" />
+            <field name="view_id" ref="view_partner_tree" />
+            <field name="view_mode">tree</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record
+            id="action_view_form_partner_cooperator"
+            model="ir.actions.act_window.view"
+        >
+            <field name="act_window_id" ref="action_partner_cooperator_form" />
+            <field name="view_id" ref="view_partner_form" />
+            <field name="view_mode">form</field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record
             id="action_partner_cooperator_candidate_form"
             model="ir.actions.act_window"
         >
@@ -208,6 +241,7 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner</field>
             <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_res_partner_filter" />
             <field name="domain">[('coop_candidate', '=',True)]</field>
             <field name="context">{'create':False}</field>
             <field name="filter" eval="True" />
@@ -224,12 +258,53 @@
             </field>
         </record>
 
+        <record
+            id="action_view_kanban_partner_cooperator_candidate"
+            model="ir.actions.act_window.view"
+        >
+            <field
+                name="act_window_id"
+                ref="action_partner_cooperator_candidate_form"
+            />
+            <field name="view_mode">kanban</field>
+            <field name="sequence">0</field>
+        </record>
+
+        <record
+            id="action_view_tree_partner_cooperator_candidate"
+            model="ir.actions.act_window.view"
+        >
+            <field
+                name="act_window_id"
+                ref="action_partner_cooperator_candidate_form"
+            />
+            <field name="view_id" ref="view_partner_tree" />
+            <field name="view_mode">tree</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record
+            id="action_view_form_partner_cooperator_candidate"
+            model="ir.actions.act_window.view"
+        >
+            <field
+                name="act_window_id"
+                ref="action_partner_cooperator_candidate_form"
+            />
+            <field name="view_id" ref="view_partner_form" />
+            <field name="view_mode">form</field>
+            <field name="sequence">2</field>
+        </record>
+
         <record id="action_company_representative_form" model="ir.actions.act_window">
             <field name="name">Company representative</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner</field>
             <field name="view_mode">kanban,tree,form</field>
-            <field name="domain">[('representative_of_member_company','=',True)]</field>
+            <field name="search_view_id" ref="view_res_partner_filter" />
+            <field
+                name="domain"
+            >[('representative_of_member_company', '=', True)]</field>
             <field name="filter" eval="True" />
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
@@ -242,6 +317,35 @@
                     documents, etc.
                 </p>
             </field>
+        </record>
+
+        <record
+            id="action_view_kanban_company_representative"
+            model="ir.actions.act_window.view"
+        >
+            <field name="act_window_id" ref="action_company_representative_form" />
+            <field name="view_mode">kanban</field>
+            <field name="sequence">0</field>
+        </record>
+
+        <record
+            id="action_view_tree_company_representative"
+            model="ir.actions.act_window.view"
+        >
+            <field name="act_window_id" ref="action_company_representative_form" />
+            <field name="view_id" ref="view_partner_tree" />
+            <field name="view_mode">tree</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record
+            id="action_view_form_company_representative"
+            model="ir.actions.act_window.view"
+        >
+            <field name="act_window_id" ref="action_company_representative_form" />
+            <field name="view_id" ref="view_partner_form" />
+            <field name="view_mode">form</field>
+            <field name="sequence">2</field>
         </record>
 
         <record id="remove_partner_follower" model="ir.ui.view">
