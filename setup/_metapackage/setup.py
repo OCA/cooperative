@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo12-addon-cooperator_portal',
         'odoo12-addon-cooperator_website',
         'odoo12-addon-cooperator_website_referral_source',
+        'odoo12-addon-l10n_be_cooperator',
         'odoo12-addon-l10n_be_cooperator_national_number',
         'odoo12-addon-l10n_be_cooperator_website_national_number',
     ],
