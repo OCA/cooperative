@@ -15,20 +15,17 @@ from odoo.addons.portal.controllers.portal import CustomerPortal, pager as porta
 
 class CooperatorPortalAccount(CustomerPortal):
     def __init__(self, *args, **kwargs):
-        super().__init__()
-        # Class scope is accessible throughout the server even on
-        # odoo instances that do not install this module.
-
-        # Therefore : bring back to instance scope if not already
-        #  if "MANDATORY_BILLING_FIELDS" in vars(self):
+        super().__init__(*args, **kwargs)
+        # these are class constants (shared between all running odoo
+        # instances), so they have to be copied to self to be modified only
+        # for the odoo instances using this module, but only if a sub-class
+        # did not already do it.
         if "MANDATORY_BILLING_FIELDS" not in vars(self):
-            self.MANDATORY_BILLING_FIELDS = (
-                CustomerPortal.MANDATORY_BILLING_FIELDS.copy()
-            )
-
-        self.MANDATORY_BILLING_FIELDS.extend(
-            ["iban", "birthdate_date", "gender", "lang"]
-        )
+            self.MANDATORY_BILLING_FIELDS = self.MANDATORY_BILLING_FIELDS.copy()
+        self.MANDATORY_BILLING_FIELDS.extend(["birthdate_date", "gender", "lang"])
+        if "OPTIONAL_BILLING_FIELDS" not in vars(self):
+            self.OPTIONAL_BILLING_FIELDS = self.OPTIONAL_BILLING_FIELDS.copy()
+        self.OPTIONAL_BILLING_FIELDS.extend(["iban"])
 
     def _prepare_portal_layout_values(self):
         values = super()._prepare_portal_layout_values()
@@ -78,9 +75,7 @@ class CooperatorPortalAccount(CustomerPortal):
         error, error_message = super().details_form_validate(data)
         sub_req_model = request.env["subscription.request"]
         iban = data.get("iban")
-        valid = sub_req_model.check_iban(iban)
-
-        if not valid:
+        if iban and not sub_req_model.check_iban(iban):
             error["iban"] = "error"
             error_message.append(_("The IBAN account number is not valid."))
         return error, error_message
@@ -90,17 +85,25 @@ class CooperatorPortalAccount(CustomerPortal):
         partner = request.env.user.partner_id
 
         res = super().account(redirect, **post)
-        if not res.qcontext.get("error"):
-            partner_bank = request.env["res.partner.bank"]
+        if (
+            post
+            and request.httprequest.method == "POST"
+            and not res.qcontext.get("error")
+        ):
             iban = post.get("iban")
             if iban:
                 if partner.bank_ids:
-                    bank_account = partner.bank_ids[0]
-                    bank_account.acc_number = iban
+                    # update existing bank account
+                    partner.bank_ids[0].acc_number = iban
                 else:
-                    partner_bank.sudo().create(
-                        {"partner_id": partner.id, "acc_number": iban}
-                    )
+                    # create a new bank account
+                    partner.bank_ids = [
+                        (0, 0, {"partner_id": partner.id, "acc_number": iban})
+                    ]
+            else:
+                if partner.bank_ids:
+                    # delete the existing bank account
+                    partner.bank_ids = [(2, partner.bank_ids[0].id, 0)]
         return res
 
     @route(

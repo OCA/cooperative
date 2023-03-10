@@ -24,7 +24,7 @@
                 <label class="col-form-label" for="gender">Gender</label>
                 <select
                     name="gender"
-                    t-attf-class="form-control #{error.get('gender') or ''}"
+                    t-attf-class="form-control #{error.get('gender') and 'is-invalid' or ''}"
                 >
                     <option value="" />
                     <t t-foreach="genders or []" t-as="item">
@@ -38,12 +38,12 @@
                 </select>
             </div>
             <div
-                t-attf-class="form-group #{error.get('lang') and 'has-error' or ''} col-xl-6"
+                t-attf-class="form-group #{error.get('lang') and 'o_has_error' or ''} col-xl-6"
             >
                 <label class="col-form-label" for="lang">Language</label>
                 <select
                     name="lang"
-                    t-attf-class="form-control #{error.get('lang') or ''}"
+                    t-attf-class="form-control #{error.get('lang') and 'is-invalid' or ''}"
                 >
                     <option value="" />
                     <t t-foreach="langs or []" t-as="langue">
@@ -65,18 +65,18 @@
                 <input
                     type="date"
                     name="birthdate_date"
-                    t-attf-class="form-control #{error.get('birthdate_date') or ''}"
+                    t-attf-class="form-control #{error.get('birthdate_date') and 'is-invalid' or ''}"
                     t-att-value="birthdate_date or partner.birthdate_date"
                 />
             </div>
             <div
                 t-attf-class="form-group #{error.get('iban') and 'o_has_error' or ''} col-xl-6"
             >
-                <label class="col-form-label" for="iban">Bank Account Number</label>
+                <label class="col-form-label label-optional" for="iban">Bank Account Number</label>
                 <input
                     type="input"
                     name="iban"
-                    t-attf-class="form-control #{error.get('iban') or ''}"
+                    t-attf-class="form-control #{error.get('iban') and 'is-invalid' or ''}"
                     t-att-value="iban"
                 />
             </div>
