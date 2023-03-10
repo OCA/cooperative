@@ -27,6 +27,7 @@ addon | version | maintainers | summary
 [cooperator_website_referral_source](cooperator_website_referral_source/) | 12.0.1.0.0 |  | Add a Selection field in the form to select how the respondent discovered the cooperative.
 [l10n_be_cooperator](l10n_be_cooperator/) | 12.0.2.4.2 |  | Cooperators Belgium Localization
 [l10n_be_cooperator_national_number](l10n_be_cooperator_national_number/) | 12.0.1.0.0 |  | Ask for Belgian National Number in Cooperative Subscription Request.
+[l10n_be_cooperator_portal](l10n_be_cooperator_portal/) | 12.0.1.1.0 |  | Give access to Tax Shelter Report in the portal.
 [l10n_be_cooperator_website_national_number](l10n_be_cooperator_website_national_number/) | 12.0.1.0.0 |  | Ask for Belgian National Number in Cooperative Subscription Request Frontend Form.
 
 [//]: # (end addons)
