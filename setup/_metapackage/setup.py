@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo12-addon-l10n_be_cooperator_national_number',
         'odoo12-addon-l10n_be_cooperator_portal',
         'odoo12-addon-l10n_be_cooperator_website_national_number',
+        'odoo12-addon-l10n_es_cooperator',
     ],
     classifiers=[
         'Programming Language :: Python',
