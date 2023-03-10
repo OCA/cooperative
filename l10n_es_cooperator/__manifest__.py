@@ -1,6 +1,6 @@
 {
     "name": "Cooperator Spain Localisation",
-    "version": "12.0.0.1.0",
+    "version": "12.0.0.1.1",
     "depends": ["cooperator", "cooperator_website", "l10n_es"],
     "author": (
         "Coop IT Easy SC,"
