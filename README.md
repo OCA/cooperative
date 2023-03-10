@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [cooperator_portal](cooperator_portal/) | 12.0.3.1.0 |  | Show cooperator information in the website portal
 [cooperator_website](cooperator_website/) | 12.0.3.2.0 |  | This module adds the cooperator subscription form allowing to subscribe for shares online.
 [cooperator_website_referral_source](cooperator_website_referral_source/) | 12.0.1.0.0 |  | Add a Selection field in the form to select how the respondent discovered the cooperative.
+[l10n_be_cooperator](l10n_be_cooperator/) | 12.0.2.4.1 |  | Cooperators Belgium Localization
 [l10n_be_cooperator_national_number](l10n_be_cooperator_national_number/) | 12.0.1.0.0 |  | Ask for Belgian National Number in Cooperative Subscription Request.
 [l10n_be_cooperator_website_national_number](l10n_be_cooperator_website_national_number/) | 12.0.1.0.0 |  | Ask for Belgian National Number in Cooperative Subscription Request Frontend Form.
 
