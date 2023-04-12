@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="subscription_request_form_inherit" model="ir.ui.view">
+            <field
+                name="name"
+            >account_payment_cooperator.subscription_request.form</field>
+            <field name="model">subscription.request</field>
+            <field name="inherit_id" ref="cooperator.subscription_request_view_form" />
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='iban']" position="after">
+                    <field name="payment_mode_id" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
