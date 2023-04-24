@@ -48,10 +48,14 @@ msgid "Address"
 msgstr "Adresse"
 
 #. module: cooperator_website
-#: code:addons/cooperator_website/controllers/main.py:288
+#: code:addons/cooperator_website/controllers/main.py:307
 #, python-format
-msgid "An account already exists for this email address. Please log in before filling in the form."
-msgstr "Il y a déjà un compte utilisateur pour ce courriel. Connectez-vous avant de remplir le formulaire."
+msgid ""
+"An account already exists for this email address. Please log in before "
+"filling in the form."
+msgstr ""
+"Il y a déjà un compte utilisateur pour ce courriel. Connectez-vous avant de "
+"remplir le formulaire."
 
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.becomecooperator
@@ -157,7 +161,7 @@ msgid "Email"
 msgstr "Courriel"
 
 #. module: cooperator_website
-#: code:addons/cooperator_website/controllers/main.py:299
+#: code:addons/cooperator_website/controllers/main.py:318
 #, python-format
 msgid "Email and confirmation email addresses don't match."
 msgstr "Le courriel et le courriel de confirmation ne sont pas identiques."
@@ -229,7 +233,7 @@ msgid "Phone"
 msgstr "Téléphone"
 
 #. module: cooperator_website
-#: code:addons/cooperator_website/controllers/main.py:312
+#: code:addons/cooperator_website/controllers/main.py:331
 #, python-format
 msgid "Please upload a scan of your ID card."
 msgstr "Veuillez charger une copie de votre carte d'identité."
@@ -240,7 +244,7 @@ msgid "Privacy Policy"
 msgstr "Politique de gestion des données"
 
 #. module: cooperator_website
-#: code:addons/cooperator_website/controllers/main.py:322
+#: code:addons/cooperator_website/controllers/main.py:341
 #, python-format
 msgid "Provided IBAN is not valid."
 msgstr "L'IBAN fourni n'est pas valide."
@@ -262,7 +266,7 @@ msgid "Share type"
 msgstr "Type de part"
 
 #. module: cooperator_website
-#: code:addons/cooperator_website/controllers/main.py:279
+#: code:addons/cooperator_website/controllers/main.py:298
 #, python-format
 msgid "Some mandatory fields have not been filled."
 msgstr "Certains champs obligatoires sont vides."
@@ -293,13 +297,15 @@ msgid "Website Cooperator Contact Form"
 msgstr "Formulaire en ligne pour coopérateur"
 
 #. module: cooperator_website
-#: code:addons/cooperator_website/controllers/main.py:343
+#: code:addons/cooperator_website/controllers/main.py:362
 #, python-format
-msgid "You can't subscribe for an amount that exceeds {amount}{currency_symbol}."
-msgstr "Vous ne pouvez souscrire à un montant supérieur à {amount} {currency_symbol}."
+msgid ""
+"You can't subscribe for an amount that exceeds {amount}{currency_symbol}."
+msgstr ""
+"Vous ne pouvez souscrire à un montant supérieur à {amount} {currency_symbol}."
 
 #. module: cooperator_website
-#: code:addons/cooperator_website/controllers/main.py:335
+#: code:addons/cooperator_website/controllers/main.py:354
 #, python-format
 msgid "You can't subscribe to two different types of share."
 msgstr "Vous ne pouvez souscrire à des types de parts différents."
