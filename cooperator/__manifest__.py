@@ -1,6 +1,6 @@
 # Copyright 2013-2018 Open Architects Consulting SPRL.
 # Copyright 2018      Coop IT Easy SC (<http://www.coopiteasy.be>)
-#   Houssine BAKKALI - <houssine@coopiteasy.be>
+#   Houssine BAKKALI <houssine@coopiteasy.be>
 #   Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -9,16 +9,16 @@
     "summary": "Manage your cooperators",
     "version": "12.0.6.4.2",
     "depends": [
-        "base",
-        "web",
-        "sale",
         "account",
         "base_iban",
-        "product",
-        "partner_firstname",
-        "partner_contact_birthdate",
-        "partner_contact_gender",
         "mail",
+        "web",
+        # todo split into cooperator_partner_firstname
+        "partner_firstname",
+        # todo split into cooperator partner_contact_birthdate
+        "partner_contact_birthdate",
+        # todo split into cooperator_partner_contact_gender
+        "partner_contact_gender",
     ],
     "author": "Coop IT Easy SC, Odoo Community Association (OCA)",
     "category": "Cooperative management",
