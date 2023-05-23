@@ -8,16 +8,11 @@ class SubscriptionRequest(models.Model):
     national_number = fields.Char(string="National Number")
     display_national_number = fields.Boolean(
         compute="_compute_display_national_number",
-        default=lambda self: self._check_national_number_required(),
     )
 
     @api.depends("company_id", "company_id.require_national_number")
     def _compute_display_national_number(self):
-        self.display_national_number = self._check_national_number_required()
-
-    def _check_national_number_required(self):
-        company = self.env["res.company"]._company_default_get()
-        return company.require_national_number
+        self.display_national_number = self.company_id.require_national_number
 
     def get_national_number_from_partner(self, partner):
         national_number_id_category = self.env.ref(
@@ -31,7 +26,7 @@ class SubscriptionRequest(models.Model):
     def validate_subscription_request(self):
         self.ensure_one()
         if (
-            self._check_national_number_required()
+            self.display_national_number
             and not self.national_number
             and not self.is_company
         ):
@@ -39,7 +34,7 @@ class SubscriptionRequest(models.Model):
         super().validate_subscription_request()
 
     def create_national_number(self, partner):
-        if self._check_national_number_required():
+        if self.display_national_number:
             if not self.is_company:
                 values = {
                     "name": self.national_number,
