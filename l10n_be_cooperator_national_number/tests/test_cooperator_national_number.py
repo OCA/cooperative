@@ -19,7 +19,7 @@ class TestCooperatorNationalNumber(SavepointCase, CooperatorTestMixin):
         return self.env["subscription.request"].create(vals)
 
     def set_national_number_required(self):
-        company = self.env["res.company"]._company_default_get()
+        company = self.env.company
         company.require_national_number = True
 
     def test_national_number_applied_to_partner(self):
