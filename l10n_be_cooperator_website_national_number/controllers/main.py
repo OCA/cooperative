@@ -21,7 +21,6 @@ class WebsiteSubscription(WebsiteSubscription):
 
     def fill_values(self, values, is_company, logged, load_from_user=False):
         values = super().fill_values(values, is_company, logged, load_from_user)
-        sub_req_obj = request.env["subscription.request"]
-        if not is_company and sub_req_obj._check_national_number_required():
+        if not is_company and request.env.company.require_national_number:
             values["national_number_required"] = True
         return values
