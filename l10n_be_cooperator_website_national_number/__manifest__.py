@@ -6,7 +6,7 @@
         Ask for Belgian National Number in Cooperative
         Subscription Request Frontend Form.
         """,
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "depends": [
         "l10n_be_cooperator_national_number",
         "l10n_be_cooperator",

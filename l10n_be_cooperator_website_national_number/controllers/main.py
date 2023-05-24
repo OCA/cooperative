@@ -8,7 +8,7 @@ class WebsiteSubscription(WebsiteSubscription):
         values = super().get_values_from_user(values, is_company)
         if request.env.user.login != "public":
             partner = request.env.user.partner_id
-            company = request.env["res.company"]._company_default_get()
+            company = request.env.company
             if not is_company and company.require_national_number:
                 national_number_id_category = request.env.ref(
                     "l10n_be_national_number.l10n_be_national_number_category"
