@@ -15,7 +15,7 @@
                 t-att-readonly="logged"
                 t-att-required="national_number_required"
                 t-attf-value="#{national_number or ''}"
-            />  
+            />
         </div>
     </template>
 
@@ -24,8 +24,13 @@
         inherit_id="cooperator_website.becomecooperator"
         name="becomecooperator"
     >
-        <xpath expr="//t[@t-call='cooperator_website.address_template']" position="after">
-            <t t-call="l10n_be_cooperator_website_national_number.national_number_template" />
+        <xpath
+            expr="//t[@t-call='cooperator_website.address_template']"
+            position="after"
+        >
+            <t
+                t-call="l10n_be_cooperator_website_national_number.national_number_template"
+            />
         </xpath>
     </template>
 

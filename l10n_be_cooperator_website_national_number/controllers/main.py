@@ -1,4 +1,5 @@
 from odoo.http import request
+
 from odoo.addons.cooperator_website.controllers.main import WebsiteSubscription
 
 
