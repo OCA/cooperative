@@ -10,11 +10,11 @@
             <field name="country_id" position="after">
                 <field
                     name="national_number"
-                    attrs="{'invisible': ['|', ('display_national_number', '=', False), ('is_company', '=', True)],
-                'required': [('display_national_number', '=', True),
-                ('is_company', '=', False)]}"
+                    attrs="{'invisible': [('display_national_number', '=', False)],
+                'required': [('require_national_number', '=', True)]}"
                 />
                 <field name="display_national_number" invisible="True" />
+                <field name="require_national_number" invisible="True" />
             </field>
         </field>
     </record>
