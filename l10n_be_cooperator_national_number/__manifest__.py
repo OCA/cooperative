@@ -3,7 +3,7 @@
 {
     "name": "Belgium: Cooperator National Number",
     "summary": "Ask for Belgian National Number in Cooperative Subscription Request.",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.1.0",
     "depends": ["cooperator", "l10n_be_national_number"],
     "author": "Coop IT Easy SC, Odoo Community Association (OCA)",
     "category": "Cooperative management",

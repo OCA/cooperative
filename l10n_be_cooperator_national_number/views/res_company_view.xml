@@ -6,7 +6,11 @@
         <field name="model">res.company</field>
         <field name="arch" type="xml">
             <field name="allow_id_card_upload" position="after">
-                <field name="require_national_number" />
+                <field name="display_national_number" />
+                <field
+                    name="require_national_number"
+                    attrs="{'invisible': [('display_national_number', '=', False)]}"
+                />
             </field>
         </field>
     </record>

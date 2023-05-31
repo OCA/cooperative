@@ -9,10 +9,21 @@ class SubscriptionRequest(models.Model):
     display_national_number = fields.Boolean(
         compute="_compute_display_national_number",
     )
+    require_national_number = fields.Boolean(
+        compute="_compute_require_national_number",
+    )
 
-    @api.depends("company_id", "company_id.require_national_number")
+    @api.depends("is_company", "company_id", "company_id.display_national_number")
     def _compute_display_national_number(self):
-        self.display_national_number = self.company_id.require_national_number
+        self.display_national_number = (
+            self.company_id.display_national_number and not self.is_company
+        )
+
+    @api.depends("is_company", "company_id", "company_id.require_national_number")
+    def _compute_require_national_number(self):
+        self.require_national_number = (
+            self.company_id.require_national_number and not self.is_company
+        )
 
     def get_national_number_from_partner(self, partner):
         national_number_id_category = self.env.ref(
@@ -25,30 +36,26 @@ class SubscriptionRequest(models.Model):
 
     def validate_subscription_request(self):
         self.ensure_one()
-        if (
-            self.display_national_number
-            and not self.national_number
-            and not self.is_company
-        ):
+        if self.require_national_number and not self.national_number:
             raise UserError(_("National Number is required."))
         super().validate_subscription_request()
 
     def create_national_number(self, partner):
-        if self.display_national_number:
-            if not self.is_company:
-                values = {
-                    "name": self.national_number,
-                    "category_id": self.env.ref(
-                        "l10n_be_national_number.l10n_be_national_number_category"  # noqa
-                    ).id,
-                    "partner_id": partner.id,
-                }
-                self.env["res.partner.id_number"].create(values)
+        if not self.is_company:
+            values = {
+                "name": self.national_number,
+                "category_id": self.env.ref(
+                    "l10n_be_national_number.l10n_be_national_number_category"  # noqa
+                ).id,
+                "partner_id": partner.id,
+            }
+            self.env["res.partner.id_number"].create(values)
         return partner
 
     def create_coop_partner(self):
         partner = super().create_coop_partner()
-        self.create_national_number(partner)
+        if self.require_national_number:
+            self.create_national_number(partner)
         return partner
 
     def get_representative_vals(self):
