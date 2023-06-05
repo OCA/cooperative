@@ -257,6 +257,16 @@ class WebsiteSubscription(http.Controller):
         product_id = kwargs.get("share_product_id")
         return prod_obj.sudo().browse(int(product_id)).product_variant_ids[0]
 
+    def _additional_validate(self, kwargs, logged, values, post_file):
+        """
+        Validation hook that can be reimplemented in dependent modules.
+
+        This should return a boolean value indicating whether the validation
+        succeeded or not. If it did not succeed, an error message should be
+        assigned to values["error_msg"].
+        """
+        return True
+
     def validation(  # noqa: C901 (method too complex)
         self, kwargs, logged, values, post_file
     ):
@@ -353,6 +363,10 @@ class WebsiteSubscription(http.Controller):
                 "You can't subscribe for an amount that exceeds "
                 "{amount}{currency_symbol}."
             ).format(amount=max_amount, currency_symbol=company.currency_id.symbol)
+            return request.render(redirect, values)
+
+        if not self._additional_validate(kwargs, logged, values, post_file):
+            values = self.fill_values(values, is_company, logged)
             return request.render(redirect, values)
 
         # remove non-model attributes (used internally when re-rendering the

@@ -30,7 +30,7 @@
                         attrs="{'invisible':[('is_company','=',False)],'required':[('is_company','=',True)]}"
                     />
                     <field name="bank_account" />
-                    <field name="share_product" widget="selection" />
+                    <field name="share_product" options="{'no_create':True}" />
                     <field name="share_qty" />
                     <field name="share_unit_price" />
                     <field name="subscription_amount" />
