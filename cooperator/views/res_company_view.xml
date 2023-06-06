@@ -39,6 +39,10 @@
                     <field name="generic_rules_approval_required" />
                     <field name="generic_rules_approval_text" />
                     <field name="send_confirmation_email" />
+                    <field
+                        name="cooperator_confirmation_mail_template"
+                        attrs="{'invisible': [('send_confirmation_email', '=', False)]}"
+                    />
                     <field name="send_capital_release_email" />
                     <field name="send_certificate_email" />
                 </group>
