@@ -119,6 +119,11 @@ class ResCompany(models.Model):
     send_capital_release_email = fields.Boolean(
         string="Send Capital Release email", default=True
     )
+    cooperator_waiting_list_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Waiting list email template",
+        domain="[('model', '=', 'subscription.request')]",
+    )
     send_waiting_list_email = fields.Boolean(
         string="Send Waiting List email", default=True
     )
@@ -168,6 +173,7 @@ class ResCompany(models.Model):
             "cooperator_capital_release_mail_template": (
                 "cooperator.email_template_release_capital"
             ),
+            "cooperator_waiting_list_mail_template": "cooperator.email_template_waiting_list",
         }
 
     def _get_default_cooperator_mail_template(self, xmlid, copy=True):

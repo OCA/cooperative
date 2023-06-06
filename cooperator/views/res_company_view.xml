@@ -49,6 +49,8 @@
                         attrs="{'invisible': [('send_capital_release_email', '=', False)]}"
                     />
                     <field name="send_certificate_email" />
+                    <!-- TODO: Should there be a send toggle for this one? -->
+                    <field name="cooperator_waiting_list_mail_template" />
                 </group>
             </group>
         </field>
