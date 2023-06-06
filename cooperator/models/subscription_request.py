@@ -53,10 +53,11 @@ class SubscriptionRequest(models.Model):
 
     def get_mail_template_notif(self, is_company=False):
         if is_company:
+            # TODO: Fix this, obviously
             mail_template = "cooperator.email_template_confirmation_company"
+            return self.env.ref(mail_template, False)
         else:
-            mail_template = "cooperator.email_template_confirmation"
-        return self.env.ref(mail_template, False)
+            return self.company_id.cooperator_confirmation_mail_template
 
     @api.constrains("share_product_id", "is_company")
     def _check_share_available_to_user(self):
@@ -121,7 +122,8 @@ class SubscriptionRequest(models.Model):
                 partner.cooperator = True
 
         subscription_request = super().create(vals)
-        subscription_request._send_confirmation_mail()
+        # FIXME: This should NOT be in the create method.
+        # subscription_request._send_confirmation_mail()
         return subscription_request
 
     @api.model
