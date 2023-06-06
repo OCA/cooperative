@@ -54,4 +54,5 @@
         "demo/users.xml",
     ],
     "application": True,
+    "post_init_hook": "_assign_default_mail_template_ids",
 }

@@ -103,6 +103,11 @@ class ResCompany(models.Model):
     send_certificate_email = fields.Boolean(
         string="Send certificate email", default=True
     )
+    cooperator_confirmation_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Share confirmation email template",
+        domain="[('model', '=', 'subscription.request')]",
+    )
     send_confirmation_email = fields.Boolean(
         string="Send confirmation email", default=True
     )
@@ -138,3 +143,63 @@ class ResCompany(models.Model):
     def onchange_generic_rules_approval_required(self):
         if self.generic_rules_approval_required:
             self.display_generic_rules_approval = True
+
+    @api.model
+    def create(self, vals):
+        result = super().create(vals)
+        # The ignore_list is populated such that, if the user defines a template
+        # they want to use during company creation, that choice doesn't get
+        # overridden. The boolean check exists because, when creating a company
+        # from the UI, all empty fields are defined with no value.
+        result._setup_default_cooperator_mail_templates(
+            ignore_list=[key for key, val in vals.items() if val]
+        )
+        return result
+
+    @api.model
+    def _get_cooperator_mail_template_fields(self):
+        return {
+            "cooperator_confirmation_mail_template": "cooperator.email_template_confirmation",
+        }
+
+    def _get_default_cooperator_mail_template(self, xmlid, copy=True):
+        """Get the mail template from its xmlid and either return it or return
+        a copy of it.
+        """
+        self.ensure_one()
+        try:
+            template = self.env.ref(xmlid)
+        except ValueError:
+            return False
+        if copy:
+            result = template.copy()
+            # Set name to 'Company - Template' instead of 'Template (copy)'.
+            result.name = "{} - {}".format(self.name, template.name)
+            return result
+        else:
+            return template
+
+    def _assign_default_cooperator_mail_template(
+        self, field, xmlid, copy=True, override=False
+    ):
+        for company in self:
+            if override or not getattr(company, field):
+                company.write(
+                    {
+                        field: company._get_default_cooperator_mail_template(
+                            xmlid, copy=copy
+                        ).id
+                    }
+                )
+
+    def _setup_default_cooperator_mail_templates(
+        self, copy=True, override=False, ignore_list=None
+    ):
+        if ignore_list is None:
+            ignore_list = []
+        for field, xmlid in self._get_cooperator_mail_template_fields().items():
+            if field in ignore_list:
+                continue
+            self._assign_default_cooperator_mail_template(
+                field, xmlid, copy=copy, override=override
+            )
