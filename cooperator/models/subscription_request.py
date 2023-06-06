@@ -53,9 +53,7 @@ class SubscriptionRequest(models.Model):
 
     def get_mail_template_notif(self, is_company=False):
         if is_company:
-            # TODO: Fix this, obviously
-            mail_template = "cooperator.email_template_confirmation_company"
-            return self.env.ref(mail_template, False)
+            return self.company_id.cooperator_confirmation_company_mail_template
         else:
             return self.company_id.cooperator_confirmation_mail_template
 
