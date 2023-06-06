@@ -10,6 +10,8 @@ class SubscriptionRequest(models.Model):
         The Tax Identification Number. Complete it if the contact is subjected to
         government taxes. Used in some legal statements."
         """,
+        readonly=True,
+        states={"draft": [("readonly", False)]},
     )
 
     def get_partner_vals(self):
