@@ -781,8 +781,8 @@ class SubscriptionRequest(models.Model):
 
     def _send_waiting_list_mail(self):
         if self.company_id.send_waiting_list_email:
-            waiting_list_mail_template = self.env.ref(
-                "cooperator.email_template_waiting_list", False
+            waiting_list_mail_template = (
+                self.company_id.cooperator_waiting_list_mail_template
             )
             waiting_list_mail_template.send_mail(self.id, True)
 
