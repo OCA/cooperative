@@ -205,7 +205,7 @@ class AccountMove(models.Model):
         return True
 
     def _get_capital_release_mail_template(self):
-        return self.env.ref("cooperator.email_template_release_capital", False)
+        return self.company_id.cooperator_capital_release_mail_template
 
     def send_capital_release_request_mail(self):
         if self.company_id.send_capital_release_email:
