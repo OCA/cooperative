@@ -111,6 +111,11 @@ class ResCompany(models.Model):
     send_confirmation_email = fields.Boolean(
         string="Send confirmation email", default=True
     )
+    cooperator_capital_release_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Capital release email template",
+        domain="[('model', '=', 'account.move')]",
+    )
     send_capital_release_email = fields.Boolean(
         string="Send Capital Release email", default=True
     )
@@ -160,6 +165,9 @@ class ResCompany(models.Model):
     def _get_cooperator_mail_template_fields(self):
         return {
             "cooperator_confirmation_mail_template": "cooperator.email_template_confirmation",
+            "cooperator_capital_release_mail_template": (
+                "cooperator.email_template_release_capital"
+            ),
         }
 
     def _get_default_cooperator_mail_template(self, xmlid, copy=True):
