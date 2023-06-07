@@ -7,6 +7,6 @@ from odoo import models
 class AccountChartTemplate(models.Model):
     _inherit = "account.chart.template"
 
-    def generate_journals(self, acc_template_ref, company, journals_dict=None):
-        super().generate_journals(acc_template_ref, company, journals_dict)
-        self.env["subscription.request"].create_journal(company)
+    def _load(self, sale_tax_rate, purchase_tax_rate, company):
+        super()._load(sale_tax_rate, purchase_tax_rate, company)
+        company._init_cooperator_data()
