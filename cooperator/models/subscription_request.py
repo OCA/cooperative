@@ -537,25 +537,15 @@ class SubscriptionRequest(models.Model):
 
     @api.model
     def create_journal(self, company):
-        if company.subscription_journal_id or (
-            not company.chart_template_id
-            and not self.env["account.chart.template"].existing_accounting(company)
-        ):
-            # do not create the journal if it already exists. if it does not
-            # exist, but no account chart template has been loaded yet and no
-            # accounting data exists, then it should not be created either
-            # because all existing journals will be deleted when the account
-            # chart template will be loaded. this method will be called again
-            # when the journals will be created by the account chart template.
-            return
-        company.subscription_journal_id = self.env["account.journal"].create(
-            {
-                "name": _("Subscription Journal"),
-                "code": _("SUBJ"),
-                "type": "sale",
-                "company_id": company.id,
-            }
-        )
+        if not company.subscription_journal_id:
+            company.subscription_journal_id = self.env["account.journal"].create(
+                {
+                    "name": _("Subscription Journal"),
+                    "code": _("SUBJ"),
+                    "type": "sale",
+                    "company_id": company.id,
+                }
+            )
 
     def get_journal(self):
         return self.company_id.subscription_journal_id
