@@ -142,6 +142,11 @@ class ResCompany(models.Model):
     send_waiting_list_email = fields.Boolean(
         string="Send Waiting List email", default=True
     )
+    cooperator_share_transfer_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Share transfer email template",
+        domain="[('model', '=', 'res.partner')]",
+    )
     send_share_transfer_email = fields.Boolean(
         string="Send Share Transfer Email", default=True
     )
@@ -195,6 +200,9 @@ class ResCompany(models.Model):
             "cooperator_certificate_mail_template": "cooperator.email_template_certificat",
             "cooperator_certificate_increase_mail_template": (
                 "cooperator.email_template_certificat_increase"
+            ),
+            "cooperator_share_transfer_mail_template": (
+                "cooperator.email_template_share_transfer"
             ),
         }
 
