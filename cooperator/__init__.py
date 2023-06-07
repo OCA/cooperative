@@ -6,8 +6,5 @@ from . import wizard
 
 
 def post_init(cr, registry):
-    # the subscription journal must be created for each company.
     env = api.Environment(cr, SUPERUSER_ID, {})
-    subscription_request_model = env["subscription.request"]
-    for company in env.companies:
-        subscription_request_model.create_journal(company)
+    env.companies._init_cooperator_data()
