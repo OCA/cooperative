@@ -105,6 +105,11 @@ class ResCompany(models.Model):
         string="Certificate email template",
         domain="[('model', '=', 'res.partner')]",
     )
+    cooperator_certificate_increase_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Certificate increase email template",
+        domain="[('model', '=', 'res.partner')]",
+    )
     send_certificate_email = fields.Boolean(
         string="Send certificate email", default=True
     )
@@ -188,6 +193,9 @@ class ResCompany(models.Model):
             ),
             "cooperator_waiting_list_mail_template": "cooperator.email_template_waiting_list",
             "cooperator_certificate_mail_template": "cooperator.email_template_certificat",
+            "cooperator_certificate_increase_mail_template": (
+                "cooperator.email_template_certificat_increase"
+            ),
         }
 
     def _get_default_cooperator_mail_template(self, xmlid, copy=True):
