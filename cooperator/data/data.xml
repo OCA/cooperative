@@ -12,12 +12,6 @@
             <field name="name">Company Share</field>
         </record>
 
-        <record id="subscription_journal" model="account.journal">
-            <field name="name">Subscription Journal</field>
-            <field name="code">SUBJ</field>
-            <field name="type">sale</field>
-        </record>
-
         <record id="sequence_subscription" model="ir.sequence">
             <field name="name">Subscription Register</field>
             <field name="code">subscription.register</field>

@@ -54,4 +54,5 @@
         "demo/users.xml",
     ],
     "application": True,
+    "post_init_hook": "post_init",
 }
