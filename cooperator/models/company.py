@@ -44,6 +44,11 @@ class ResCompany(models.Model):
         " receivable account for the"
         " cooperators",
     )
+    subscription_journal_id = fields.Many2one(
+        "account.journal",
+        "Subscription Journal",
+        readonly=True,
+    )
     unmix_share_type = fields.Boolean(
         string="Unmix share type",
         default=True,
