@@ -61,10 +61,9 @@ class AccountMove(models.Model):
 
     def get_mail_template_certificate(self):
         if self.partner_id.member:
-            mail_template = "cooperator.email_template_certificat_increase"
+            return self.env.ref("cooperator.email_template_certificat_increase")
         else:
-            mail_template = "cooperator.email_template_certificat"
-        return self.env.ref(mail_template)
+            return self.company_id.cooperator_certificate_mail_template
 
     def get_sequence_register(self):
         return self.env.ref("cooperator.sequence_subscription", False)

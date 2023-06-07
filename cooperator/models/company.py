@@ -100,6 +100,11 @@ class ResCompany(models.Model):
         translate=True,
         help="Text to display aside the checkbox to approve the generic rules.",
     )
+    cooperator_certificate_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Certificate email template",
+        domain="[('model', '=', 'res.partner')]",
+    )
     send_certificate_email = fields.Boolean(
         string="Send certificate email", default=True
     )
@@ -182,6 +187,7 @@ class ResCompany(models.Model):
                 "cooperator.email_template_release_capital"
             ),
             "cooperator_waiting_list_mail_template": "cooperator.email_template_waiting_list",
+            "cooperator_certificate_mail_template": "cooperator.email_template_certificat",
         }
 
     def _get_default_cooperator_mail_template(self, xmlid, copy=True):
