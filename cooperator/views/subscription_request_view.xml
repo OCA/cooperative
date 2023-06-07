@@ -26,10 +26,17 @@
                 <field name="is_valid_iban" invisible="True" />
                 <button
                     type="object"
+                    string="Confirm"
+                    aria-label="Confirm"
+                    name="confirm_subscription_request"
+                    attrs="{'invisible':['|', ('state','not in',['draft']),('is_valid_iban','=',False)]}"
+                />
+                <button
+                    type="object"
                     string="Validate"
                     aria-label="Validate"
                     name="validate_subscription_request"
-                    attrs="{'invisible':['|',('state','not in',['draft','waiting']),('is_valid_iban','=',False)]}"
+                    attrs="{'invisible':['|',('state','not in',['confirmed','waiting']),('is_valid_iban','=',False)]}"
                 />
                 <button
                     type="object"
@@ -58,10 +65,17 @@
             <form string="Subscription Requests">
                 <header>
                     <button
+                        type="object"
+                        string="Confirm"
+                        aria-label="Confirm"
+                        name="confirm_subscription_request"
+                        attrs="{'invisible':['|', ('state','not in',['draft']),('is_valid_iban','=',False)]}"
+                    />
+                    <button
                         string="Validate"
                         type="object"
                         name="validate_subscription_request"
-                        attrs="{'invisible':['|',('state','not in',['draft','waiting']),('is_valid_iban','=',False)]}"
+                        attrs="{'invisible':['|',('state','not in',['confirmed','waiting']),('is_valid_iban','=',False)]}"
                     />
                     <button
                         string="Waiting list"
@@ -79,7 +93,7 @@
                     <field
                         name="state"
                         widget="statusbar"
-                        statusbar_visible="draft,cancelled,done,failed"
+                        statusbar_visible="draft,confirmed,cancelled,done,failed"
                     />
                 </header>
                 <sheet>

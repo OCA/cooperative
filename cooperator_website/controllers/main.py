@@ -478,4 +478,6 @@ class WebsiteSubscription(http.Controller):
                 }
                 attach_obj.sudo().create(attachment_value)
 
+            subscription_id.confirm_subscription_request()
+
         return self.get_subscription_response(values, kwargs)
