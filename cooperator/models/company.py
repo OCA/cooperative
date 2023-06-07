@@ -150,6 +150,11 @@ class ResCompany(models.Model):
     send_share_transfer_email = fields.Boolean(
         string="Send Share Transfer Email", default=True
     )
+    cooperator_share_update_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Share update email template",
+        domain="[('model', '=', 'res.partner')]",
+    )
     send_share_update_email = fields.Boolean(
         string="Send Share Update Email", default=True
     )
@@ -204,6 +209,7 @@ class ResCompany(models.Model):
             "cooperator_share_transfer_mail_template": (
                 "cooperator.email_template_share_transfer"
             ),
+            "cooperator_share_update_mail_template": "cooperator.email_template_share_update",
         }
 
     def _get_default_cooperator_mail_template(self, xmlid, copy=True):

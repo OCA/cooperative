@@ -64,6 +64,7 @@
                     <!-- TODO: Should there be a send toggle for this one? -->
                     <field name="cooperator_waiting_list_mail_template" />
                     <field name="cooperator_share_transfer_mail_template" />
+                    <field name="cooperator_share_update_mail_template" />
                 </group>
             </group>
         </field>
