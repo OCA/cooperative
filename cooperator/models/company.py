@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class ResCompany(models.Model):
@@ -16,6 +16,16 @@ class ResCompany(models.Model):
     coop_email_contact = fields.Char(string="Contact email address for the cooperator")
     subscription_maximum_amount = fields.Float(
         string="Maximum authorised subscription amount"
+    )
+    cooperator_number_sequence_id = fields.Many2one(
+        comodel_name="ir.sequence",
+        string="Sequence to use for cooperator numbers",
+        readonly=True,
+    )
+    cooperator_register_operation_sequence_id = fields.Many2one(
+        comodel_name="ir.sequence",
+        string="Sequence to use for cooperator register operations",
+        readonly=True,
     )
     default_capital_release_request_payment_term = fields.Many2one(
         comodel_name="account.payment.term",
@@ -251,3 +261,30 @@ class ResCompany(models.Model):
 
     def get_cooperator_share_update_mail_template(self):
         return self._get_cooperator_template("cooperator_share_update_mail_template")
+
+    @api.model
+    def create(self, vals):
+        company = super().create(vals)
+        company._create_cooperator_sequences()
+        return company
+
+    def _create_cooperator_sequences(self):
+        for company in self:
+            if not company.cooperator_number_sequence_id:
+                company.cooperator_number_sequence_id = self.env["ir.sequence"].create(
+                    {
+                        "name": _("Cooperator number sequence"),
+                        "code": "subscription.register",
+                        "company_id": company.id,
+                    }
+                )
+            if not company.cooperator_register_operation_sequence_id:
+                company.cooperator_register_operation_sequence_id = self.env[
+                    "ir.sequence"
+                ].create(
+                    {
+                        "name": _("Cooperator register operation sequence"),
+                        "code": "register.operation",
+                        "company_id": company.id,
+                    }
+                )
