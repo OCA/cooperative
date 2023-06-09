@@ -66,11 +66,13 @@ class AccountMove(models.Model):
             mail_template = "cooperator.email_template_certificat"
         return self.env.ref(mail_template)
 
-    def get_sequence_register(self):
-        return self.env.ref("cooperator.sequence_subscription", False)
+    def get_number_sequence(self):
+        self.ensure_one()
+        return self.company_id.cooperator_number_sequence_id
 
-    def get_sequence_operation(self):
-        return self.env.ref("cooperator.sequence_register_operation", False)
+    def get_operation_sequence(self):
+        self.ensure_one()
+        return self.company_id.cooperator_register_operation_sequence_id
 
     def get_share_line_vals(self, line, effective_date):
         return {
@@ -96,7 +98,7 @@ class AccountMove(models.Model):
         # if not yet cooperator we generate a cooperator number
         vals = {}
         if self.partner_id.member is False and self.partner_id.old_member is False:
-            sequence_id = self.get_sequence_register()
+            sequence_id = self.get_number_sequence()
             sub_reg_num = sequence_id.next_by_id()
             vals = {
                 "member": True,
@@ -127,7 +129,7 @@ class AccountMove(models.Model):
 
         self.set_membership()
 
-        sequence_operation = self.get_sequence_operation()
+        sequence_operation = self.get_operation_sequence()
         sub_reg_operation = sequence_operation.next_by_id()
 
         for line in self.invoice_line_ids:
