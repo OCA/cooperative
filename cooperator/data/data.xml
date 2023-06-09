@@ -17,19 +17,5 @@
             <field name="code">SUBJ</field>
             <field name="type">sale</field>
         </record>
-
-        <record id="sequence_subscription" model="ir.sequence">
-            <field name="name">Subscription Register</field>
-            <field name="code">subscription.register</field>
-            <field eval="1" name="number_next" />
-            <field eval="1" name="number_increment" />
-        </record>
-
-        <record id="sequence_register_operation" model="ir.sequence">
-            <field name="name">Register Operation</field>
-            <field name="code">register.operation</field>
-            <field eval="1" name="number_next" />
-            <field eval="1" name="number_increment" />
-        </record>
     </data>
 </odoo>
