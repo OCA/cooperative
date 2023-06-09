@@ -173,3 +173,13 @@ class CooperatorTestMixin:
         )
         self.validate_subscription_request_and_pay(subscription_request)
         return partner
+
+    def create_company(self, name):
+        company = self.env["res.company"].create(
+            {
+                "name": name,
+            }
+        )
+        # apply the same account chart template as the main company
+        self.env.company.chart_template_id.try_loading(company)
+        return company
