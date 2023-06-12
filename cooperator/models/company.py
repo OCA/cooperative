@@ -157,14 +157,14 @@ class ResCompany(models.Model):
         # possible cases:
         # 1. when a new company is created. in this case it will be called
         #    when the account chart template is loaded.
-        # 2. when a database is initialized with only the cooperator module,
-        #    and the l10n_generic_coa module is loaded after it by the
-        #    post_init_hook of the account module. in this case it is first
-        #    called by the post_init_hook of this module (cooperator) (but
-        #    with no effect, as explained below) and then again when the
-        #    account chart template is loaded.
+        # 2. when a database is initialized with the cooperator module but no
+        #    l10n module, and the l10n_generic_coa module is loaded after the
+        #    cooperator module by the post_init_hook of the account module. in
+        #    this case it is first called by the xml data of this module
+        #    (cooperator) (but with no effect, as explained below) and then
+        #    again when the account chart template is loaded.
         # 3. when the cooperator module is installed on an existing database.
-        #    in this case it is called by the post_init_hook of this module.
+        #    in this case it is called by the xml data of this module.
         subscription_request_model = self.env["subscription.request"]
         for company in self:
             if not company._accounting_data_initialized():

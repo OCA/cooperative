@@ -25,5 +25,9 @@
             <field eval="1" name="number_next" />
             <field eval="1" name="number_increment" />
         </record>
+
+        <function model="res.company" name="_init_cooperator_data">
+            <value model="res.company" search="[]" />
+        </function>
     </data>
 </odoo>
