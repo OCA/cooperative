@@ -23,27 +23,33 @@ def migrate(cr, version):
     journal_id = row[1]
     cr.execute(
         """
+        update res_company as rc
+        set subscription_journal_id = aj.id
+        from account_journal as aj
+        where
+            rc.subscription_journal_id is null and
+            aj.company_id = rc.id and
+            (aj.id = %s or aj.code = 'SUBJ')
+        """,
+        (journal_id,),
+    )
+    cr.execute(
+        """
         select id
         from res_company
+        where subscription_journal_id is null
         order by id
         """
     )
     company_rows = cr.fetchall()
     company_ids = [row[0] for row in company_rows]
-    if len(company_ids) > 1:
+    if company_ids:
         _logger.warning(
-            "Multiple companies found. "
-            "Please set the subscription journal manually for companies with "
-            "ids: {company_ids}".format(company_ids=company_ids[1:])
+            "Could not find the subscription journal for companies with ids: "
+            "{company_ids}. Please check and set it manually if needed.".format(
+                company_ids=company_ids
+            )
         )
-    cr.execute(
-        """
-        update res_company
-        set subscription_journal_id = %s
-        where id = %s
-        """,
-        (journal_id, company_ids[0]),
-    )
     cr.execute(
         """
         delete
