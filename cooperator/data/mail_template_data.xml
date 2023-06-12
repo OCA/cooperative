@@ -501,5 +501,13 @@
 </div>
             ]]></field>
         </record>
+
+        <!--
+            After the above templates are created, immediately set them on the
+            existing companies.
+        -->
+        <function model="res.company" name="_setup_default_cooperator_mail_templates">
+            <value model="res.company" search="[]" />
+        </function>
     </data>
 </odoo>
