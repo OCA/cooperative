@@ -120,8 +120,11 @@ class SubscriptionRequest(models.Model):
                 partner.cooperator = True
 
         subscription_request = super().create(vals)
-        # FIXME: This should NOT be in the create method.
-        # subscription_request._send_confirmation_mail()
+        # TODO: This should probably not be in the create method. There may need
+        # to be a stage after draft in which this e-mail is sent, or the e-mail
+        # should exclusively be sent from `cooperator_website`. See #73 for
+        # some comments, and for a reverted implementation of the extra state.
+        subscription_request._send_confirmation_mail()
         return subscription_request
 
     @api.model
