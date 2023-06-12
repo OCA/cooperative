@@ -70,8 +70,8 @@
 
     <!--
         this is here only to support the case where a database is initialized
-        without demo data, and demo data is loaded later on (instead of using
-        only the post_init_hook).
+        without demo data, and demo data is loaded later on (because this
+        function is also called indirectly from the main xml data file).
     -->
     <function model="res.company" name="_init_cooperator_demo_data">
         <value model="res.company" search="[]" />
