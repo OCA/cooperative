@@ -184,7 +184,7 @@ class ResCompany(models.Model):
         result = super().create(vals)
         # The ignore_list is populated such that, if the user defines a template
         # they want to use during company creation, that choice doesn't get
-        # overridden. The boolean check exists because, when creating a company
+        # overwritten. The boolean check exists because, when creating a company
         # from the UI, all empty fields are defined with no value.
         result._setup_default_cooperator_mail_templates(
             ignore_list=[key for key, val in vals.items() if val]
@@ -230,10 +230,10 @@ class ResCompany(models.Model):
             return template
 
     def _assign_default_cooperator_mail_template(
-        self, field, xmlid, copy=True, override=False
+        self, field, xmlid, copy=True, overwrite=False
     ):
         for company in self:
-            if override or not getattr(company, field):
+            if overwrite or not getattr(company, field):
                 company.write(
                     {
                         field: company._get_default_cooperator_mail_template(
@@ -243,7 +243,7 @@ class ResCompany(models.Model):
                 )
 
     def _setup_default_cooperator_mail_templates(
-        self, copy=True, override=False, ignore_list=None
+        self, copy=True, overwrite=False, ignore_list=None
     ):
         if ignore_list is None:
             ignore_list = []
@@ -251,5 +251,5 @@ class ResCompany(models.Model):
             if field in ignore_list:
                 continue
             self._assign_default_cooperator_mail_template(
-                field, xmlid, copy=copy, override=override
+                field, xmlid, copy=copy, overwrite=overwrite
             )

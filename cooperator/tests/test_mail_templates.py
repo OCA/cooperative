@@ -46,34 +46,34 @@ class TestMailTemplates(SavepointCase):
         new_template = company.cooperator_confirmation_mail_template
         self.assertEqual(new_template, self.default_template)
 
-    def test_assign_no_override(self):
-        """When instructing not to override, don't."""
+    def test_assign_no_overwrite(self):
+        """When instructing not to overwrite, don't."""
         company = self.env["res.company"].create({"name": "Test Company"})
         template = company.cooperator_confirmation_mail_template
 
         company._assign_default_cooperator_mail_template(
             "cooperator_confirmation_mail_template",
             "cooperator.email_template_confirmation",
-            override=False,
+            overwrite=False,
         )
         new_template = company.cooperator_confirmation_mail_template
         self.assertEqual(template, new_template)
 
-    def test_assign_override(self):
-        """When instructing to override, do."""
+    def test_assign_overwrite(self):
+        """When instructing to overwrite, do."""
         company = self.env["res.company"].create({"name": "Test Company"})
         template = company.cooperator_confirmation_mail_template
 
         company._assign_default_cooperator_mail_template(
             "cooperator_confirmation_mail_template",
             "cooperator.email_template_confirmation",
-            override=True,
+            overwrite=True,
         )
         new_template = company.cooperator_confirmation_mail_template
         self.assertNotEqual(template, new_template)
 
-    def test_create_company_dont_override_vals(self):
-        """When defining a field in the create method, don't override it."""
+    def test_create_company_dont_overwrite_vals(self):
+        """When defining a field in the create method, don't overwrite it."""
         company = self.env["res.company"].create(
             {
                 "name": "Test Company",
@@ -84,8 +84,8 @@ class TestMailTemplates(SavepointCase):
             company.cooperator_confirmation_mail_template, self.default_template
         )
 
-    def test_create_company_override_falsy_val(self):
-        """When 'defining' a field in the create method as falsy, do override it."""
+    def test_create_company_overwrite_falsy_val(self):
+        """When 'defining' a field in the create method as falsy, do overwrite it."""
         company = self.env["res.company"].create(
             {
                 "name": "Test Company",
