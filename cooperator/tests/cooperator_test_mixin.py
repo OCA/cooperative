@@ -91,7 +91,6 @@ class CooperatorTestMixin:
                 "skip_iban_control": True,
             }
         )
-        cls.subscription_request_1.confirm_subscription_request()
         cls.bank_journal = cls.env["account.journal"].create(
             {"name": "Bank", "type": "bank", "code": "BNK67"}
         )
@@ -162,7 +161,6 @@ class CooperatorTestMixin:
             "birthdate": "1980-01-01",
             "iban": "BE60096123456870",
             "source": "manual",
-            "state": "confirmed",
         }
 
     def get_dummy_company_subscription_requests_vals(self):

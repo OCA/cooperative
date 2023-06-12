@@ -108,7 +108,7 @@ class SubscriptionRequest(models.Model):
         if partner:
             pending_requests_domain = [
                 ("partner_id", "=", partner.id),
-                ("state", "in", ("draft", "confirmed", "waiting", "done")),
+                ("state", "in", ("draft", "waiting", "done")),
             ]
             # we don't use partner.coop_candidate because we want to also
             # handle draft and waiting requests.
@@ -120,6 +120,8 @@ class SubscriptionRequest(models.Model):
                 partner.cooperator = True
 
         subscription_request = super().create(vals)
+        # FIXME: This should NOT be in the create method.
+        # subscription_request._send_confirmation_mail()
         return subscription_request
 
     @api.model
@@ -222,7 +224,6 @@ class SubscriptionRequest(models.Model):
     state = fields.Selection(
         [
             ("draft", "Draft"),
-            ("confirmed", "Confirmed"),
             ("block", "Blocked"),  # todo reword to blocked
             ("done", "Done"),
             ("waiting", "Waiting"),
@@ -679,12 +680,10 @@ class SubscriptionRequest(models.Model):
     def validate_subscription_request(self):
         # todo rename to validate (careful with iwp dependencies)
         self.ensure_one()
-        if self.state not in ("confirmed", "waiting"):
+        if self.state not in ("draft", "waiting"):
             raise ValidationError(
-                _("The request must be confirmed or on waiting list to be validated")
+                _("The request must be in draft or on waiting list to be validated")
             )
-        if not self.is_valid_iban:
-            raise ValidationError(_("Cannot validate request with invalid IBAN."))
 
         partner_obj = self.env["res.partner"]
 
@@ -760,21 +759,10 @@ class SubscriptionRequest(models.Model):
 
         return invoice
 
-    def confirm_subscription_request(self):
-        self.ensure_one()
-        if self.state not in ["draft"]:
-            raise ValidationError(_("Only draft requests can be confirmed."))
-        if not self.is_valid_iban:
-            raise ValidationError(_("Cannot confirm request with invalid IBAN."))
-        self._send_confirmation_mail()
-        self.write({"state": "confirmed"})
-
     def block_subscription_request(self):
         self.ensure_one()
-        if self.state not in ["draft", "confirmed"]:
-            raise ValidationError(
-                _("Only draft and confirmed requests can be blocked.")
-            )
+        if self.state != "draft":
+            raise ValidationError(_("Only draft requests can be blocked."))
         self.write({"state": "block"})
 
     def unblock_subscription_request(self):
@@ -785,8 +773,8 @@ class SubscriptionRequest(models.Model):
 
     def cancel_subscription_request(self):
         self.ensure_one()
-        if self.state not in ("draft", "confirmed", "waiting", "done", "block"):
-            raise ValidationError(_("You cannot cancel a request in this state."))
+        if self.state not in ("draft", "waiting", "done", "block"):
+            raise ValidationError(_("You cannot cancel a request in this " "state."))
         self.write({"state": "cancelled"})
 
     def _send_waiting_list_mail(self):
@@ -798,9 +786,9 @@ class SubscriptionRequest(models.Model):
 
     def put_on_waiting_list(self):
         self.ensure_one()
-        if self.state not in ["draft", "confirmed"]:
+        if self.state != "draft":
             raise ValidationError(
-                _("Only draft and confirmed request can be put on the waiting list.")
+                _("Only draft request can be put on the waiting list.")
             )
         self._send_waiting_list_mail()
         self.write({"state": "waiting"})

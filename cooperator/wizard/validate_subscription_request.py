@@ -11,7 +11,7 @@ class ValidateSubscriptionRequest(models.TransientModel):
             self._context.get("active_ids")
         )
         subscription_requests = selected_requests.filtered(
-            lambda record: record.state in ["confirmed", "waiting"]
+            lambda record: record.state in ["draft", "waiting"]
         )
 
         for subscription_request in subscription_requests:
