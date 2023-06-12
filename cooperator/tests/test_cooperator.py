@@ -522,7 +522,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         Test that creating a new company creates a new subscription journal
         for it.
         """
-        company_1 = self.env.company
+        company_1 = self.company
         company_2 = self.create_company("company 2")
         self.assertTrue(company_2.subscription_journal_id)
         self.assertEqual(company_2.subscription_journal_id.company_id, company_2)
@@ -531,7 +531,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         )
 
     def test_subscription_request_journal_per_company(self):
-        company_1 = self.env.company
+        company_1 = self.company
         company_2 = self.create_company("company 2")
         subscription_request_1 = self.env["subscription.request"].create(
             self.get_dummy_subscription_requests_vals()

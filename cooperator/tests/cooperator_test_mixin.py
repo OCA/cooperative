@@ -9,7 +9,8 @@ class CooperatorTestMixin:
     @classmethod
     def set_up_cooperator_test_data(cls):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.env.company.coop_email_contact = "coop_email@example.org"
+        cls.company = cls.env.company
+        cls.company.coop_email_contact = "coop_email@example.org"
         cls.demo_partner = cls.env.ref("base.partner_demo")
         cls.share_x = cls.env["product.product"].create(
             {
@@ -98,7 +99,7 @@ class CooperatorTestMixin:
                         0,
                         {
                             "name": invoice.payment_reference,
-                            "account_id": self.env.company.property_cooperator_account.id,
+                            "account_id": self.company.property_cooperator_account.id,
                             "credit": amount,
                         },
                     ),
@@ -181,5 +182,5 @@ class CooperatorTestMixin:
             }
         )
         # apply the same account chart template as the main company
-        self.env.company.chart_template_id.try_loading(company)
+        self.company.chart_template_id.try_loading(company)
         return company
