@@ -17,5 +17,9 @@
             <field name="code">SUBJ</field>
             <field name="type">sale</field>
         </record>
+
+        <function model="res.company" name="_create_cooperator_sequences">
+            <value model="res.company" search="[]" />
+        </function>
     </data>
 </odoo>
