@@ -8,6 +8,7 @@ from odoo import fields, models
 class ShareLine(models.Model):
     _name = "share.line"
     _description = "Share line"
+    _check_company_auto = True
 
     def _compute_total_line(self):
         res = {}
@@ -16,7 +17,11 @@ class ShareLine(models.Model):
         return res
 
     share_product_id = fields.Many2one(
-        "product.product", string="Share type", required=True, readonly=True
+        "product.product",
+        string="Share type",
+        required=True,
+        readonly=True,
+        check_company=True,
     )
     share_number = fields.Integer(
         string="Number of Share", required=True, readonly=True
