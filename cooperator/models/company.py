@@ -8,6 +8,7 @@ from odoo import _, api, fields, models
 
 class ResCompany(models.Model):
     _inherit = "res.company"
+    _check_company_auto = True
 
     def _compute_base_logo(self):
         base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
@@ -43,11 +44,13 @@ class ResCompany(models.Model):
         " the default one as the"
         " receivable account for the"
         " cooperators",
+        check_company=True,
     )
     subscription_journal_id = fields.Many2one(
         "account.journal",
         "Subscription Journal",
         readonly=True,
+        check_company=True,
     )
     unmix_share_type = fields.Boolean(
         string="Unmix share type",
