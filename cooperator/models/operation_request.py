@@ -351,12 +351,10 @@ class OperationRequest(models.Model):
                     _("Converting just part of the" " shares is not yet implemented")
                 )
         elif self.operation_type == "transfer":
-            sequence_id = self.env.ref("cooperator.sequence_subscription", False)
             partner_vals = {"member": True}
             if self.receiver_not_member:
                 partner = self.subscription_request.create_coop_partner()
-                # get cooperator number
-                sub_reg_num = int(sequence_id.next_by_id())
+                sub_reg_num = self.env["ir.sequence"].next_by_code("cooperator.number")
                 partner_vals.update(
                     sub_request.get_eater_vals(partner, self.share_product_id)
                 )
@@ -367,7 +365,9 @@ class OperationRequest(models.Model):
                 # means an old member or cooperator candidate
                 if not self.partner_id_to.member:
                     if self.partner_id_to.cooperator_register_number == 0:
-                        sub_reg_num = int(sequence_id.next_by_id())
+                        sub_reg_num = self.env["ir.sequence"].next_by_code(
+                            "cooperator.number"
+                        )
                         partner_vals["cooperator_register_number"] = sub_reg_num
                     partner_vals.update(
                         sub_request.get_eater_vals(
@@ -392,11 +392,7 @@ class OperationRequest(models.Model):
         else:
             raise ValidationError(_("This operation is not yet" " implemented."))
 
-        sequence_operation = self.env.ref(
-            "cooperator.sequence_register_operation", False
-        )  # noqa
-        sub_reg_operation = sequence_operation.next_by_id()
-
+        sub_reg_operation = self.env["ir.sequence"].next_by_code("register.operation")
         values["name"] = sub_reg_operation
         values["register_number_operation"] = int(sub_reg_operation)
 
