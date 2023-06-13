@@ -159,7 +159,7 @@ class ResCompany(models.Model):
     )
     cooperator_share_update_mail_template = fields.Many2one(
         comodel_name="mail.template",
-        string="Share transfer email template",
+        string="Share update email template",
         domain="[('model', '=', 'res.partner')]",
         help="If left empty, the default global mail template will be used.",
     )
