@@ -5,7 +5,7 @@
 
 from datetime import datetime
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class AccountMove(models.Model):
@@ -64,13 +64,13 @@ class AccountMove(models.Model):
             return self.company_id.get_cooperator_certificate_increase_mail_template()
         return self.company_id.get_cooperator_certificate_mail_template()
 
-    def get_number_sequence(self):
-        self.ensure_one()
-        return self.company_id.cooperator_number_sequence_id
+    @api.model
+    def get_next_cooperator_number(self):
+        return self.env["ir.sequence"].next_by_code("cooperator.number")
 
-    def get_operation_sequence(self):
-        self.ensure_one()
-        return self.company_id.cooperator_register_operation_sequence_id
+    @api.model
+    def get_next_register_operation(self):
+        return self.env["ir.sequence"].next_by_code("register.operation")
 
     def get_share_line_vals(self, line, effective_date):
         return {
@@ -96,8 +96,7 @@ class AccountMove(models.Model):
         # if not yet cooperator we generate a cooperator number
         vals = {}
         if self.partner_id.member is False and self.partner_id.old_member is False:
-            sequence_id = self.get_number_sequence()
-            sub_reg_num = sequence_id.next_by_id()
+            sub_reg_num = self.get_next_cooperator_number()
             vals = {
                 "member": True,
                 "old_member": False,
@@ -127,8 +126,7 @@ class AccountMove(models.Model):
 
         self.set_membership()
 
-        sequence_operation = self.get_operation_sequence()
-        sub_reg_operation = sequence_operation.next_by_id()
+        sub_reg_operation = self.get_next_register_operation()
 
         for line in self.invoice_line_ids:
             sub_reg_vals = self.get_subscription_register_vals(line, effective_date)
