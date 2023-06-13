@@ -53,9 +53,8 @@ class SubscriptionRequest(models.Model):
 
     def get_mail_template_notif(self, is_company=False):
         if is_company:
-            return self.company_id.cooperator_confirmation_company_mail_template
-        else:
-            return self.company_id.cooperator_confirmation_mail_template
+            return self.company_id.get_cooperator_confirmation_company_mail_template()
+        return self.company_id.get_cooperator_confirmation_mail_template()
 
     @api.constrains("share_product_id", "is_company")
     def _check_share_available_to_user(self):
@@ -783,7 +782,7 @@ class SubscriptionRequest(models.Model):
     def _send_waiting_list_mail(self):
         if self.company_id.send_waiting_list_email:
             waiting_list_mail_template = (
-                self.company_id.cooperator_waiting_list_mail_template
+                self.company_id.get_cooperator_waiting_list_mail_template()
             )
             waiting_list_mail_template.send_mail(self.id, True)
 

@@ -41,39 +41,30 @@
                     <field name="send_confirmation_email" />
                     <field
                         name="cooperator_confirmation_mail_template"
-                        attrs="{'invisible': ['|', ('send_confirmation_email', '=', False), ('id', '=', False)]}"
+                        attrs="{'invisible': [('send_confirmation_email', '=', False)]}"
                     />
                     <field
                         name="cooperator_confirmation_company_mail_template"
-                        attrs="{'invisible': ['|', ('send_confirmation_email', '=', False), ('id', '=', False)]}"
+                        attrs="{'invisible': [('send_confirmation_email', '=', False)]}"
                     />
                     <field name="send_capital_release_email" />
                     <field
                         name="cooperator_capital_release_mail_template"
-                        attrs="{'invisible': ['|', ('send_capital_release_email', '=', False), ('id', '=', False)]}"
+                        attrs="{'invisible': [('send_capital_release_email', '=', False)]}"
                     />
                     <field name="send_certificate_email" />
                     <field
                         name="cooperator_certificate_mail_template"
-                        attrs="{'invisible': ['|', ('send_certificate_email', '=', False), ('id', '=', False)]}"
+                        attrs="{'invisible': [('send_certificate_email', '=', False)]}"
                     />
                     <field
                         name="cooperator_certificate_increase_mail_template"
-                        attrs="{'invisible': ['|', ('send_certificate_email', '=', False), ('id', '=', False)]}"
+                        attrs="{'invisible': [('send_certificate_email', '=', False)]}"
                     />
                     <!-- TODO: Should there be a send toggle for this one? -->
-                    <field
-                        name="cooperator_waiting_list_mail_template"
-                        attrs="{'invisible': [('id', '=', False)]}"
-                    />
-                    <field
-                        name="cooperator_share_transfer_mail_template"
-                        attrs="{'invisible': [('id', '=', False)]}"
-                    />
-                    <field
-                        name="cooperator_share_update_mail_template"
-                        attrs="{'invisible': [('id', '=', False)]}"
-                    />
+                    <field name="cooperator_waiting_list_mail_template" />
+                    <field name="cooperator_share_transfer_mail_template" />
+                    <field name="cooperator_share_update_mail_template" />
                 </group>
             </group>
         </field>
