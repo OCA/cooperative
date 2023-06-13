@@ -12,7 +12,9 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     subscription_request = fields.Many2one(
-        "subscription.request", string="Subscription request"
+        "subscription.request",
+        string="Subscription request",
+        check_company=True,
     )
     release_capital_request = fields.Boolean(string="Release of capital request")
 
@@ -79,6 +81,7 @@ class AccountMove(models.Model):
             "partner_id": self.partner_id.id,
             "share_unit_price": line.price_unit,
             "effective_date": effective_date,
+            "company_id": self.company_id.id,
         }
 
     def get_subscription_register_vals(self, line, effective_date):
@@ -89,6 +92,7 @@ class AccountMove(models.Model):
             "share_unit_price": line.price_unit,
             "date": effective_date,
             "type": "subscription",
+            "company_id": self.company_id.id,
         }
 
     def get_membership_vals(self):

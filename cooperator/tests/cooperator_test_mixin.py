@@ -57,17 +57,10 @@ class CooperatorTestMixin:
                 "skip_iban_control": True,
             }
         )
-        cls.bank_journal = cls.env["account.journal"].create(
-            {"name": "Bank", "type": "bank", "code": "BNK67"}
-        )
-        cls.payment_method = cls.env.ref("account.account_payment_method_manual_in")
 
     def pay_invoice(self, invoice, payment_date=None):
         ctx = {"active_model": "account.move", "active_ids": [invoice.id]}
-        register_payments_vals = {
-            "journal_id": self.bank_journal.id,
-            "payment_method_id": self.payment_method.id,
-        }
+        register_payments_vals = {"payment_type": "inbound"}
         if payment_date is not None:
             register_payments_vals["payment_date"] = payment_date
         register_payment = (
@@ -80,9 +73,16 @@ class CooperatorTestMixin:
     def create_payment_account_move(self, invoice, date, amount=None):
         if amount is None:
             amount = invoice.line_ids[0].credit
+        journal = self.env["account.journal"].search(
+            [
+                ("type", "=", "bank"),
+                ("company_id", "=", invoice.company_id.id),
+            ],
+            limit=1,
+        )
         am = self.env["account.move"].create(
             {
-                "journal_id": self.bank_journal.id,
+                "journal_id": journal.id,
                 "date": date,
                 "line_ids": [
                     (
@@ -90,7 +90,7 @@ class CooperatorTestMixin:
                         0,
                         {
                             "name": invoice.name,
-                            "account_id": self.bank_journal.default_account_id.id,
+                            "account_id": journal.default_account_id.id,
                             "debit": amount,
                         },
                     ),
@@ -99,7 +99,7 @@ class CooperatorTestMixin:
                         0,
                         {
                             "name": invoice.payment_reference,
-                            "account_id": self.company.property_cooperator_account.id,
+                            "account_id": invoice.company_id.property_cooperator_account.id,
                             "credit": amount,
                         },
                     ),
