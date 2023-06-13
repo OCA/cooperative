@@ -17,16 +17,6 @@ class ResCompany(models.Model):
     subscription_maximum_amount = fields.Float(
         string="Maximum authorised subscription amount"
     )
-    cooperator_number_sequence_id = fields.Many2one(
-        comodel_name="ir.sequence",
-        string="Sequence to use for cooperator numbers",
-        readonly=True,
-    )
-    cooperator_register_operation_sequence_id = fields.Many2one(
-        comodel_name="ir.sequence",
-        string="Sequence to use for cooperator register operations",
-        readonly=True,
-    )
     default_capital_release_request_payment_term = fields.Many2one(
         comodel_name="account.payment.term",
         string="Default Payment Term",
@@ -155,23 +145,23 @@ class ResCompany(models.Model):
         company._create_cooperator_sequences()
         return company
 
+    @api.model
+    def _get_cooperator_sequence_map(self):
+        return {
+            "cooperator.number": _("Cooperator number sequence"),
+            "register.operation": _("Cooperator register operation sequence"),
+        }
+
     def _create_cooperator_sequences(self):
         for company in self:
-            if not company.cooperator_number_sequence_id:
-                company.cooperator_number_sequence_id = self.env["ir.sequence"].create(
-                    {
-                        "name": _("Cooperator number sequence"),
-                        "code": "subscription.register",
-                        "company_id": company.id,
-                    }
-                )
-            if not company.cooperator_register_operation_sequence_id:
-                company.cooperator_register_operation_sequence_id = self.env[
-                    "ir.sequence"
-                ].create(
-                    {
-                        "name": _("Cooperator register operation sequence"),
-                        "code": "register.operation",
-                        "company_id": company.id,
-                    }
-                )
+            for code, name in self._get_cooperator_sequence_map().items():
+                if not self.env["ir.sequence"].search(
+                    [("code", "=", code), ("company_id", "=", company.id)]
+                ):
+                    self.env["ir.sequence"].create(
+                        {
+                            "name": name,
+                            "code": code,
+                            "company_id": company.id,
+                        }
+                    )
