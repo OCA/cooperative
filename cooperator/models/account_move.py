@@ -50,12 +50,27 @@ class AccountMove(models.Model):
         email = partner.email
 
         user = user_obj.search([("login", "=", email)])
-        if not user:
+        if user:
+            if self.company_id not in user.company_ids:
+                user.company_ids = [(4, self.company_id.id, 0)]
+        else:
+            company_ids = [(6, 0, [self.company_id.id])]
             user = user_obj.search([("login", "=", email), ("active", "=", False)])
             if user:
-                user.sudo().write({"active": True})
+                user.sudo().write(
+                    {
+                        "active": True,
+                        "company_id": self.company_id.id,
+                        "company_ids": company_ids,
+                    }
+                )
             else:
-                user_values = {"partner_id": partner.id, "login": email}
+                user_values = {
+                    "partner_id": partner.id,
+                    "login": email,
+                    "company_id": self.company_id.id,
+                    "company_ids": company_ids,
+                }
                 user = user_obj.sudo()._signup_create_user(user_values)
                 user.sudo().with_context({"create_user": True}).action_reset_password()
 
