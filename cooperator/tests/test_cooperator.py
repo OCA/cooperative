@@ -625,3 +625,46 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         invoice = subscription_request.capital_release_request
         self.assertEqual(invoice.company_id, company_2)
         self.pay_invoice(invoice)
+
+    def test_create_cooperator_and_user_for_other_company(self):
+        """
+        Test that creating a cooperator with its corresponding user for a
+        different company works.
+        """
+        company_2 = self.create_company("company 2")
+        company_2.create_user = True
+        subscription_request = (
+            self.env["subscription.request"]
+            .with_company(company_2)
+            .create(self.get_dummy_subscription_requests_vals())
+        )
+        self.validate_subscription_request_and_pay(subscription_request)
+        partner = subscription_request.partner_id
+        user = self.env["res.users"].search([("partner_id", "=", partner.id)])
+        self.assertEqual(user.company_id, company_2)
+        self.assertEqual(user.company_ids, company_2)
+
+    def test_create_cooperator_and_user_for_multiple_companies(self):
+        """
+        Test that creating a cooperator with its corresponding user for a
+        different company works.
+        """
+        self.company.create_user = True
+        subscription_request_1 = self.env["subscription.request"].create(
+            self.get_dummy_subscription_requests_vals()
+        )
+        self.validate_subscription_request_and_pay(subscription_request_1)
+        partner_1 = subscription_request_1.partner_id
+        company_2 = self.create_company("company 2")
+        company_2.create_user = True
+        subscription_request_2 = (
+            self.env["subscription.request"]
+            .with_company(company_2)
+            .create(self.get_dummy_subscription_requests_vals())
+        )
+        self.validate_subscription_request_and_pay(subscription_request_2)
+        partner_2 = subscription_request_2.partner_id
+        self.assertEqual(partner_1, partner_2)
+        user = self.env["res.users"].search([("partner_id", "=", partner_1.id)])
+        self.assertEqual(user.company_id, self.company)
+        self.assertEqual(user.company_ids, self.company | company_2)
