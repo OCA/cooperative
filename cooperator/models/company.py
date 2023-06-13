@@ -103,13 +103,13 @@ class ResCompany(models.Model):
     cooperator_certificate_mail_template = fields.Many2one(
         comodel_name="mail.template",
         string="Certificate email template",
-        domain="[('model', '=', 'res.partner')]",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
         help="If left empty, the default global mail template will be used.",
     )
     cooperator_certificate_increase_mail_template = fields.Many2one(
         comodel_name="mail.template",
         string="Certificate increase email template",
-        domain="[('model', '=', 'res.partner')]",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
         help="If left empty, the default global mail template will be used.",
     )
     send_certificate_email = fields.Boolean(
@@ -118,13 +118,19 @@ class ResCompany(models.Model):
     cooperator_confirmation_mail_template = fields.Many2one(
         comodel_name="mail.template",
         string="Share confirmation email template",
-        domain="[('model', '=', 'subscription.request')]",
+        domain=[
+            ("model", "=", "subscription.request"),
+            ("is_cooperator_template", "=", True),
+        ],
         help="If left empty, the default global mail template will be used.",
     )
     cooperator_confirmation_company_mail_template = fields.Many2one(
         comodel_name="mail.template",
         string="Company share confirmation email template",
-        domain="[('model', '=', 'subscription.request')]",
+        domain=[
+            ("model", "=", "subscription.request"),
+            ("is_cooperator_template", "=", True),
+        ],
         help="If left empty, the default global mail template will be used.",
     )
     send_confirmation_email = fields.Boolean(
@@ -133,7 +139,7 @@ class ResCompany(models.Model):
     cooperator_capital_release_mail_template = fields.Many2one(
         comodel_name="mail.template",
         string="Capital release email template",
-        domain="[('model', '=', 'account.move')]",
+        domain=[("model", "=", "account.move"), ("is_cooperator_template", "=", True)],
         help="If left empty, the default global mail template will be used.",
     )
     send_capital_release_email = fields.Boolean(
@@ -142,7 +148,10 @@ class ResCompany(models.Model):
     cooperator_waiting_list_mail_template = fields.Many2one(
         comodel_name="mail.template",
         string="Waiting list email template",
-        domain="[('model', '=', 'subscription.request')]",
+        domain=[
+            ("model", "=", "subscription.request"),
+            ("is_cooperator_template", "=", True),
+        ],
         help="If left empty, the default global mail template will be used.",
     )
     send_waiting_list_email = fields.Boolean(
@@ -151,7 +160,7 @@ class ResCompany(models.Model):
     cooperator_share_transfer_mail_template = fields.Many2one(
         comodel_name="mail.template",
         string="Share transfer email template",
-        domain="[('model', '=', 'res.partner')]",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
         help="If left empty, the default global mail template will be used.",
     )
     send_share_transfer_email = fields.Boolean(
@@ -160,7 +169,7 @@ class ResCompany(models.Model):
     cooperator_share_update_mail_template = fields.Many2one(
         comodel_name="mail.template",
         string="Share update email template",
-        domain="[('model', '=', 'res.partner')]",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
         help="If left empty, the default global mail template will be used.",
     )
     send_share_update_email = fields.Boolean(
