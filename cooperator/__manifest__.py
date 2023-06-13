@@ -54,5 +54,4 @@
         "demo/users.xml",
     ],
     "application": True,
-    "post_init_hook": "_create_cooperator_sequences",
 }
