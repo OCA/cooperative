@@ -54,14 +54,14 @@ class OperationRequest(models.Model):
     share_product_id = fields.Many2one(
         "product.product",
         string="Share type",
-        domain=[("is_share", "=", True)],
+        domain="[('is_share', '=', True), ('company_id', 'in', (company_id, False))]",
         required=True,
         check_company=True,
     )
     share_to_product_id = fields.Many2one(
         "product.product",
         string="Convert to this share type",
-        domain=[("is_share", "=", True)],
+        domain="[('is_share', '=', True), ('company_id', 'in', (company_id, False))]",
         check_company=True,
     )
     share_short_name = fields.Char(
