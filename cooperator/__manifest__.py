@@ -28,6 +28,7 @@
         "data/data.xml",
         "security/res_groups.xml",
         "security/ir.model.access.csv",
+        "security/ir_rule.xml",
         "wizard/create_subscription_from_partner.xml",
         "wizard/validate_subscription_request.xml",
         "wizard/update_share_line.xml",
