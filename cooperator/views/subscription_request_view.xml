@@ -24,6 +24,7 @@
                 <field name="source" />
                 <field name="state" />
                 <field name="is_valid_iban" invisible="True" />
+                <field name="company_id" groups="base.group_multi_company" />
                 <button
                     type="object"
                     string="Validate"
@@ -155,6 +156,11 @@
                             <field name="data_policy_approved" />
                             <field name="financial_risk_approved" />
                             <field name="generic_rules_approved" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                attrs="{'readonly': [('id', '!=', False)]}"
+                            />
                         </group>
                     </group>
                     <notebook>
