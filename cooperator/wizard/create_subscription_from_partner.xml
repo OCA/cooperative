@@ -34,6 +34,7 @@
                     <field name="share_qty" />
                     <field name="share_unit_price" />
                     <field name="subscription_amount" />
+                    <field name="company_id" groups="base.group_multi_company" />
                 </group>
                 <footer>
                     <button

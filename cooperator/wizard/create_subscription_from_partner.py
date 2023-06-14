@@ -5,6 +5,7 @@ from odoo.exceptions import UserError
 class PartnerCreateSubscription(models.TransientModel):
     _name = "partner.create.subscription"
     _description = "Create Subscription From Partner"
+    _check_company_auto = True
 
     @api.onchange("share_product")
     def on_change_share_type(self):
@@ -83,6 +84,7 @@ class PartnerCreateSubscription(models.TransientModel):
 
     @api.model
     def _get_possible_share(self):
+        # fixme: limit to shares of the selected company (in the form).
         domain = [("is_share", "=", True)]
         partner = self._get_partner()
         if partner.is_company:
@@ -116,6 +118,7 @@ class PartnerCreateSubscription(models.TransientModel):
         domain=_get_possible_share,
         default=_default_product_id,
         required=True,
+        check_company=True,
     )
     share_qty = fields.Integer(string="Share Quantity", required=True)
     share_unit_price = fields.Float(
@@ -138,6 +141,13 @@ class PartnerCreateSubscription(models.TransientModel):
     representative_email = fields.Char(
         string="Representative email", default=_get_representative_email
     )
+    company_id = fields.Many2one(
+        "res.company",
+        string="Company",
+        required=True,
+        change_default=True,
+        default=lambda self: self.env.company,
+    )
 
     def create_subscription(self):
         sub_req = self.env["subscription.request"]
@@ -156,6 +166,7 @@ class PartnerCreateSubscription(models.TransientModel):
             "city": cooperator.city,
             "country_id": cooperator.country_id.id,
             "lang": cooperator.lang,
+            "company_id": self.company_id.id,
         }
 
         if self.is_company:
