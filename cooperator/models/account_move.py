@@ -68,10 +68,17 @@ class AccountMove(models.Model):
                 user_values = {
                     "partner_id": partner.id,
                     "login": email,
-                    "company_id": self.company_id.id,
-                    "company_ids": company_ids,
                 }
                 user = user_obj.sudo()._signup_create_user(user_values)
+                # passing these values in _signup_create_user() does not work
+                # if the website module is loaded, because it overrides the
+                # method and overwrites them.
+                user.sudo().write(
+                    {
+                        "company_id": self.company_id.id,
+                        "company_ids": company_ids,
+                    }
+                )
                 user.sudo().with_context({"create_user": True}).action_reset_password()
 
         return user
