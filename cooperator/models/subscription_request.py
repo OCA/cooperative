@@ -257,6 +257,11 @@ class SubscriptionRequest(models.Model):
     share_product_id = fields.Many2one(
         "product.product",
         string="Share type",
+        # the company_id condition ensures that only shares available for the
+        # company to which this subscription request is linked will be
+        # displayed in the form. this is useful for users that have access to
+        # multiple companies and create subscription requests for the
+        # non-current company.
         domain="[('is_share', '=', True), ('company_id', 'in', (company_id, False))]",
         required=True,
         readonly=True,
@@ -513,6 +518,9 @@ class SubscriptionRequest(models.Model):
 
     def _prepare_invoice_line(self, product, partner, qty):
         self.ensure_one()
+        # .with_company() is needed to allow to validate a subscription
+        # request for a company other than the current one, which can happen
+        # when a user is "logged in" to multiple companies.
         product = product.with_company(self.company_id)
         account = (
             product.property_account_income_id
