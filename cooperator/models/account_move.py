@@ -52,8 +52,10 @@ class AccountMove(models.Model):
         user = user_obj.search([("login", "=", email)])
         if user:
             if self.company_id not in user.company_ids:
+                # add the company to the user's companies
                 user.company_ids = [(4, self.company_id.id, 0)]
         else:
+            # set the company as the only company of the user
             company_ids = [(6, 0, [self.company_id.id])]
             user = user_obj.search([("login", "=", email), ("active", "=", False)])
             if user:
