@@ -40,6 +40,11 @@ msgstr ""
 
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
+msgid "<option value=\"\">Country...</option>"
+msgstr ""
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
 msgid "Address"
 msgstr ""
 
@@ -121,11 +126,6 @@ msgstr ""
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
 msgid "Country"
-msgstr ""
-
-#. module: cooperator_website
-#: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
-msgid "Country..."
 msgstr ""
 
 #. module: cooperator_website
