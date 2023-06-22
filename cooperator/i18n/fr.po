@@ -1409,6 +1409,7 @@ msgid "Cooperator register"
 msgstr "Registre des coopérateurs"
 
 #. module: cooperator
+#: model:account.account,name:cooperator.account_cooperator_demo
 #: model:ir.actions.act_window,name:cooperator.action_partner_cooperator_form
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_cooperator
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_main
@@ -1645,6 +1646,11 @@ msgstr "Courriel :"
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_register_filter
 msgid "Entry type"
 msgstr "Type d'entrée"
+
+#. module: cooperator
+#: model:account.account,name:cooperator.account_equity_demo
+msgid "Equity"
+msgstr ""
 
 #. module: cooperator
 #: code:addons/cooperator/wizard/update_share_line.py:0
@@ -2654,6 +2660,11 @@ msgid "Subscription Date"
 msgstr "Date de la souscription"
 
 #. module: cooperator
+#: model:account.journal,name:cooperator.subscription_journal
+msgid "Subscription Journal"
+msgstr "Journal de souscription"
+
+#. module: cooperator
 #: model:ir.actions.act_window,name:cooperator.subscription_register_action
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_subscription_register
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_register_form
@@ -3128,6 +3139,3 @@ msgstr "payé"
 
 #~ msgid "Bank Accounts"
 #~ msgstr "Comptes bancaires"
-
-#~ msgid "Subscription Journal"
-#~ msgstr "Journal de souscription"
