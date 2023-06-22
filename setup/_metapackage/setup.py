@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo14-addon-cooperator',
         'odoo14-addon-cooperator_portal',
         'odoo14-addon-cooperator_website',
+        'odoo14-addon-l10n_be_cooperator',
     ],
     classifiers=[
         'Programming Language :: Python',
