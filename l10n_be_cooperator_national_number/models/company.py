@@ -19,8 +19,8 @@ class ResCompany(models.Model):
             if company.require_national_number and not company.display_national_number:
                 raise ValidationError(
                     _(
-                        "If the 'Require National Number' toggle is enabled,"
-                        " then so must the 'Display National Number' toggle."
+                        'If the "Require National Number" toggle is enabled,'
+                        ' then so must the "Display National Number" toggle.'
                     )
                 )
 
