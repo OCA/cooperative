@@ -707,6 +707,80 @@ class SubscriptionRequest(models.Model):
         else:
             return None
 
+    def _find_or_create_partner(self):
+        """
+        If self.partner_id is not set, set it by searching for a corresponding
+        partner or creating a new one, then return it.
+        """
+        self.ensure_one()
+        partner = self.partner_id
+        if partner:
+            return partner
+        domain = []
+        if self.already_cooperator:
+            raise UserError(
+                _(
+                    "The checkbox already cooperator is"
+                    " checked please select a cooperator."
+                )
+            )
+        elif self.is_company and self.company_register_number:
+            domain = [
+                (
+                    "company_register_number",
+                    "=",
+                    self.company_register_number,
+                )
+            ]  # noqa
+        elif not self.is_company:
+            domain = self._get_partner_domain()
+
+        if domain:
+            partner = self.env["res.partner"].search(domain, limit=1)
+
+        if not partner:
+            partner = self.create_coop_partner()
+
+        self.partner_id = partner
+        return partner
+
+    def _find_or_create_representative(self):
+        """
+        Search for an existing contact that is a representative for the
+        company partner linked to this subscription request. If none is found,
+        create one.
+        """
+        self.ensure_one()
+        contact = False
+        partner_model = self.env["res.partner"]
+        domain = self._get_partner_domain()
+        if domain:
+            contact = partner_model.search(domain)
+            if contact:
+                contact.type = "representative"
+        if not contact:
+            contact_vals = self.get_representative_vals()
+            partner_model.create(contact_vals)
+        else:
+            if len(contact) > 1:
+                raise UserError(
+                    _(
+                        "There is two different persons with the"
+                        " same national register number. Please"
+                        " proceed to a merge before to continue"
+                    )
+                )
+            if contact.parent_id and contact.parent_id != self.partner_id:
+                raise UserError(
+                    _(
+                        "This contact person is already defined"
+                        " for another company. Please select"
+                        " another contact"
+                    )
+                )
+            else:
+                contact.write({"parent_id": self.partner_id.id, "representative": True})
+
     def validate_subscription_request(self):
         # todo rename to validate (careful with iwp dependencies)
         self.ensure_one()
@@ -715,73 +789,22 @@ class SubscriptionRequest(models.Model):
                 _("The request must be in draft or on waiting list to be validated")
             )
 
-        partner_obj = self.env["res.partner"]
-
         if self.ordered_parts <= 0:
             raise UserError(_("Number of share must be greater than 0."))
-        if self.partner_id:
-            partner = self.partner_id
-        else:
-            partner = None
-            domain = []
-            if self.already_cooperator:
-                raise UserError(
-                    _(
-                        "The checkbox already cooperator is"
-                        " checked please select a cooperator."
-                    )
-                )
-            elif self.is_company and self.company_register_number:
-                domain = [
-                    (
-                        "company_register_number",
-                        "=",
-                        self.company_register_number,
-                    )
-                ]  # noqa
-            elif not self.is_company:
-                domain = self._get_partner_domain()
 
-            if domain:
-                partner = partner_obj.search(domain)
+        # fixme: when re-using an existing partner (as self.partner_id or as a
+        # representative), their values are not updated with the values of the
+        # subscription request. this includes partner information (name,
+        # street address, etc.) but also cooperative membership data like
+        # data_policy_approved. how to fix this? should it be optional or
+        # should it be done in all cases?
 
-        if not partner:
-            partner = self.create_coop_partner()
-            self.partner_id = partner
-        else:
-            partner = partner[0]
+        partner = self._find_or_create_partner()
 
         partner.cooperator = True
 
         if self.is_company and not partner.has_representative():
-            contact = False
-            domain = self._get_partner_domain()
-            if domain:
-                contact = partner_obj.search(domain)
-                if contact:
-                    contact.type = "representative"
-            if not contact:
-                contact_vals = self.get_representative_vals()
-                partner_obj.create(contact_vals)
-            else:
-                if len(contact) > 1:
-                    raise UserError(
-                        _(
-                            "There is two different persons with the"
-                            " same national register number. Please"
-                            " proceed to a merge before to continue"
-                        )
-                    )
-                if contact.parent_id and contact.parent_id.id != partner.id:
-                    raise UserError(
-                        _(
-                            "This contact person is already defined"
-                            " for another company. Please select"
-                            " another contact"
-                        )
-                    )
-                else:
-                    contact.write({"parent_id": partner.id, "representative": True})
+            self._find_or_create_representative()
 
         invoice = self.create_invoice(partner)
         self.write({"state": "done"})
