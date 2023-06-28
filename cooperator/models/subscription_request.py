@@ -106,18 +106,26 @@ class SubscriptionRequest(models.Model):
     def create(self, vals):
         partner = self._find_partner_from_create_vals(vals)
         if partner:
+            company_id = vals.get("company_id", self.env.company.id)
+            cooperative_membership = partner.get_cooperative_membership(company_id)
+            member = cooperative_membership and cooperative_membership.member
             pending_requests_domain = [
+                ("company_id", "=", company_id),
                 ("partner_id", "=", partner.id),
                 ("state", "in", ("draft", "waiting", "done")),
             ]
             # we don't use partner.coop_candidate because we want to also
             # handle draft and waiting requests.
-            if partner.member or self.search(pending_requests_domain):
+            if member or self.search(pending_requests_domain):
                 vals["type"] = "increase"
-            if partner.member:
+            if member:
                 vals["already_cooperator"] = True
-            if not partner.cooperator:
-                partner.cooperator = True
+            if not cooperative_membership:
+                cooperative_membership = partner.create_cooperative_membership(
+                    company_id
+                )
+            elif not cooperative_membership.cooperator:
+                cooperative_membership.cooperator = True
 
         subscription_request = super().create(vals)
         # TODO: This should probably not be in the create method. There may need
@@ -619,17 +627,26 @@ class SubscriptionRequest(models.Model):
             "name": self.company_name,
             "is_company": self.is_company,
             "company_register_number": self.company_register_number,  # noqa
-            "cooperator": True,
             "street": self.address,
             "zip": self.zip_code,
             "city": self.city,
             "email": self.company_email,
             "country_id": self.country_id.id,
             "lang": self.lang,
-            "data_policy_approved": self.data_policy_approved,
-            "internal_rules_approved": self.internal_rules_approved,
-            "financial_risk_approved": self.financial_risk_approved,
-            "generic_rules_approved": self.generic_rules_approved,
+            "cooperative_membership_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "company_id": self.company_id.id,
+                        "cooperator": True,
+                        "data_policy_approved": self.data_policy_approved,
+                        "internal_rules_approved": self.internal_rules_approved,
+                        "financial_risk_approved": self.financial_risk_approved,
+                        "generic_rules_approved": self.generic_rules_approved,
+                    },
+                )
+            ],
         }
         return partner_vals
 
@@ -642,16 +659,25 @@ class SubscriptionRequest(models.Model):
             "zip": self.zip_code,
             "email": self.email,
             "gender": self.gender,
-            "cooperator": True,
             "city": self.city,
             "phone": self.phone,
             "country_id": self.country_id.id,
             "lang": self.lang,
             "birthdate_date": self.birthdate,
-            "data_policy_approved": self.data_policy_approved,
-            "internal_rules_approved": self.internal_rules_approved,
-            "financial_risk_approved": self.financial_risk_approved,
-            "generic_rules_approved": self.generic_rules_approved,
+            "cooperative_membership_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "company_id": self.company_id.id,
+                        "cooperator": True,
+                        "data_policy_approved": self.data_policy_approved,
+                        "internal_rules_approved": self.internal_rules_approved,
+                        "financial_risk_approved": self.financial_risk_approved,
+                        "generic_rules_approved": self.generic_rules_approved,
+                    },
+                )
+            ],
         }
         return partner_vals
 
@@ -661,7 +687,6 @@ class SubscriptionRequest(models.Model):
             "firstname": self.firstname,
             "lastname": self.lastname,
             "is_company": False,
-            "cooperator": True,
             "street": self.address,
             "gender": self.gender,
             "zip": self.zip_code,
@@ -675,10 +700,20 @@ class SubscriptionRequest(models.Model):
             "representative": True,
             "function": self.contact_person_function,
             "type": "representative",
-            "data_policy_approved": self.data_policy_approved,
-            "internal_rules_approved": self.internal_rules_approved,
-            "financial_risk_approved": self.financial_risk_approved,
-            "generic_rules_approved": self.generic_rules_approved,
+            "cooperative_membership_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "company_id": self.company_id.id,
+                        "cooperator": True,
+                        "data_policy_approved": self.data_policy_approved,
+                        "internal_rules_approved": self.internal_rules_approved,
+                        "financial_risk_approved": self.financial_risk_approved,
+                        "generic_rules_approved": self.generic_rules_approved,
+                    },
+                )
+            ],
         }
         return contact_vals
 
@@ -801,7 +836,13 @@ class SubscriptionRequest(models.Model):
 
         partner = self._find_or_create_partner()
 
-        partner.cooperator = True
+        cooperative_membership = partner.get_cooperative_membership(self.company_id.id)
+        if not cooperative_membership:
+            cooperative_membership = partner.create_cooperative_membership(
+                self.company_id.id
+            )
+        elif not cooperative_membership.cooperator:
+            cooperative_membership.cooperator = True
 
         if self.is_company and not partner.has_representative():
             self._find_or_create_representative()
