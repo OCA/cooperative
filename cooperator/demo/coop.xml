@@ -15,6 +15,12 @@
         <field name="city">Namur (Loyers)</field>
         <field name="zip">5101</field>
         <field name="country_id" ref="base.be" />
+    </record>
+
+    <record id="cooperative_membership_1_demo" model="cooperative.membership">
+        <field name="company_id" ref="base.main_company" />
+        <field name="partner_id" ref="res_partner_cooperator_1_demo" />
+        <field name="cooperator" eval="True" />
         <field name="member" eval="True" />
     </record>
 
@@ -33,6 +39,12 @@
         <field name="city">Namur (Loyers)</field>
         <field name="zip">5101</field>
         <field name="country_id" ref="base.be" />
+    </record>
+
+    <record id="cooperator_membership_2_demo" model="cooperative.membership">
+        <field name="company_id" ref="base.main_company" />
+        <field name="partner_id" ref="res_partner_cooperator_2_demo" />
+        <field name="cooperator" eval="True" />
         <field name="member" eval="True" />
     </record>
 
@@ -80,6 +92,7 @@
     <record id="product_template_share_type_1_demo" model="product.template">
         <field name="name">Part A - Founder</field>
         <field name="short_name">Part A</field>
+        <field name="default_code">share_a</field>
         <field name="is_share" eval="True" />
         <field name="default_share_product" eval="True" />
         <field name="force_min_qty" eval="True" />
@@ -93,6 +106,7 @@
     <record id="product_template_share_type_2_demo" model="product.template">
         <field name="name">Part B - Worker</field>
         <field name="short_name">Part B</field>
+        <field name="default_code">share_b</field>
         <field name="is_share" eval="True" />
         <field name="default_share_product" eval="True" />
         <field name="force_min_qty" eval="True" />

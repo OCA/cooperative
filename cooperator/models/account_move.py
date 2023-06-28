@@ -124,21 +124,24 @@ class AccountMove(models.Model):
         # flag the partner as an effective member
         # if not yet cooperator we generate a cooperator number
         vals = {}
-        if self.partner_id.member is False and self.partner_id.old_member is False:
+        cooperative_membership = self.partner_id.get_cooperative_membership(
+            self.company_id.id
+        )
+        if not cooperative_membership.member and not cooperative_membership.old_member:
             sub_reg_num = self.get_next_cooperator_number()
             vals = {
                 "member": True,
                 "old_member": False,
                 "cooperator_register_number": int(sub_reg_num),
             }
-        elif self.partner_id.old_member:
+        elif cooperative_membership.old_member:
             vals = {"member": True, "old_member": False}
 
         return vals
 
     def set_membership(self):
         vals = self.get_membership_vals()
-        self.partner_id.write(vals)
+        self.partner_id.get_cooperative_membership(self.company_id.id).write(vals)
 
         return True
 

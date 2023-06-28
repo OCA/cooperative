@@ -106,6 +106,10 @@
                                     name="total_amount_line"
                                     sum="Total subscribed amount"
                                 />
+                                <field
+                                    name="company_id"
+                                    groups="base.group_multi_company"
+                                />
                             </tree>
                         </field>
                     </page>
@@ -126,6 +130,10 @@
                                 />
                                 <field name="type" />
                                 <field name="state" />
+                                <field
+                                    name="company_id"
+                                    groups="base.group_multi_company"
+                                />
                             </tree>
                         </field>
                     </page>
@@ -155,22 +163,32 @@
                     <filter
                         string="Cooperators"
                         name="cooperators"
-                        domain="[('member','=',1)]"
+                        domain="[('cooperative_membership_ids.member', '=' , True)]"
                         help="Cooperator Partners"
                     />
                     <filter
                         string="Old Cooperators"
                         name="old_cooperators"
-                        domain="[('old_member','=',1)]"
+                        domain="[('cooperative_membership_ids.old_member', '=', True)]"
                         help="Cooperator Partners"
                     />
                     <filter
                         string="Cooperator Candidates"
                         name="cooperator_candidates"
-                        domain="[('coop_candidate','=',1)]"
+                        domain="[('cooperative_membership_ids.coop_candidate', '=', True)]"
                         help="Cooperator Partners"
                     />
                 </filter>
+                <!--
+                    fixme: the filter below was available when the cooperative
+                    membership properties were stored on res.partner instead
+                    of cooperative.membership. group_by does not work on
+                    non-stored computed field and does not support something
+                    like cooperative_membership_ids.cooperator_type. a way to
+                    make it work could be to override a model method like
+                    read_group() in res.partner.
+                -->
+                <!--
                 <filter name="salesperson" position="before">
                     <filter
                         string="Cooperator Type"
@@ -178,6 +196,7 @@
                         context="{'group_by': 'cooperator_type'}"
                     />
                 </filter>
+                -->
             </field>
         </record>
 
@@ -185,7 +204,9 @@
             <field name="name">Cooperators</field>
             <field name="res_model">res.partner</field>
             <field name="view_mode">kanban,tree,form</field>
-            <field name="domain">[('member','=',True)]</field>
+            <field
+                name="domain"
+            >[('cooperative_membership_ids.member', '=', True)]</field>
             <field name="context">{'create':False}</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
