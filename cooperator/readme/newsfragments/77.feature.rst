@@ -1,0 +1,2 @@
+Improve multi-company consistency by setting ``company_id`` on records where
+needed and adding the ``check_company`` flag on ``Many2one`` fields.
