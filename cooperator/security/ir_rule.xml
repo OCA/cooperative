@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record model="ir.rule" id="cooperative_membership_rule_company">
+        <field name="name">Cooperative Membership multi-company</field>
+        <field name="model_id" ref="cooperator.model_cooperative_membership" />
+        <field name="global" eval="True" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

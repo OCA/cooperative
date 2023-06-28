@@ -16,6 +16,7 @@ class CooperatorTestMixin:
             {
                 "name": "Share X - Founder",
                 "short_name": "Part X",
+                "default_code": "share_x",
                 "is_share": True,
                 "by_individual": True,
                 "by_company": False,
@@ -26,6 +27,7 @@ class CooperatorTestMixin:
             {
                 "name": "Share Y - Worker",
                 "short_name": "Part Y",
+                "default_code": "share_y",
                 "is_share": True,
                 "default_share_product": True,
                 "by_individual": True,
@@ -58,6 +60,17 @@ class CooperatorTestMixin:
             }
         )
 
+    @classmethod
+    def create_company(cls, name):
+        company = cls.env["res.company"].create(
+            {
+                "name": name,
+            }
+        )
+        # apply the same account chart template as the main company
+        cls.company.chart_template_id.try_loading(company)
+        return company
+
     def pay_invoice(self, invoice, payment_date=None):
         ctx = {"active_model": "account.move", "active_ids": [invoice.id]}
         register_payments_vals = {"payment_type": "inbound"}
@@ -68,7 +81,7 @@ class CooperatorTestMixin:
             .with_context(ctx)
             .create(register_payments_vals)
         )
-        register_payment.action_create_payments()
+        register_payment.with_company(invoice.company_id).action_create_payments()
 
     def create_payment_account_move(self, invoice, date, amount=None):
         if amount is None:
@@ -104,6 +117,7 @@ class CooperatorTestMixin:
                         },
                     ),
                 ],
+                "company_id": invoice.company_id.id,
             }
         )
         am.action_post()
@@ -174,13 +188,3 @@ class CooperatorTestMixin:
         )
         self.validate_subscription_request_and_pay(subscription_request)
         return partner
-
-    def create_company(self, name):
-        company = self.env["res.company"].create(
-            {
-                "name": name,
-            }
-        )
-        # apply the same account chart template as the main company
-        self.company.chart_template_id.try_loading(company)
-        return company

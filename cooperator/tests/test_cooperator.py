@@ -4,7 +4,9 @@
 
 from datetime import date, datetime, timedelta
 
-from odoo.exceptions import AccessError, UserError
+from freezegun import freeze_time
+
+from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.fields import Date
 from odoo.tests.common import SavepointCase, users
 
@@ -25,6 +27,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "effective_date": datetime.now() - timedelta(days=120),
             }
         )
+        cls.company_2 = cls.create_company("company 2")
 
     @users("user-cooperator")
     def test_put_on_waiting_list(self):
@@ -366,6 +369,16 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         # should this be true?
         self.assertTrue(representative.cooperator)
 
+    def test_representative_of_member_company(self):
+        vals = self.get_dummy_company_subscription_requests_vals()
+        subscription_request = self.env["subscription.request"].create(vals)
+        subscription_request.validate_subscription_request()
+        partner = subscription_request.partner_id
+        representative = partner.child_ids
+        self.assertFalse(representative.representative_of_member_company)
+        self.pay_invoice(subscription_request.capital_release_request)
+        self.assertTrue(representative.representative_of_member_company)
+
     def test_create_subscription_with_matching_email(self):
         partner = self.env["res.partner"].create(
             {
@@ -389,9 +402,9 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
             {
                 "name": "dummy partner 2",
                 "email": "dummy@example.net",
-                "cooperator": True,
             }
         )
+        partner2.create_cooperative_membership(self.env.company.id)
         vals = self.get_dummy_subscription_requests_vals()
         vals["email"] = "dummy@example.net"
         subscription_request = self.env["subscription.request"].create(vals)
@@ -463,9 +476,10 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "email": "dummycompany@example.net",
                 "company_register_number": "dummy company register number",
                 "is_company": True,
-                "cooperator": True,
             }
         )
+        company_partner2.create_cooperative_membership(self.env.company.id)
+        company_partner2.cooperator = True
         vals = self.get_dummy_company_subscription_requests_vals()
         subscription_request = self.env["subscription.request"].create(vals)
         partner = subscription_request.partner_id
@@ -523,7 +537,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         for it.
         """
         company_1 = self.company
-        company_2 = self.create_company("company 2")
+        company_2 = self.company_2
         self.assertTrue(company_2.subscription_journal_id)
         self.assertEqual(company_2.subscription_journal_id.company_id, company_2)
         self.assertNotEqual(
@@ -532,7 +546,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
 
     def test_subscription_request_journal_per_company(self):
         company_1 = self.company
-        company_2 = self.create_company("company 2")
+        company_2 = self.company_2
         subscription_request_1 = self.env["subscription.request"].create(
             self.get_dummy_subscription_requests_vals()
         )
@@ -558,7 +572,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         # link the share to a specific company (instead of it being shared
         # across all of them).
         self.share_y.company_id = self.company.id
-        company_2 = self.create_company("company 2")
+        company_2 = self.company_2
         with self.assertRaises(UserError):
             self.env["subscription.request"].with_company(company_2).create(
                 self.get_dummy_subscription_requests_vals()
@@ -572,7 +586,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         # link the share to a specific company (instead of it being shared
         # across all of them).
         self.share_y.company_id = self.company.id
-        company_2 = self.create_company("company 2")
+        company_2 = self.company_2
         vals = {
             "partner_id": self.demo_partner.id,
             "operation_type": "sell_back",
@@ -595,7 +609,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         Test that creating a cooperator for a different company works and
         keeps data correctly separated per company.
         """
-        company_2 = self.create_company("company 2")
+        company_2 = self.company_2
         subscription_request = (
             self.env["subscription.request"]
             .with_company(company_2)
@@ -605,33 +619,55 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         invoice = subscription_request.capital_release_request
         self.assertEqual(invoice.company_id, company_2)
 
-        partner = subscription_request.partner_id
+        partner = subscription_request.partner_id.with_company(self.company)
+        self.assertFalse(partner.coop_candidate)
+        self.assertFalse(partner.member)
+        # partner.share_ids contains all share lines across all companies
+        self.assertTrue(partner.share_ids)
+        # the cooperative membership (company-dependent) contains only the
+        # share lines for the current company.
+        self.assertFalse(partner.cooperative_membership_id.share_ids)
+        partner = partner.with_company(company_2)
         self.assertFalse(partner.coop_candidate)
         self.assertTrue(partner.member)
-        self.assertTrue(partner.share_ids)
+        self.assertTrue(partner.cooperative_membership_id.share_ids)
+        self.assertEqual(partner.share_ids, partner.cooperative_membership_id.share_ids)
 
     def test_create_cooperator_for_non_current_company(self):
         """
         Test that creating a cooperator for a different company than the
         current one works and keeps data correctly separated per company.
         """
-        company_2 = self.create_company("company 2")
+        company_2 = self.company_2
         subscription_request = (
             self.env["subscription.request"]
             .with_company(company_2)
             .create(self.get_dummy_subscription_requests_vals())
         )
+        # validate subscription request for company_2 but with self.company as
+        # the current company.
         subscription_request.with_company(self.company).validate_subscription_request()
         invoice = subscription_request.capital_release_request
         self.assertEqual(invoice.company_id, company_2)
-        self.pay_invoice(invoice)
+        # register a payment for company_2 but with self.company as the
+        # current company.
+        self.pay_invoice(invoice.with_company(self.company))
+        partner = subscription_request.partner_id.with_company(self.company)
+        self.assertFalse(partner.coop_candidate)
+        self.assertFalse(partner.member)
+        self.assertFalse(partner.cooperative_membership_id.share_ids)
+        partner = partner.with_company(company_2)
+        self.assertFalse(partner.coop_candidate)
+        self.assertTrue(partner.member)
+        self.assertTrue(partner.cooperative_membership_id.share_ids)
+        self.assertEqual(partner.share_ids, partner.cooperative_membership_id.share_ids)
 
     def test_create_cooperator_and_user_for_other_company(self):
         """
         Test that creating a cooperator with its corresponding user for a
         different company works.
         """
-        company_2 = self.create_company("company 2")
+        company_2 = self.company_2
         company_2.create_user = True
         subscription_request = (
             self.env["subscription.request"]
@@ -655,7 +691,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         )
         self.validate_subscription_request_and_pay(subscription_request_1)
         partner_1 = subscription_request_1.partner_id
-        company_2 = self.create_company("company 2")
+        company_2 = self.company_2
         company_2.create_user = True
         subscription_request_2 = (
             self.env["subscription.request"]
@@ -668,3 +704,403 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         user = self.env["res.users"].search([("partner_id", "=", partner_1.id)])
         self.assertEqual(user.company_id, self.company)
         self.assertEqual(user.company_ids, self.company | company_2)
+
+    def test_partner_company_dependent_fields_without_membership(self):
+        """
+        Test that company-dependent fields on res.partner without a membership
+        should have their default value.
+        """
+        partner = self.env["res.partner"].create(
+            {
+                "name": "dummy partner 1",
+            }
+        )
+        # at creation, a partner must not have a cooperative membership.
+        self.assertFalse(partner.cooperative_membership_id)
+        self.assertFalse(partner.cooperative_membership_ids)
+
+        # without a cooperative membership, all fields should have their
+        # default value.
+        self.assertFalse(partner.cooperator)
+        self.assertFalse(partner.member)
+        self.assertFalse(partner.coop_candidate)
+        self.assertFalse(partner.old_member)
+        self.assertEqual(partner.cooperator_register_number, 0)
+        self.assertEqual(partner.number_of_share, 0)
+        self.assertEqual(partner.total_value, 0)
+        self.assertEqual(partner.cooperator_type, False)
+        self.assertEqual(partner.effective_date, False)
+        self.assertFalse(partner.data_policy_approved)
+        self.assertFalse(partner.internal_rules_approved)
+        self.assertFalse(partner.financial_risk_approved)
+        self.assertFalse(partner.generic_rules_approved)
+
+    def test_set_partner_company_dependent_fields_without_membership(self):
+        """
+        Test that setting company-dependent fields on res.partner without a
+        membership should fail.
+        """
+        partner = self.env["res.partner"].create(
+            {
+                "name": "dummy partner 1",
+            }
+        )
+        # without a cooperative membership, setting the fields should fail.
+        with self.assertRaises(ValidationError):
+            partner.cooperator = True
+        with self.assertRaises(ValidationError):
+            partner.member = True
+        with self.assertRaises(ValidationError):
+            partner.coop_candidate = True
+        with self.assertRaises(ValidationError):
+            partner.old_member = True
+        with self.assertRaises(ValidationError):
+            partner.cooperator_register_number = 1
+        with self.assertRaises(ValidationError):
+            partner.number_of_share = 1
+        with self.assertRaises(ValidationError):
+            partner.total_value = 4.2
+        with self.assertRaises(ValidationError):
+            partner.cooperator_type = "share_a"
+        with self.assertRaises(ValidationError):
+            partner.effective_date = date(2023, 6, 21)
+        with self.assertRaises(ValidationError):
+            partner.data_policy_approved = True
+        with self.assertRaises(ValidationError):
+            partner.internal_rules_approved = True
+        with self.assertRaises(ValidationError):
+            partner.financial_risk_approved = True
+        with self.assertRaises(ValidationError):
+            partner.generic_rules_approved = True
+
+    @freeze_time("2023-06-21")
+    def test_existing_partner_company_dependent_fields_with_membership(self):
+        """
+        Test that making a partner cooperator should create a cooperative
+        membership for the company, and that computed field should have the
+        same value as on the cooperative membership.
+        """
+        partner = self.env["res.partner"].create(
+            {
+                "name": "dummy partner 1",
+            }
+        )
+        vals = self.get_dummy_subscription_requests_vals()
+        vals.update(
+            {
+                "partner_id": partner.id,
+                "data_policy_approved": True,
+                "internal_rules_approved": True,
+                "financial_risk_approved": True,
+                "generic_rules_approved": True,
+            }
+        )
+        subscription_request = self.env["subscription.request"].create(vals)
+        self.validate_subscription_request_and_pay(subscription_request)
+        self.assertTrue(partner.cooperative_membership_id)
+        self.assertEqual(partner.cooperative_membership_id.company_id, self.company)
+        self.assertEqual(
+            partner.cooperative_membership_ids, partner.cooperative_membership_id
+        )
+        self.assertTrue(partner.cooperator)
+        self.assertTrue(partner.member)
+        self.assertFalse(partner.coop_candidate)
+        self.assertFalse(partner.old_member)
+        self.assertNotEqual(partner.cooperator_register_number, 0)
+        self.assertEqual(partner.number_of_share, 2)
+        self.assertEqual(partner.total_value, 50)
+        self.assertEqual(partner.cooperator_type, "share_y")
+        self.assertEqual(partner.effective_date, date(2023, 6, 21))
+        # fixme: these should probably be true. see comment in
+        # subscription.request.validate_subscription_request()
+        self.assertFalse(partner.data_policy_approved)
+        self.assertFalse(partner.internal_rules_approved)
+        self.assertFalse(partner.financial_risk_approved)
+        self.assertFalse(partner.generic_rules_approved)
+        cooperative_membership = partner.cooperative_membership_id
+        self.assertEqual(partner.cooperator, cooperative_membership.cooperator)
+        self.assertEqual(partner.member, cooperative_membership.member)
+        self.assertEqual(partner.coop_candidate, cooperative_membership.coop_candidate)
+        self.assertEqual(partner.old_member, cooperative_membership.old_member)
+        self.assertEqual(
+            partner.cooperator_register_number,
+            cooperative_membership.cooperator_register_number,
+        )
+        self.assertEqual(
+            partner.number_of_share, cooperative_membership.number_of_share
+        )
+        self.assertEqual(partner.total_value, cooperative_membership.total_value)
+        self.assertEqual(
+            partner.cooperator_type, cooperative_membership.cooperator_type
+        )
+        self.assertEqual(partner.effective_date, cooperative_membership.effective_date)
+        self.assertEqual(
+            partner.data_policy_approved, cooperative_membership.data_policy_approved
+        )
+        self.assertEqual(
+            partner.internal_rules_approved,
+            cooperative_membership.internal_rules_approved,
+        )
+        self.assertEqual(
+            partner.financial_risk_approved,
+            cooperative_membership.financial_risk_approved,
+        )
+        self.assertEqual(
+            partner.generic_rules_approved,
+            cooperative_membership.generic_rules_approved,
+        )
+
+    @freeze_time("2023-06-21")
+    def test_partner_company_dependent_fields_with_membership(self):
+        """
+        Test that creating a cooperator partner should create a cooperative
+        membership for the company, and that computed field should have the
+        same value as on the cooperative membership.
+        """
+        vals = self.get_dummy_subscription_requests_vals()
+        vals.update(
+            {
+                "data_policy_approved": True,
+                "internal_rules_approved": True,
+                "financial_risk_approved": True,
+                "generic_rules_approved": True,
+            }
+        )
+        subscription_request = self.env["subscription.request"].create(vals)
+        self.validate_subscription_request_and_pay(subscription_request)
+        partner = subscription_request.partner_id
+        self.assertTrue(partner.cooperative_membership_id)
+        self.assertEqual(partner.cooperative_membership_id.company_id, self.company)
+        self.assertTrue(partner.cooperator)
+        self.assertTrue(partner.member)
+        self.assertFalse(partner.coop_candidate)
+        self.assertFalse(partner.old_member)
+        self.assertNotEqual(partner.cooperator_register_number, 0)
+        self.assertEqual(partner.number_of_share, 2)
+        self.assertEqual(partner.total_value, 50)
+        self.assertEqual(partner.cooperator_type, "share_y")
+        self.assertEqual(partner.effective_date, date(2023, 6, 21))
+        self.assertTrue(partner.data_policy_approved)
+        self.assertTrue(partner.internal_rules_approved)
+        self.assertTrue(partner.financial_risk_approved)
+        self.assertTrue(partner.generic_rules_approved)
+        cooperative_membership = partner.cooperative_membership_id
+        self.assertEqual(partner.cooperator, cooperative_membership.cooperator)
+        self.assertEqual(partner.member, cooperative_membership.member)
+        self.assertEqual(partner.coop_candidate, cooperative_membership.coop_candidate)
+        self.assertEqual(partner.old_member, cooperative_membership.old_member)
+        self.assertEqual(
+            partner.cooperator_register_number,
+            cooperative_membership.cooperator_register_number,
+        )
+        self.assertEqual(
+            partner.number_of_share, cooperative_membership.number_of_share
+        )
+        self.assertEqual(partner.total_value, cooperative_membership.total_value)
+        self.assertEqual(
+            partner.cooperator_type, cooperative_membership.cooperator_type
+        )
+        self.assertEqual(partner.effective_date, cooperative_membership.effective_date)
+        self.assertEqual(
+            partner.data_policy_approved, cooperative_membership.data_policy_approved
+        )
+        self.assertEqual(
+            partner.internal_rules_approved,
+            cooperative_membership.internal_rules_approved,
+        )
+        self.assertEqual(
+            partner.financial_risk_approved,
+            cooperative_membership.financial_risk_approved,
+        )
+        self.assertEqual(
+            partner.generic_rules_approved,
+            cooperative_membership.generic_rules_approved,
+        )
+
+    @freeze_time("2023-06-21")
+    def test_set_partner_company_dependent_fields_with_membership(self):
+        """
+        Test that setting company-dependent fields on the partner should set
+        them on the cooperative membership.
+        """
+        partner = self.create_dummy_cooperator()
+        partner.cooperator = False
+        self.assertFalse(partner.cooperator)
+        partner.member = False
+        self.assertFalse(partner.member)
+        # fixme: as this is a computed field, this should fail
+        partner.coop_candidate = True
+        self.assertTrue(partner.coop_candidate)
+        partner.old_member = True
+        self.assertTrue(partner.old_member)
+        # fixme: as this is a readonly field, this should fail
+        partner.cooperator_register_number = 42
+        self.assertEqual(partner.cooperator_register_number, 42)
+        # fixme: as this is a computed field, this should fail
+        partner.number_of_share = 7
+        self.assertEqual(partner.number_of_share, 7)
+        # fixme: as this is a computed field, this should fail
+        partner.total_value = 100
+        self.assertEqual(partner.total_value, 100)
+        # fixme: as this is a computed field, this should fail
+        partner.cooperator_type = "share_x"
+        self.assertEqual(partner.cooperator_type, "share_x")
+        # fixme: as this is a computed field, this should fail
+        partner.effective_date = date(2023, 6, 28)
+        self.assertEqual(partner.effective_date, date(2023, 6, 28))
+        partner.data_policy_approved = True
+        self.assertTrue(partner.data_policy_approved)
+        partner.internal_rules_approved = True
+        self.assertTrue(partner.internal_rules_approved)
+        partner.financial_risk_approved = True
+        self.assertTrue(partner.financial_risk_approved)
+        partner.generic_rules_approved = True
+        self.assertTrue(partner.generic_rules_approved)
+        cooperative_membership = partner.cooperative_membership_id
+        self.assertEqual(partner.cooperator, cooperative_membership.cooperator)
+        self.assertEqual(partner.member, cooperative_membership.member)
+        self.assertEqual(partner.coop_candidate, cooperative_membership.coop_candidate)
+        self.assertEqual(partner.old_member, cooperative_membership.old_member)
+        self.assertEqual(
+            partner.cooperator_register_number,
+            cooperative_membership.cooperator_register_number,
+        )
+        self.assertEqual(
+            partner.number_of_share, cooperative_membership.number_of_share
+        )
+        self.assertEqual(partner.total_value, cooperative_membership.total_value)
+        self.assertEqual(
+            partner.cooperator_type, cooperative_membership.cooperator_type
+        )
+        self.assertEqual(partner.effective_date, cooperative_membership.effective_date)
+        self.assertEqual(
+            partner.data_policy_approved, cooperative_membership.data_policy_approved
+        )
+        self.assertEqual(
+            partner.internal_rules_approved,
+            cooperative_membership.internal_rules_approved,
+        )
+        self.assertEqual(
+            partner.financial_risk_approved,
+            cooperative_membership.financial_risk_approved,
+        )
+        self.assertEqual(
+            partner.generic_rules_approved,
+            cooperative_membership.generic_rules_approved,
+        )
+
+    @freeze_time("2023-06-21")
+    def test_set_partner_company_dependent_fields_on_membership(self):
+        """
+        Test that setting fields on the cooperative membership should update
+        the company-dependent fields on the partner.
+        """
+        partner = self.create_dummy_cooperator()
+        cooperative_membership = partner.cooperative_membership_id
+        cooperative_membership.cooperator = False
+        self.assertFalse(partner.cooperator)
+        cooperative_membership.member = False
+        self.assertFalse(partner.member)
+        # fixme: as this is a computed field, this should fail
+        cooperative_membership.coop_candidate = True
+        self.assertTrue(partner.coop_candidate)
+        cooperative_membership.old_member = True
+        self.assertTrue(partner.old_member)
+        # fixme: as this is a readonly field, this should fail
+        cooperative_membership.cooperator_register_number = 42
+        self.assertEqual(partner.cooperator_register_number, 42)
+        # fixme: as this is a computed field, this should fail
+        cooperative_membership.number_of_share = 7
+        self.assertEqual(partner.number_of_share, 7)
+        # fixme: as this is a computed field, this should fail
+        cooperative_membership.total_value = 100
+        self.assertEqual(partner.total_value, 100)
+        # fixme: as this is a computed field, this should fail
+        cooperative_membership.cooperator_type = "share_x"
+        self.assertEqual(partner.cooperator_type, "share_x")
+        # fixme: as this is a computed field, this should fail
+        cooperative_membership.effective_date = date(2023, 6, 28)
+        self.assertEqual(partner.effective_date, date(2023, 6, 28))
+        cooperative_membership.data_policy_approved = True
+        self.assertTrue(partner.data_policy_approved)
+        cooperative_membership.internal_rules_approved = True
+        self.assertTrue(partner.internal_rules_approved)
+        cooperative_membership.financial_risk_approved = True
+        self.assertTrue(partner.financial_risk_approved)
+        cooperative_membership.generic_rules_approved = True
+        self.assertTrue(partner.generic_rules_approved)
+
+    @freeze_time("2023-06-21")
+    def test_company_dependent_fields_for_other_company(self):
+        """
+        Test that partner company-dependenty fields should have a different
+        value per company.
+        """
+        partner = self.create_dummy_cooperator()
+        self.assertTrue(partner.cooperative_membership_id)
+        self.assertTrue(partner.member)
+
+        # with another company, the partner should not have a
+        # cooperative_membership_id.
+        partner = partner.with_company(self.company_2)
+        self.assertFalse(partner.cooperative_membership_id)
+
+        # all fields should have their default value.
+        self.assertFalse(partner.cooperator)
+        self.assertFalse(partner.member)
+        self.assertFalse(partner.coop_candidate)
+        self.assertFalse(partner.old_member)
+        self.assertEqual(partner.cooperator_register_number, 0)
+        self.assertEqual(partner.number_of_share, 0)
+        self.assertEqual(partner.total_value, 0)
+        self.assertEqual(partner.cooperator_type, False)
+        self.assertEqual(partner.effective_date, False)
+        self.assertFalse(partner.data_policy_approved)
+        self.assertFalse(partner.internal_rules_approved)
+        self.assertFalse(partner.financial_risk_approved)
+        self.assertFalse(partner.generic_rules_approved)
+
+        # setting the fields should fail.
+        with self.assertRaises(ValidationError):
+            partner.cooperator = True
+        with self.assertRaises(ValidationError):
+            partner.member = True
+        with self.assertRaises(ValidationError):
+            partner.coop_candidate = True
+        with self.assertRaises(ValidationError):
+            partner.old_member = True
+        with self.assertRaises(ValidationError):
+            partner.cooperator_register_number = 1
+        with self.assertRaises(ValidationError):
+            partner.number_of_share = 1
+        with self.assertRaises(ValidationError):
+            partner.total_value = 4.2
+        with self.assertRaises(ValidationError):
+            partner.cooperator_type = "share_a"
+        with self.assertRaises(ValidationError):
+            partner.effective_date = date(2023, 6, 21)
+        with self.assertRaises(ValidationError):
+            partner.data_policy_approved = True
+        with self.assertRaises(ValidationError):
+            partner.internal_rules_approved = True
+        with self.assertRaises(ValidationError):
+            partner.financial_risk_approved = True
+        with self.assertRaises(ValidationError):
+            partner.generic_rules_approved = True
+
+    def test_cooperative_membership_for_other_company(self):
+        """
+        Test that making a partner cooperator of another company should create
+        a cooperative membership for that company.
+        """
+        company_2 = self.company_2
+        subscription_request = (
+            self.env["subscription.request"]
+            .with_company(company_2)
+            .create(self.get_dummy_subscription_requests_vals())
+        )
+        self.validate_subscription_request_and_pay(subscription_request)
+        partner = subscription_request.partner_id
+        self.assertTrue(partner.cooperative_membership_id)
+        self.assertEqual(partner.cooperative_membership_id.company_id, company_2)
+        self.assertFalse(partner.with_company(self.company).cooperative_membership_id)
