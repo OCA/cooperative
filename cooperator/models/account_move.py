@@ -10,6 +10,7 @@ from odoo import api, fields, models
 
 class AccountMove(models.Model):
     _inherit = "account.move"
+    _check_company_auto = True
 
     subscription_request = fields.Many2one(
         "subscription.request",
