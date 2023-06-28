@@ -1,0 +1,3 @@
+Move cooperative membership properties from ``res.partner`` to new
+``cooperative.membership`` model and add company-dependent computed fields on
+``res.partner`` for backward compatibility.
