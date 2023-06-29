@@ -65,7 +65,6 @@ class SubscriptionRequest(models.Model):
 
     def get_partner_vals(self):
         contact_vals = super().get_partner_vals()
-        contact_vals["national_number"] = self.national_number
         return contact_vals
 
     def get_person_info(self, partner):
