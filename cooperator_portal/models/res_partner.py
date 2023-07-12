@@ -10,7 +10,7 @@ class ResPartner(models.Model):
     def write(self, vals):
         # Extremely awkward filter function.
         #
-        # In `prepare_portal_layout_values()` of portal.py in our module, the
+        # In `_prepare_portal_layout_values()` of portal.py in our module, the
         # "iban" key is added to the values dict. Later in `account()` (where
         # the latter method is called upstream), we read the key and write its
         # value to the partner's res.partner.bank.
