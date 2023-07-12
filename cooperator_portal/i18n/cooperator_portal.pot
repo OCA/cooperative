@@ -154,7 +154,7 @@ msgid "Request Date"
 msgstr ""
 
 #. module: cooperator_portal
-#: code:addons/cooperator_portal/controllers/portal.py:85
+#: code:addons/cooperator_portal/controllers/portal.py:80
 #, python-format
 msgid "The IBAN account number is not valid."
 msgstr ""
