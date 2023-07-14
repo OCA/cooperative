@@ -37,6 +37,7 @@ class SubscriptionRequest(models.Model):
     _name = "subscription.request"
     _description = "Subscription Request"
     _inherit = ["mail.thread", "mail.activity.mixin"]
+    _check_company_auto = True
 
     def get_required_field(self):
         required_fields = _REQUIRED.copy()
@@ -258,10 +259,16 @@ class SubscriptionRequest(models.Model):
     share_product_id = fields.Many2one(
         "product.product",
         string="Share type",
-        domain=[("is_share", "=", True)],
+        # the company_id condition ensures that only shares available for the
+        # company to which this subscription request is linked will be
+        # displayed in the form. this is useful for users that have access to
+        # multiple companies and create subscription requests for the
+        # non-current company.
+        domain="[('is_share', '=', True), ('company_id', 'in', (company_id, False))]",
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
+        check_company=True,
     )
     share_short_name = fields.Char(
         related="share_product_id.short_name",
@@ -318,7 +325,9 @@ class SubscriptionRequest(models.Model):
     phone = fields.Char(
         string="Phone", readonly=True, states={"draft": [("readonly", False)]}
     )
-    user_id = fields.Many2one("res.users", string="Responsible", readonly=True)
+    user_id = fields.Many2one(
+        "res.users", string="Responsible", readonly=True, check_company=True
+    )
     # todo rename to valid_subscription_request
     is_valid_iban = fields.Boolean(
         compute="_compute_is_valid_iban",
@@ -428,6 +437,7 @@ class SubscriptionRequest(models.Model):
         string="Operation Request",
         readonly=True,
         states={"draft": [("readonly", False)]},
+        check_company=True,
     )
     capital_release_request = fields.One2many(
         "account.move",
@@ -510,6 +520,10 @@ class SubscriptionRequest(models.Model):
 
     def _prepare_invoice_line(self, product, partner, qty):
         self.ensure_one()
+        # .with_company() is needed to allow to validate a subscription
+        # request for a company other than the current one, which can happen
+        # when a user is "logged in" to multiple companies.
+        product = product.with_company(self.company_id)
         account = (
             product.property_account_income_id
             or product.categ_id.property_account_income_categ_id
@@ -523,7 +537,7 @@ class SubscriptionRequest(models.Model):
                 % (product.name, product.id, product.categ_id.name)
             )
 
-        fpos = partner.property_account_position_id
+        fpos = partner.with_company(self.company_id).property_account_position_id
         if fpos:
             account = fpos.map_account(account)
 
@@ -533,7 +547,8 @@ class SubscriptionRequest(models.Model):
             "price_unit": product.lst_price,
             "quantity": qty,
             "product_uom_id": product.uom_id.id,
-            "product_id": product.id or False,
+            "product_id": product.id,
+            "company_id": self.company_id.id,
         }
         return res
 
@@ -566,6 +581,7 @@ class SubscriptionRequest(models.Model):
             "move_type": "out_invoice",
             "release_capital_request": True,
             "subscription_request": self.id,
+            "company_id": self.company_id.id,
         }
 
         payment_term_id = self.env.company.default_capital_release_request_payment_term

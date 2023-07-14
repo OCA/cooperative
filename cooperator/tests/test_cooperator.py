@@ -4,7 +4,7 @@
 
 from datetime import date, datetime, timedelta
 
-from odoo.exceptions import AccessError
+from odoo.exceptions import AccessError, UserError
 from odoo.fields import Date
 from odoo.tests.common import SavepointCase, users
 
@@ -549,3 +549,122 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         self.assertEqual(
             subscription_request_2.get_journal(), company_2.subscription_journal_id
         )
+
+    def test_create_subscription_request_with_share_of_different_company(self):
+        """
+        Test that creating a subscription request with a share (product)
+        linked to a different company than the current one fails.
+        """
+        # link the share to a specific company (instead of it being shared
+        # across all of them).
+        self.share_y.company_id = self.company.id
+        company_2 = self.create_company("company 2")
+        with self.assertRaises(UserError):
+            self.env["subscription.request"].with_company(company_2).create(
+                self.get_dummy_subscription_requests_vals()
+            )
+
+    def test_create_operation_request_with_share_of_different_company(self):
+        """
+        Test that creating an operation request with a share (product)
+        linked to a different company than the current one fails.
+        """
+        # link the share to a specific company (instead of it being shared
+        # across all of them).
+        self.share_y.company_id = self.company.id
+        company_2 = self.create_company("company 2")
+        vals = {
+            "partner_id": self.demo_partner.id,
+            "operation_type": "sell_back",
+            "share_product_id": self.share_y.id,
+            "quantity": 2,
+        }
+        with self.assertRaises(UserError):
+            self.env["operation.request"].with_company(company_2).create(vals)
+        vals.update(
+            {
+                "share_product_id": self.share_x.id,
+                "share_to_product_id": self.share_y.id,
+            }
+        )
+        with self.assertRaises(UserError):
+            self.env["operation.request"].with_company(company_2).create(vals)
+
+    def test_create_cooperator_for_other_company(self):
+        """
+        Test that creating a cooperator for a different company works and
+        keeps data correctly separated per company.
+        """
+        company_2 = self.create_company("company 2")
+        subscription_request = (
+            self.env["subscription.request"]
+            .with_company(company_2)
+            .create(self.get_dummy_subscription_requests_vals())
+        )
+        self.validate_subscription_request_and_pay(subscription_request)
+        invoice = subscription_request.capital_release_request
+        self.assertEqual(invoice.company_id, company_2)
+
+        partner = subscription_request.partner_id
+        self.assertFalse(partner.coop_candidate)
+        self.assertTrue(partner.member)
+        self.assertTrue(partner.share_ids)
+
+    def test_create_cooperator_for_non_current_company(self):
+        """
+        Test that creating a cooperator for a different company than the
+        current one works and keeps data correctly separated per company.
+        """
+        company_2 = self.create_company("company 2")
+        subscription_request = (
+            self.env["subscription.request"]
+            .with_company(company_2)
+            .create(self.get_dummy_subscription_requests_vals())
+        )
+        subscription_request.with_company(self.company).validate_subscription_request()
+        invoice = subscription_request.capital_release_request
+        self.assertEqual(invoice.company_id, company_2)
+        self.pay_invoice(invoice)
+
+    def test_create_cooperator_and_user_for_other_company(self):
+        """
+        Test that creating a cooperator with its corresponding user for a
+        different company works.
+        """
+        company_2 = self.create_company("company 2")
+        company_2.create_user = True
+        subscription_request = (
+            self.env["subscription.request"]
+            .with_company(company_2)
+            .create(self.get_dummy_subscription_requests_vals())
+        )
+        self.validate_subscription_request_and_pay(subscription_request)
+        partner = subscription_request.partner_id
+        user = self.env["res.users"].search([("partner_id", "=", partner.id)])
+        self.assertEqual(user.company_id, company_2)
+        self.assertEqual(user.company_ids, company_2)
+
+    def test_create_cooperator_and_user_for_multiple_companies(self):
+        """
+        Test that creating a cooperator with its corresponding user for a
+        different company works.
+        """
+        self.company.create_user = True
+        subscription_request_1 = self.env["subscription.request"].create(
+            self.get_dummy_subscription_requests_vals()
+        )
+        self.validate_subscription_request_and_pay(subscription_request_1)
+        partner_1 = subscription_request_1.partner_id
+        company_2 = self.create_company("company 2")
+        company_2.create_user = True
+        subscription_request_2 = (
+            self.env["subscription.request"]
+            .with_company(company_2)
+            .create(self.get_dummy_subscription_requests_vals())
+        )
+        self.validate_subscription_request_and_pay(subscription_request_2)
+        partner_2 = subscription_request_2.partner_id
+        self.assertEqual(partner_1, partner_2)
+        user = self.env["res.users"].search([("partner_id", "=", partner_1.id)])
+        self.assertEqual(user.company_id, self.company)
+        self.assertEqual(user.company_ids, self.company | company_2)

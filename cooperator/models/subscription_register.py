@@ -15,6 +15,7 @@ def _lang_get(self):
 class SubscriptionRegister(models.Model):
     _name = "subscription.register"
     _description = "Subscription register"
+    _check_company_auto = True
 
     def _compute_total_line(self):
         for line in self:
@@ -48,6 +49,7 @@ class SubscriptionRegister(models.Model):
         required=True,
         readonly=True,
         domain=[("is_share", "=", True)],
+        check_company=True,
     )
     share_short_name = fields.Char(
         related="share_product_id.short_name",
@@ -59,6 +61,7 @@ class SubscriptionRegister(models.Model):
         string="Share to type",
         readonly=True,
         domain=[("is_share", "=", True)],
+        check_company=True,
     )
     share_to_short_name = fields.Char(
         related="share_to_product_id.short_name",
@@ -100,6 +103,7 @@ class SubscriptionRegister(models.Model):
         string="Responsible",
         readonly=True,
         default=lambda self: self.env.user,
+        check_company=True,
     )
 
     _order = "register_number_operation asc"

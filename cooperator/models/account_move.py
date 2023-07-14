@@ -10,9 +10,12 @@ from odoo import api, fields, models
 
 class AccountMove(models.Model):
     _inherit = "account.move"
+    _check_company_auto = True
 
     subscription_request = fields.Many2one(
-        "subscription.request", string="Subscription request"
+        "subscription.request",
+        string="Subscription request",
+        check_company=True,
     )
     release_capital_request = fields.Boolean(string="Release of capital request")
 
@@ -48,13 +51,37 @@ class AccountMove(models.Model):
         email = partner.email
 
         user = user_obj.search([("login", "=", email)])
-        if not user:
+        if user:
+            if self.company_id not in user.company_ids:
+                # add the company to the user's companies
+                user.company_ids = [(4, self.company_id.id, 0)]
+        else:
+            # set the company as the only company of the user
+            company_ids = [(6, 0, [self.company_id.id])]
             user = user_obj.search([("login", "=", email), ("active", "=", False)])
             if user:
-                user.sudo().write({"active": True})
+                user.sudo().write(
+                    {
+                        "active": True,
+                        "company_id": self.company_id.id,
+                        "company_ids": company_ids,
+                    }
+                )
             else:
-                user_values = {"partner_id": partner.id, "login": email}
+                user_values = {
+                    "partner_id": partner.id,
+                    "login": email,
+                }
                 user = user_obj.sudo()._signup_create_user(user_values)
+                # passing these values in _signup_create_user() does not work
+                # if the website module is loaded, because it overrides the
+                # method and overwrites them.
+                user.sudo().write(
+                    {
+                        "company_id": self.company_id.id,
+                        "company_ids": company_ids,
+                    }
+                )
                 user.sudo().with_context({"create_user": True}).action_reset_password()
 
         return user
@@ -79,6 +106,7 @@ class AccountMove(models.Model):
             "partner_id": self.partner_id.id,
             "share_unit_price": line.price_unit,
             "effective_date": effective_date,
+            "company_id": self.company_id.id,
         }
 
     def get_subscription_register_vals(self, line, effective_date):
@@ -89,6 +117,7 @@ class AccountMove(models.Model):
             "share_unit_price": line.price_unit,
             "date": effective_date,
             "type": "subscription",
+            "company_id": self.company_id.id,
         }
 
     def get_membership_vals(self):

@@ -12,6 +12,7 @@ from odoo.exceptions import ValidationError
 class OperationRequest(models.Model):
     _name = "operation.request"
     _description = "Operation request"
+    _check_company_auto = True
 
     def get_date_now(self):
         # fixme odoo 12 uses date types
@@ -53,13 +54,15 @@ class OperationRequest(models.Model):
     share_product_id = fields.Many2one(
         "product.product",
         string="Share type",
-        domain=[("is_share", "=", True)],
+        domain="[('is_share', '=', True), ('company_id', 'in', (company_id, False))]",
         required=True,
+        check_company=True,
     )
     share_to_product_id = fields.Many2one(
         "product.product",
         string="Convert to this share type",
-        domain=[("is_share", "=", True)],
+        domain="[('is_share', '=', True), ('company_id', 'in', (company_id, False))]",
+        check_company=True,
     )
     share_short_name = fields.Char(
         related="share_product_id.short_name", string="Share type name"
@@ -95,6 +98,7 @@ class OperationRequest(models.Model):
         string="Responsible",
         readonly=True,
         default=lambda self: self.env.user,
+        check_company=True,
     )
     subscription_request = fields.One2many(
         "subscription.request",
@@ -116,7 +120,7 @@ class OperationRequest(models.Model):
         default=lambda self: self.env.company,
     )
 
-    invoice = fields.Many2one("account.move", string="Invoice")
+    invoice = fields.Many2one("account.move", string="Invoice", check_company=True)
 
     @api.constrains("effective_date")
     def _constrain_effective_date(self):
@@ -386,6 +390,7 @@ class OperationRequest(models.Model):
                     "share_product_id": self.share_product_id.id,
                     "share_unit_price": self.share_unit_price,
                     "effective_date": effective_date,
+                    "company_id": self.company_id.id,
                 }
             )
             values["partner_id_to"] = self.partner_id_to.id
