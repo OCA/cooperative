@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class ResCompany(models.Model):
@@ -251,3 +251,30 @@ class ResCompany(models.Model):
 
     def get_cooperator_share_update_mail_template(self):
         return self._get_cooperator_template("cooperator_share_update_mail_template")
+
+    @api.model
+    def create(self, vals):
+        company = super().create(vals)
+        company._create_cooperator_sequences()
+        return company
+
+    @api.model
+    def _get_cooperator_sequence_map(self):
+        return {
+            "cooperator.number": _("Cooperator number sequence"),
+            "register.operation": _("Cooperator register operation sequence"),
+        }
+
+    def _create_cooperator_sequences(self):
+        for company in self:
+            for code, name in self._get_cooperator_sequence_map().items():
+                if not self.env["ir.sequence"].search(
+                    [("code", "=", code), ("company_id", "=", company.id)]
+                ):
+                    self.env["ir.sequence"].create(
+                        {
+                            "name": name,
+                            "code": code,
+                            "company_id": company.id,
+                        }
+                    )
