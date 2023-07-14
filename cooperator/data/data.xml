@@ -12,13 +12,11 @@
             <field name="name">Company Share</field>
         </record>
 
-        <record id="subscription_journal" model="account.journal">
-            <field name="name">Subscription Journal</field>
-            <field name="code">SUBJ</field>
-            <field name="type">sale</field>
-        </record>
-
         <function model="res.company" name="_create_cooperator_sequences">
+            <value model="res.company" search="[]" />
+        </function>
+
+        <function model="res.company" name="_init_cooperator_data">
             <value model="res.company" search="[]" />
         </function>
     </data>

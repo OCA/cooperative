@@ -44,6 +44,11 @@ class ResCompany(models.Model):
         " receivable account for the"
         " cooperators",
     )
+    subscription_journal_id = fields.Many2one(
+        "account.journal",
+        "Subscription Journal",
+        readonly=True,
+    )
     unmix_share_type = fields.Boolean(
         string="Unmix share type",
         default=True,
@@ -278,3 +283,59 @@ class ResCompany(models.Model):
                             "company_id": company.id,
                         }
                     )
+
+    def _accounting_data_initialized(self):
+        return self.chart_template_id or self.env[
+            "account.chart.template"
+        ].existing_accounting(self)
+
+    def _init_cooperator_data(self):
+        """
+        Generate default cooperator data for the company.
+        """
+        # this method exists to initialize data correctly for the following
+        # possible cases:
+        # 1. when a new company is created. in this case it will be called
+        #    when the account chart template is loaded.
+        # 2. when a database is initialized with the cooperator module but no
+        #    l10n module, and the l10n_generic_coa module is loaded after the
+        #    cooperator module by the post_init_hook of the account module. in
+        #    this case it is first called by the xml data of this module
+        #    (cooperator) (but with no effect, as explained below) and then
+        #    again when the account chart template is loaded.
+        # 3. when the cooperator module is installed on an existing database.
+        #    in this case it is called by the xml data of this module.
+        subscription_request_model = self.env["subscription.request"]
+        for company in self:
+            if not company._accounting_data_initialized():
+                # if no account chart template has been loaded yet and no
+                # accounting data exists, then no accounting data should be
+                # created yet because all existing journals and accounts will
+                # be deleted when the account chart template will be loaded.
+                # this method will be called again after the account chart
+                # template has been loaded.
+                continue
+            subscription_request_model.create_journal(company)
+        # this is called here to support the first 2 cases explained above.
+        self._init_cooperator_demo_data()
+
+    def _init_cooperator_demo_data(self):
+        if not self.env["ir.module.module"].search([("name", "=", "cooperator")]).demo:
+            # demo data must not be loaded, nothing to do
+            return
+        account_account_model = self.env["account.account"]
+        receivable_account_type = self.env.ref("account.data_account_type_receivable")
+        for company in self:
+            if not company._accounting_data_initialized():
+                # same remark as in _init_cooperator_data()
+                continue
+            if not company.property_cooperator_account:
+                company.property_cooperator_account = account_account_model.create(
+                    {
+                        "code": "416101",
+                        "name": "Cooperators",
+                        "user_type_id": receivable_account_type.id,
+                        "reconcile": True,
+                        "company_id": company.id,
+                    }
+                )

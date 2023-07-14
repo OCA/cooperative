@@ -537,8 +537,20 @@ class SubscriptionRequest(models.Model):
         }
         return res
 
+    @api.model
+    def create_journal(self, company):
+        if not company.subscription_journal_id:
+            company.subscription_journal_id = self.env["account.journal"].create(
+                {
+                    "name": _("Subscription Journal"),
+                    "code": _("SUBJ"),
+                    "type": "sale",
+                    "company_id": company.id,
+                }
+            )
+
     def get_journal(self):
-        return self.env.ref("cooperator.subscription_journal")
+        return self.company_id.subscription_journal_id
 
     def get_accounting_account(self):
         account = self.company_id.property_cooperator_account

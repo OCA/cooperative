@@ -68,23 +68,14 @@
         <field name="country_id" ref="base.be" />
     </record>
 
-    <record id="account_cooperator_demo" model="account.account">
-        <field name="code">416101</field>
-        <field name="name">Cooperators</field>
-        <field name="user_type_id" ref="account.data_account_type_receivable" />
-        <field name="reconcile" eval="True" />
-    </record>
-
-    <record id="account_equity_demo" model="account.account">
-        <field name="name">Equity</field>
-        <field name="code">100910</field>
-        <field eval="True" name="reconcile" />
-        <field name="user_type_id" ref="account.data_account_type_equity" />
-    </record>
-
-    <record id="base.main_company" model="res.company">
-        <field name="property_cooperator_account" ref="account_cooperator_demo" />
-    </record>
+    <!--
+        this is here only to support the case where a database is initialized
+        without demo data, and demo data is loaded later on (because this
+        function is also called indirectly from the main xml data file).
+    -->
+    <function model="res.company" name="_init_cooperator_demo_data">
+        <value model="res.company" search="[]" />
+    </function>
 
     <record id="product_template_share_type_1_demo" model="product.template">
         <field name="name">Part A - Founder</field>
