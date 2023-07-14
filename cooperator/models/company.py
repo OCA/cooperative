@@ -100,20 +100,77 @@ class ResCompany(models.Model):
         translate=True,
         help="Text to display aside the checkbox to approve the generic rules.",
     )
+    cooperator_certificate_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Certificate email template",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
+        help="If left empty, the default global mail template will be used.",
+    )
+    cooperator_certificate_increase_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Certificate increase email template",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
+        help="If left empty, the default global mail template will be used.",
+    )
     send_certificate_email = fields.Boolean(
         string="Send certificate email", default=True
+    )
+    cooperator_confirmation_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Share confirmation email template",
+        domain=[
+            ("model", "=", "subscription.request"),
+            ("is_cooperator_template", "=", True),
+        ],
+        help="If left empty, the default global mail template will be used.",
+    )
+    cooperator_confirmation_company_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Company share confirmation email template",
+        domain=[
+            ("model", "=", "subscription.request"),
+            ("is_cooperator_template", "=", True),
+        ],
+        help="If left empty, the default global mail template will be used.",
     )
     send_confirmation_email = fields.Boolean(
         string="Send confirmation email", default=True
     )
+    cooperator_capital_release_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Capital release email template",
+        domain=[("model", "=", "account.move"), ("is_cooperator_template", "=", True)],
+        help="If left empty, the default global mail template will be used.",
+    )
     send_capital_release_email = fields.Boolean(
         string="Send Capital Release email", default=True
+    )
+    cooperator_waiting_list_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Waiting list email template",
+        domain=[
+            ("model", "=", "subscription.request"),
+            ("is_cooperator_template", "=", True),
+        ],
+        help="If left empty, the default global mail template will be used.",
     )
     send_waiting_list_email = fields.Boolean(
         string="Send Waiting List email", default=True
     )
+    cooperator_share_transfer_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Share transfer email template",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
+        help="If left empty, the default global mail template will be used.",
+    )
     send_share_transfer_email = fields.Boolean(
         string="Send Share Transfer Email", default=True
+    )
+    cooperator_share_update_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Share update email template",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
+        help="If left empty, the default global mail template will be used.",
     )
     send_share_update_email = fields.Boolean(
         string="Send Share Update Email", default=True
@@ -138,3 +195,59 @@ class ResCompany(models.Model):
     def onchange_generic_rules_approval_required(self):
         if self.generic_rules_approval_required:
             self.display_generic_rules_approval = True
+
+    @api.model
+    def _get_cooperator_mail_template_fields(self):
+        return {
+            "cooperator_confirmation_mail_template": "cooperator.email_template_confirmation",
+            "cooperator_confirmation_company_mail_template": (
+                "cooperator.email_template_confirmation_company"
+            ),
+            "cooperator_capital_release_mail_template": (
+                "cooperator.email_template_release_capital"
+            ),
+            "cooperator_waiting_list_mail_template": "cooperator.email_template_waiting_list",
+            "cooperator_certificate_mail_template": "cooperator.email_template_certificat",
+            "cooperator_certificate_increase_mail_template": (
+                "cooperator.email_template_certificat_increase"
+            ),
+            "cooperator_share_transfer_mail_template": (
+                "cooperator.email_template_share_transfer"
+            ),
+            "cooperator_share_update_mail_template": "cooperator.email_template_share_update",
+        }
+
+    def _get_cooperator_template(self, name):
+        self.ensure_one()
+        template = getattr(self, name)
+        if not template:
+            return self.env.ref(self._get_cooperator_mail_template_fields()[name])
+        return template
+
+    def get_cooperator_certificate_mail_template(self):
+        return self._get_cooperator_template("cooperator_certificate_mail_template")
+
+    def get_cooperator_certificate_increase_mail_template(self):
+        return self._get_cooperator_template(
+            "cooperator_certificate_increase_mail_template"
+        )
+
+    def get_cooperator_confirmation_mail_template(self):
+        return self._get_cooperator_template("cooperator_confirmation_mail_template")
+
+    def get_cooperator_confirmation_company_mail_template(self):
+        return self._get_cooperator_template(
+            "cooperator_confirmation_company_mail_template"
+        )
+
+    def get_cooperator_capital_release_mail_template(self):
+        return self._get_cooperator_template("cooperator_capital_release_mail_template")
+
+    def get_cooperator_waiting_list_mail_template(self):
+        return self._get_cooperator_template("cooperator_waiting_list_mail_template")
+
+    def get_cooperator_share_transfer_mail_template(self):
+        return self._get_cooperator_template("cooperator_share_transfer_mail_template")
+
+    def get_cooperator_share_update_mail_template(self):
+        return self._get_cooperator_template("cooperator_share_update_mail_template")

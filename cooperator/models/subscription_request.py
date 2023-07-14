@@ -53,10 +53,8 @@ class SubscriptionRequest(models.Model):
 
     def get_mail_template_notif(self, is_company=False):
         if is_company:
-            mail_template = "cooperator.email_template_confirmation_company"
-        else:
-            mail_template = "cooperator.email_template_confirmation"
-        return self.env.ref(mail_template, False)
+            return self.company_id.get_cooperator_confirmation_company_mail_template()
+        return self.company_id.get_cooperator_confirmation_mail_template()
 
     @api.constrains("share_product_id", "is_company")
     def _check_share_available_to_user(self):
@@ -121,6 +119,10 @@ class SubscriptionRequest(models.Model):
                 partner.cooperator = True
 
         subscription_request = super().create(vals)
+        # TODO: This should probably not be in the create method. There may need
+        # to be a stage after draft in which this e-mail is sent, or the e-mail
+        # should exclusively be sent from `cooperator_website`. See #73 for
+        # some comments, and for a reverted implementation of the extra state.
         subscription_request._send_confirmation_mail()
         return subscription_request
 
@@ -779,8 +781,8 @@ class SubscriptionRequest(models.Model):
 
     def _send_waiting_list_mail(self):
         if self.company_id.send_waiting_list_email:
-            waiting_list_mail_template = self.env.ref(
-                "cooperator.email_template_waiting_list", False
+            waiting_list_mail_template = (
+                self.company_id.get_cooperator_waiting_list_mail_template()
             )
             waiting_list_mail_template.send_mail(self.id, True)
 

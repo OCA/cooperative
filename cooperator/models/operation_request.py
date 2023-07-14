@@ -276,10 +276,10 @@ class OperationRequest(models.Model):
                 )
 
     def _get_share_transfer_mail_template(self):
-        return self.env.ref("cooperator.email_template_share_transfer", False)
+        return self.company_id.get_cooperator_share_transfer_mail_template()
 
     def _get_share_update_mail_template(self):
-        return self.env.ref("cooperator.email_template_share_update", False)
+        return self.company_id.get_cooperator_share_update_mail_template()
 
     def _send_share_transfer_mail(
         self, sub_register_line
