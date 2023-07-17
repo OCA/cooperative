@@ -19,24 +19,22 @@ class TestCooperatorNationalNumber(SavepointCase, CooperatorTestMixin):
         return self.env["subscription.request"].create(vals)
 
     def set_national_number_required(self):
-        company = self.env.company
-        company.display_national_number = True
-        company.require_national_number = True
+        self.company.display_national_number = True
+        self.company.require_national_number = True
 
     def test_require_without_display(self):
         """You cannot require a national number without also displaying it."""
-        company = self.env.company
-        company.write(
+        self.company.write(
             {
                 "display_national_number": False,
                 "require_national_number": False,
             }
         )
         with self.assertRaises(ValidationError):
-            company.require_national_number = True
+            self.company.require_national_number = True
         self.set_national_number_required()
         with self.assertRaises(ValidationError):
-            company.display_national_number = False
+            self.company.display_national_number = False
 
     def test_company_not_required(self):
         """Subscription requests for companies do not require a national number."""
@@ -69,22 +67,20 @@ class TestCooperatorNationalNumber(SavepointCase, CooperatorTestMixin):
     def test_no_national_number_provided(self):
         """Expect an error if no national number is given, but one is required."""
         self.set_national_number_required()
-        vals = self.get_dummy_company_subscription_requests_vals()
+        vals = self.get_dummy_subscription_requests_vals()
         subscription_request = self.env["subscription.request"].create(vals)
         with self.assertRaises(UserError):
             subscription_request.validate_subscription_request()
-        with self.assertRaises(UserError):
-            subscription_request.create_coop_partner()
 
     def test_national_number_provided_not_required(self):
         """Expect no error when a number is given but not required."""
-        vals = self.get_dummy_company_subscription_requests_vals()
+        vals = self.get_dummy_subscription_requests_vals()
         subscription_request = self.env["subscription.request"].create(vals)
         subscription_request.national_number = 12345
         subscription_request.validate_subscription_request()
 
     def test_no_national_number_provided_not_required(self):
         """Expect no error when no number is given nor required."""
-        vals = self.get_dummy_company_subscription_requests_vals()
+        vals = self.get_dummy_subscription_requests_vals()
         subscription_request = self.env["subscription.request"].create(vals)
         subscription_request.validate_subscription_request()

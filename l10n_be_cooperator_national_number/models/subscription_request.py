@@ -38,48 +38,12 @@ class SubscriptionRequest(models.Model):
         self.ensure_one()
         if self.require_national_number and not self.national_number:
             raise UserError(_("National Number is required."))
-        super().validate_subscription_request()
-
-    def create_national_number(self, partner):
-        self.ensure_one()
+        invoice = super().validate_subscription_request()
         if not self.is_company:
-            if not self.national_number and self.require_national_number:
-                raise ValueError(_("National Number is required."))
-            elif not self.national_number:
-                # Do nothing if no national number is provided, but none is
-                # required.
-                pass
-            else:
-                values = {
-                    "name": self.national_number,
-                    "category_id": self.env.ref(
-                        "l10n_be_national_number.l10n_be_national_number_category"  # noqa
-                    ).id,
-                    "partner_id": partner.id,
-                }
-                self.env["res.partner.id_number"].create(values)
-        return partner
-
-    def create_coop_partner(self):
-        self.ensure_one()
-        partner = super().create_coop_partner()
-        if self.display_national_number:
-            self.create_national_number(partner)
-        return partner
-
-    def get_representative_vals(self):
-        contact_vals = super().get_representative_vals()
-        contact_vals["national_number"] = self.national_number
-        return contact_vals
-
-    def get_partner_vals(self):
-        contact_vals = super().get_partner_vals()
-        return contact_vals
+            partner = invoice.partner_id
+            partner.update_belgian_national_number(self.national_number)
+        return invoice
 
     def get_person_info(self, partner):
         super().get_person_info(partner)
         self.national_number = self.get_national_number_from_partner(partner)
-
-    def update_partner_info(self):
-        self.create_national_number(self.partner_id)
-        super().update_partner_info()
