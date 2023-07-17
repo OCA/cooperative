@@ -65,3 +65,26 @@ class TestCooperatorNationalNumber(SavepointCase, CooperatorTestMixin):
         subscription_request = self.create_subscription_request()
         with self.assertRaises(UserError):
             subscription_request.validate_subscription_request()
+
+    def test_no_national_number_provided(self):
+        """Expect an error if no national number is given, but one is required."""
+        self.set_national_number_required()
+        vals = self.get_dummy_company_subscription_requests_vals()
+        subscription_request = self.env["subscription.request"].create(vals)
+        with self.assertRaises(UserError):
+            subscription_request.validate_subscription_request()
+        with self.assertRaises(UserError):
+            subscription_request.create_coop_partner()
+
+    def test_national_number_provided_not_required(self):
+        """Expect no error when a number is given but not required."""
+        vals = self.get_dummy_company_subscription_requests_vals()
+        subscription_request = self.env["subscription.request"].create(vals)
+        subscription_request.national_number = 12345
+        subscription_request.validate_subscription_request()
+
+    def test_no_national_number_provided_not_required(self):
+        """Expect no error when no number is given nor required."""
+        vals = self.get_dummy_company_subscription_requests_vals()
+        subscription_request = self.env["subscription.request"].create(vals)
+        subscription_request.validate_subscription_request()
