@@ -41,20 +41,29 @@ class SubscriptionRequest(models.Model):
         super().validate_subscription_request()
 
     def create_national_number(self, partner):
+        self.ensure_one()
         if not self.is_company:
-            values = {
-                "name": self.national_number,
-                "category_id": self.env.ref(
-                    "l10n_be_national_number.l10n_be_national_number_category"  # noqa
-                ).id,
-                "partner_id": partner.id,
-            }
-            self.env["res.partner.id_number"].create(values)
+            if not self.national_number and self.require_national_number:
+                raise ValueError(_("National Number is required."))
+            elif not self.national_number:
+                # Do nothing if no national number is provided, but none is
+                # required.
+                pass
+            else:
+                values = {
+                    "name": self.national_number,
+                    "category_id": self.env.ref(
+                        "l10n_be_national_number.l10n_be_national_number_category"  # noqa
+                    ).id,
+                    "partner_id": partner.id,
+                }
+                self.env["res.partner.id_number"].create(values)
         return partner
 
     def create_coop_partner(self):
+        self.ensure_one()
         partner = super().create_coop_partner()
-        if self.require_national_number:
+        if self.display_national_number:
             self.create_national_number(partner)
         return partner
 
