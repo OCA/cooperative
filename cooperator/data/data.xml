@@ -13,11 +13,11 @@
         </record>
 
         <function model="res.company" name="_create_cooperator_sequences">
-            <value model="res.company" search="[]" />
+            <function model="res.company" name="search" eval="[[]]" />
         </function>
 
         <function model="res.company" name="_init_cooperator_data">
-            <value model="res.company" search="[]" />
+            <function model="res.company" name="search" eval="[[]]" />
         </function>
     </data>
 </odoo>
