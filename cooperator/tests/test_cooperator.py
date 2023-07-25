@@ -404,7 +404,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "email": "dummy@example.net",
             }
         )
-        partner2.create_cooperative_membership(self.env.company.id)
+        partner2.create_cooperative_membership(self.company.id)
         vals = self.get_dummy_subscription_requests_vals()
         vals["email"] = "dummy@example.net"
         subscription_request = self.env["subscription.request"].create(vals)
@@ -478,7 +478,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
                 "is_company": True,
             }
         )
-        company_partner2.create_cooperative_membership(self.env.company.id)
+        company_partner2.create_cooperative_membership(self.company.id)
         company_partner2.cooperator = True
         vals = self.get_dummy_company_subscription_requests_vals()
         subscription_request = self.env["subscription.request"].create(vals)
