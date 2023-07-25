@@ -1,1 +1,0 @@
-Create subscription journal per company.

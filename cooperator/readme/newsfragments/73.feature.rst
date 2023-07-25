@@ -1,2 +1,0 @@
-Each company now has their own mail templates for cooperator-related e-mails. If
-no template is set, the default (global) template is used.
