@@ -12,6 +12,7 @@ from odoo.exceptions import ValidationError
 class OperationRequest(models.Model):
     _name = "operation.request"
     _description = "Operation request"
+    _check_company_auto = True
 
     def get_date_now(self):
         # fixme odoo 12 uses date types
@@ -53,13 +54,15 @@ class OperationRequest(models.Model):
     share_product_id = fields.Many2one(
         "product.product",
         string="Share type",
-        domain=[("is_share", "=", True)],
+        domain="[('is_share', '=', True), ('company_id', 'in', (company_id, False))]",
         required=True,
+        check_company=True,
     )
     share_to_product_id = fields.Many2one(
         "product.product",
         string="Convert to this share type",
-        domain=[("is_share", "=", True)],
+        domain="[('is_share', '=', True), ('company_id', 'in', (company_id, False))]",
+        check_company=True,
     )
     share_short_name = fields.Char(
         related="share_product_id.short_name", string="Share type name"
@@ -95,6 +98,7 @@ class OperationRequest(models.Model):
         string="Responsible",
         readonly=True,
         default=lambda self: self.env.user,
+        check_company=True,
     )
     subscription_request = fields.One2many(
         "subscription.request",
@@ -116,7 +120,7 @@ class OperationRequest(models.Model):
         default=lambda self: self.env.company,
     )
 
-    invoice = fields.Many2one("account.move", string="Invoice")
+    invoice = fields.Many2one("account.move", string="Invoice", check_company=True)
 
     @api.constrains("effective_date")
     def _constrain_effective_date(self):
@@ -276,10 +280,10 @@ class OperationRequest(models.Model):
                 )
 
     def _get_share_transfer_mail_template(self):
-        return self.env.ref("cooperator.email_template_share_transfer", False)
+        return self.company_id.get_cooperator_share_transfer_mail_template()
 
     def _get_share_update_mail_template(self):
-        return self.env.ref("cooperator.email_template_share_update", False)
+        return self.company_id.get_cooperator_share_update_mail_template()
 
     def _send_share_transfer_mail(
         self, sub_register_line
@@ -351,12 +355,10 @@ class OperationRequest(models.Model):
                     _("Converting just part of the" " shares is not yet implemented")
                 )
         elif self.operation_type == "transfer":
-            sequence_id = self.env.ref("cooperator.sequence_subscription", False)
             partner_vals = {"member": True}
             if self.receiver_not_member:
                 partner = self.subscription_request.create_coop_partner()
-                # get cooperator number
-                sub_reg_num = int(sequence_id.next_by_id())
+                sub_reg_num = self.env["ir.sequence"].next_by_code("cooperator.number")
                 partner_vals.update(
                     sub_request.get_eater_vals(partner, self.share_product_id)
                 )
@@ -367,7 +369,9 @@ class OperationRequest(models.Model):
                 # means an old member or cooperator candidate
                 if not self.partner_id_to.member:
                     if self.partner_id_to.cooperator_register_number == 0:
-                        sub_reg_num = int(sequence_id.next_by_id())
+                        sub_reg_num = self.env["ir.sequence"].next_by_code(
+                            "cooperator.number"
+                        )
                         partner_vals["cooperator_register_number"] = sub_reg_num
                     partner_vals.update(
                         sub_request.get_eater_vals(
@@ -386,17 +390,14 @@ class OperationRequest(models.Model):
                     "share_product_id": self.share_product_id.id,
                     "share_unit_price": self.share_unit_price,
                     "effective_date": effective_date,
+                    "company_id": self.company_id.id,
                 }
             )
             values["partner_id_to"] = self.partner_id_to.id
         else:
             raise ValidationError(_("This operation is not yet" " implemented."))
 
-        sequence_operation = self.env.ref(
-            "cooperator.sequence_register_operation", False
-        )  # noqa
-        sub_reg_operation = sequence_operation.next_by_id()
-
+        sub_reg_operation = self.env["ir.sequence"].next_by_code("register.operation")
         values["name"] = sub_reg_operation
         values["register_number_operation"] = int(sub_reg_operation)
 

@@ -37,6 +37,7 @@ class SubscriptionRequest(models.Model):
     _name = "subscription.request"
     _description = "Subscription Request"
     _inherit = ["mail.thread", "mail.activity.mixin"]
+    _check_company_auto = True
 
     def get_required_field(self):
         required_fields = _REQUIRED.copy()
@@ -53,10 +54,8 @@ class SubscriptionRequest(models.Model):
 
     def get_mail_template_notif(self, is_company=False):
         if is_company:
-            mail_template = "cooperator.email_template_confirmation_company"
-        else:
-            mail_template = "cooperator.email_template_confirmation"
-        return self.env.ref(mail_template, False)
+            return self.company_id.get_cooperator_confirmation_company_mail_template()
+        return self.company_id.get_cooperator_confirmation_mail_template()
 
     @api.constrains("share_product_id", "is_company")
     def _check_share_available_to_user(self):
@@ -107,20 +106,32 @@ class SubscriptionRequest(models.Model):
     def create(self, vals):
         partner = self._find_partner_from_create_vals(vals)
         if partner:
+            company_id = vals.get("company_id", self.env.company.id)
+            cooperative_membership = partner.get_cooperative_membership(company_id)
+            member = cooperative_membership and cooperative_membership.member
             pending_requests_domain = [
+                ("company_id", "=", company_id),
                 ("partner_id", "=", partner.id),
                 ("state", "in", ("draft", "waiting", "done")),
             ]
             # we don't use partner.coop_candidate because we want to also
             # handle draft and waiting requests.
-            if partner.member or self.search(pending_requests_domain):
+            if member or self.search(pending_requests_domain):
                 vals["type"] = "increase"
-            if partner.member:
+            if member:
                 vals["already_cooperator"] = True
-            if not partner.cooperator:
-                partner.cooperator = True
+            if not cooperative_membership:
+                cooperative_membership = partner.create_cooperative_membership(
+                    company_id
+                )
+            elif not cooperative_membership.cooperator:
+                cooperative_membership.cooperator = True
 
         subscription_request = super().create(vals)
+        # TODO: This should probably not be in the create method. There may need
+        # to be a stage after draft in which this e-mail is sent, or the e-mail
+        # should exclusively be sent from `cooperator_website`. See #73 for
+        # some comments, and for a reverted implementation of the extra state.
         subscription_request._send_confirmation_mail()
         return subscription_request
 
@@ -256,10 +267,16 @@ class SubscriptionRequest(models.Model):
     share_product_id = fields.Many2one(
         "product.product",
         string="Share type",
-        domain=[("is_share", "=", True)],
+        # the company_id condition ensures that only shares available for the
+        # company to which this subscription request is linked will be
+        # displayed in the form. this is useful for users that have access to
+        # multiple companies and create subscription requests for the
+        # non-current company.
+        domain="[('is_share', '=', True), ('company_id', 'in', (company_id, False))]",
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
+        check_company=True,
     )
     share_short_name = fields.Char(
         related="share_product_id.short_name",
@@ -316,7 +333,9 @@ class SubscriptionRequest(models.Model):
     phone = fields.Char(
         string="Phone", readonly=True, states={"draft": [("readonly", False)]}
     )
-    user_id = fields.Many2one("res.users", string="Responsible", readonly=True)
+    user_id = fields.Many2one(
+        "res.users", string="Responsible", readonly=True, check_company=True
+    )
     # todo rename to valid_subscription_request
     is_valid_iban = fields.Boolean(
         compute="_compute_is_valid_iban",
@@ -426,6 +445,7 @@ class SubscriptionRequest(models.Model):
         string="Operation Request",
         readonly=True,
         states={"draft": [("readonly", False)]},
+        check_company=True,
     )
     capital_release_request = fields.One2many(
         "account.move",
@@ -508,6 +528,10 @@ class SubscriptionRequest(models.Model):
 
     def _prepare_invoice_line(self, product, partner, qty):
         self.ensure_one()
+        # .with_company() is needed to allow to validate a subscription
+        # request for a company other than the current one, which can happen
+        # when a user is "logged in" to multiple companies.
+        product = product.with_company(self.company_id)
         account = (
             product.property_account_income_id
             or product.categ_id.property_account_income_categ_id
@@ -521,7 +545,7 @@ class SubscriptionRequest(models.Model):
                 % (product.name, product.id, product.categ_id.name)
             )
 
-        fpos = partner.property_account_position_id
+        fpos = partner.with_company(self.company_id).property_account_position_id
         if fpos:
             account = fpos.map_account(account)
 
@@ -531,12 +555,25 @@ class SubscriptionRequest(models.Model):
             "price_unit": product.lst_price,
             "quantity": qty,
             "product_uom_id": product.uom_id.id,
-            "product_id": product.id or False,
+            "product_id": product.id,
+            "company_id": self.company_id.id,
         }
         return res
 
+    @api.model
+    def create_journal(self, company):
+        if not company.subscription_journal_id:
+            company.subscription_journal_id = self.env["account.journal"].create(
+                {
+                    "name": _("Subscription Journal"),
+                    "code": _("SUBJ"),
+                    "type": "sale",
+                    "company_id": company.id,
+                }
+            )
+
     def get_journal(self):
-        return self.env.ref("cooperator.subscription_journal")
+        return self.company_id.subscription_journal_id
 
     def get_accounting_account(self):
         account = self.company_id.property_cooperator_account
@@ -552,6 +589,7 @@ class SubscriptionRequest(models.Model):
             "move_type": "out_invoice",
             "release_capital_request": True,
             "subscription_request": self.id,
+            "company_id": self.company_id.id,
         }
 
         payment_term_id = self.env.company.default_capital_release_request_payment_term
@@ -589,17 +627,26 @@ class SubscriptionRequest(models.Model):
             "name": self.company_name,
             "is_company": self.is_company,
             "company_register_number": self.company_register_number,  # noqa
-            "cooperator": True,
             "street": self.address,
             "zip": self.zip_code,
             "city": self.city,
             "email": self.company_email,
             "country_id": self.country_id.id,
             "lang": self.lang,
-            "data_policy_approved": self.data_policy_approved,
-            "internal_rules_approved": self.internal_rules_approved,
-            "financial_risk_approved": self.financial_risk_approved,
-            "generic_rules_approved": self.generic_rules_approved,
+            "cooperative_membership_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "company_id": self.company_id.id,
+                        "cooperator": True,
+                        "data_policy_approved": self.data_policy_approved,
+                        "internal_rules_approved": self.internal_rules_approved,
+                        "financial_risk_approved": self.financial_risk_approved,
+                        "generic_rules_approved": self.generic_rules_approved,
+                    },
+                )
+            ],
         }
         return partner_vals
 
@@ -612,16 +659,25 @@ class SubscriptionRequest(models.Model):
             "zip": self.zip_code,
             "email": self.email,
             "gender": self.gender,
-            "cooperator": True,
             "city": self.city,
             "phone": self.phone,
             "country_id": self.country_id.id,
             "lang": self.lang,
             "birthdate_date": self.birthdate,
-            "data_policy_approved": self.data_policy_approved,
-            "internal_rules_approved": self.internal_rules_approved,
-            "financial_risk_approved": self.financial_risk_approved,
-            "generic_rules_approved": self.generic_rules_approved,
+            "cooperative_membership_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "company_id": self.company_id.id,
+                        "cooperator": True,
+                        "data_policy_approved": self.data_policy_approved,
+                        "internal_rules_approved": self.internal_rules_approved,
+                        "financial_risk_approved": self.financial_risk_approved,
+                        "generic_rules_approved": self.generic_rules_approved,
+                    },
+                )
+            ],
         }
         return partner_vals
 
@@ -631,7 +687,6 @@ class SubscriptionRequest(models.Model):
             "firstname": self.firstname,
             "lastname": self.lastname,
             "is_company": False,
-            "cooperator": True,
             "street": self.address,
             "gender": self.gender,
             "zip": self.zip_code,
@@ -645,10 +700,20 @@ class SubscriptionRequest(models.Model):
             "representative": True,
             "function": self.contact_person_function,
             "type": "representative",
-            "data_policy_approved": self.data_policy_approved,
-            "internal_rules_approved": self.internal_rules_approved,
-            "financial_risk_approved": self.financial_risk_approved,
-            "generic_rules_approved": self.generic_rules_approved,
+            "cooperative_membership_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "company_id": self.company_id.id,
+                        "cooperator": True,
+                        "data_policy_approved": self.data_policy_approved,
+                        "internal_rules_approved": self.internal_rules_approved,
+                        "financial_risk_approved": self.financial_risk_approved,
+                        "generic_rules_approved": self.generic_rules_approved,
+                    },
+                )
+            ],
         }
         return contact_vals
 
@@ -677,6 +742,80 @@ class SubscriptionRequest(models.Model):
         else:
             return None
 
+    def _find_or_create_partner(self):
+        """
+        If self.partner_id is not set, set it by searching for a corresponding
+        partner or creating a new one, then return it.
+        """
+        self.ensure_one()
+        partner = self.partner_id
+        if partner:
+            return partner
+        domain = []
+        if self.already_cooperator:
+            raise UserError(
+                _(
+                    "The checkbox already cooperator is"
+                    " checked please select a cooperator."
+                )
+            )
+        elif self.is_company and self.company_register_number:
+            domain = [
+                (
+                    "company_register_number",
+                    "=",
+                    self.company_register_number,
+                )
+            ]  # noqa
+        elif not self.is_company:
+            domain = self._get_partner_domain()
+
+        if domain:
+            partner = self.env["res.partner"].search(domain, limit=1)
+
+        if not partner:
+            partner = self.create_coop_partner()
+
+        self.partner_id = partner
+        return partner
+
+    def _find_or_create_representative(self):
+        """
+        Search for an existing contact that is a representative for the
+        company partner linked to this subscription request. If none is found,
+        create one.
+        """
+        self.ensure_one()
+        contact = False
+        partner_model = self.env["res.partner"]
+        domain = self._get_partner_domain()
+        if domain:
+            contact = partner_model.search(domain)
+            if contact:
+                contact.type = "representative"
+        if not contact:
+            contact_vals = self.get_representative_vals()
+            partner_model.create(contact_vals)
+        else:
+            if len(contact) > 1:
+                raise UserError(
+                    _(
+                        "There is two different persons with the"
+                        " same national register number. Please"
+                        " proceed to a merge before to continue"
+                    )
+                )
+            if contact.parent_id and contact.parent_id != self.partner_id:
+                raise UserError(
+                    _(
+                        "This contact person is already defined"
+                        " for another company. Please select"
+                        " another contact"
+                    )
+                )
+            else:
+                contact.write({"parent_id": self.partner_id.id, "representative": True})
+
     def validate_subscription_request(self):
         # todo rename to validate (careful with iwp dependencies)
         self.ensure_one()
@@ -685,73 +824,28 @@ class SubscriptionRequest(models.Model):
                 _("The request must be in draft or on waiting list to be validated")
             )
 
-        partner_obj = self.env["res.partner"]
-
         if self.ordered_parts <= 0:
             raise UserError(_("Number of share must be greater than 0."))
-        if self.partner_id:
-            partner = self.partner_id
-        else:
-            partner = None
-            domain = []
-            if self.already_cooperator:
-                raise UserError(
-                    _(
-                        "The checkbox already cooperator is"
-                        " checked please select a cooperator."
-                    )
-                )
-            elif self.is_company and self.company_register_number:
-                domain = [
-                    (
-                        "company_register_number",
-                        "=",
-                        self.company_register_number,
-                    )
-                ]  # noqa
-            elif not self.is_company:
-                domain = self._get_partner_domain()
 
-            if domain:
-                partner = partner_obj.search(domain)
+        # fixme: when re-using an existing partner (as self.partner_id or as a
+        # representative), their values are not updated with the values of the
+        # subscription request. this includes partner information (name,
+        # street address, etc.) but also cooperative membership data like
+        # data_policy_approved. how to fix this? should it be optional or
+        # should it be done in all cases?
 
-        if not partner:
-            partner = self.create_coop_partner()
-            self.partner_id = partner
-        else:
-            partner = partner[0]
+        partner = self._find_or_create_partner()
 
-        partner.cooperator = True
+        cooperative_membership = partner.get_cooperative_membership(self.company_id.id)
+        if not cooperative_membership:
+            cooperative_membership = partner.create_cooperative_membership(
+                self.company_id.id
+            )
+        elif not cooperative_membership.cooperator:
+            cooperative_membership.cooperator = True
 
         if self.is_company and not partner.has_representative():
-            contact = False
-            domain = self._get_partner_domain()
-            if domain:
-                contact = partner_obj.search(domain)
-                if contact:
-                    contact.type = "representative"
-            if not contact:
-                contact_vals = self.get_representative_vals()
-                partner_obj.create(contact_vals)
-            else:
-                if len(contact) > 1:
-                    raise UserError(
-                        _(
-                            "There is two different persons with the"
-                            " same national register number. Please"
-                            " proceed to a merge before to continue"
-                        )
-                    )
-                if contact.parent_id and contact.parent_id.id != partner.id:
-                    raise UserError(
-                        _(
-                            "This contact person is already defined"
-                            " for another company. Please select"
-                            " another contact"
-                        )
-                    )
-                else:
-                    contact.write({"parent_id": partner.id, "representative": True})
+            self._find_or_create_representative()
 
         invoice = self.create_invoice(partner)
         self.write({"state": "done"})
@@ -779,8 +873,8 @@ class SubscriptionRequest(models.Model):
 
     def _send_waiting_list_mail(self):
         if self.company_id.send_waiting_list_email:
-            waiting_list_mail_template = self.env.ref(
-                "cooperator.email_template_waiting_list", False
+            waiting_list_mail_template = (
+                self.company_id.get_cooperator_waiting_list_mail_template()
             )
             waiting_list_mail_template.send_mail(self.id, True)
 

@@ -8,3 +8,5 @@ from . import account_move
 from . import company
 from . import account_journal
 from . import mail_template
+from . import account_chart_template
+from . import cooperative_membership

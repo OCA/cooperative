@@ -5,14 +5,17 @@
 
 from datetime import datetime
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class AccountMove(models.Model):
     _inherit = "account.move"
+    _check_company_auto = True
 
     subscription_request = fields.Many2one(
-        "subscription.request", string="Subscription request"
+        "subscription.request",
+        string="Subscription request",
+        check_company=True,
     )
     release_capital_request = fields.Boolean(string="Release of capital request")
 
@@ -48,29 +51,53 @@ class AccountMove(models.Model):
         email = partner.email
 
         user = user_obj.search([("login", "=", email)])
-        if not user:
+        if user:
+            if self.company_id not in user.company_ids:
+                # add the company to the user's companies
+                user.company_ids = [(4, self.company_id.id, 0)]
+        else:
+            # set the company as the only company of the user
+            company_ids = [(6, 0, [self.company_id.id])]
             user = user_obj.search([("login", "=", email), ("active", "=", False)])
             if user:
-                user.sudo().write({"active": True})
+                user.sudo().write(
+                    {
+                        "active": True,
+                        "company_id": self.company_id.id,
+                        "company_ids": company_ids,
+                    }
+                )
             else:
-                user_values = {"partner_id": partner.id, "login": email}
+                user_values = {
+                    "partner_id": partner.id,
+                    "login": email,
+                }
                 user = user_obj.sudo()._signup_create_user(user_values)
+                # passing these values in _signup_create_user() does not work
+                # if the website module is loaded, because it overrides the
+                # method and overwrites them.
+                user.sudo().write(
+                    {
+                        "company_id": self.company_id.id,
+                        "company_ids": company_ids,
+                    }
+                )
                 user.sudo().with_context({"create_user": True}).action_reset_password()
 
         return user
 
     def get_mail_template_certificate(self):
         if self.partner_id.member:
-            mail_template = "cooperator.email_template_certificat_increase"
-        else:
-            mail_template = "cooperator.email_template_certificat"
-        return self.env.ref(mail_template)
+            return self.company_id.get_cooperator_certificate_increase_mail_template()
+        return self.company_id.get_cooperator_certificate_mail_template()
 
-    def get_sequence_register(self):
-        return self.env.ref("cooperator.sequence_subscription", False)
+    @api.model
+    def get_next_cooperator_number(self):
+        return self.env["ir.sequence"].next_by_code("cooperator.number")
 
-    def get_sequence_operation(self):
-        return self.env.ref("cooperator.sequence_register_operation", False)
+    @api.model
+    def get_next_register_operation(self):
+        return self.env["ir.sequence"].next_by_code("register.operation")
 
     def get_share_line_vals(self, line, effective_date):
         return {
@@ -79,6 +106,7 @@ class AccountMove(models.Model):
             "partner_id": self.partner_id.id,
             "share_unit_price": line.price_unit,
             "effective_date": effective_date,
+            "company_id": self.company_id.id,
         }
 
     def get_subscription_register_vals(self, line, effective_date):
@@ -89,28 +117,31 @@ class AccountMove(models.Model):
             "share_unit_price": line.price_unit,
             "date": effective_date,
             "type": "subscription",
+            "company_id": self.company_id.id,
         }
 
     def get_membership_vals(self):
         # flag the partner as an effective member
         # if not yet cooperator we generate a cooperator number
         vals = {}
-        if self.partner_id.member is False and self.partner_id.old_member is False:
-            sequence_id = self.get_sequence_register()
-            sub_reg_num = sequence_id.next_by_id()
+        cooperative_membership = self.partner_id.get_cooperative_membership(
+            self.company_id.id
+        )
+        if not cooperative_membership.member and not cooperative_membership.old_member:
+            sub_reg_num = self.get_next_cooperator_number()
             vals = {
                 "member": True,
                 "old_member": False,
                 "cooperator_register_number": int(sub_reg_num),
             }
-        elif self.partner_id.old_member:
+        elif cooperative_membership.old_member:
             vals = {"member": True, "old_member": False}
 
         return vals
 
     def set_membership(self):
         vals = self.get_membership_vals()
-        self.partner_id.write(vals)
+        self.partner_id.get_cooperative_membership(self.company_id.id).write(vals)
 
         return True
 
@@ -127,8 +158,7 @@ class AccountMove(models.Model):
 
         self.set_membership()
 
-        sequence_operation = self.get_sequence_operation()
-        sub_reg_operation = sequence_operation.next_by_id()
+        sub_reg_operation = self.get_next_register_operation()
 
         for line in self.invoice_line_ids:
             sub_reg_vals = self.get_subscription_register_vals(line, effective_date)
@@ -205,7 +235,7 @@ class AccountMove(models.Model):
         return True
 
     def _get_capital_release_mail_template(self):
-        return self.env.ref("cooperator.email_template_release_capital", False)
+        return self.company_id.get_cooperator_capital_release_mail_template()
 
     def send_capital_release_request_mail(self):
         if self.company_id.send_capital_release_email:

@@ -3,11 +3,12 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class ResCompany(models.Model):
     _inherit = "res.company"
+    _check_company_auto = True
 
     def _compute_base_logo(self):
         base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
@@ -43,6 +44,13 @@ class ResCompany(models.Model):
         " the default one as the"
         " receivable account for the"
         " cooperators",
+        check_company=True,
+    )
+    subscription_journal_id = fields.Many2one(
+        "account.journal",
+        "Subscription Journal",
+        readonly=True,
+        check_company=True,
     )
     unmix_share_type = fields.Boolean(
         string="Unmix share type",
@@ -100,20 +108,77 @@ class ResCompany(models.Model):
         translate=True,
         help="Text to display aside the checkbox to approve the generic rules.",
     )
+    cooperator_certificate_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Certificate email template",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
+        help="If left empty, the default global mail template will be used.",
+    )
+    cooperator_certificate_increase_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Certificate increase email template",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
+        help="If left empty, the default global mail template will be used.",
+    )
     send_certificate_email = fields.Boolean(
         string="Send certificate email", default=True
+    )
+    cooperator_confirmation_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Share confirmation email template",
+        domain=[
+            ("model", "=", "subscription.request"),
+            ("is_cooperator_template", "=", True),
+        ],
+        help="If left empty, the default global mail template will be used.",
+    )
+    cooperator_confirmation_company_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Company share confirmation email template",
+        domain=[
+            ("model", "=", "subscription.request"),
+            ("is_cooperator_template", "=", True),
+        ],
+        help="If left empty, the default global mail template will be used.",
     )
     send_confirmation_email = fields.Boolean(
         string="Send confirmation email", default=True
     )
+    cooperator_capital_release_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Capital release email template",
+        domain=[("model", "=", "account.move"), ("is_cooperator_template", "=", True)],
+        help="If left empty, the default global mail template will be used.",
+    )
     send_capital_release_email = fields.Boolean(
         string="Send Capital Release email", default=True
+    )
+    cooperator_waiting_list_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Waiting list email template",
+        domain=[
+            ("model", "=", "subscription.request"),
+            ("is_cooperator_template", "=", True),
+        ],
+        help="If left empty, the default global mail template will be used.",
     )
     send_waiting_list_email = fields.Boolean(
         string="Send Waiting List email", default=True
     )
+    cooperator_share_transfer_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Share transfer email template",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
+        help="If left empty, the default global mail template will be used.",
+    )
     send_share_transfer_email = fields.Boolean(
         string="Send Share Transfer Email", default=True
+    )
+    cooperator_share_update_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Share update email template",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
+        help="If left empty, the default global mail template will be used.",
     )
     send_share_update_email = fields.Boolean(
         string="Send Share Update Email", default=True
@@ -138,3 +203,142 @@ class ResCompany(models.Model):
     def onchange_generic_rules_approval_required(self):
         if self.generic_rules_approval_required:
             self.display_generic_rules_approval = True
+
+    @api.model
+    def _get_cooperator_mail_template_fields(self):
+        return {
+            "cooperator_confirmation_mail_template": "cooperator.email_template_confirmation",
+            "cooperator_confirmation_company_mail_template": (
+                "cooperator.email_template_confirmation_company"
+            ),
+            "cooperator_capital_release_mail_template": (
+                "cooperator.email_template_release_capital"
+            ),
+            "cooperator_waiting_list_mail_template": "cooperator.email_template_waiting_list",
+            "cooperator_certificate_mail_template": "cooperator.email_template_certificat",
+            "cooperator_certificate_increase_mail_template": (
+                "cooperator.email_template_certificat_increase"
+            ),
+            "cooperator_share_transfer_mail_template": (
+                "cooperator.email_template_share_transfer"
+            ),
+            "cooperator_share_update_mail_template": "cooperator.email_template_share_update",
+        }
+
+    def _get_cooperator_template(self, name):
+        self.ensure_one()
+        template = getattr(self, name)
+        if not template:
+            return self.env.ref(self._get_cooperator_mail_template_fields()[name])
+        return template
+
+    def get_cooperator_certificate_mail_template(self):
+        return self._get_cooperator_template("cooperator_certificate_mail_template")
+
+    def get_cooperator_certificate_increase_mail_template(self):
+        return self._get_cooperator_template(
+            "cooperator_certificate_increase_mail_template"
+        )
+
+    def get_cooperator_confirmation_mail_template(self):
+        return self._get_cooperator_template("cooperator_confirmation_mail_template")
+
+    def get_cooperator_confirmation_company_mail_template(self):
+        return self._get_cooperator_template(
+            "cooperator_confirmation_company_mail_template"
+        )
+
+    def get_cooperator_capital_release_mail_template(self):
+        return self._get_cooperator_template("cooperator_capital_release_mail_template")
+
+    def get_cooperator_waiting_list_mail_template(self):
+        return self._get_cooperator_template("cooperator_waiting_list_mail_template")
+
+    def get_cooperator_share_transfer_mail_template(self):
+        return self._get_cooperator_template("cooperator_share_transfer_mail_template")
+
+    def get_cooperator_share_update_mail_template(self):
+        return self._get_cooperator_template("cooperator_share_update_mail_template")
+
+    @api.model
+    def create(self, vals):
+        company = super().create(vals)
+        company._create_cooperator_sequences()
+        return company
+
+    @api.model
+    def _get_cooperator_sequence_map(self):
+        return {
+            "cooperator.number": _("Cooperator number sequence"),
+            "register.operation": _("Cooperator register operation sequence"),
+        }
+
+    def _create_cooperator_sequences(self):
+        for company in self:
+            for code, name in self._get_cooperator_sequence_map().items():
+                if not self.env["ir.sequence"].search(
+                    [("code", "=", code), ("company_id", "=", company.id)]
+                ):
+                    self.env["ir.sequence"].create(
+                        {
+                            "name": name,
+                            "code": code,
+                            "company_id": company.id,
+                        }
+                    )
+
+    def _accounting_data_initialized(self):
+        return self.chart_template_id or self.env[
+            "account.chart.template"
+        ].existing_accounting(self)
+
+    def _init_cooperator_data(self):
+        """
+        Generate default cooperator data for the company.
+        """
+        # this method exists to initialize data correctly for the following
+        # possible cases:
+        # 1. when a new company is created. in this case it will be called
+        #    when the account chart template is loaded.
+        # 2. when a database is initialized with the cooperator module but no
+        #    l10n module, and the l10n_generic_coa module is loaded after the
+        #    cooperator module by the post_init_hook of the account module. in
+        #    this case it is first called by the xml data of this module
+        #    (cooperator) (but with no effect, as explained below) and then
+        #    again when the account chart template is loaded.
+        # 3. when the cooperator module is installed on an existing database.
+        #    in this case it is called by the xml data of this module.
+        subscription_request_model = self.env["subscription.request"]
+        for company in self:
+            if not company._accounting_data_initialized():
+                # if no account chart template has been loaded yet and no
+                # accounting data exists, then no accounting data should be
+                # created yet because all existing journals and accounts will
+                # be deleted when the account chart template will be loaded.
+                # this method will be called again after the account chart
+                # template has been loaded.
+                continue
+            subscription_request_model.create_journal(company)
+        # this is called here to support the first 2 cases explained above.
+        self._init_cooperator_demo_data()
+
+    def _init_cooperator_demo_data(self):
+        if not self.env["ir.module.module"].search([("name", "=", "cooperator")]).demo:
+            # demo data must not be loaded, nothing to do
+            return
+        account_account_model = self.env["account.account"]
+        receivable_account_type = self.env.ref("account.data_account_type_receivable")
+        for company in self:
+            if not company._accounting_data_initialized():
+                # same remark as in _init_cooperator_data()
+                continue
+            if not company.property_cooperator_account:
+                company.property_cooperator_account = account_account_model.create(
+                    {
+                        "code": "416101",
+                        "name": "Cooperators",
+                        "user_type_id": receivable_account_type.id,
+                        "reconcile": True,
+                        "company_id": company.id,
+                    }
+                )

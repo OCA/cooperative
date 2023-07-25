@@ -1,0 +1,2 @@
+ir.sequences used by this module are no longer global; each company has its own
+sequence for cooperator memberships.

@@ -9,47 +9,14 @@ class CooperatorTestMixin:
     @classmethod
     def set_up_cooperator_test_data(cls):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        # accounting data needs to be created even if created in module data
-        # because when launching tests, accounting data will be deleted when odoo loads
-        # a test chart of account.
-        # cf _load in chart_template.py in account module
-
-        account_model = cls.env["account.account"]
-        cls.company = cls.env.user.company_id
+        cls.company = cls.env.ref("base.main_company")
         cls.company.coop_email_contact = "coop_email@example.org"
         cls.demo_partner = cls.env.ref("base.partner_demo")
-
-        receivable_account_type = cls.env.ref("account.data_account_type_receivable")
-        equity_account_type = cls.env.ref("account.data_account_type_equity")
-        cooperator_account = account_model.create(
-            {
-                "name": "Cooperator Test",
-                "code": "416109",
-                "user_type_id": receivable_account_type.id,
-                "reconcile": True,
-            }
-        )
-        cls.company.property_cooperator_account = cooperator_account
-        cls.equity_account = account_model.create(
-            {
-                "name": "Equity Test ",
-                "code": "100919",
-                "user_type_id": equity_account_type.id,
-                "reconcile": True,
-            }
-        )
-        cls.subscription_journal = cls.env["account.journal"].create(
-            {
-                "name": "Subscriptions Test",
-                "code": "SUBJT",
-                "type": "sale",
-            }
-        )
-
         cls.share_x = cls.env["product.product"].create(
             {
                 "name": "Share X - Founder",
                 "short_name": "Part X",
+                "default_code": "share_x",
                 "is_share": True,
                 "by_individual": True,
                 "by_company": False,
@@ -60,6 +27,7 @@ class CooperatorTestMixin:
             {
                 "name": "Share Y - Worker",
                 "short_name": "Part Y",
+                "default_code": "share_y",
                 "is_share": True,
                 "default_share_product": True,
                 "by_individual": True,
@@ -91,17 +59,21 @@ class CooperatorTestMixin:
                 "skip_iban_control": True,
             }
         )
-        cls.bank_journal = cls.env["account.journal"].create(
-            {"name": "Bank", "type": "bank", "code": "BNK67"}
+
+    @classmethod
+    def create_company(cls, name):
+        company = cls.env["res.company"].create(
+            {
+                "name": name,
+            }
         )
-        cls.payment_method = cls.env.ref("account.account_payment_method_manual_in")
+        # apply the same account chart template as the main company
+        cls.company.chart_template_id.try_loading(company)
+        return company
 
     def pay_invoice(self, invoice, payment_date=None):
         ctx = {"active_model": "account.move", "active_ids": [invoice.id]}
-        register_payments_vals = {
-            "journal_id": self.bank_journal.id,
-            "payment_method_id": self.payment_method.id,
-        }
+        register_payments_vals = {"payment_type": "inbound"}
         if payment_date is not None:
             register_payments_vals["payment_date"] = payment_date
         register_payment = (
@@ -109,14 +81,21 @@ class CooperatorTestMixin:
             .with_context(ctx)
             .create(register_payments_vals)
         )
-        register_payment.action_create_payments()
+        register_payment.with_company(invoice.company_id).action_create_payments()
 
     def create_payment_account_move(self, invoice, date, amount=None):
         if amount is None:
             amount = invoice.line_ids[0].credit
+        journal = self.env["account.journal"].search(
+            [
+                ("type", "=", "bank"),
+                ("company_id", "=", invoice.company_id.id),
+            ],
+            limit=1,
+        )
         am = self.env["account.move"].create(
             {
-                "journal_id": self.bank_journal.id,
+                "journal_id": journal.id,
                 "date": date,
                 "line_ids": [
                     (
@@ -124,7 +103,7 @@ class CooperatorTestMixin:
                         0,
                         {
                             "name": invoice.name,
-                            "account_id": self.bank_journal.default_account_id.id,
+                            "account_id": journal.default_account_id.id,
                             "debit": amount,
                         },
                     ),
@@ -133,11 +112,12 @@ class CooperatorTestMixin:
                         0,
                         {
                             "name": invoice.payment_reference,
-                            "account_id": self.company.property_cooperator_account.id,
+                            "account_id": invoice.company_id.property_cooperator_account.id,
                             "credit": amount,
                         },
                     ),
                 ],
+                "company_id": invoice.company_id.id,
             }
         )
         am.action_post()
