@@ -107,8 +107,40 @@ See [this issue](https://github.com/coopiteasy/vertical-cooperative/issues/350)
 
 known_caveats: the cooperator localization modules will have to be splitted in order to install the `cooperator` module without the `cooperator_website` module.
 
+Registering a payment for a subscription request for a company other than the
+current one does not create the cooperative membership information for the
+partner.
+
+A “Cooperative Memberships” page should be added to the ``res.partner`` form,
+displaying all the cooperative memberships of the partner
+(``cooperative_membership_ids``). The page should only be visible for users
+that are both in the ``cooperator_group_user`` group and in the
+``base.group_multi_company`` group (how to do this?). Should it display the
+memberships of all companies or only the ones in which the user is “logged in”
+(checked in the menu)? If all companies, there would be a conflict with the
+``cooperative_membership_rule_company`` ``ir.rule``.
+
 Changelog
 =========
+
+14.0.3.0.0 (2023-07-25)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Each company now has their own mail templates for cooperator-related e-mails. If
+  no template is set, the default (global) template is used. (`#73 <https://github.com/OCA/cooperative/issues/73>`_)
+- ir.sequences used by this module are no longer global; each company has its own
+  sequence for cooperator memberships. (`#74 <https://github.com/OCA/cooperative/issues/74>`_)
+- Create subscription journal per company. (`#75 <https://github.com/OCA/cooperative/issues/75>`_)
+- Improve multi-company consistency by setting ``company_id`` on records where
+  needed and adding the ``check_company`` flag on ``Many2one`` fields. (`#77 <https://github.com/OCA/cooperative/issues/77>`_)
+- ir.rules for multi-company usage added. Users cannot access records of this
+  module if they are not members of the relevant company. (`#78 <https://github.com/OCA/cooperative/issues/78>`_)
+- Move cooperative membership properties from ``res.partner`` to new
+  ``cooperative.membership`` model and add company-dependent computed fields on
+  ``res.partner`` for backward compatibility. (`#82 <https://github.com/OCA/cooperative/issues/82>`_)
+
 
 14.0.1.6.0 (2023-02-23)
 ~~~~~~~~~~~~~~~~~~~~~~~
