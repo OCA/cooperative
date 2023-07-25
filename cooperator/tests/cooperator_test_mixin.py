@@ -9,7 +9,7 @@ class CooperatorTestMixin:
     @classmethod
     def set_up_cooperator_test_data(cls):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.company = cls.env.company
+        cls.company = cls.env.ref("base.main_company")
         cls.company.coop_email_contact = "coop_email@example.org"
         cls.demo_partner = cls.env.ref("base.partner_demo")
         cls.share_x = cls.env["product.product"].create(
