@@ -123,7 +123,7 @@ memberships of all companies or only the ones in which the user is â€œlogged inâ
 Changelog
 =========
 
-14.0.3.0.0 (2023-07-25)
+14.0.2.0.0 (2023-07-25)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 **Features**
