@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-08-08 15:12+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_waiting_list
@@ -61,6 +63,53 @@ msgid ""
 "</div>\n"
 "            "
 msgstr ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Hello ${object.firstname},</p>\n"
+"\n"
+"    <p>Grazie per la rciesta di iscrizione. Al momento nn ci son progetti di "
+"raccolta fondi, pertanto site stati aggiunti nella lista di attesa.\n"
+"        Vi contatteremo appena verranno riaperte le richieste di iscrizine.\n"
+"     </p>\n"
+"\n"
+"    <br/>\n"
+"    <p>Non esitate a contattarci per qualsiasi chiarimento.</p>\n"
+"    <br/>\n"
+"\n"
+"    <p>Sostenibilmente,</p>\n"
+"    <p>${object.company_id.name}.</p>\n"
+"\n"
+"    % if object.company_id.street:\n"
+"        ${object.company_id.street}\n"
+"    % endif\n"
+"    % if object.company_id.street2:\n"
+"        ${object.company_id.street2}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.city or object.company_id.zip:\n"
+"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.country_id:\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id"
+".name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.phone:\n"
+"        Telefono:&nbsp; ${object.company_id.phone}\n"
+"    % endif\n"
+"\n"
+"    % if object.company_id.website:\n"
+"        <div>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
+"        </div>\n"
+"    %endif\n"
+"\n"
+"    <div>\n"
+"        <img src=${object.company_id.logo_url}>\n"
+"    </div>\n"
+"</div>\n"
+"            "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_confirmation_company
@@ -109,6 +158,55 @@ msgid ""
 "</div>\n"
 "            "
 msgstr ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Hello ${object.firstname},</p>\n"
+"\n"
+"    <p>Abbiamo ricevuto la sua richiesta di iscrizione per ${object."
+"company_id.name}. La ringraziamo per il supporto.</p>\n"
+"\n"
+"    <p>La sua richiesta verrà elaborata al più presto dal nostro team. Se "
+"tutte le informazioni fornite sono corrette riceverà presto tutte le "
+"informazioni di pagamento in un'altra e-mail.</p>\n"
+"\n"
+"    <br/>\n"
+"    <p>Non esisti a contattarci per qualsiasi domana.</p>\n"
+"    <br/>\n"
+"\n"
+"    <p>Sostenibilmente,</p>\n"
+"    <p>${object.company_id.name}.</p>\n"
+"\n"
+"    % if object.company_id.street:\n"
+"        ${object.company_id.street}\n"
+"    % endif\n"
+"    % if object.company_id.street2:\n"
+"        ${object.company_id.street2}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.city or object.company_id.zip:\n"
+"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.country_id:\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id"
+".name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.phone:\n"
+"        Telefono:&nbsp; ${object.company_id.phone}\n"
+"    % endif\n"
+"\n"
+"    % if object.company_id.website:\n"
+"        <div>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
+"        </div>\n"
+"    %endif\n"
+"\n"
+"    <div>\n"
+"        <img src=${object.company_id.logo_url}>\n"
+"    </div>\n"
+"</div>\n"
+"            "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_confirmation
@@ -155,6 +253,52 @@ msgid ""
 "</div>\n"
 "            "
 msgstr ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Salve ${object.firstname},</p>\n"
+"\n"
+"    <p>La sua richiesta verrà presto elaborata dal nostro team. Se le "
+"informazioni fornite sono corrette riceverà le informazioni per il pagamento "
+"in un'altra e-mail.</p>\n"
+"\n"
+"    <br/>\n"
+"    <p>Non esiti a contattarci per qualsiasi domanda.</p>\n"
+"    <br/>\n"
+"\n"
+"    <p>Sostenibilmente,</p>\n"
+"    <p>${object.company_id.name}.</p>\n"
+"\n"
+"    % if object.company_id.street:\n"
+"        ${object.company_id.street}\n"
+"    % endif\n"
+"    % if object.company_id.street2:\n"
+"        ${object.company_id.street2}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.city or object.company_id.zip:\n"
+"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.country_id:\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id"
+".name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.phone:\n"
+"        Telefono:&nbsp; ${object.company_id.phone}\n"
+"    % endif\n"
+"\n"
+"    % if object.company_id.website:\n"
+"        <div>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
+"        </div>\n"
+"    %endif\n"
+"\n"
+"    <div>\n"
+"        <img src=${object.company_id.logo_url}>\n"
+"    </div>\n"
+"</div>\n"
+"            "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_release_capital
@@ -199,6 +343,51 @@ msgid ""
 "</div>\n"
 "            "
 msgstr ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Salve ${object.subscription_request.firstname},</p>\n"
+"\n"
+"    <p>Trova in allegato tutte le informazioni necessarie per il pagamento. "
+"Le ricordiamo che la sua iscrizione sarà effettiva solo dal momento in cui "
+"riceveremo il pagamento.</p>\n"
+"\n"
+"    <p>Non si dimentichi di aggiungere al pagamento la comunicazione della "
+"struttura.</p>\n"
+"\n"
+"    <p>Sostenibilmente,</p>\n"
+"    <p>${object.company_id.name}.</p>\n"
+"\n"
+"    % if object.company_id.street:\n"
+"        ${object.company_id.street}\n"
+"    % endif\n"
+"    % if object.company_id.street2:\n"
+"        ${object.company_id.street2}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.city or object.company_id.zip:\n"
+"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.country_id:\n"
+"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id"
+".name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"    % endif\n"
+"    % if object.company_id.phone:\n"
+"        Telefono:&nbsp; ${object.company_id.phone}\n"
+"    % endif\n"
+"\n"
+"    % if object.company_id.website:\n"
+"        <div>\n"
+"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object."
+"company_id.website}</a>\n"
+"        </div>\n"
+"    %endif\n"
+"\n"
+"    <div>\n"
+"        <img src=${object.company_id.logo_url}>\n"
+"    </div>\n"
+"</div>\n"
+"            "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_certificat_increase
@@ -245,6 +434,51 @@ msgid ""
 "</div>\n"
 "            "
 msgstr ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Salve ${object.subscription_request_ids[0].firstname},</p>\n"
+"\n"
+"    <p>Confermiamo la ricezione del pagamento per la quota(e) che ha "
+"acquisto.</p>\n"
+"\n"
+"    <br/>\n"
+"    <p>In allegato trova il suo certificato ${object.env.company.name}.</p>\n"
+"    <p>Grazie per la fidcia ${object.env.company.name or 'us'}!</p>\n"
+"    <br/>\n"
+"    <p>Sostenibilmente,</p>\n"
+"    <p>${object.env.company.name}.</p>\n"
+"\n"
+"    % if object.env.company.street:\n"
+"        ${object.env.company.street}\n"
+"    % endif\n"
+"    % if object.env.company.street2:\n"
+"        ${object.env.company.street2}<br/>\n"
+"    % endif\n"
+"    % if object.env.company.city or object.env.company.zip:\n"
+"        ${object.env.company.zip} ${object.env.company.city}<br/>\n"
+"    % endif\n"
+"    % if object.env.company.country_id:\n"
+"        ${object.env.company.state_id and ('%s, ' % object.env.company."
+"state_id.name) or ''} ${object.env.company.country_id.name or ''}<br/>\n"
+"    % endif\n"
+"    % if object.env.company.phone:\n"
+"        Telefono:&nbsp; ${object.env.company.phone}\n"
+"    % endif\n"
+"\n"
+"    % if object.env.company.website:\n"
+"        <div>\n"
+"            Web :&nbsp;<a href=\"${object.env.company.website}\">${object.env"
+".company.website}</a>\n"
+"        </div>\n"
+"    %endif\n"
+"\n"
+"    <div>\n"
+"        <img src=${object.env.company.logo_url}>\n"
+"    </div>\n"
+"</div>\n"
+"            "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_certificat
@@ -291,6 +525,52 @@ msgid ""
 "</div>\n"
 "            "
 msgstr ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Salve ${object.subscription_request_ids[0].firstname},</p>\n"
+"\n"
+"    <p>Confermiamo la ricezione del suo pagamento. Asesso è un azionista "
+"della nostra cooperativa.</p>\n"
+"\n"
+"    <br/>\n"
+"    <p>In allegato trova il suo certificato ${object.env.company.name}.</p>\n"
+"    <p>La ringraziamo di aver scelto ${object.env.company.name or 'us'}!</p>"
+"\n"
+"    <br/>\n"
+"    <p>Sostenibilmente,</p>\n"
+"    <p>${object.env.company.name}.</p>\n"
+"\n"
+"    % if object.env.company.street:\n"
+"        ${object.env.company.street}\n"
+"    % endif\n"
+"    % if object.env.company.street2:\n"
+"        ${object.env.company.street2}<br/>\n"
+"    % endif\n"
+"    % if object.env.company.city or object.env.company.zip:\n"
+"        ${object.env.company.zip} ${object.env.company.city}<br/>\n"
+"    % endif\n"
+"    % if object.env.company.country_id:\n"
+"        ${object.env.company.state_id and ('%s, ' % object.env.company."
+"state_id.name) or ''} ${object.env.company.country_id.name or ''}<br/>\n"
+"    % endif\n"
+"    % if object.env.company.phone:\n"
+"        Telefono:&nbsp; ${object.env.company.phone}\n"
+"    % endif\n"
+"\n"
+"    % if object.env.company.website:\n"
+"        <div>\n"
+"            Web :&nbsp;<a href=\"${object.env.company.website}\">${object.env"
+".company.website}</a>\n"
+"        </div>\n"
+"    %endif\n"
+"\n"
+"    <div>\n"
+"        <img src=${object.env.company.logo_url}>\n"
+"    </div>\n"
+"</div>\n"
+"            "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_share_update
@@ -337,6 +617,52 @@ msgid ""
 "</div>\n"
 "            "
 msgstr ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Salve ${object.subscription_request_ids[0].firstname},</p>\n"
+"\n"
+"    <p>Confermiamo che è stato eseguito con successo l'adeguamento nel "
+"portfolio delle quote. Il suo certificato di cooperazine è stato aggiornato "
+"di conseguenza.</p>\n"
+"\n"
+"    <br/>\n"
+"    <p>Trova in allegato il suo certificato ${object.env.company.name}.</p>\n"
+"    <p>Grazie di aver scelto ${object.env.company.name or 'us'}!</p>\n"
+"    <br/>\n"
+"    <p>Sostenibilmente,</p>\n"
+"    <p>${object.env.company.name}.</p>\n"
+"\n"
+"    % if object.env.company.street:\n"
+"        ${object.env.company.street}\n"
+"    % endif\n"
+"    % if object.env.company.street2:\n"
+"        ${object.env.company.street2}<br/>\n"
+"    % endif\n"
+"    % if object.env.company.city or object.env.company.zip:\n"
+"        ${object.env.company.zip} ${object.env.company.city}<br/>\n"
+"    % endif\n"
+"    % if object.env.company.country_id:\n"
+"        ${object.env.company.state_id and ('%s, ' % object.env.company."
+"state_id.name) or ''} ${object.env.company.country_id.name or ''}<br/>\n"
+"    % endif\n"
+"    % if object.env.company.phone:\n"
+"        Telefono:&nbsp; ${object.env.company.phone}\n"
+"    % endif\n"
+"\n"
+"    % if object.env.company.website:\n"
+"        <div>\n"
+"            Web :&nbsp;<a href=\"${object.env.company.website}\">${object.env"
+".company.website}</a>\n"
+"        </div>\n"
+"    %endif\n"
+"\n"
+"     <div>\n"
+"         <img src=${object.env.company.logo_url}>\n"
+"     </div>\n"
+"</div>\n"
+"            "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_share_transfer
@@ -383,6 +709,51 @@ msgid ""
 "</div>\n"
 "            "
 msgstr ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Salve ${object.subscription_request_ids[0].firstname},</p>\n"
+"\n"
+"    <p>Confermiamo che le sono state trasferite le quote. Se non era già un "
+"cooperatore, ora è un azionista della nostra cooperativa.</p>\n"
+"\n"
+"    <br/>\n"
+"    <p>Trova in allegato il suo certificato ${object.env.company.name}.</p>\n"
+"    <p>Grazie per aver scelto ${object.env.company.name or 'us'}!</p>\n"
+"    <br/>\n"
+"    <p>Sostenibilmente,</p>\n"
+"    <p>${object.env.company.name}.</p>\n"
+"\n"
+"    % if object.env.company.street:\n"
+"        ${object.env.company.street}\n"
+"    % endif\n"
+"    % if object.env.company.street2:\n"
+"        ${object.env.company.street2}<br/>\n"
+"    % endif\n"
+"    % if object.env.company.city or object.env.company.zip:\n"
+"        ${object.env.company.zip} ${object.env.company.city}<br/>\n"
+"    % endif\n"
+"    % if object.env.company.country_id:\n"
+"        ${object.env.company.state_id and ('%s, ' % object.env.company."
+"state_id.name) or ''} ${object.env.company.country_id.name or ''}<br/>\n"
+"    % endif\n"
+"    % if object.env.company.phone:\n"
+"        Telefono:&nbsp; ${object.env.company.phone}\n"
+"    % endif\n"
+"\n"
+"    % if object.env.company.website:\n"
+"        <div>\n"
+"            Web :&nbsp;<a href=\"${object.env.company.website}\">${object.env"
+".company.website}</a>\n"
+"        </div>\n"
+"    %endif\n"
+"\n"
+"    <div>\n"
+"        <img src=${object.env.company.logo_url}>\n"
+"    </div>\n"
+"</div>\n"
+"            "
 
 #. module: cooperator
 #: model:mail.template,report_name:cooperator.email_template_release_capital
@@ -390,6 +761,8 @@ msgid ""
 "${(object.name or \"capital_release_request\").replace(\"/\", "
 "\"_\")}${object.state == \"draft\" and \"_draft\" or \"\"}"
 msgstr ""
+"${(object.name or \"capital_release_request\").replace(\"/\", \"_\")}${"
+"object.state == \"draft\" and \"_draft\" or \"\"}"
 
 #. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_release_capital
@@ -397,18 +770,20 @@ msgid ""
 "${object.company_id.name} Request to Release Capital (Ref ${object.name or "
 "'n/a'})"
 msgstr ""
+"${object.company_id.name} chiede di liquidare capitale (Rif ${object.name or "
+"'n/a'})"
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "%s is not available to companies"
-msgstr ""
+msgstr "%s non è disponibile per le aziende"
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "%s is not available to individuals"
-msgstr ""
+msgstr "%s non è disponibile per i privati"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
@@ -420,61 +795,68 @@ msgid ""
 "                                    Total Price\n"
 "                                </span>"
 msgstr ""
+"<span groups=\"account.group_show_line_subtotals_tax_excluded\">\n"
+"                                    Valore\n"
+"                                </span>\n"
+"                                <span groups=\"account."
+"group_show_line_subtotals_tax_included\">\n"
+"                                    Prezzo totale\n"
+"                                </span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperator_register_G001
 msgid "<span>COOPERATOR REGISTER</span>"
-msgstr ""
+msgstr "<span>REGISTRO COOPERATORE</span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
 msgid "<span>Certificate generated on</span>"
-msgstr ""
+msgstr "<span>Certificato generato il</span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
 msgid "<span>Cooperator Certificate</span>"
-msgstr ""
+msgstr "<span>Certificato cooperatore</span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "<span>Description</span>"
-msgstr ""
+msgstr "<span>Descrizione</span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "<span>Part Type</span>"
-msgstr ""
+msgstr "<span>Tipo parte</span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "<span>Quantity</span>"
-msgstr ""
+msgstr "<span>Quantità</span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperator_subscription_G001
 msgid "<span>SUBSCRIPTION REGISTER</span>"
-msgstr ""
+msgstr "<span>REGISTRO ISCRIZIONE</span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "<span>Source Document</span>"
-msgstr ""
+msgstr "<span>Documento origine</span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "<span>Unit Price</span>"
-msgstr ""
+msgstr "<span>Prezzo unitario</span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
 msgid "<span>share(s)</span>"
-msgstr ""
+msgstr "<span>quota(e)</span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "<strong class=\"mr16\">Subtotal</strong>"
-msgstr ""
+msgstr "<strong class=\"mr16\">Subtotale</strong>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
@@ -485,6 +867,11 @@ msgid ""
 "                        <br/>\n"
 "                        <br/>"
 msgstr ""
+"<strong class=\"text-center\">Scansionami con l'app della\n"
+"                            banca.\n"
+"                        </strong>\n"
+"                        <br/>\n"
+"                        <br/>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
@@ -494,212 +881,216 @@ msgid ""
 "                        </strong>\n"
 "                        <br/>"
 msgstr ""
+"<strong class=\"text-center\">Le informazioni del QR code SEPA\n"
+"                            non sono impostate correttamente.\n"
+"                        </strong>\n"
+"                        <br/>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "<strong>Account Number:</strong>"
-msgstr ""
+msgstr "<strong>Numero conto:</strong>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "<strong>Description:</strong>"
-msgstr ""
+msgstr "<strong>Descrizione:</strong>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "<strong>Request Date:</strong>"
-msgstr ""
+msgstr "<strong>Data richiesta:</strong>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "<strong>Structured Communication:</strong>"
-msgstr ""
+msgstr "<strong>Comunicazione strutturata:</strong>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "<strong>Total</strong>"
-msgstr ""
+msgstr "<strong>Totale</strong>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "<strong>Your Contact:</strong>"
-msgstr ""
+msgstr "<strong>Il tuo contratto: </strong>"
 
 #. module: cooperator
 #: code:addons/cooperator/wizard/create_subscription_from_partner.py:0
 #, python-format
 msgid "A person can't be representative of two different companies."
-msgstr ""
+msgstr "Una persona non può rappresentare due aziende."
 
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_account_chart_template
 msgid "Account Chart Template"
-msgstr ""
+msgstr "Modello foglio conto"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__iban
 msgid "Account Number"
-msgstr ""
+msgstr "Numero conto"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Azione richiesta"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__active
 msgid "Active"
-msgstr ""
+msgstr "Attivo"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Attività"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__activities_address
 msgid "Activities address"
-msgstr ""
+msgstr "Indrizzo attività"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__activities_city
 msgid "Activities city"
-msgstr ""
+msgstr "Città attività"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__activities_country_id
 msgid "Activities country"
-msgstr ""
+msgstr "Paese attività"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__activities_zip_code
 msgid "Activities zip Code"
-msgstr ""
+msgstr "CAP attività"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Decorazione eccezione attività"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Stato attività"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Icona tipo attività"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__address
 msgid "Address"
-msgstr ""
+msgstr "Indirizzo"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_partner__type
 #: model:ir.model.fields,field_description:cooperator.field_res_users__type
 msgid "Address Type"
-msgstr ""
+msgstr "Tipo indirizzo"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__allow_id_card_upload
 msgid "Allow ID Card upload"
-msgstr ""
+msgstr "Consente caricamento documento"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
 msgid "Approve"
-msgstr ""
+msgstr "Approvazione"
 
 #. module: cooperator
 #: model:ir.model.fields.selection,name:cooperator.selection__operation_request__state__approved
 msgid "Approved"
-msgstr ""
+msgstr "Approvata"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_cooperative_membership__data_policy_approved
 msgid "Approved Data Policy"
-msgstr ""
+msgstr "Politica dati approvata"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_cooperative_membership__financial_risk_approved
 msgid "Approved Financial Risk"
-msgstr ""
+msgstr "Rischio finanziario approvato"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_cooperative_membership__internal_rules_approved
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__internal_rules_approved
 msgid "Approved Internal Rules"
-msgstr ""
+msgstr "Regole interne approvate"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_cooperative_membership__generic_rules_approved
 msgid "Approved generic rules"
-msgstr ""
+msgstr "Regole generiche approvate"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_request_filter
 msgid "Archived"
-msgstr ""
+msgstr "In archivio"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Conteggio allegati"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__bank_account
 msgid "Bank account"
-msgstr ""
+msgstr "Conto bancario"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_tree
 msgid "Block"
-msgstr ""
+msgstr "Blocca"
 
 #. module: cooperator
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__state__block
 msgid "Blocked"
-msgstr ""
+msgstr "Bloccata"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__board_representative
 msgid "Board representative name"
-msgstr ""
+msgstr "Nome rappresentante del consiglio"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__signature_scan
 msgid "Board representative signature"
-msgstr ""
+msgstr "frma rappresentante del consiglio"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__bottom_logo1
 msgid "Bottom logo 1"
-msgstr ""
+msgstr "Logo inferiore 1"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__bottom_logo2
 msgid "Bottom logo 2"
-msgstr ""
+msgstr "Logo inferiore 2"
 
 #. module: cooperator
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__source__crm
 msgid "CRM"
-msgstr ""
+msgstr "CRM"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_product_product__by_company
 #: model:ir.model.fields,field_description:cooperator.field_product_template__by_company
 msgid "Can be subscribed by companies?"
-msgstr ""
+msgstr "Può sottoscriverlo un'azenda?"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_product_product__by_individual
 #: model:ir.model.fields,field_description:cooperator.field_product_template__by_individual
 msgid "Can be subscribed by individuals?"
-msgstr ""
+msgstr "Può sottoscriverlo un privato?"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
@@ -708,36 +1099,37 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:cooperator.view_update_share_line_info
 #: model_terms:ir.ui.view,arch_db:cooperator.view_validate_subscription_request
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #. module: cooperator
 #: model:ir.model.fields.selection,name:cooperator.selection__operation_request__state__cancelled
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__state__cancelled
 msgid "Cancelled"
-msgstr ""
+msgstr "Annullata"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "Cancelled Invoice"
-msgstr ""
+msgstr "Fattura annullata"
 
 #. module: cooperator
 #: code:addons/cooperator/models/partner.py:0
 #, python-format
 msgid "Cannot set {name} field on {record}: {delegate} is not set"
 msgstr ""
+"Non si può impostare il campo {name} in {record}: non è mpostato {delegate}"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_capital_release_mail_template
 msgid "Capital release email template"
-msgstr ""
+msgstr "Modello e-mail liquidazione capitale"
 
 #. module: cooperator
 #: model:ir.actions.report,name:cooperator.action_cooperator_invoices
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__capital_release_request
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
 msgid "Capital release request"
-msgstr ""
+msgstr "Richiesta liquidazione capitale"
 
 #. module: cooperator
 #: model:mail.template,report_name:cooperator.email_template_certificat
@@ -1135,6 +1527,8 @@ msgstr ""
 #: model:ir.model.fields,help:cooperator.field_res_company__default_capital_release_request_payment_term
 msgid "Default payment term to use for capital release requests"
 msgstr ""
+"Termine pagamento predefinito da utilizzare per le richieste di liqidazione "
+"capitale"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_product_product__default_share_product
@@ -1332,7 +1726,7 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__capital_release_request_date
 msgid "Force the capital release request date"
-msgstr ""
+msgstr "Forza la data richiesta liquidazione capitale"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__contact_person_function
@@ -1982,14 +2376,14 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_account_invoice_report__release_capital_request
 msgid "Release capital request"
-msgstr ""
+msgstr "Richiesta liquidazione capitale"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_account_bank_statement_line__release_capital_request
 #: model:ir.model.fields,field_description:cooperator.field_account_move__release_capital_request
 #: model:ir.model.fields,field_description:cooperator.field_account_payment__release_capital_request
 msgid "Release of capital request"
-msgstr ""
+msgstr "Richiesta liquidazione capitale"
 
 #. module: cooperator
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_main_reporting
@@ -2030,7 +2424,7 @@ msgstr ""
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "Request to Release Capital"
-msgstr ""
+msgstr "Richiesta di liquidazione capitale"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_request_filter
@@ -2094,7 +2488,7 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__send_capital_release_email
 msgid "Send Capital Release email"
-msgstr ""
+msgstr "Invio e-mail liquidazione capItale"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__send_share_transfer_email
