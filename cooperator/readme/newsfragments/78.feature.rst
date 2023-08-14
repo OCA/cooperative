@@ -1,2 +1,0 @@
-ir.rules for multi-company usage added. Users cannot access records of this
-module if they are not members of the relevant company.

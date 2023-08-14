@@ -1,3 +1,22 @@
+14.0.2.0.0 (2023-07-25)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Each company now has their own mail templates for cooperator-related e-mails. If
+  no template is set, the default (global) template is used. (`#73 <https://github.com/OCA/cooperative/issues/73>`_)
+- ir.sequences used by this module are no longer global; each company has its own
+  sequence for cooperator memberships. (`#74 <https://github.com/OCA/cooperative/issues/74>`_)
+- Create subscription journal per company. (`#75 <https://github.com/OCA/cooperative/issues/75>`_)
+- Improve multi-company consistency by setting ``company_id`` on records where
+  needed and adding the ``check_company`` flag on ``Many2one`` fields. (`#77 <https://github.com/OCA/cooperative/issues/77>`_)
+- ir.rules for multi-company usage added. Users cannot access records of this
+  module if they are not members of the relevant company. (`#78 <https://github.com/OCA/cooperative/issues/78>`_)
+- Move cooperative membership properties from ``res.partner`` to new
+  ``cooperative.membership`` model and add company-dependent computed fields on
+  ``res.partner`` for backward compatibility. (`#82 <https://github.com/OCA/cooperative/issues/82>`_)
+
+
 14.0.1.6.0 (2023-02-23)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
