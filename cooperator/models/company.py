@@ -171,18 +171,14 @@ class ResCompany(models.Model):
         domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
         help="If left empty, the default global mail template will be used.",
     )
-    send_share_transfer_email = fields.Boolean(
-        string="Send Share Transfer Email", default=True
-    )
+    send_share_transfer_email = fields.Boolean(default=True)
     cooperator_share_update_mail_template = fields.Many2one(
         comodel_name="mail.template",
         string="Share update email template",
         domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
         help="If left empty, the default global mail template will be used.",
     )
-    send_share_update_email = fields.Boolean(
-        string="Send Share Update Email", default=True
-    )
+    send_share_update_email = fields.Boolean(default=True)
 
     @api.onchange("data_policy_approval_required")
     def onchange_data_policy_approval_required(self):
