@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+
     <record id="view_update_share_line_info" model="ir.ui.view">
         <field name="name">Update Share line Info</field>
         <field name="model">share.line.update.info</field>
@@ -37,4 +38,5 @@
             eval="[(4,ref('cooperator.cooperator_group_manager'))]"
         />
     </record>
+
 </odoo>
