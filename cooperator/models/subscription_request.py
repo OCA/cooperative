@@ -195,7 +195,6 @@ class SubscriptionRequest(models.Model):
     # previously, this was a normal field. it is now computed, and is used for
     # the form title, and to allow for searching by any part of the full name.
     name = fields.Char(
-        string="Name",
         compute="_compute_name",
         store=True,
     )
@@ -218,7 +217,6 @@ class SubscriptionRequest(models.Model):
     )
     gender = fields.Selection(
         [("male", _("Male")), ("female", _("Female")), ("other", _("Other"))],
-        string="Gender",
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
@@ -227,7 +225,6 @@ class SubscriptionRequest(models.Model):
             ("new", "New Cooperator"),
             ("increase", "Increase number of share"),
         ],
-        string="Type",
         default="new",
         readonly=True,
         states={"draft": [("readonly", False)]},
@@ -242,13 +239,11 @@ class SubscriptionRequest(models.Model):
             ("cancelled", "Cancelled"),
             ("paid", "paid"),
         ],
-        string="State",
         required=True,
         default="draft",
         tracking=True,
     )
     email = fields.Char(
-        string="Email",
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
@@ -305,19 +300,16 @@ class SubscriptionRequest(models.Model):
         states={"draft": [("readonly", False)]},
     )
     address = fields.Char(
-        string="Address",
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
     city = fields.Char(
-        string="City",
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
     zip_code = fields.Char(
-        string="Zip Code",
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
@@ -330,9 +322,7 @@ class SubscriptionRequest(models.Model):
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
-    phone = fields.Char(
-        string="Phone", readonly=True, states={"draft": [("readonly", False)]}
-    )
+    phone = fields.Char(readonly=True, states={"draft": [("readonly", False)]})
     user_id = fields.Many2one(
         "res.users", string="Responsible", readonly=True, check_company=True
     )
@@ -469,21 +459,16 @@ class SubscriptionRequest(models.Model):
             ("manual", "Manual"),
             ("operation", "Operation"),
         ],
-        string="Source",
         default="website",
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
-    data_policy_approved = fields.Boolean(string="Data Policy Approved", default=False)
+    data_policy_approved = fields.Boolean(default=False)
     internal_rules_approved = fields.Boolean(
         string="Approved Internal Rules", default=False
     )
-    financial_risk_approved = fields.Boolean(
-        string="Financial Risk Approved", default=False
-    )
-    generic_rules_approved = fields.Boolean(
-        string="Generic Rules Approved", default=False
-    )
+    financial_risk_approved = fields.Boolean(default=False)
+    generic_rules_approved = fields.Boolean(default=False)
     active = fields.Boolean(default=True)
 
     _order = "id desc"
@@ -540,9 +525,10 @@ class SubscriptionRequest(models.Model):
             raise UserError(
                 _(
                     "Please define income account for this product:"
-                    ' "%s" (id:%d) - or for its category: "%s".'
+                    ' "{name}" (id: {id}) - or for its category: "{category}".'
+                ).format(
+                    name=product.name, id=product.id, category=product.categ_id.name
                 )
-                % (product.name, product.id, product.categ_id.name)
             )
 
         fpos = partner.with_company(self.company_id).property_account_position_id

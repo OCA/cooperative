@@ -36,7 +36,7 @@ class ShareLine(models.Model):
         currency_field="company_currency_id",
         readonly=True,
     )
-    effective_date = fields.Date(string="Effective Date", readonly=True)
+    effective_date = fields.Date(readonly=True)
     partner_id = fields.Many2one(
         "res.partner",
         string="Cooperator",

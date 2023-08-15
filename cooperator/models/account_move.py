@@ -82,7 +82,7 @@ class AccountMove(models.Model):
                         "company_ids": company_ids,
                     }
                 )
-                user.sudo().with_context({"create_user": True}).action_reset_password()
+                user.sudo().with_context(create_user=True).action_reset_password()
 
         return user
 

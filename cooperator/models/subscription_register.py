@@ -22,9 +22,7 @@ class SubscriptionRegister(models.Model):
             line.total_amount_line = line.share_unit_price * line.quantity
 
     name = fields.Char(string="Number Operation", required=True, readonly=True)
-    register_number_operation = fields.Integer(
-        string="Register Number Operation", required=True, readonly=True
-    )
+    register_number_operation = fields.Integer(required=True, readonly=True)
     partner_id = fields.Many2one(
         "res.partner", string="Cooperator", required=True, readonly=True
     )
