@@ -1,0 +1,1 @@
+Fix consistency of XML files: XML declaration, spacing.

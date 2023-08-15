@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+
     <record id="subscription_request_tree" model="ir.ui.view">
         <field name="name">subscription.request.tree</field>
         <field name="model">subscription.request</field>
@@ -331,4 +332,5 @@
         <field name="name">Share Lines</field>
         <field name="res_model">share.line</field>
     </record>
+
 </odoo>
