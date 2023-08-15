@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+
     <record model="ir.actions.report" id="action_cooperator_invoices">
         <field name="model">account.move</field>
         <field name="name">Capital release request</field>
@@ -46,4 +47,5 @@
         <field name="binding_model_id" ref="model_res_partner" />
         <field name="binding_type">report</field>
     </record>
+
 </odoo>

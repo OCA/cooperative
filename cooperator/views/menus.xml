@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
      Copyright 2019 Coop IT Easy
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
+
     <menuitem
         name="Cooperators"
         id="menu_cooperator_main"
@@ -108,4 +109,5 @@
         parent="menu_cooperator_config"
         sequence="430"
     />
+
 </odoo>

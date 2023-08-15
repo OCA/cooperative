@@ -4,6 +4,7 @@
     so users can freely customize/delete them
 -->
 <odoo noupdate="1">
+
     <!-- Request to release capital Email template -->
     <record id="email_template_release_capital" model="mail.template">
         <field name="name">Request to Release Capital - Send by Email</field>
@@ -502,4 +503,5 @@
 </div>
         ]]></field>
     </record>
+
 </odoo>
