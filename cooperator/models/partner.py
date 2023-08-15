@@ -78,7 +78,7 @@ class ResPartner(models.Model):
         search=_search_cooperative_membership_id,
     )
     share_ids = fields.One2many("share.line", "partner_id", string="Share Lines")
-    company_register_number = fields.Char(string="Company Register Number")
+    company_register_number = fields.Char()
     representative = fields.Boolean(string="Legal Representative")
     representative_of_member_company = fields.Boolean(
         string="Legal Representative of Member Company",
@@ -223,7 +223,6 @@ def add_cooperative_membership_field(name, field_type, **kwargs):
 add_cooperative_membership_field(
     "cooperator",
     fields.Boolean,
-    string="Cooperator",
     help="Check this box if this contact is a cooperator (effective or not).",
 )
 add_cooperative_membership_field(
@@ -267,13 +266,11 @@ add_cooperative_membership_field(
     "cooperator_type",
     fields.Selection,
     selection=ResPartner._get_share_type,
-    string="Cooperator Type",
     readonly=True,
 )
 add_cooperative_membership_field(
     "effective_date",
     fields.Date,
-    string="Effective Date",
     readonly=True,
 )
 add_cooperative_membership_field(

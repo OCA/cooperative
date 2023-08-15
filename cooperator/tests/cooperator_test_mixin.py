@@ -78,7 +78,7 @@ class CooperatorTestMixin:
             register_payments_vals["payment_date"] = payment_date
         register_payment = (
             self.env["account.payment.register"]
-            .with_context(ctx)
+            .with_context(**ctx)
             .create(register_payments_vals)
         )
         register_payment.with_company(invoice.company_id).action_create_payments()

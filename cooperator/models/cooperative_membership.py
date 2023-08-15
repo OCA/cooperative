@@ -121,7 +121,6 @@ class CooperativeMembership(models.Model):
     # todo: remove this. this was used on res.partner. the existence of a
     # cooperative.membership record should be enough.
     cooperator = fields.Boolean(
-        string="Cooperator",
         help="Check this box if this contact is a cooperator (effective or not).",
         copy=False,
     )
@@ -161,12 +160,9 @@ class CooperativeMembership(models.Model):
     cooperator_type = fields.Selection(
         selection=_get_share_type,
         compute=_compute_cooperator_type,
-        string="Cooperator Type",
         store=True,
     )
-    effective_date = fields.Date(
-        string="Effective Date", compute=_compute_effective_date, store=True
-    )
+    effective_date = fields.Date(compute=_compute_effective_date, store=True)
     subscription_request_ids = fields.One2many(
         "subscription.request",
         string="Subscription request",

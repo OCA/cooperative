@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="subscription_register_tree" model="ir.ui.view">
         <field name="name">subscription.register.tree</field>
         <field name="model">subscription.register</field>
         <field name="arch" type="xml">
-            <tree string="Subscription Register" create="false">
+            <tree create="false">
                 <field name="register_number_operation" />
                 <field name="date" />
                 <field name="partner_id" />
@@ -103,5 +104,4 @@
         <field name="view_id" ref="subscription_register_tree" />
         <field name="search_view_id" ref="view_subscription_register_filter" />
     </record>
-
 </odoo>

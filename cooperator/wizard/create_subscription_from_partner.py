@@ -102,13 +102,11 @@ class PartnerCreateSubscription(models.TransientModel):
             )
 
     is_company = fields.Boolean(string="Is company?", default=_get_is_company)
-    cooperator = fields.Many2one(
-        "res.partner", string="Cooperator", default=_get_partner
-    )
+    cooperator = fields.Many2one("res.partner", default=_get_partner)
     register_number = fields.Char(
         string="Register Company Number", default=_get_register_number
     )
-    email = fields.Char(string="Email", required=True, default=_get_email)
+    email = fields.Char(required=True, default=_get_email)
     bank_account = fields.Char(
         string="Bank account", required=True, default=_get_bank_account
     )

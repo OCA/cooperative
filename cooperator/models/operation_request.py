@@ -48,7 +48,6 @@ class OperationRequest(models.Model):
             ("sell_back", "Sell Back"),
             ("convert", "Conversion"),
         ],
-        string="Operation Type",
         required=True,
     )
     share_product_id = fields.Many2one(
@@ -89,7 +88,6 @@ class OperationRequest(models.Model):
             ("cancelled", "Cancelled"),
             ("refused", "Refused"),
         ],
-        string="State",
         required=True,
         default="draft",
     )
@@ -120,7 +118,7 @@ class OperationRequest(models.Model):
         default=lambda self: self.env.company,
     )
 
-    invoice = fields.Many2one("account.move", string="Invoice", check_company=True)
+    invoice = fields.Many2one("account.move", check_company=True)
 
     @api.constrains("effective_date")
     def _constrain_effective_date(self):
