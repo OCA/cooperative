@@ -3,71 +3,48 @@
 
     <template
         id="external_layout_standard"
+        name="Cooperator Template Layout"
         inherit_id="web.external_layout_standard"
         primary="True"
         priority="100"
     >
+        <!-- remove horizontal line above footer -->
         <xpath
-            expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']"
+            expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div"
+            position="attributes"
+        >
+            <attribute name="style" />
+        </xpath>
+        <!--
+            display logos on the right side of the footer according to the
+            company properties
+        -->
+        <xpath
+            expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div"
             position="replace"
         >
-            <div t-att-class="footer" name="footer" style="font-size: 0.8em;">
-                <div class="row">
-                    <div
-                        t-att-class="'text-center col-10' if company.display_logo1 or company.display_logo2 else 'text-center col'"
-                    >
-                        <ul class="list-inline mb4">
-                            <li t-if="company.phone" class="list-inline-item">
-                                Phone:
-                                <span t-field="company.phone" />
-                            </li>
-                            <li t-if="company.email" class="list-inline-item">
-                                Email:
-                                <span t-field="company.email" />
-                            </li>
-                            <li t-if="company.website" class="list-inline-item">
-                                Web:
-                                <span t-field="company.website" />
-                            </li>
-                            <li t-if="company.vat" class="list-inline-item"><t
-                                    t-esc="company.country_id.vat_label or 'Tax ID'"
-                                />
-                                :
-                                <span t-field="company.vat" />
-                            </li>
-                        </ul>
-
-                        <div name="financial_infos">
-                            <span t-field="company.report_footer" />
+            <t t-if="company.display_logo1 or company.display_logo2">
+                <div style="font-size: 0.8em;">
+                    <div class="row">
+                        <div class="col-10">$0</div>
+                        <div name="logos" class="col-2 text-center">
+                            <img
+                                class="img img-responsive"
+                                t-if="company.display_logo1"
+                                t-attf-src="data:image/*;base64,{{company.bottom_logo1}}"
+                                style="display: block; margin: auto; max-width: 100%; max-height: 3em;"
+                            />
+                            <img
+                                class="img img-responsive"
+                                t-if="company.display_logo2"
+                                t-attf-src="data:image/*;base64,{{company.bottom_logo2}}"
+                                style="display: block; margin: auto; max-width: 100%; max-height: 3em;"
+                            />
                         </div>
-
-                        <div t-if="report_type == 'pdf'" class="text-muted text-center">
-                            Page:
-                            <span class="page" />
-                            /
-                            <span class="topage" />
-                        </div>
-                    </div>
-                    <div
-                        name="logos"
-                        class="col-2 text-center"
-                        t-if="company.display_logo1 or company.display_logo2"
-                    >
-                        <img
-                            class="img img-responsive"
-                            t-if="company.display_logo1"
-                            t-attf-src="data:image/*;base64,{{company.bottom_logo1}}"
-                            style="display: block; margin: auto; max-width: 100%; max-height: 3em;"
-                        />
-                        <img
-                            class="img img-responsive"
-                            t-if="company.display_logo2"
-                            t-attf-src="data:image/*;base64,{{company.bottom_logo2}}"
-                            style="display: block; margin: auto; max-width: 100%; max-height: 3em;"
-                        />
                     </div>
                 </div>
-            </div>
+            </t>
+            <t t-else="">$0</t>
         </xpath>
     </template>
 

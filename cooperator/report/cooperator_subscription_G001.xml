@@ -28,7 +28,7 @@
                         <td>
                             <span
                                 class="color_text"
-                                t-esc="time.strftime('%Y-%m-%d')"
+                                t-out="time.strftime('%Y-%m-%d')"
                             />
                         </td>
                         <td>
@@ -133,7 +133,7 @@
                         </th>
 
                         <th class="total_table" style="text-align:center" width="15%">
-                            <span t-esc="sum(t.quantity for t in docs)" />
+                            <span t-out="sum(t.quantity for t in docs)" />
                         </th>
                     </tr>
                 </table>
