@@ -207,14 +207,10 @@
         <field name="domain">[('cooperative_membership_ids.member', '=', True)]</field>
         <field name="context">{'create':False}</field>
         <field name="help" type="html">
-            <p class="oe_view_nocontent_create">
-                Click to add a contact in your address book.
-            </p>
-            <p>
-                OpenERP helps you easily track all activities related to
-                a cooperator: discussions, history of business
-                opportunities,
-                documents, etc.
+            <p class="o_view_nocontent_smiling_face">
+                Cooperators
+            </p><p>
+                Odoo helps you track all activities related to your cooperators.
             </p>
         </field>
     </record>
@@ -228,14 +224,10 @@
         <field name="context">{'create':False}</field>
         <field name="filter" eval="True" />
         <field name="help" type="html">
-            <p class="oe_view_nocontent_create">
-                Click to add a contact in your address book.
-            </p>
-            <p>
-                OpenERP helps you easily track all activities related to
-                a cooperator: discussions, history of business
-                opportunities,
-                documents, etc.
+            <p class="o_view_nocontent_smiling_face">
+                Cooperator candidates
+            </p><p>
+                Odoo helps you track all activities related to your cooperators.
             </p>
         </field>
     </record>
@@ -248,14 +240,10 @@
         <field name="domain">[('representative_of_member_company','=',True)]</field>
         <field name="filter" eval="True" />
         <field name="help" type="html">
-            <p class="oe_view_nocontent_create">
-                Click to add a contact in your address book.
-            </p>
-            <p>
-                OpenERP helps you easily track all activities related to
-                a cooperator: discussions, history of business
-                opportunities,
-                documents, etc.
+            <p class="o_view_nocontent_smiling_face">
+                Company representative
+            </p><p>
+                Odoo helps you track all activities related to your cooperators.
             </p>
         </field>
     </record>
