@@ -8,12 +8,12 @@ from freezegun import freeze_time
 
 from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.fields import Date
-from odoo.tests.common import SavepointCase, users
+from odoo.tests.common import TransactionCase, users
 
 from .cooperator_test_mixin import CooperatorTestMixin
 
 
-class CooperatorCase(SavepointCase, CooperatorTestMixin):
+class CooperatorCase(TransactionCase, CooperatorTestMixin):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

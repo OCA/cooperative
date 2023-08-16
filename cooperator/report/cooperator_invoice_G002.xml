@@ -10,7 +10,7 @@
                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'
                 />
                 <div t-if="o.partner_id.vat" class="mt16"><t
-                        t-esc="o.company_id.country_id.vat_label or 'Tax ID'"
+                        t-out="o.company_id.country_id.vat_label or 'Tax ID'"
                     />:
                     <span t-field="o.partner_id.vat" />
                 </div>
@@ -204,7 +204,7 @@
                                     <td colspan="99">
                                         <strong class="mr16">Subtotal</strong>
                                         <span
-                                            t-esc="current_subtotal"
+                                            t-out="current_subtotal"
                                             t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                         />
                                     </td>
