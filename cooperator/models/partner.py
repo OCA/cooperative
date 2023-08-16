@@ -8,6 +8,53 @@ from odoo.exceptions import ValidationError
 
 from . import share_type
 
+# many fields that were previously defined directly on res.partner are now
+# defined on cooperative.membership to allow to have different values per
+# company. for backward compatibility, the fields are still available on
+# res.partner and their value is company-dependent, meaning that their value
+# changes depending on which company is the current company
+# (self.env.company). to make this work, 3 methods are needed per field: a
+# company-dependent compute method, a set method and a search method. instead
+# of copying the same 3 methods for each of the fields, the following function
+# allows to define such a field and its methods.
+
+
+def company_dependent_related_field(delegate, name, field_type, **kwargs):
+    delegate_field_name = ".".join([delegate, name])
+
+    def _compute(self):
+        for record in self:
+            setattr(record, name, getattr(getattr(record, delegate), name))
+
+    def _set(self):
+        for record in self:
+            delegate_record = getattr(record, delegate)
+            if not delegate_record:
+                raise ValidationError(
+                    _(
+                        "Cannot set {name} field on {record}: {delegate} is not set"
+                    ).format(name=name, record=record, delegate=delegate)
+                )
+            setattr(delegate_record, name, getattr(record, name))
+
+    def _search(self, operator, value):
+        return [(delegate_field_name, operator, value)]
+
+    return field_type(
+        **kwargs,
+        compute=api.depends_context("company")(
+            api.depends(delegate_field_name)(_compute)
+        ),
+        inverse=_set,
+        search=_search,
+    )
+
+
+def cooperative_membership_field(name, field_type, **kwargs):
+    return company_dependent_related_field(
+        "cooperative_membership_id", name, field_type, **kwargs
+    )
+
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
@@ -77,8 +124,61 @@ class ResPartner(models.Model):
         compute=_compute_cooperative_membership_id,
         search=_search_cooperative_membership_id,
     )
+    cooperator = cooperative_membership_field(
+        "cooperator",
+        fields.Boolean,
+        help="Check this box if this contact is a cooperator (effective or not).",
+    )
+    member = cooperative_membership_field(
+        "member",
+        fields.Boolean,
+        string="Effective cooperator",
+        help="Check this box if this cooperator is an effective member.",
+        readonly=True,
+    )
+    coop_candidate = cooperative_membership_field(
+        "coop_candidate",
+        fields.Boolean,
+        string="Cooperator candidate",
+        readonly=True,
+    )
+    old_member = cooperative_membership_field(
+        "old_member",
+        fields.Boolean,
+        string="Old cooperator",
+        help="Check this box if this cooperator is no more an effective member.",
+    )
     share_ids = fields.One2many("share.line", "partner_id", string="Share Lines")
+    cooperator_register_number = cooperative_membership_field(
+        "cooperator_register_number",
+        fields.Integer,
+        string="Cooperator Number",
+        readonly=True,
+    )
+    number_of_share = cooperative_membership_field(
+        "number_of_share",
+        fields.Integer,
+        string="Number of share",
+        readonly=True,
+    )
+    total_value = cooperative_membership_field(
+        "total_value",
+        fields.Float,
+        string="Total value of shares",
+        readonly=True,
+    )
     company_register_number = fields.Char()
+    cooperator_type = cooperative_membership_field(
+        "cooperator_type",
+        fields.Selection,
+        selection=_get_share_type,
+        readonly=True,
+    )
+    effective_date = cooperative_membership_field(
+        "effective_date",
+        fields.Date,
+        readonly=True,
+    )
     representative = fields.Boolean(string="Legal Representative")
     representative_of_member_company = fields.Boolean(
         string="Legal Representative of Member Company",
@@ -92,6 +192,26 @@ class ResPartner(models.Model):
         "subscription.request", "partner_id", string="Subscription request"
     )
     legal_form = fields.Selection([], string="Legal form")
+    data_policy_approved = cooperative_membership_field(
+        "data_policy_approved",
+        fields.Boolean,
+        string="Approved Data Policy",
+    )
+    internal_rules_approved = cooperative_membership_field(
+        "internal_rules_approved",
+        fields.Boolean,
+        string="Approved Internal Rules",
+    )
+    financial_risk_approved = cooperative_membership_field(
+        "financial_risk_approved",
+        fields.Boolean,
+        string="Approved Financial Risk",
+    )
+    generic_rules_approved = cooperative_membership_field(
+        "generic_rules_approved",
+        fields.Boolean,
+        string="Approved generic rules",
+    )
 
     @api.onchange("parent_id")
     def onchange_parent_id(self):
@@ -164,132 +284,3 @@ class ResPartner(models.Model):
                 }
             )
         return result
-
-
-# many fields that were previously defined directly on res.partner are now
-# defined on cooperative.membership to allow to have different values per
-# company. for backward compatibility, the fields are still available on
-# res.partner and their value is company-dependent, meaning that their value
-# changes depending on which company is the current company
-# (self.env.company). to make this work, 3 methods are needed per field: a
-# company-dependent compute method, a set method and a search method. instead
-# of copying the same 3 methods for each of the fields, the following function
-# allows to define a field and its methods on the class.
-
-
-def add_company_dependent_related_field(
-    model_class, delegate, name, field_type, **kwargs
-):
-    delegate_field_name = ".".join([delegate, name])
-
-    def _compute(self):
-        for record in self:
-            setattr(record, name, getattr(getattr(record, delegate), name))
-
-    def _set(self):
-        for record in self:
-            delegate_record = getattr(record, delegate)
-            if not delegate_record:
-                raise ValidationError(
-                    _(
-                        "Cannot set {name} field on {record}: {delegate} is not set"
-                    ).format(name=name, record=record, delegate=delegate)
-                )
-            setattr(delegate_record, name, getattr(record, name))
-
-    def _search(self, operator, value):
-        return [(delegate_field_name, operator, value)]
-
-    setattr(
-        model_class,
-        name,
-        field_type(
-            **kwargs,
-            compute=api.depends_context("company")(
-                api.depends(delegate_field_name)(_compute)
-            ),
-            inverse=_set,
-            search=_search,
-        ),
-    )
-
-
-def add_cooperative_membership_field(name, field_type, **kwargs):
-    add_company_dependent_related_field(
-        ResPartner, "cooperative_membership_id", name, field_type, **kwargs
-    )
-
-
-add_cooperative_membership_field(
-    "cooperator",
-    fields.Boolean,
-    help="Check this box if this contact is a cooperator (effective or not).",
-)
-add_cooperative_membership_field(
-    "member",
-    fields.Boolean,
-    string="Effective cooperator",
-    help="Check this box if this cooperator is an effective member.",
-    readonly=True,
-)
-add_cooperative_membership_field(
-    "coop_candidate",
-    fields.Boolean,
-    string="Cooperator candidate",
-    readonly=True,
-)
-add_cooperative_membership_field(
-    "old_member",
-    fields.Boolean,
-    string="Old cooperator",
-    help="Check this box if this cooperator is no more an effective member.",
-)
-add_cooperative_membership_field(
-    "cooperator_register_number",
-    fields.Integer,
-    string="Cooperator Number",
-    readonly=True,
-)
-add_cooperative_membership_field(
-    "number_of_share",
-    fields.Integer,
-    string="Number of share",
-    readonly=True,
-)
-add_cooperative_membership_field(
-    "total_value",
-    fields.Float,
-    string="Total value of shares",
-    readonly=True,
-)
-add_cooperative_membership_field(
-    "cooperator_type",
-    fields.Selection,
-    selection=ResPartner._get_share_type,
-    readonly=True,
-)
-add_cooperative_membership_field(
-    "effective_date",
-    fields.Date,
-    readonly=True,
-)
-add_cooperative_membership_field(
-    "data_policy_approved",
-    fields.Boolean,
-    string="Approved Data Policy",
-)
-add_cooperative_membership_field(
-    "internal_rules_approved",
-    fields.Boolean,
-    string="Approved Internal Rules",
-)
-add_cooperative_membership_field(
-    "financial_risk_approved",
-    fields.Boolean,
-    string="Approved Financial Risk",
-)
-add_cooperative_membership_field(
-    "generic_rules_approved",
-    fields.Boolean,
-    string="Approved generic rules",
-)

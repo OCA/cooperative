@@ -18,7 +18,7 @@
                 <p name="certificate_generation_date" class="mt16">
                     <span>Certificate generated on</span>
                     <span
-                        t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"
+                        t-out="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"
                     />
                 </p>
 
