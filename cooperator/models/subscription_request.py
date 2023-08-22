@@ -511,7 +511,7 @@ class SubscriptionRequest(models.Model):
     def get_eater_vals(self, partner, share_product_id):  # noqa
         return {}
 
-    def _prepare_invoice_line(self, product, partner, qty):
+    def _prepare_invoice_line(self, move_id, product, partner, qty):
         self.ensure_one()
         # .with_company() is needed to allow to validate a subscription
         # request for a company other than the current one, which can happen
@@ -537,6 +537,7 @@ class SubscriptionRequest(models.Model):
 
         res = {
             "name": product.name,
+            "move_id": move_id,
             "account_id": account.id,
             "price_unit": product.lst_price,
             "quantity": qty,
@@ -594,13 +595,11 @@ class SubscriptionRequest(models.Model):
             invoice_vals["invoice_date"] = self.capital_release_request_date
         invoice = self.env["account.move"].create(invoice_vals)
         vals = self._prepare_invoice_line(
-            self.share_product_id, partner, self.ordered_parts
+            invoice.id, self.share_product_id, partner, self.ordered_parts
         )
-        vals["move_id"] = invoice.id
         self.env["account.move.line"].with_context(check_move_validity=False).create(
             vals
         )
-        invoice.with_context(check_move_validity=False)._onchange_invoice_line_ids()
 
         # validate the capital release request
         invoice.action_post()

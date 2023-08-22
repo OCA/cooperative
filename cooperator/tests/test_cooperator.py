@@ -1104,3 +1104,24 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         self.assertTrue(partner.cooperative_membership_id)
         self.assertEqual(partner.cooperative_membership_id.company_id, company_2)
         self.assertFalse(partner.with_company(self.company).cooperative_membership_id)
+
+    def test_capital_release_request_receivable_account(self):
+        """
+        Test that the receivable account of capital release requests is the
+        cooperator account.
+        """
+        self.subscription_request_1.validate_subscription_request()
+        invoice = self.subscription_request_1.capital_release_request
+        self.assertEqual(
+            invoice.line_ids[-1].account_id,
+            invoice.company_id.property_cooperator_account,
+        )
+
+    def test_capital_release_request_taxes(self):
+        """
+        Test that no taxes are added on capital release requests.
+        """
+        self.subscription_request_1.validate_subscription_request()
+        invoice = self.subscription_request_1.capital_release_request
+        self.assertFalse(invoice.invoice_line_ids.tax_ids)
+        self.assertEqual(len(invoice.line_ids), 2)
