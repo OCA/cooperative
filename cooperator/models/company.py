@@ -132,15 +132,6 @@ class ResCompany(models.Model):
         ],
         help="If left empty, the default global mail template will be used.",
     )
-    cooperator_confirmation_company_mail_template = fields.Many2one(
-        comodel_name="mail.template",
-        string="Company share confirmation email template",
-        domain=[
-            ("model", "=", "subscription.request"),
-            ("is_cooperator_template", "=", True),
-        ],
-        help="If left empty, the default global mail template will be used.",
-    )
     send_confirmation_email = fields.Boolean(
         string="Send confirmation email", default=True
     )
@@ -204,9 +195,6 @@ class ResCompany(models.Model):
     def _get_cooperator_mail_template_fields(self):
         return {
             "cooperator_confirmation_mail_template": "cooperator.email_template_confirmation",
-            "cooperator_confirmation_company_mail_template": (
-                "cooperator.email_template_confirmation_company"
-            ),
             "cooperator_capital_release_mail_template": (
                 "cooperator.email_template_release_capital"
             ),
@@ -238,11 +226,6 @@ class ResCompany(models.Model):
 
     def get_cooperator_confirmation_mail_template(self):
         return self._get_cooperator_template("cooperator_confirmation_mail_template")
-
-    def get_cooperator_confirmation_company_mail_template(self):
-        return self._get_cooperator_template(
-            "cooperator_confirmation_company_mail_template"
-        )
 
     def get_cooperator_capital_release_mail_template(self):
         return self._get_cooperator_template("cooperator_capital_release_mail_template")

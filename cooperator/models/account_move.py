@@ -135,7 +135,9 @@ class AccountMove(models.Model):
     def _send_certificate_mail(self, certificate_email_template, sub_reg_line):
         if self.company_id.send_certificate_email:
             # we send the email with the certificate in attachment
-            certificate_email_template.sudo().send_mail(self.partner_id.id, False)
+            certificate_email_template.sudo().send_mail(
+                self.partner_id.id, email_layout_xmlid="mail.mail_notification_layout"
+            )
 
     def set_cooperator_effective(self, effective_date):
         sub_register_obj = self.env["subscription.register"]
@@ -229,4 +231,6 @@ class AccountMove(models.Model):
             email_template = self._get_capital_release_mail_template()
             # we send the email with the capital release request in attachment
             # TODO remove sudo() and give necessary access right
-            email_template.sudo().send_mail(self.id, True)
+            email_template.sudo().send_mail(
+                self.id, email_layout_xmlid="mail.mail_notification_layout"
+            )

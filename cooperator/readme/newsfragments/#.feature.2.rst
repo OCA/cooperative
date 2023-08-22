@@ -1,0 +1,1 @@
+Merge the confirmation email template for individuals and companies into one.
