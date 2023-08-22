@@ -52,11 +52,6 @@ class SubscriptionRequest(models.Model):
             required_fields.append("generic_rules_approved")
         return required_fields
 
-    def get_mail_template_notif(self, is_company=False):
-        if is_company:
-            return self.company_id.get_cooperator_confirmation_company_mail_template()
-        return self.company_id.get_cooperator_confirmation_mail_template()
-
     @api.constrains("share_product_id", "is_company")
     def _check_share_available_to_user(self):
         for request in self:
@@ -73,12 +68,14 @@ class SubscriptionRequest(models.Model):
 
     def _send_confirmation_mail(self):
         if self.company_id.send_confirmation_email:
-            mail_template_notif = self.get_mail_template_notif(
-                is_company=self.is_company
+            mail_template_notif = (
+                self.company_id.get_cooperator_confirmation_mail_template()
             )
             # sudo is needed to change state of invoice linked to a request
             #  sent through the api
-            mail_template_notif.sudo().send_mail(self.id)
+            mail_template_notif.sudo().send_mail(
+                self.id, email_layout_xmlid="mail.mail_notification_layout"
+            )
 
     def _find_partner_from_create_vals(self, vals):
         """
@@ -861,7 +858,9 @@ class SubscriptionRequest(models.Model):
             waiting_list_mail_template = (
                 self.company_id.get_cooperator_waiting_list_mail_template()
             )
-            waiting_list_mail_template.send_mail(self.id, True)
+            waiting_list_mail_template.send_mail(
+                self.id, email_layout_xmlid="mail.mail_notification_layout"
+            )
 
     def put_on_waiting_list(self):
         self.ensure_one()
