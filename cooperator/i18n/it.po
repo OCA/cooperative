@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-08-10 12:11+0000\n"
+"PO-Revision-Date: 2023-09-03 13:43+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -1063,7 +1063,7 @@ msgstr "Nome rappresentante del consiglio"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__signature_scan
 msgid "Board representative signature"
-msgstr "frma rappresentante del consiglio"
+msgstr "Firma rappresentante del consiglio"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__bottom_logo1
@@ -1475,7 +1475,7 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__create_user
 msgid "Create user for cooperator"
-msgstr "Crea tente per cooperatore"
+msgstr "Crea utente per cooperatore"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_cooperative_membership__create_uid
@@ -1509,7 +1509,7 @@ msgstr "Nota di credito"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__data_policy_approval_text
 msgid "Data Policy Approval Text"
-msgstr "Testo approvazine politica dati"
+msgstr "Testo approvazione politica dati"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__data_policy_approved
@@ -1529,7 +1529,7 @@ msgstr "Termini di pagamento prdefiniti"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__default_country_id
 msgid "Default country"
-msgstr "Paese predefinito"
+msgstr "Nazione predefinita"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__default_lang_id
@@ -1540,7 +1540,7 @@ msgstr "Lingua predefinita"
 #: model:ir.model.fields,help:cooperator.field_res_company__default_capital_release_request_payment_term
 msgid "Default payment term to use for capital release requests"
 msgstr ""
-"Termine pagamento predefinito da utilizzare per le richieste di liqidazione "
+"Termine pagamento predefinito da utilizzare per le richieste di liquidazione "
 "capitale"
 
 #. module: cooperator
@@ -1685,7 +1685,7 @@ msgstr ""
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
 msgid "Execute"
-msgstr "Esecuzione"
+msgstr "Esegui"
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:0
@@ -2399,12 +2399,12 @@ msgstr "Rifiutata"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__register_number
 msgid "Register Company Number"
-msgstr "Registra numero azienda"
+msgstr "Registrazione numero azienda"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__register_number_operation
 msgid "Register Number Operation"
-msgstr "Registra numero operazione"
+msgstr "Registrazione numero operazione"
 
 #. module: cooperator
 #: model:ir.ui.menu,name:cooperator.menu_move_out_invoice_type
@@ -2551,7 +2551,7 @@ msgstr "Invio e-mail certificato"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__send_confirmation_email
 msgid "Send confirmation email"
-msgstr "Invio e-mail conferma"
+msgstr "Invio e-mail di conferma"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperator_subscription_G001
@@ -2588,7 +2588,7 @@ msgstr "Quantità quota"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_operation_request__subscription_request
 msgid "Share Receiver Info"
-msgstr "Infrmazioni ricevitore quota"
+msgstr "Informazioni ricevitore quota"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__share_product
@@ -2763,12 +2763,12 @@ msgstr "Registro iscrizione"
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_register_form
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_register_tree
 msgid "Subscription Register"
-msgstr "Registrazione iscrizione"
+msgstr "Registro iscrizione"
 
 #. module: cooperator
 #: model:ir.actions.report,name:cooperator.action_cooperator_subscription_report
 msgid "Subscription Register Report"
-msgstr "Resoconto registrazione iscrizione"
+msgstr "Resoconto registro iscrizione"
 
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_subscription_request
@@ -2791,12 +2791,12 @@ msgstr "Ammontare iscrizione"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__date
 msgid "Subscription date request"
-msgstr "Richiesta data iscrizione"
+msgstr "Data richiesta iscrizione"
 
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_subscription_register
 msgid "Subscription register"
-msgstr "Registrazione iscrizione"
+msgstr "Registro iscrizione"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_account_bank_statement_line__subscription_request
@@ -3007,7 +3007,7 @@ msgstr "Totale quote"
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_tree
 msgid "Total ordered parts"
-msgstr "Totale componenti lavorati"
+msgstr "Totale componenti ordinati"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_register_tree
@@ -3088,12 +3088,12 @@ msgstr "Informazioni aggiornamento"
 #: model:ir.actions.act_window,name:cooperator.action_view_update_share_line_info
 #: model_terms:ir.ui.view,arch_db:cooperator.view_update_share_line_info
 msgid "Update Share Line Info"
-msgstr "Infrmazini riga aggiornamento quota"
+msgstr "Informazioni riga aggiornamento quota"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.view_update_share_line_info
 msgid "Update Share Line Info."
-msgstr "Infrmazini riga aggiornamento quota."
+msgstr "Informazioni riga aggiornamento quota."
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.share_line_form
@@ -3147,7 +3147,7 @@ msgstr "Nota di credito fornitore"
 #: model:ir.model.fields.selection,name:cooperator.selection__operation_request__state__waiting
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__state__waiting
 msgid "Waiting"
-msgstr "Attesa"
+msgstr "In attesa"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
@@ -3211,7 +3211,7 @@ msgstr "CAP"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_share_line_update_info__effective_date
 msgid "effective date"
-msgstr "Data effettiva"
+msgstr "data effettiva"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
