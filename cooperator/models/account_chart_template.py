@@ -7,7 +7,7 @@ from odoo import models
 class AccountChartTemplate(models.Model):
     _inherit = "account.chart.template"
 
-    def _load(self, sale_tax_rate, purchase_tax_rate, company):
-        result = super()._load(sale_tax_rate, purchase_tax_rate, company)
+    def _load(self, company):
+        result = super()._load(company)
         company._init_cooperator_data()
         return result

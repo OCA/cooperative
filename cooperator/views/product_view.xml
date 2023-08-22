@@ -10,6 +10,11 @@
                     <field name="is_share" />
                     <label for="is_share" />
                 </div>
+                <field
+                    name="is_share"
+                    groups="!cooperator.cooperator_group_manager"
+                    invisible="True"
+                />
                 <div
                     attrs="{'invisible':[('is_share','=',False)]}"
                     groups="cooperator.cooperator_group_user"
