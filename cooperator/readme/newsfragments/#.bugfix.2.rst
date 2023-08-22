@@ -1,0 +1,3 @@
+Fix the company name in confirmation email template: display the name of the
+company that made the subscription request instead of the name of the
+cooperative.
