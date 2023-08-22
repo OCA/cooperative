@@ -93,6 +93,7 @@
         <field name="name">Part A - Founder</field>
         <field name="short_name">Part A</field>
         <field name="default_code">share_a</field>
+        <field name="categ_id" ref="product_category_company_share" />
         <field name="is_share" eval="True" />
         <field name="default_share_product" eval="True" />
         <field name="force_min_qty" eval="True" />
@@ -107,6 +108,7 @@
         <field name="name">Part B - Worker</field>
         <field name="short_name">Part B</field>
         <field name="default_code">share_b</field>
+        <field name="categ_id" ref="product_category_company_share" />
         <field name="is_share" eval="True" />
         <field name="default_share_product" eval="True" />
         <field name="force_min_qty" eval="True" />

@@ -26,25 +26,12 @@ class AccountMove(models.Model):
         starting_sequence = "%s/%04d/000" % (self.journal_id.code, self.date.year)
         return starting_sequence
 
+    # todo: remove this and test this feature
     def _reverse_move_vals(self, default_values, cancel=True):
         values = super()._reverse_move_vals(default_values, cancel)
         values["release_capital_request"] = self.release_capital_request
 
         return values
-
-    def _recompute_payment_terms_lines(self):
-        super()._recompute_payment_terms_lines()
-        subscription_request = self.subscription_request
-        if not subscription_request:
-            return
-        # ensure payment terms lines use the account for subscription requests.
-        payment_terms_lines = self.line_ids.filtered(
-            lambda line: line.account_id.user_type_id.type in ("receivable", "payable")
-        )
-        account = subscription_request.get_accounting_account()
-        for line in payment_terms_lines:
-            if line.account_id != account:
-                line.account_id = account
 
     def create_user(self, partner):
         user_obj = self.env["res.users"]
@@ -193,13 +180,13 @@ class AccountMove(models.Model):
 
     def _get_payment_account_moves(self):
         reconciled_lines = self.line_ids.filtered(
-            lambda line: line.account_id.user_type_id.type == "receivable"
+            lambda line: line.account_id.account_type == "asset_receivable"
         )
         reconciled_amls = reconciled_lines.mapped("matched_credit_ids.credit_move_id")
         return reconciled_amls.move_id
 
-    def action_invoice_paid(self):
-        super().action_invoice_paid()
+    def _invoice_paid_hook(self):
+        result = super()._invoice_paid_hook()
         for invoice in self:
             # we check if there is an open refund for this invoice. in this
             # case we don't run the process_subscription function as the
@@ -232,7 +219,7 @@ class AccountMove(models.Model):
                 and refund
             ):
                 invoice.subscription_request.state = "cancelled"
-        return True
+        return result
 
     def _get_capital_release_mail_template(self):
         return self.company_id.get_cooperator_capital_release_mail_template()

@@ -37,7 +37,7 @@ class ResCompany(models.Model):
         comodel_name="account.account",
         string="Cooperator Account",
         domain=[
-            ("internal_type", "=", "receivable"),
+            ("account_type", "=", "asset_receivable"),
             ("deprecated", "=", False),
         ],
         help="This account will be"
@@ -323,7 +323,6 @@ class ResCompany(models.Model):
             # demo data must not be loaded, nothing to do
             return
         account_account_model = self.env["account.account"]
-        receivable_account_type = self.env.ref("account.data_account_type_receivable")
         for company in self:
             if not company._accounting_data_initialized():
                 # same remark as in _init_cooperator_data()
@@ -333,7 +332,7 @@ class ResCompany(models.Model):
                     {
                         "code": "416101",
                         "name": "Cooperators",
-                        "user_type_id": receivable_account_type.id,
+                        "account_type": "asset_receivable",
                         "reconcile": True,
                         "company_id": company.id,
                     }

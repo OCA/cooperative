@@ -122,6 +122,11 @@
                                 groups="base.group_multi_company"
                                 attrs="{'readonly': [('id', '!=', False)]}"
                             />
+                            <field
+                                name="company_id"
+                                groups="!base.group_multi_company"
+                                invisible="True"
+                            />
                         </group>
                     </group>
                     <group>
@@ -169,11 +174,7 @@
                                                 name="share_product_id"
                                                 invisible="True"
                                             />
-                                            <field
-                                                name="company_id"
-                                                groups="base.group_multi_company"
-                                                invisible="True"
-                                            />
+                                            <field name="company_id" invisible="True" />
                                         </group>
                                     </group>
                                 </sheet>

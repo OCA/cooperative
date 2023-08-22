@@ -48,11 +48,7 @@
                             name="coop_candidate"
                             groups="cooperator.cooperator_group_user"
                         />
-                        <field
-                            name="cooperator"
-                            invisible="True"
-                            groups="cooperator.cooperator_group_manager"
-                        />
+                        <field name="cooperator" invisible="True" />
                         <field
                             name="member"
                             groups="cooperator.cooperator_group_manager"

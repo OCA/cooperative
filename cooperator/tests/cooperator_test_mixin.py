@@ -12,11 +12,15 @@ class CooperatorTestMixin:
         cls.company = cls.env.ref("base.main_company")
         cls.company.coop_email_contact = "coop_email@example.org"
         cls.demo_partner = cls.env.ref("base.partner_demo")
+        company_share_category = cls.env.ref(
+            "cooperator.product_category_company_share"
+        )
         cls.share_x = cls.env["product.product"].create(
             {
                 "name": "Share X - Founder",
                 "short_name": "Part X",
                 "default_code": "share_x",
+                "categ_id": company_share_category.id,
                 "is_share": True,
                 "by_individual": True,
                 "by_company": False,
@@ -28,6 +32,7 @@ class CooperatorTestMixin:
                 "name": "Share Y - Worker",
                 "short_name": "Part Y",
                 "default_code": "share_y",
+                "categ_id": company_share_category.id,
                 "is_share": True,
                 "default_share_product": True,
                 "by_individual": True,
@@ -121,7 +126,7 @@ class CooperatorTestMixin:
             }
         )
         am.action_post()
-        (invoice.line_ids[1] + am.line_ids[1]).reconcile()
+        (invoice.line_ids[-1] + am.line_ids[-1]).reconcile()
         return am
 
     def get_dummy_subscription_requests_vals(self):
