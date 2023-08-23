@@ -2,7 +2,6 @@
 #   Houssine Bakkali <houssine@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-import warnings
 from datetime import date
 
 from odoo import _, api, fields, models
@@ -77,6 +76,7 @@ class SubscriptionRequest(models.Model):
                 self.id, email_layout_xmlid="mail.mail_notification_layout"
             )
 
+    @api.model
     def _find_partner_from_create_vals(self, vals):
         """
         Find the partner corresponding to the vals dict.
@@ -100,51 +100,45 @@ class SubscriptionRequest(models.Model):
         return partner
 
     @api.model
-    def create(self, vals):
-        partner = self._find_partner_from_create_vals(vals)
-        if partner:
-            company_id = vals.get("company_id", self.env.company.id)
-            cooperative_membership = partner.get_cooperative_membership(company_id)
-            member = cooperative_membership and cooperative_membership.member
-            pending_requests_domain = [
-                ("company_id", "=", company_id),
-                ("partner_id", "=", partner.id),
-                ("state", "in", ("draft", "waiting", "done")),
-            ]
-            # we don't use partner.coop_candidate because we want to also
-            # handle draft and waiting requests.
-            if member or self.search(pending_requests_domain):
-                vals["type"] = "increase"
-            if member:
-                vals["already_cooperator"] = True
-            if not cooperative_membership:
-                cooperative_membership = partner.create_cooperative_membership(
-                    company_id
-                )
-            elif not cooperative_membership.cooperator:
-                cooperative_membership.cooperator = True
+    def _adapt_create_vals_and_membership_from_partner(self, vals, partner):
+        """
+        Check for existing cooperative membership for the partner, create or
+        update it if needed and set vals accordingly.
+        """
+        company_id = vals.get("company_id", self.env.company.id)
+        cooperative_membership = partner.get_cooperative_membership(company_id)
+        member = cooperative_membership and cooperative_membership.member
+        pending_requests_domain = [
+            ("company_id", "=", company_id),
+            ("partner_id", "=", partner.id),
+            ("state", "in", ("draft", "waiting", "done")),
+        ]
+        # we don't use partner.coop_candidate because we want to also
+        # handle draft and waiting requests.
+        if member or self.search(pending_requests_domain):
+            vals["type"] = "increase"
+        if member:
+            vals["already_cooperator"] = True
+        if not cooperative_membership:
+            cooperative_membership = partner.create_cooperative_membership(company_id)
+        elif not cooperative_membership.cooperator:
+            cooperative_membership.cooperator = True
 
-        subscription_request = super().create(vals)
-        # TODO: This should probably not be in the create method. There may need
-        # to be a stage after draft in which this e-mail is sent, or the e-mail
-        # should exclusively be sent from `cooperator_website`. See #73 for
-        # some comments, and for a reverted implementation of the extra state.
-        subscription_request._send_confirmation_mail()
-        return subscription_request
-
-    @api.model
-    def create_comp_sub_req(self, vals):
-        warnings.warn(
-            "subscription.request.create_comp_sub_req() is deprecated. "
-            "please use .create() instead.",
-            DeprecationWarning,
-        )
-        return self.create(vals)
-
-    def check_empty_string(self, value):
-        if value is None or value is False or value == "":
-            return False
-        return True
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = self.browse()
+        for vals in vals_list:
+            partner = self._find_partner_from_create_vals(vals)
+            if partner:
+                self._adapt_create_vals_and_membership_from_partner(vals, partner)
+            subscription_request = super().create(vals)
+            # TODO: This should probably not be in the create method. There may need
+            # to be a stage after draft in which this e-mail is sent, or the e-mail
+            # should exclusively be sent from `cooperator_website`. See #73 for
+            # some comments, and for a reverted implementation of the extra state.
+            subscription_request._send_confirmation_mail()
+            records += subscription_request
+        return records
 
     def check_iban(self, iban):
         if not iban:
