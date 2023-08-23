@@ -239,11 +239,11 @@ class ResCompany(models.Model):
     def get_cooperator_share_update_mail_template(self):
         return self._get_cooperator_template("cooperator_share_update_mail_template")
 
-    @api.model
-    def create(self, vals):
-        company = super().create(vals)
-        company._create_cooperator_sequences()
-        return company
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        records._create_cooperator_sequences()
+        return records
 
     @api.model
     def _get_cooperator_sequence_map(self):
