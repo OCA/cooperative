@@ -45,7 +45,10 @@
                     </thead>
                     <tbody class="invoice_tbody">
                         <t t-set="nb_ligne" t-value="0" />
-                        <t t-foreach="o.share_ids" t-as="line">
+                        <t
+                            t-foreach="o.cooperative_membership_id.share_ids"
+                            t-as="line"
+                        >
                             <tr>
                                 <td class="text-left" name="effective_date">
                                     <span t-field="line.effective_date" />

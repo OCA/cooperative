@@ -1,0 +1,2 @@
+Ensure that only shares related to the current company appear on the
+cooperator certificate.
