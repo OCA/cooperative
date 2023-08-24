@@ -44,10 +44,10 @@
         "views/menus.xml",
         "report/reports.xml",
         "report/layout.xml",
-        "report/cooperator_invoice_G002.xml",
-        "report/cooperator_certificat_G001.xml",
-        "report/cooperator_subscription_G001.xml",
-        "report/cooperator_register_G001.xml",
+        "report/report_invoice.xml",
+        "report/report_cooperator_certificate.xml",
+        "report/report_subscription_register.xml",
+        "report/report_cooperator_register.xml",
         "data/mail_template_data.xml",  # Must be loaded after reports
     ],
     "demo": [

@@ -1,0 +1,1 @@
+Rename some XML IDs to improve consistency.
