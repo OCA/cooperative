@@ -169,7 +169,7 @@ msgid ""
 msgstr ""
 
 #. module: cooperator
-#: model:mail.template,body_html:cooperator.email_template_certificat
+#: model:mail.template,body_html:cooperator.email_template_certificate
 msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
@@ -189,119 +189,52 @@ msgid ""
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid ""
-"<span groups=\"account.group_show_line_subtotals_tax_excluded\">\n"
-"                                    Amount\n"
-"                                </span>\n"
-"                                <span groups=\"account."
-"group_show_line_subtotals_tax_included\">\n"
-"                                    Total Price\n"
-"                                </span>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_register_G001
-msgid "<span>COOPERATOR REGISTER</span>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 msgid "<span>Certificate generated on</span>"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 msgid "<span>Cooperator Certificate</span>"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "<span>Description</span>"
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_register
+msgid "<span>Cooperator Register</span>"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_invoice_document
 msgid "<span>Part Type</span>"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "<span>Quantity</span>"
+#: model_terms:ir.ui.view,arch_db:cooperator.report_subscription_register
+msgid "<span>Subscription Register</span>"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_subscription_G001
-msgid "<span>SUBSCRIPTION REGISTER</span>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "<span>Source Document</span>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "<span>Unit Price</span>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 msgid "<span>share(s)</span>"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "<strong class=\"mr16\">Subtotal</strong>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid ""
-"<strong class=\"text-center\">Scan me with your banking\n"
-"                            app.\n"
-"                        </strong>\n"
-"                        <br/>\n"
-"                        <br/>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid ""
-"<strong class=\"text-center\">The SEPA QR Code\n"
-"                            informations are not set correctly.\n"
-"                        </strong>\n"
-"                        <br/>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_invoice_document
 msgid "<strong>Account Number:</strong>"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "<strong>Description:</strong>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_invoice_document
 msgid "<strong>Request Date:</strong>"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "<strong>Structured Communication:</strong>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 msgid "<strong>Total</strong>"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_invoice_document
 msgid "<strong>Your Contact:</strong>"
 msgstr ""
 
@@ -505,11 +438,6 @@ msgid "Cancelled"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "Cancelled Invoice"
-msgstr ""
-
-#. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/partner.py:0
 #, python-format
@@ -544,8 +472,8 @@ msgid "Certificate increase email template"
 msgstr ""
 
 #. module: cooperator
-#: model:mail.template,report_name:cooperator.email_template_certificat
 #: model:mail.template,report_name:cooperator.email_template_certificat_increase
+#: model:mail.template,report_name:cooperator.email_template_certificate
 #: model:mail.template,report_name:cooperator.email_template_share_transfer
 #: model:mail.template,report_name:cooperator.email_template_share_update
 msgid "Certificate {{ (object.cooperator_register_number or '') }}"
@@ -747,7 +675,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_share_line_update_info__cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__partner_id
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__partner_id
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_subscription_G001
+#: model_terms:ir.ui.view,arch_db:cooperator.report_subscription_register
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
 #: model_terms:ir.ui.view,arch_db:cooperator.view_share_line_filter
 msgid "Cooperator"
@@ -802,8 +730,8 @@ msgid "Cooperator candidates"
 msgstr ""
 
 #. module: cooperator
-#: model:ir.actions.report,name:cooperator.action_cooperator_report_certificat
-msgid "Cooperator certificat"
+#: model:ir.actions.report,name:cooperator.action_cooperator_report_certificate
+msgid "Cooperator certificate"
 msgstr ""
 
 #. module: cooperator
@@ -895,11 +823,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__create_date
 #: model:ir.model.fields,field_description:cooperator.field_validate_subscription_request__create_date
 msgid "Created on"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "Credit Note"
 msgstr ""
 
 #. module: cooperator
@@ -1007,22 +930,12 @@ msgid "Draft"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "Draft Invoice"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_register_G001
-msgid ""
-"Effective\n"
-"                            date"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_cooperative_membership__effective_date
 #: model:ir.model.fields,field_description:cooperator.field_res_partner__effective_date
 #: model:ir.model.fields,field_description:cooperator.field_res_users__effective_date
 #: model:ir.model.fields,field_description:cooperator.field_share_line__effective_date
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_register
 msgid "Effective Date"
 msgstr ""
 
@@ -1035,7 +948,6 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_operation_request__effective_date
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
 #: model_terms:ir.ui.view,arch_db:cooperator.view_share_line_filter
 msgid "Effective date"
 msgstr ""
@@ -1043,7 +955,7 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__email
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__email
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_register_G001
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_register
 msgid "Email"
 msgstr ""
 
@@ -1108,7 +1020,7 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 msgid "For the board of"
 msgstr ""
 
@@ -1249,7 +1161,6 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_operation_request__invoice
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
 msgid "Invoice"
 msgstr ""
 
@@ -1456,7 +1367,7 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__name
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_register_G001
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_register
 msgid "Name"
 msgstr ""
 
@@ -1481,7 +1392,7 @@ msgid "Next Activity Type"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_register_G001
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_register
 msgid "Number"
 msgstr ""
 
@@ -1499,6 +1410,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_share_line__share_number
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__ordered_parts
 msgid "Number of Share"
+msgstr ""
+
+#. module: cooperator
+#: model_terms:ir.ui.view,arch_db:cooperator.report_subscription_register
+msgid "Number of Shares"
 msgstr ""
 
 #. module: cooperator
@@ -1589,17 +1505,8 @@ msgid "Operation"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_subscription_G001
-msgid ""
-"Operation\n"
-"                            number"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_subscription_G001
-msgid ""
-"Operation\n"
-"                            type"
+#: model_terms:ir.ui.view,arch_db:cooperator.report_subscription_register
+msgid "Operation Number"
 msgstr ""
 
 #. module: cooperator
@@ -1610,6 +1517,7 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_operation_request__operation_type
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__type
+#: model_terms:ir.ui.view,arch_db:cooperator.report_subscription_register
 msgid "Operation Type"
 msgstr ""
 
@@ -1655,13 +1563,13 @@ msgid "Partner"
 msgstr ""
 
 #. module: cooperator
-#: model:mail.template,subject:cooperator.email_template_certificat
 #: model:mail.template,subject:cooperator.email_template_certificat_increase
+#: model:mail.template,subject:cooperator.email_template_certificate
 msgid "Payment Received Confirmation"
 msgstr ""
 
 #. module: cooperator
-#: model:mail.template,name:cooperator.email_template_certificat
+#: model:mail.template,name:cooperator.email_template_certificate
 msgid "Payment Received Confirmation: Cooperator Certificate"
 msgstr ""
 
@@ -1680,11 +1588,6 @@ msgid ""
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "Please use the following communication for your payment:"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_operation_request__share_to_unit_price
 #: model:ir.model.fields,help:cooperator.field_operation_request__share_unit_price
 #: model:ir.model.fields,help:cooperator.field_partner_create_subscription__share_unit_price
@@ -1698,8 +1601,8 @@ msgid "Product"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_register_G001
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_register
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_tree
 msgid "Quantity"
 msgstr ""
@@ -1788,7 +1691,7 @@ msgid "Request date"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_invoice_document
 msgid "Request to Release Capital"
 msgstr ""
 
@@ -1916,15 +1819,8 @@ msgid "Sent to cooperators with their capital release request in attachment"
 msgstr ""
 
 #. module: cooperator
-#: model:mail.template,description:cooperator.email_template_certificat
+#: model:mail.template,description:cooperator.email_template_certificate
 msgid "Sent to cooperators with their cooperator certificate in attachment"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_subscription_G001
-msgid ""
-"Share\n"
-"                            number"
 msgstr ""
 
 #. module: cooperator
@@ -1972,6 +1868,7 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__share_product
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_tree
 msgid "Share Type"
 msgstr ""
@@ -2046,7 +1943,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__share_product_id
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__share_product_id
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_share_product
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
 msgid "Share type"
 msgstr ""
 
@@ -2112,14 +2008,8 @@ msgid "Subscription"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_subscription_G001
-msgid ""
-"Subscription\n"
-"                            date"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__date
+#: model_terms:ir.ui.view,arch_db:cooperator.report_subscription_register
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_register_filter
 msgid "Subscription Date"
 msgstr ""
@@ -2208,11 +2098,6 @@ msgstr ""
 #: model:ir.actions.act_window,name:cooperator.subscription_request_action
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_subscription_request
 msgid "Subscriptions"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_subscription_G001
-msgid "TOTAL :"
 msgstr ""
 
 #. module: cooperator
@@ -2351,8 +2236,8 @@ msgid "This share type could not be transfered to "
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_register_G001
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_register
 msgid "Total"
 msgstr ""
 
@@ -2425,7 +2310,7 @@ msgid "Unblock"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 msgid "Unit Price"
 msgstr ""
 
@@ -2486,16 +2371,6 @@ msgstr ""
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.view_validate_subscription_request
 msgid "Validate the subscription request."
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "Vendor Bill"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.theme_invoice_G002_document
-msgid "Vendor Credit Note"
 msgstr ""
 
 #. module: cooperator
@@ -2568,7 +2443,7 @@ msgid "effective date"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.cooperator_certificat_G001_document
+#: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 msgid "is recorded in the register of cooperators under number"
 msgstr ""
 

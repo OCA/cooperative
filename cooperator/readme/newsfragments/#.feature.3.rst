@@ -1,0 +1,2 @@
+Make the capital release request report inherit from the invoice report
+instead of copying and modifying it.
