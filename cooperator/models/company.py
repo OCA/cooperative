@@ -199,7 +199,7 @@ class ResCompany(models.Model):
                 "cooperator.email_template_release_capital"
             ),
             "cooperator_waiting_list_mail_template": "cooperator.email_template_waiting_list",
-            "cooperator_certificate_mail_template": "cooperator.email_template_certificat",
+            "cooperator_certificate_mail_template": "cooperator.email_template_certificate",
             "cooperator_certificate_increase_mail_template": (
                 "cooperator.email_template_certificat_increase"
             ),
