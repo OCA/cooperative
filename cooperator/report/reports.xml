@@ -5,8 +5,8 @@
         <field name="model">account.move</field>
         <field name="name">Capital release request</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">cooperator.theme_invoice_G002</field>
-        <field name="report_file">cooperator_invoice_G002.xml</field>
+        <field name="report_name">cooperator.report_invoice</field>
+        <field name="report_file">cooperator.report_invoice</field>
         <field name="print_report_name">object._get_report_base_filename()</field>
         <field
             name="attachment"
@@ -19,19 +19,19 @@
         <field name="model">subscription.register</field>
         <field name="name">Subscription Register Report</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">cooperator.cooperator_subscription_G001</field>
-        <field name="report_file">cooperator_subscription_G001.xml</field>
+        <field name="report_name">cooperator.report_subscription_register</field>
+        <field name="report_file">cooperator.report_subscription_register</field>
         <field name="multi" eval="True" />
         <field name="binding_model_id" ref="model_subscription_register" />
         <field name="binding_type">report</field>
     </record>
 
-    <record model="ir.actions.report" id="action_cooperator_report_certificat">
+    <record model="ir.actions.report" id="action_cooperator_report_certificate">
         <field name="model">res.partner</field>
-        <field name="name">Cooperator certificat</field>
+        <field name="name">Cooperator certificate</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">cooperator.cooperator_certificat_G001</field>
-        <field name="report_file">cooperator_certificat_G001.xml</field>
+        <field name="report_name">cooperator.report_cooperator_certificate</field>
+        <field name="report_file">cooperator.report_cooperator_certificate</field>
         <field name="multi" eval="True" />
         <field name="binding_model_id" ref="model_res_partner" />
         <field name="binding_type">report</field>
@@ -41,8 +41,8 @@
         <field name="model">res.partner</field>
         <field name="name">Cooperator register</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">cooperator.cooperator_register_G001</field>
-        <field name="report_file">cooperator_register_G001.xml</field>
+        <field name="report_name">cooperator.report_cooperator_register</field>
+        <field name="report_file">cooperator.report_cooperator_register</field>
         <field name="multi" eval="True" />
         <field name="binding_model_id" ref="model_res_partner" />
         <field name="binding_type">report</field>

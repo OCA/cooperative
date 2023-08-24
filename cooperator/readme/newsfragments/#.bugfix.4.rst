@@ -1,0 +1,2 @@
+Fix the layout of all reports by rewriting them from the default invoice
+layout.
