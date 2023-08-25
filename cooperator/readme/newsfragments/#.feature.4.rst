@@ -1,1 +1,1 @@
-Rename some XML IDs to improve consistency.
+Rename some files and XML IDs to improve consistency.
