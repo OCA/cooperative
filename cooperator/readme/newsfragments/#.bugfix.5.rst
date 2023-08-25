@@ -1,0 +1,2 @@
+Ensure reversals of capital release requests use a name prefix to not clash
+with normal entries ("RSUBJ" instead of "SUBJ").
