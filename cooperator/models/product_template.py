@@ -1,7 +1,7 @@
-# Copyright 2019 Coop IT Easy SCRL fs
-#   Houssine Bakkali <houssine@coopiteasy.be>
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-
+# SPDX-FileCopyrightText: 2019 Coop IT Easy SC
+# SPDX-FileContributor: Houssine Bakkali <houssine@coopiteasy.be>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 from odoo import fields, models
 

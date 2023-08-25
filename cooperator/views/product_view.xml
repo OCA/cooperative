@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2017 Open Architects Consulting SPRL
+SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
 <odoo>
+
     <record id="product_template_form_view" model="ir.ui.view">
         <field name="name">product_template_form_view</field>
         <field name="model">product.template</field>
@@ -173,4 +180,5 @@
        </p>
      </field>
  </record> -->
+
 </odoo>
