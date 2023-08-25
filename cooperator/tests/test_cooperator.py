@@ -6,8 +6,8 @@ from datetime import date, datetime, timedelta
 
 from freezegun import freeze_time
 
+from odoo import fields
 from odoo.exceptions import AccessError, UserError, ValidationError
-from odoo.fields import Date
 from odoo.tests.common import TransactionCase, users
 
 from .cooperator_test_mixin import CooperatorTestMixin
@@ -58,6 +58,26 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         )
 
     @users("user-cooperator")
+    def test_capital_release_request_reversal_name(self):
+        self.validate_subscription_request_and_pay(self.subscription_request_1)
+        invoice = self.subscription_request_1.capital_release_request
+        reverse_wizard = self.env["account.move.reversal"].create(
+            {
+                "move_ids": [fields.Command.link(invoice.id)],
+                "reason": "test move reversal",
+                "refund_method": "refund",
+                "journal_id": invoice.journal_id.id,
+            }
+        )
+        action = reverse_wizard.reverse_moves()
+        reversed_move = self.env["account.move"].browse(action["res_id"])
+        self.assertEqual(
+            reversed_move.name,
+            "RSUBJ/{year}/001".format(year=date.today().year),
+        )
+        self.assertTrue(reversed_move.release_capital_request)
+
+    @users("user-cooperator")
     def test_register_payment_for_capital_release(self):
         self.validate_subscription_request_and_pay(self.subscription_request_1)
         invoice = self.subscription_request_1.capital_release_request
@@ -67,14 +87,14 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         self.assertFalse(partner.coop_candidate)
         self.assertTrue(partner.member)
         self.assertTrue(partner.share_ids)
-        self.assertEqual(partner.effective_date, Date.today())
+        self.assertEqual(partner.effective_date, fields.Date.today())
 
         share = partner.share_ids[0]
         self.assertEqual(share.share_number, self.subscription_request_1.ordered_parts)
         self.assertEqual(
             share.share_product_id, self.subscription_request_1.share_product_id
         )
-        self.assertEqual(share.effective_date, Date.today())
+        self.assertEqual(share.effective_date, fields.Date.today())
 
     @users("user-cooperator")
     def test_effective_date_from_payment_date(self):
