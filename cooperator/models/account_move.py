@@ -24,14 +24,12 @@ class AccountMove(models.Model):
         if not self.release_capital_request:
             return super()._get_starting_sequence()
         starting_sequence = "%s/%04d/000" % (self.journal_id.code, self.date.year)
+        if self.journal_id.refund_sequence and self.move_type in (
+            "out_refund",
+            "in_refund",
+        ):
+            starting_sequence = "R" + starting_sequence
         return starting_sequence
-
-    # todo: remove this and test this feature
-    def _reverse_move_vals(self, default_values, cancel=True):
-        values = super()._reverse_move_vals(default_values, cancel)
-        values["release_capital_request"] = self.release_capital_request
-
-        return values
 
     def create_user(self, partner):
         user_obj = self.env["res.users"]
