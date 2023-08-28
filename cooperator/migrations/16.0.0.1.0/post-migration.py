@@ -9,7 +9,7 @@ _translations_to_delete = [
     "email_template_confirmation",
     "email_template_waiting_list",
     "email_template_certificate",
-    "email_template_certificat_increase",
+    "email_template_share_increase",
     "email_template_share_transfer",
     "email_template_share_update",
 ]
