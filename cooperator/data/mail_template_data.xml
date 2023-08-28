@@ -149,7 +149,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="is_cooperator_template" eval="True" />
     </record>
 
-    <record id="email_template_certificat_increase" model="mail.template">
+    <record id="email_template_share_increase" model="mail.template">
         <field
             name="name"
         >Share Increase: Payment Received Confirmation: Cooperator Certificate</field>

@@ -201,7 +201,7 @@ class ResCompany(models.Model):
             "cooperator_waiting_list_mail_template": "cooperator.email_template_waiting_list",
             "cooperator_certificate_mail_template": "cooperator.email_template_certificate",
             "cooperator_certificate_increase_mail_template": (
-                "cooperator.email_template_certificat_increase"
+                "cooperator.email_template_share_increase"
             ),
             "cooperator_share_transfer_mail_template": (
                 "cooperator.email_template_share_transfer"

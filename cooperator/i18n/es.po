@@ -149,7 +149,7 @@ msgid ""
 msgstr ""
 
 #. module: cooperator
-#: model:mail.template,body_html:cooperator.email_template_certificat_increase
+#: model:mail.template,body_html:cooperator.email_template_share_increase
 msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
@@ -240,7 +240,7 @@ msgstr ""
 
 #. module: cooperator
 #. odoo-python
-#: code:addons/cooperator/wizard/create_subscription_from_partner.py:0
+#: code:addons/cooperator/wizard/partner_create_subscription.py:0
 #, python-format
 msgid "A person can't be representative of two different companies."
 msgstr ""
@@ -439,7 +439,7 @@ msgstr ""
 
 #. module: cooperator
 #. odoo-python
-#: code:addons/cooperator/models/partner.py:0
+#: code:addons/cooperator/models/res_partner.py:0
 #, python-format
 msgid "Cannot set {name} field on {record}: {delegate} is not set"
 msgstr ""
@@ -472,8 +472,8 @@ msgid "Certificate increase email template"
 msgstr ""
 
 #. module: cooperator
-#: model:mail.template,report_name:cooperator.email_template_certificat_increase
 #: model:mail.template,report_name:cooperator.email_template_certificate
+#: model:mail.template,report_name:cooperator.email_template_share_increase
 #: model:mail.template,report_name:cooperator.email_template_share_transfer
 #: model:mail.template,report_name:cooperator.email_template_share_update
 msgid "Certificate {{ (object.cooperator_register_number or '') }}"
@@ -741,7 +741,7 @@ msgstr ""
 
 #. module: cooperator
 #. odoo-python
-#: code:addons/cooperator/models/company.py:0
+#: code:addons/cooperator/models/res_company.py:0
 #, python-format
 msgid "Cooperator number sequence"
 msgstr ""
@@ -753,7 +753,7 @@ msgstr ""
 
 #. module: cooperator
 #. odoo-python
-#: code:addons/cooperator/models/company.py:0
+#: code:addons/cooperator/models/res_company.py:0
 #, python-format
 msgid "Cooperator register operation sequence"
 msgstr ""
@@ -1563,8 +1563,8 @@ msgid "Partner"
 msgstr ""
 
 #. module: cooperator
-#: model:mail.template,subject:cooperator.email_template_certificat_increase
 #: model:mail.template,subject:cooperator.email_template_certificate
+#: model:mail.template,subject:cooperator.email_template_share_increase
 msgid "Payment Received Confirmation"
 msgstr ""
 
@@ -1781,7 +1781,7 @@ msgid "Send confirmation email"
 msgstr ""
 
 #. module: cooperator
-#: model:mail.template,description:cooperator.email_template_certificat_increase
+#: model:mail.template,description:cooperator.email_template_share_increase
 msgid ""
 "Sent to cooperators in case of share increase with their cooperator "
 "certificate in attachment"
@@ -1824,7 +1824,7 @@ msgid "Sent to cooperators with their cooperator certificate in attachment"
 msgstr ""
 
 #. module: cooperator
-#: model:mail.template,name:cooperator.email_template_certificat_increase
+#: model:mail.template,name:cooperator.email_template_share_increase
 msgid "Share Increase: Payment Received Confirmation: Cooperator Certificate"
 msgstr ""
 
@@ -2169,7 +2169,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
-#: code:addons/cooperator/wizard/create_subscription_from_partner.py:0
+#: code:addons/cooperator/wizard/partner_create_subscription.py:0
 #, python-format
 msgid ""
 "There is two different persons with the same national register number. "

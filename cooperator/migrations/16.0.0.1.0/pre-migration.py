@@ -10,6 +10,10 @@ _xml_ids_renames = [
         "cooperator.email_template_certificate",
     ),
     (
+        "cooperator.email_template_certificat_increase",
+        "cooperator.email_template_share_increase",
+    ),
+    (
         "cooperator.theme_invoice_G002",
         "cooperator.report_invoice",
     ),
