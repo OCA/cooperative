@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+
     <template id="contact_template" name="contact_template">
         <div class="row">
             <div class="col-md-6">
@@ -21,7 +22,6 @@
                     />
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div
                     class="form-group field-lastname"
@@ -39,7 +39,6 @@
                         t-attf-value="#{lastname or ''}"
                         placeholder="Bourdon"
                     />
-
                 </div>
             </div>
         </div>
@@ -64,16 +63,14 @@
                                     t-att-value="type[0]"
                                     t-att-selected="type[0] == gender"
                                 >
-                                    <t t-esc="type[1]" />
+                                    <t t-out="type[1]" />
                                 </option>
                             </t>
                         </option>
                     </select>
-
                 </div>
             </div>
             <div class="col-md-6">
-
                 <div
                     class="form-group field-birthdate"
                     t-attf-class="form-group #{error and 'birthdate' in error and 'has-error' or ''}"
@@ -89,12 +86,9 @@
                         t-attf-value="#{birthdate or ''}"
                         placeholder="1978-03-05"
                     />
-
                 </div>
             </div>
         </div>
-
-
         <div
             class="form-group field-phone"
             t-attf-class="form-group #{error and 'phone' in error and 'has-error' or ''}"
@@ -111,10 +105,7 @@
                 t-attf-value="#{phone or ''}"
                 placeholder="+32 456 926 5059"
             />
-
-
         </div>
-
         <div
             class="form-group field-lang"
             t-attf-class="form-group #{error and 'lang' in error and 'has-error' or ''}"
@@ -132,17 +123,19 @@
                         t-att-value="langue.code"
                         t-att-selected="langue.code == lang"
                     >
-                        <t t-esc="langue.name" />
+                        <t t-out="langue.name" />
                     </option>
                 </t>
             </select>
-
         </div>
     </template>
 
     <template id="iban_template" name="iban_template">
         <div name="iban_template_container">
-        <!-- Empty container to be filled by EMC localization modules -->
+            <!--
+                Empty container to be filled by Cooperator localization
+                modules
+            -->
         </div>
     </template>
 
@@ -163,9 +156,7 @@
                 t-attf-value="#{address or ''}"
                 placeholder="rue Van Hove 199"
             />
-
         </div>
-
         <div class="row">
             <div class="col-md-6">
                 <div
@@ -184,7 +175,6 @@
                         t-attf-value="#{city or ''}"
                         placeholder="Bruxelles"
                     />
-
                 </div>
             </div>
             <div class="col-md-6">
@@ -200,12 +190,9 @@
                         t-attf-value="#{zip_code or ''}"
                         placeholder="1030"
                     />
-
                 </div>
             </div>
         </div>
-
-
         <div
             class="form-group field-country"
             t-attf-class="form-group #{error and 'country_id' in error and 'has-error' or ''}"
@@ -225,7 +212,7 @@
                         t-att-value="country.id"
                         t-att-selected="country.id == int(country_id)"
                     >
-                        <t t-esc="country.name" />
+                        <t t-out="country.name" />
                     </option>
                 </t>
             </select>
@@ -264,11 +251,10 @@
                     t-att-checked="generic_rules_approved"
                 />
                 <label>
-                    <t t-raw="generic_rules_text" />
+                    <t t-out="generic_rules_text" />
                 </label>
             </div>
         </div>
-
         <div
             id="data_policy_approved"
             name="data_policy_approved_container"
@@ -285,11 +271,10 @@
                     t-att-checked="data_policy_approved"
                 />
                 <label>
-                    <t t-raw="data_policy_text" />
+                    <t t-out="data_policy_text" />
                 </label>
             </div>
         </div>
-
         <div
             id="internal_rules_approved"
             name="internal_rules_approved_container"
@@ -306,11 +291,10 @@
                     t-att-checked="internal_rules_approved"
                 />
                 <label>
-                    <t t-raw="internal_rules_text" />
+                    <t t-out="internal_rules_text" />
                 </label>
             </div>
         </div>
-
         <div
             id="financial_risk_approved"
             name="financial_risk_approved_container"
@@ -327,7 +311,7 @@
                     t-att-checked="financial_risk_approved"
                 />
                 <label>
-                    <t t-raw="financial_risk_text" />
+                    <t t-out="financial_risk_text" />
                 </label>
             </div>
         </div>
@@ -353,7 +337,7 @@
                                 t-att-value="product.id"
                                 t-att-selected="product.id == int(share_product_id)"
                             >
-                                <t t-esc="product.short_name" />
+                                <t t-out="product.short_name" />
                             </option>
                         </t>
                     </select>
@@ -380,7 +364,7 @@
                     <div class="input-group-prepend">
                         <span
                             class="input-group-text"
-                            t-esc="company.currency_id.symbol"
+                            t-out="company.currency_id.symbol"
                         />
                     </div>
                     <input
@@ -393,15 +377,12 @@
                     />
                 </div>
             </div>
-
         </div>
     </template>
 
     <template id="error_message_template" name="error_message_template">
         <p style="color:red;">
-            <!-- <t t-debug="ipdb"></t>                     -->
-
-            <t t-raw="error_msg" />
+            <t t-out="error_msg" />
         </p>
     </template>
 
@@ -425,9 +406,7 @@
                                 enctype="multipart/form-data"
                             >
                                 <t t-call="cooperator_website.error_message_template" />
-
                                 <t t-call="cooperator_website.csrf_template" />
-
                                 <div
                                     class="text-center"
                                     name="my_account_link_container"
@@ -457,7 +436,6 @@
                                     >Do you already have an account?</a>
                                     <br />
                                 </div>
-
                                 <div
                                     t-attf-class="form-group"
                                     style="display: none;"
@@ -472,7 +450,6 @@
                                         Logged
                                     </label>
                                 </div>
-
                                 <div
                                     t-attf-class="form-group"
                                     style="display: none;"
@@ -500,9 +477,7 @@
                                         t-attf-value="#{email or ''}"
                                         placeholder="didier.bourdon@mycoop.be"
                                     />
-
                                 </div>
-
                                 <div
                                     t-if="not logged"
                                     class="form-group field-confirm_login"
@@ -521,18 +496,12 @@
                                         t-attf-value="#{confirm_email or ''}"
                                         placeholder="didier.bourdon@mycoop.be"
                                     />
-
                                 </div>
                                 <t t-call="cooperator_website.contact_template" />
-
                                 <t t-call="cooperator_website.iban_template" />
-
                                 <t t-call="cooperator_website.address_template" />
-
                                 <t t-call="cooperator_website.shares_template" />
-
                                 <t t-call="cooperator_website.rules_template" />
-
                                 <div class="text-center">
                                     <button
                                         class="btn btn-primary mt-3 mb-3 text-center"
@@ -541,14 +510,10 @@
                             </form>
                         </div>
                     </div>
-
-
                 </div>
             </div>
-
         </t>
     </template>
-
 
     <template id="becomecompanycooperator" name="Become Cooperator">
         <t t-call="website.layout">
@@ -566,9 +531,7 @@
                                 enctype="multipart/form-data"
                             >
                                 <t t-call="cooperator_website.error_message_template" />
-
                                 <t t-call="cooperator_website.csrf_template" />
-
                                 <div
                                     t-attf-class="form-group"
                                     style="display: none;"
@@ -592,9 +555,7 @@
                                         Is a company?
                                     </label>
                                 </div>
-
                                 <h2 class="text-center">Company Info</h2>
-
                                 <div
                                     t-attf-class="form-group #{error and 'company_register_number' in error and 'has-error' or ''}"
                                     name="company_register_number_container"
@@ -612,7 +573,6 @@
                                         placeholder="0647980091"
                                     />
                                 </div>
-
                                 <div
                                     t-attf-class="form-group #{error and 'company_name' in error and 'has-error' or ''}"
                                     name="company_name_container"
@@ -628,7 +588,6 @@
                                         placeholder="Super Cooperative"
                                     />
                                 </div>
-
                                 <div
                                     t-attf-class="form-group #{error and 'company_type' in error and 'has-error' or ''}"
                                     name="company_type_container"
@@ -646,12 +605,11 @@
                                                 t-att-value="type[0]"
                                                 t-att-selected="type[0] == company_type"
                                             >
-                                                <t t-esc="type[1]" />
+                                                <t t-out="type[1]" />
                                             </option>
                                         </t>
                                     </select>
                                 </div>
-
                                 <div
                                     t-attf-class="form-group #{error and 'company_email' in error and 'has-error' or ''}"
                                     name="company_email_container"
@@ -682,12 +640,9 @@
                                         placeholder="administration@mycoop.be"
                                     />
                                 </div>
-
                                 <t t-call="cooperator_website.iban_template" />
-
                                 <h2 class="text-center">Main Address</h2>
                                 <t t-call="cooperator_website.address_template" />
-
                                 <h2 class="text-center">Contact Person</h2>
                                 <div class="form-group field-login">
                                     <label for="email">Email</label>
@@ -702,11 +657,8 @@
                                         t-attf-value="#{email or ''}"
                                         placeholder="didier.bourdon@mycoop.be"
                                     />
-
                                 </div>
                                 <t t-call="cooperator_website.contact_template" />
-
-
                                 <div
                                     class="form-group field-function"
                                     t-attf-class="form-group #{error and 'contact_person_function' in error and 'has-error' or ''}"
@@ -725,11 +677,8 @@
                                         t-attf-value="#{contact_person_function or ''}"
                                     />
                                 </div>
-
                                 <t t-call="cooperator_website.shares_template" />
-
                                 <t t-call="cooperator_website.rules_template" />
-
                                 <div class="text-center">
                                     <button
                                         class="btn btn-primary mt-3 mb-3 text-center"
@@ -738,82 +687,34 @@
                             </form>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </t>
     </template>
 
-
-    <template id="assets_frontend" inherit_id="web.assets_frontend" name="Coop">
-        <xpath expr="." position="inside">
-            <script
-                type="text/javascript"
-                src="/cooperator_website/static/src/js/cooperator.js"
-            />
+    <!--
+        this template inherits from the website.page record with xml id
+        website.contactus_thanks. the website.page model uses delegation
+        inheritance to ir.ui.view and the view gets an automatically generated
+        xml id with the "_ir_ui_view" suffix.
+    -->
+    <template
+        id="cooperator_thanks"
+        name="Thanks (Cooperator)"
+        inherit_id="website.contactus_thanks_ir_ui_view"
+        primary="True"
+        priority="100"
+    >
+        <xpath expr="/t[@t-name='website.contactus_thanks']" position="attributes">
+            <attribute name="name">Thanks (Cooperator)</attribute>
+        </xpath>
+        <xpath
+            expr="//div[@id='wrap']/section/div/div/div[1]/h5/span[2]"
+            position="replace"
+        >
+            <span>Your subscription has been <b>successfully</b> registered.</span>
         </xpath>
     </template>
-
-    <template
-        id="company_operational_offices"
-        inherit_id="website.company_description"
-        name="Company Description"
-    >
-        <address itemscope="itemscope" position="inside">
-            <div class="fa fa-building-o" t-field="res_company.company_registry" />
-            <br />
-            <t t-if="res_company.partner_id.bank_ids">
-                <div
-                    class="fa fa-bank"
-                    t-field="res_company.partner_id.bank_ids[0].sanitized_acc_number"
-                />
-            </t>
-        </address>
-    </template>
-
-    <template id="cooperator_thanks" name="Cooperator contact us">
-        <t t-call="website.layout">
-            <div id="wrap">
-                <div class="oe_structure" />
-                <div class="container">
-                    <h1>Thanks!</h1>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="alert alert-success">
-                                Your subscription has been successfully registered.
-                                <button
-                                    type="button"
-                                    class="close"
-                                    data-dismiss="alert"
-                                >&amp;times;</button>
-                            </div>
-                            <p>
-                                We will get back to you shortly.
-                            </p>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <i class="fa fa-phone" />
-                                    :
-                                    <span t-field="res_company.phone" />
-                                </li>
-                                <li>
-                                    <i class="fa fa-envelope" />
-                                    :
-                                    <span t-field="res_company.email" />
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <t t-call="website.company_description" />
-                        </div>
-                    </div>
-                </div>
-                <div class="oe_structure" />
-            </div>
-        </t>
-    </template>
-
 
     <record id="menu_becomecooperator" model="website.menu">
         <field name="name">Become Cooperator</field>
@@ -822,30 +723,4 @@
         <field name="sequence" type="int">65</field>
     </record>
 
-    <!--<template id="footer_coop_email_contact" inherit_id="website.footer_default" customize_show="True" name="Coop email contact">
-    <xpath expr="//span[@t-field='res_company.email']" position="replace">
-        <span t-field="res_company.coop_email_contact"></span>
-    </xpath>
-</template>-->
-
-    <template
-        id="company_description_coop_email_contact"
-        inherit_id="website.company_description"
-        name="Company Description Email Contact"
-    >
-        <xpath expr="//div[@t-field='res_company.partner_id']" position="replace">
-            <div
-                t-field="res_company.partner_id"
-                t-field-options='{
-                "widget": "contact",
-                "fields": ["name", "address", "phone", "mobile", "fax"]}'
-            />
-            <ul class="list-unstyled">
-                <li t-ignore="true">
-                    <i class="fa fa-envelope" />
-                    <span t-field="res_company.coop_email_contact" />
-                </li>
-            </ul>
-        </xpath>
-    </template>
 </odoo>

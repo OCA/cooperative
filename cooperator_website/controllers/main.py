@@ -1,6 +1,5 @@
 import base64
 import re
-import warnings
 from datetime import datetime
 from urllib.parse import urljoin
 
@@ -118,14 +117,6 @@ class WebsiteSubscription(http.Controller):
         this method.
         """
         return {"_values": values, "_kwargs": kwargs}
-
-    def preRenderThanks(self, values, kwargs):
-        warnings.warn(
-            "WebsiteSubscription.preRenderThanks() is deprecated. "
-            "please use .pre_render_thanks() instead.",
-            DeprecationWarning,
-        )
-        return self.pre_render_thanks(values, kwargs)
 
     def get_subscription_response(self, values, kwargs):
         values = self.pre_render_thanks(values, kwargs)

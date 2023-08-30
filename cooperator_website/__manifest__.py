@@ -5,7 +5,7 @@
 
 {
     "name": "Cooperators Website",
-    "version": "14.0.1.1.2",
+    "version": "15.0.1.0.0",
     "depends": [
         "cooperator",
         "website",
@@ -20,7 +20,11 @@
     """,
     "data": [
         "views/subscription_template.xml",
-        "data/website_cooperator_data.xml",
     ],
+    "assets": {
+        "web.assets_frontend": [
+            "cooperator_website/static/src/js/*.js",
+        ],
+    },
     "application": True,
 }
