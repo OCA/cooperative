@@ -1,0 +1,2 @@
+Use the ``website.contactus_thanks`` webpage as a base for the thanks page
+instead of copying and modifying it.

@@ -1,0 +1,2 @@
+Remove deprecated ``WebsiteSubscription.preRenderThanks()``. Use
+``WebsiteSubscription.pre_render_thanks()`` instead.
