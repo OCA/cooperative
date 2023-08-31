@@ -321,6 +321,7 @@ class WebsiteSubscription(http.Controller):
                 values = self.fill_values(values, is_company, logged)
                 values.update(kwargs)
                 values["error_msg"] = _("Please upload a scan of your ID card.")
+                values["error"] = {"identity_card_scan"}
                 return request.render(redirect, values)
 
         if "iban" in required_fields:
@@ -404,7 +405,7 @@ class WebsiteSubscription(http.Controller):
         values = {}
 
         for field_name, field_value in kwargs.items():
-            if hasattr(field_value, "filename"):
+            if hasattr(field_value, "filename") and field_value:
                 post_file.append(field_value)
             elif field_name in sub_req_obj._fields and field_name not in _BLACKLIST:
                 values[field_name] = field_value
@@ -467,7 +468,7 @@ class WebsiteSubscription(http.Controller):
                     "name": field_value.filename,
                     "res_model": "subscription.request",
                     "res_id": subscription_id,
-                    "datas": base64.encodestring(field_value.read()),
+                    "datas": base64.encodebytes(field_value.read()),
                 }
                 attach_obj.sudo().create(attachment_value)
 

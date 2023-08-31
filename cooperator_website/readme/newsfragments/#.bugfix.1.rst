@@ -1,0 +1,2 @@
+Fix validation of upload of identity card scan: correctly detect missing file
+and avoid creating empty attachments.

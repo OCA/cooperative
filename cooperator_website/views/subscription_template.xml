@@ -187,15 +187,18 @@
         <div
             t-if="res_company.allow_id_card_upload"
             class="mb-3 field-file"
-            name="identity_card_container"
+            name="identity_card_scan_container"
         >
-            <label for="identity_card" class="form-label">Identity card scan</label>
+            <label
+                for="identity_card_scan"
+                class="form-label"
+            >Identity card scan</label>
             <div class="col-md-7 col-sm-8">
                 <input
                     type="file"
-                    class="form-control form-control-sm{{ error and 'file' in error and ' is-invalid' or '' }}"
-                    name="identity_card"
-                    t-att-value="file"
+                    t-attf-class="form-control form-control-sm{{ error and 'identity_card_scan' in error and ' is-invalid' or '' }}"
+                    name="identity_card_scan"
+                    t-att-value="identity_card_scan"
                 />
             </div>
         </div>
