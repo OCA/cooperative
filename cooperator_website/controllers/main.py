@@ -286,6 +286,7 @@ class WebsiteSubscription(http.Controller):
 
         if error:
             values = self.fill_values(values, is_company, logged)
+            values.update(kwargs)
             values["error_msg"] = _("Some mandatory fields have not been filled.")
             values = dict(values, error=error, kwargs=kwargs.items())
             return request.render(redirect, values)
