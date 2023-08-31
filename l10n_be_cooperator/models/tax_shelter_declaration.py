@@ -73,7 +73,6 @@ class TaxShelterDeclaration(models.Model):
             ("computed", "Computed"),
             ("validated", "Validated"),
         ],
-        string="State",
         required=True,
         default="draft",
     )
@@ -219,7 +218,6 @@ class TaxShelterCertificate(models.Model):
             ("no_eligible", "No eligible"),
             ("sent", "Sent"),
         ],
-        string="State",
         required=True,
         default="draft",
     )
@@ -292,11 +290,12 @@ class TaxShelterCertificate(models.Model):
     company_id = fields.Many2one(related="declaration_id.company_id", string="Company")
 
     def _compute_access_url(self):
-        super()._compute_access_url()
+        result = super()._compute_access_url()
         for certificate in self:
             certificate.access_url = "/my/tax_shelter_certificates/%s" % (
                 certificate.id
             )
+        return result
 
     def generate_pdf_report(self, report_type):
         report, name = REPORTS[report_type]
