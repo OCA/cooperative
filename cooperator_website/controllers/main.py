@@ -309,6 +309,7 @@ class WebsiteSubscription(http.Controller):
                     values["error_msg"] = _(
                         "Email and confirmation email addresses don't match."
                     )
+                    values["error"] = {"email", "confirm_email"}
                     return request.render(redirect, values)
 
         # There's no issue with the email, so we can remember the confirmation email
@@ -330,6 +331,7 @@ class WebsiteSubscription(http.Controller):
                 if not valid:
                     values = self.fill_values(values, is_company, logged)
                     values["error_msg"] = _("Provided IBAN is not valid.")
+                    values["error"] = {"iban"}
                     return request.render(redirect, values)
 
         # check the subscription's amount

@@ -4,39 +4,31 @@
     <template id="contact_template" name="contact_template">
         <div class="row">
             <div class="col-md-6">
-                <div
-                    class="form-group field-firstname"
-                    t-attf-class="form-group #{error and 'firstname' in error and 'has-error' or ''}"
-                    name="firstname_container"
-                >
-                    <label for="firstname">First Name</label>
+                <div class="mb-3 field-firstname" name="firstname_container">
+                    <label for="firstname" class="form-label">First Name</label>
                     <input
-                        class="form-control form-control-sm"
+                        t-attf-class="form-control form-control-sm{{ error and 'firstname' in error and ' is-invalid' or '' }}"
                         id="firstname"
                         type="text"
                         name="firstname"
-                        required="True"
+                        required="true"
                         t-att-readonly="logged"
-                        t-attf-value="#{firstname or ''}"
+                        t-att-value="firstname"
                         placeholder="Didier"
                     />
                 </div>
             </div>
             <div class="col-md-6">
-                <div
-                    class="form-group field-lastname"
-                    t-attf-class="form-group #{error and 'lastname' in error and 'has-error' or ''}"
-                    name="lastname_container"
-                >
-                    <label for="lastname">Last Name</label>
+                <div class="mb-3 field-lastname" name="lastname_container">
+                    <label for="lastname" class="form-label">Last Name</label>
                     <input
-                        class="form-control form-control-sm"
+                        t-attf-class="form-control form-control-sm{{ error and 'lastname' in error and ' is-invalid' or '' }}"
                         id="lastname"
                         type="text"
                         name="lastname"
-                        required="True"
+                        required="true"
                         t-att-readonly="logged"
-                        t-attf-value="#{lastname or ''}"
+                        t-att-value="lastname"
                         placeholder="Bourdon"
                     />
                 </div>
@@ -44,17 +36,13 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div
-                    class="form-group field-gender"
-                    t-attf-class="form-group #{error and 'gender' in error and 'has-error' or ''}"
-                    name="gender_container"
-                >
-                    <label for="gender">Gender</label>
+                <div class="mb-3 field-gender" name="gender_container">
+                    <label for="gender" class="form-label">Gender</label>
                     <select
-                        class="form-control form-control-sm"
+                        t-attf-class="form-select form-select-sm{{ error and 'gender' in error and ' is-invalid' or '' }}"
                         id="gender"
                         name="gender"
-                        required="True"
+                        required="true"
                         t-att-readonly="logged"
                     >
                         <option value="">
@@ -71,59 +59,47 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div
-                    class="form-group field-birthdate"
-                    t-attf-class="form-group #{error and 'birthdate' in error and 'has-error' or ''}"
-                    name="birthdate_container"
-                >
-                    <label for="birthdate">Date of birth</label>
+                <div class="mb-3 field-birthdate" name="birthdate_container">
+                    <label for="birthdate" class="form-label">Date of birth</label>
                     <input
-                        class="form-control form-control-sm  mandatory-field"
+                        t-attf-class="form-control form-control-sm{{ error and 'birthdate' in error and ' is-invalid' or '' }}"
                         type="date"
                         name="birthdate"
-                        required="True"
+                        required="true"
                         t-att-readonly="logged"
-                        t-attf-value="#{birthdate or ''}"
+                        t-att-value="birthdate"
                         placeholder="1978-03-05"
                     />
                 </div>
             </div>
         </div>
-        <div
-            class="form-group field-phone"
-            t-attf-class="form-group #{error and 'phone' in error and 'has-error' or ''}"
-            name="phone_container"
-        >
-            <label for="phone">Phone</label>
+        <div class="mb-3 field-phone" name="phone_container">
+            <label for="phone" class="form-label">Phone</label>
             <input
-                class="form-control form-control-sm"
+                t-attf-class="form-control form-control-sm{{ error and 'phone' in error and ' is-invalid' or '' }}"
                 id="phone"
                 type="tel"
                 name="phone"
-                required="True"
+                required="true"
                 t-att-readonly="logged"
-                t-attf-value="#{phone or ''}"
+                t-att-value="phone"
                 placeholder="+32 456 926 5059"
             />
         </div>
-        <div
-            class="form-group field-lang"
-            t-attf-class="form-group #{error and 'lang' in error and 'has-error' or ''}"
-            name="lang_container"
-        >
-            <label for="lang">Language</label>
+        <div class="mb-3 field-lang" name="lang_container">
+            <label for="lang" class="form-label">Language</label>
             <select
-                class="form-control form-control-sm"
+                t-attf-class="form-select form-select-sm{{ error and 'lang' in error and ' is-invalid' or '' }}"
                 id="lang"
                 name="lang"
-                required="True"
+                required="true"
             >
-                <t t-foreach="langs or []" t-as="langue">
+                <t t-foreach="langs or []" t-as="language">
                     <option
-                        t-att-value="langue.code"
-                        t-att-selected="langue.code == lang"
+                        t-att-value="language.code"
+                        t-att-selected="language.code == lang"
                     >
-                        <t t-out="langue.name" />
+                        <t t-out="language.name" />
                     </option>
                 </t>
             </select>
@@ -140,70 +116,58 @@
     </template>
 
     <template id="address_template" name="address_template">
-        <div
-            class="form-group field-address"
-            t-attf-class="form-group #{error and 'address' in error and 'has-error' or ''}"
-            name="address_container"
-        >
-            <label for="address">Address</label>
+        <div class="mb-3 field-address" name="address_container">
+            <label for="address" class="form-label">Address</label>
             <input
-                class="form-control form-control-sm"
+                t-attf-class="form-control form-control-sm{{ error and 'address' in error and ' is-invalid' or '' }}"
                 type="text"
                 name="address"
                 id="address"
-                required="True"
+                required="true"
                 t-att-readonly="logged"
-                t-attf-value="#{address or ''}"
+                t-att-value="address"
                 placeholder="rue Van Hove 199"
             />
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div
-                    class="form-group field-city"
-                    t-attf-class="form-group #{error and 'zip_code' in error and 'has-error' or ''}"
-                    name="zip_code_city_container"
-                >
-                    <label for="city">City</label>
+                <div class="mb-3 field-city" name="city_container">
+                    <label for="city" class="form-label">City</label>
                     <input
-                        class="form-control form-control-sm"
+                        t-attf-class="form-control form-control-sm{{ error and 'city' in error and ' is-invalid' or '' }}"
                         id="city"
                         type="text"
                         name="city"
-                        required="True"
+                        required="true"
                         t-att-readonly="logged"
-                        t-attf-value="#{city or ''}"
+                        t-att-value="city"
                         placeholder="Bruxelles"
                     />
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group field-zip_code">
-                    <label for="zip_code">Zip / Postal Code</label>
+                <div class="mb-3 field-zip_code" name="zip_code_container">
+                    <label for="zip_code" class="form-label">Zip / Postal Code</label>
                     <input
-                        class="form-control form-control-sm"
+                        t-attf-class="form-control form-control-sm{{ error and 'zip_code' in error and ' is-invalid' or '' }}"
                         id="zip_code"
                         type="text"
                         name="zip_code"
-                        required="True"
+                        required="true"
                         t-att-readonly="logged"
-                        t-attf-value="#{zip_code or ''}"
+                        t-att-value="zip_code"
                         placeholder="1030"
                     />
                 </div>
             </div>
         </div>
-        <div
-            class="form-group field-country"
-            t-attf-class="form-group #{error and 'country_id' in error and 'has-error' or ''}"
-            name="country_container"
-        >
-            <label for="country_id">Country</label>
+        <div class="mb-3 field-country" name="country_container">
+            <label for="country_id" class="form-label">Country</label>
             <select
-                class="form-control form-control-sm"
+                t-attf-class="form-select form-select-sm{{ error and 'country_id' in error and ' is-invalid' or '' }}"
                 id="country_id"
                 name="country_id"
-                required="True"
+                required="true"
                 t-att-readonly="logged"
             >
                 <option value="">Country...</option>
@@ -222,16 +186,16 @@
     <template id="rules_template" name="rules_template">
         <div
             t-if="res_company.allow_id_card_upload"
-            t-attf-class="form-group #{error and 'file' in error and 'has-error' or ''}"
-            name="resume_container"
+            class="mb-3 field-file"
+            name="identity_card_container"
         >
-            <label for="Resume">Identity card scan</label>
+            <label for="identity_card" class="form-label">Identity card scan</label>
             <div class="col-md-7 col-sm-8">
                 <input
                     type="file"
-                    class="form-control form-control-sm"
-                    name="Resume"
-                    t-attf-value="#{file or ''}"
+                    class="form-control form-control-sm{{ error and 'file' in error and ' is-invalid' or '' }}"
+                    name="identity_card"
+                    t-att-value="file"
                 />
             </div>
         </div>
@@ -239,9 +203,9 @@
             id="generic_rules_approved"
             name="generic_rules_approved_container"
             t-if="display_generic_rules"
-            t-attf-class="form-group"
+            class="mb-3"
         >
-            <label for="generic_rules_approved">Generic Rules</label>
+            <label for="generic_rules_approved" class="form-label">Generic Rules</label>
             <div class="form-check">
                 <input
                     type="checkbox"
@@ -250,7 +214,7 @@
                     t-att-required="generic_rules_required"
                     t-att-checked="generic_rules_approved"
                 />
-                <label>
+                <label class="form-check-label">
                     <t t-out="generic_rules_text" />
                 </label>
             </div>
@@ -259,9 +223,9 @@
             id="data_policy_approved"
             name="data_policy_approved_container"
             t-if="display_data_policy"
-            t-attf-class="form-group"
+            class="mb-3"
         >
-            <label for="data_policy_approved">Privacy Policy</label>
+            <label for="data_policy_approved" class="form-label">Privacy Policy</label>
             <div class="form-check">
                 <input
                     type="checkbox"
@@ -270,7 +234,7 @@
                     t-att-required="data_policy_required"
                     t-att-checked="data_policy_approved"
                 />
-                <label>
+                <label class="form-check-label">
                     <t t-out="data_policy_text" />
                 </label>
             </div>
@@ -279,9 +243,12 @@
             id="internal_rules_approved"
             name="internal_rules_approved_container"
             t-if="display_internal_rules"
-            t-attf-class="form-group"
+            class="mb-3"
         >
-            <label for="internal_rules_approved">Internal Rules</label>
+            <label
+                for="internal_rules_approved"
+                class="form-label"
+            >Internal Rules</label>
             <div class="form-check">
                 <input
                     type="checkbox"
@@ -290,7 +257,7 @@
                     t-att-required="internal_rules_required"
                     t-att-checked="internal_rules_approved"
                 />
-                <label>
+                <label class="form-check-label">
                     <t t-out="internal_rules_text" />
                 </label>
             </div>
@@ -299,9 +266,12 @@
             id="financial_risk_approved"
             name="financial_risk_approved_container"
             t-if="display_financial_risk"
-            t-attf-class="form-group"
+            class="mb-3"
         >
-            <label for="financial_risk_approved">Financial Risk</label>
+            <label
+                for="financial_risk_approved"
+                class="form-label"
+            >Financial Risk</label>
             <div class="form-check">
                 <input
                     type="checkbox"
@@ -310,7 +280,7 @@
                     t-att-required="financial_risk_required"
                     t-att-checked="financial_risk_approved"
                 />
-                <label>
+                <label class="form-check-label">
                     <t t-out="financial_risk_text" />
                 </label>
             </div>
@@ -320,17 +290,13 @@
     <template id="shares_template" name="shares_template">
         <div class="row" name="share_div">
             <div class="col-md-5">
-                <div
-                    class="form-group field-parts-type"
-                    t-attf-class="form-group #{error and 'share_product_id' in error and 'has-error' or ''}"
-                    name="share_product_container"
-                >
-                    <label for="share_product_id">Share type</label>
+                <div class="mb-3 field-parts-type" name="share_product_container">
+                    <label for="share_product_id" class="form-label">Share type</label>
                     <select
-                        class="form-control form-control-sm"
+                        t-attf-class="form-select form-select-sm{{ error and 'share_product_id' in error and ' is-invalid' or '' }}"
                         id="share_product_id"
                         name="share_product_id"
-                        required="True"
+                        required="true"
                     >
                         <t t-foreach="products or []" t-as="product">
                             <option
@@ -344,8 +310,8 @@
                 </div>
             </div>
             <div class="col-md-4 col-6">
-                <label for="ordered_parts">Share number</label>
-                <div t-attf-class="form-group" name="share_number_container">
+                <label for="ordered_parts" class="form-label">Share number</label>
+                <div class="mb-3" name="share_number_container">
                     <input
                         type="number"
                         name="ordered_parts"
@@ -359,18 +325,13 @@
             </div>
             <div class="col-md-3 col-6" name="total_parts_container">
                 <div id="share_price" style="display: none;" />
-                <label for="total_parts">Total</label>
-                <div class="input-group input-group-sm">
-                    <div class="input-group-prepend">
-                        <span
-                            class="input-group-text"
-                            t-out="company.currency_id.symbol"
-                        />
-                    </div>
+                <label for="total_parts" class="form-label">Total</label>
+                <div class="input-group input-group-sm mb-3 has-validation">
+                    <span class="input-group-text" t-out="company.currency_id.symbol" />
                     <input
                         type="text"
                         id="total_parts"
-                        class="form-control form-control-sm total"
+                        class="form-control form-control-sm"
                         name="total_parts"
                         t-att-data-max="company.subscription_maximum_amount"
                         t-att-readonly="'readonly'"
@@ -412,16 +373,13 @@
                                     name="my_account_link_container"
                                 >
                                     <a
-                                        class='btn btn-primary'
+                                        class="btn btn-primary"
                                         t-if="logged"
                                         t-attf-href="/my/account"
                                         style="white-space: normal;"
                                     >Do you want to modify your personal information first?</a>
                                 </div>
-                                <div
-                                    t-attf-class="form-group"
-                                    name="my_account_link_container"
-                                >
+                                <div class="mb-3" name="my_account_link_container">
                                 <t t-if="redirect_url == null">
                                     <t
                                             t-set="redirect_url"
@@ -429,15 +387,15 @@
                                         > </t>
                                 </t>
                                     <a
-                                        class='btn btn-primary'
+                                        class="btn btn-primary"
                                         t-if="not logged"
-                                        t-attf-href="/web/login?redirect=#{ redirect_url }"
+                                        t-attf-href="/web/login?redirect={{ redirect_url }}"
                                         style="white-space: normal;"
                                     >Do you already have an account?</a>
                                     <br />
                                 </div>
                                 <div
-                                    t-attf-class="form-group"
+                                    class="mb-3"
                                     style="display: none;"
                                     name="logged_container"
                                 >
@@ -451,7 +409,7 @@
                                     </label>
                                 </div>
                                 <div
-                                    t-attf-class="form-group"
+                                    class="mb-3"
                                     style="display: none;"
                                     name="already_cooperator_container"
                                 >
@@ -464,36 +422,39 @@
                                         Are you already a cooperator?
                                     </label>
                                 </div>
-                                <div class="form-group field-login">
-                                    <label for="email">Email</label>
+                                <div class="mb-3 field-login">
+                                    <label for="email" class="form-label">Email</label>
                                     <input
                                         class="form-control form-control-sm"
+                                        t-attf-class="form-control form-control-sm{{ error and 'email' in error and ' is-invalid' or '' }}"
                                         autocapitalize="off"
                                         type="email"
                                         name="email"
                                         id="email"
-                                        required="True"
+                                        required="true"
                                         t-att-readonly="logged"
-                                        t-attf-value="#{email or ''}"
+                                        t-att-value="email"
                                         placeholder="didier.bourdon@mycoop.be"
                                     />
                                 </div>
                                 <div
                                     t-if="not logged"
-                                    class="form-group field-confirm_login"
+                                    class="mb-3 field-confirm_login"
                                     name="confirm_email_container"
-                                    t-attf-class="form-group #{error and 'email_from' in error and 'has-error' or ''}"
                                 >
-                                    <label for="confirm_email">Confirm Email</label>
+                                    <label
+                                        for="confirm_email"
+                                        class="form-label"
+                                    >Confirm Email</label>
                                     <input
-                                        class="form-control form-control-sm"
+                                        t-attf-class="form-control form-control-sm{{ error and 'confirm_email' in error and ' is-invalid' or '' }}"
                                         autocapitalize="off"
                                         type="email"
                                         name="confirm_email"
                                         id="confirm_email"
-                                        required="True"
+                                        required="true"
                                         t-att-readonly="logged"
-                                        t-attf-value="#{confirm_email or ''}"
+                                        t-att-value="confirm_email"
                                         placeholder="didier.bourdon@mycoop.be"
                                     />
                                 </div>
@@ -533,7 +494,7 @@
                                 <t t-call="cooperator_website.error_message_template" />
                                 <t t-call="cooperator_website.csrf_template" />
                                 <div
-                                    t-attf-class="form-group"
+                                    class="mb-3"
                                     style="display: none;"
                                     name="logged_is_company_container"
                                 >
@@ -557,46 +518,55 @@
                                 </div>
                                 <h2 class="text-center">Company Info</h2>
                                 <div
-                                    t-attf-class="form-group #{error and 'company_register_number' in error and 'has-error' or ''}"
+                                    class="mb-3 field-company_register_number"
                                     name="company_register_number_container"
                                 >
-                                    <label for="company_register_number">
+                                    <label
+                                        for="company_register_number"
+                                        class="form-label"
+                                    >
                                         Company Register Number
                                     </label>
                                     <input
                                         type="text"
-                                        class="form-control form-control-sm mandatory-field"
+                                        t-attf-class="form-control form-control-sm{{ error and 'company_register_number' in error and ' is-invalid' or '' }}"
                                         name="company_register_number"
-                                        required="True"
+                                        required="true"
                                         t-att-readonly="logged"
-                                        t-attf-value="#{company_register_number or ''}"
+                                        t-att-value="company_register_number"
                                         placeholder="0647980091"
                                     />
                                 </div>
                                 <div
-                                    t-attf-class="form-group #{error and 'company_name' in error and 'has-error' or ''}"
+                                    class="mb-3 field-company_name"
                                     name="company_name_container"
                                 >
-                                    <label for="company_name">Company name</label>
+                                    <label
+                                        for="company_name"
+                                        class="form-label"
+                                    >Company name</label>
                                     <input
                                         type="text"
-                                        class="form-control form-control-sm mandatory-field"
+                                        t-attf-class="form-control form-control-sm{{ error and 'company_name' in error and ' is-invalid' or '' }}"
                                         name="company_name"
-                                        required="True"
+                                        required="true"
                                         t-att-readonly="logged"
-                                        t-attf-value="#{company_name or ''}"
+                                        t-att-value="company_name"
                                         placeholder="Super Cooperative"
                                     />
                                 </div>
                                 <div
-                                    t-attf-class="form-group #{error and 'company_type' in error and 'has-error' or ''}"
+                                    class="mb-3 field-company_type"
                                     name="company_type_container"
                                 >
-                                    <label for="company_type">Company type</label>
+                                    <label
+                                        for="company_type"
+                                        class="form-label"
+                                    >Company type</label>
                                     <select
                                         name="company_type"
-                                        class="form-control form-control-sm"
-                                        required="True"
+                                        t-attf-class="form-select form-select-sm{{ error and 'company_type' in error and ' is-invalid' or '' }}"
+                                        required="true"
                                         t-att-readonly="logged"
                                     >
                                         <option value="" />
@@ -611,32 +581,38 @@
                                     </select>
                                 </div>
                                 <div
-                                    t-attf-class="form-group #{error and 'company_email' in error and 'has-error' or ''}"
+                                    class="mb-3 field-company_email"
                                     name="company_email_container"
                                 >
-                                    <label for="company_email">Company email</label>
+                                    <label
+                                        for="company_email"
+                                        class="form-label"
+                                    >Company email</label>
                                     <input
                                         type="text"
-                                        class="form-control form-control-sm mandatory-field"
+                                        t-attf-class="form-control form-control-sm{{ error and 'company_email' in error and ' is-invalid' or '' }}"
                                         name="company_email"
-                                        required="True"
-                                        t-attf-value="#{company_email or ''}"
+                                        required="true"
+                                        t-att-value="company_email"
                                         placeholder="administration@mycoop.be"
                                     />
                                 </div>
                                 <div
                                     t-if="not logged"
-                                    t-attf-class="form-group #{error and 'email_from' in error and 'has-error' or ''}"
+                                    class="mb-3 field-confirm_email"
                                     name="confirm_email_container"
                                 >
-                                    <label for="confirm_email">Confirm Email</label>
+                                    <label
+                                        for="confirm_email"
+                                        class="form-label"
+                                    >Confirm Email</label>
                                     <input
                                         type="confirm_email"
-                                        class="form-control form-control-sm mandatory-field"
+                                        t-attf-class="form-control form-control-sm{{ error and 'confirm_email' in error and ' is-invalid' or '' }}"
                                         name="confirm_email"
                                         t-att-required="not logged"
                                         t-att-readonly="logged"
-                                        t-attf-value="#{confirm_email or ''}"
+                                        t-att-value="confirm_email"
                                         placeholder="administration@mycoop.be"
                                     />
                                 </div>
@@ -644,37 +620,39 @@
                                 <h2 class="text-center">Main Address</h2>
                                 <t t-call="cooperator_website.address_template" />
                                 <h2 class="text-center">Contact Person</h2>
-                                <div class="form-group field-login">
-                                    <label for="email">Email</label>
+                                <div class="mb-3 field-login">
+                                    <label for="email" class="form-label">Email</label>
                                     <input
                                         class="form-control form-control-sm"
                                         autocapitalize="off"
                                         type="email"
                                         name="email"
                                         id="email"
-                                        required="True"
+                                        required="true"
                                         t-att-readonly="logged"
-                                        t-attf-value="#{email or ''}"
+                                        t-att-value="email"
                                         placeholder="didier.bourdon@mycoop.be"
                                     />
                                 </div>
                                 <t t-call="cooperator_website.contact_template" />
                                 <div
-                                    class="form-group field-function"
-                                    t-attf-class="form-group #{error and 'contact_person_function' in error and 'has-error' or ''}"
+                                    class="mb-3 field-function"
                                     name="contact_person_function_container"
                                 >
-                                    <label for="contact_person_function">
+                                    <label
+                                        for="contact_person_function"
+                                        class="form-label"
+                                    >
                                         Function
                                     </label>
                                     <input
                                         type="text"
-                                        class="form-control form-control-sm"
+                                        t-attf-class="form-control form-control-sm{{ error and 'contact_person_function' in error and ' is-invalid' or '' }}"
                                         name="contact_person_function"
                                         id="contact_person_function"
-                                        required="True"
+                                        required="true"
                                         t-att-readonly="logged"
-                                        t-attf-value="#{contact_person_function or ''}"
+                                        t-att-value="contact_person_function"
                                     />
                                 </div>
                                 <t t-call="cooperator_website.shares_template" />
