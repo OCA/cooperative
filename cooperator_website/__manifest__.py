@@ -1,7 +1,8 @@
-# Copyright 2013-2018 Open Architects Consulting SPRL.
-# Copyright 2018-Coop IT Easy SC (<http://www.coopiteasy.be>)
-# - Houssine BAKKALI - <houssine@coopiteasy.be>
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+# SPDX-FileCopyrightText: 2013 - 2018 Open Architects Consulting SPRL
+# SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+# SPDX-FileContributor: Houssine BAKKALI <houssine@coopiteasy.be>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 {
     "name": "Cooperators Website",
