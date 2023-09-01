@@ -8,7 +8,7 @@
 {
     "name": "Cooperators Belgium",
     "summary": "Cooperators Belgium Localization",
-    "version": "15.0.0.1.0",
+    "version": "15.0.1.0.0",
     "depends": [
         "cooperator",
         "cooperator_website",
@@ -20,10 +20,9 @@
     "license": "AGPL-3",
     "data": [
         "security/ir.model.access.csv",
-        "reports/tax_shelter_report.xml",
-        "reports/tax_shelter_resold_report.xml",  # todo remove?
-        "reports/tax_shelter_subscription_report.xml",
-        "reports/tax_shelter_shares_report.xml",
+        "report/tax_shelter_report.xml",
+        "report/tax_shelter_subscription_report.xml",
+        "report/tax_shelter_shares_report.xml",
         "views/tax_shelter_declaration_view.xml",
         "views/subscription_template.xml",
         "data/mail_template_data.xml",
@@ -32,5 +31,5 @@
     "demo": [
         "demo/tax_shelter_demo.xml",
     ],
-    "auto-install": True,
+    "auto_install": True,
 }

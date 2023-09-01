@@ -319,8 +319,7 @@ class TaxShelterCertificate(models.Model):
 
     def send_certificates(self):
         tax_shelter_mail_template = self.env.ref(
-            "l10n_be_cooperator.email_template_tax_shelter_certificate",
-            False,
+            "l10n_be_cooperator.email_template_tax_shelter_certificate"
         )
         for certificate in self:
             if (

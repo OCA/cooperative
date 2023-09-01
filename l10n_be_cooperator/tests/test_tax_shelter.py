@@ -3,12 +3,12 @@
 
 from datetime import date
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 from odoo.addons.cooperator.tests.cooperator_test_mixin import CooperatorTestMixin
 
 
-class TestTaxShelter(SavepointCase, CooperatorTestMixin):
+class TestTaxShelter(TransactionCase, CooperatorTestMixin):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

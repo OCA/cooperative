@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="tax_shelter_report_shares_document">
+    <template id="tax_shelter_report_subscription_document">
         <t t-call="web.external_layout">
             <t t-set="address">
                 <address
@@ -8,7 +8,7 @@
                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'
                 />
                 <div t-if="o.partner_id.cooperator_register_number">
-                    Numéro de coopérateur :
+                    Cooperator number:
                     <span t-field="o.partner_id.cooperator_register_number" />
                 </div>
             </t>
@@ -17,11 +17,6 @@
                 <!-- TODO: Translate below to English -->
                 <h2 style="font-size: 3em;">
                     <span>Déclaration Tax Shelter</span>
-                    <br />
-                    <small>
-                        Attestation concernant une des quatre années suivant
-                        l'acquisition de parts
-                    </small>
                 </h2>
 
                 <p>
@@ -29,24 +24,24 @@
                 </p>
 
                 <p>
-                    À la date du
-                    <span t-field="o.partner_id.effective_date" />,
-                    vous êtes devenu coopérateur de
-                    <span t-field="o.company_id.name" />.
-                </p>
-
-                <p>
-                    Cette lettre confirme qu'en date du
-                    <span t-field="o.declaration_id.date_to" />,
-                    vous êtes toujours en possession de parts de
+                    Durant l'année
+                    <span t-field="o.declaration_id.fiscal_year" />
+                    vous avez souscrit des parts de
                     <span t-field="o.company_id.name" />
                     pour un montant total de
                     <span
-                        t-field="o.partner_id.total_value"
-                        t-field-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'
+                        t-field="o.total_amount_subscribed"
+                        t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'
                     />
-                    euros et que la condition prévue à l'article 145(26), §3,
-                    alinéa 2, CIR92 est remplie.
+                    euros.
+                    <br />
+                    Le montant éligible pour le Tax shelter est de
+                    <span
+                        t-field="o.total_amount_eligible"
+                        t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'
+                    />
+                    euros.
+                    <br />
                 </p>
 
                 <table class="table table-sm o_main_table" name="taxshelter_line_table">
@@ -109,36 +104,6 @@
                             <td>
                                 <span t-field="l.amount_subscribed_eligible" />
                             </td>
-                        </tr>
-                        <tr t-foreach="o.resold_lines" t-as="l">
-                            <td>
-                                <span t-field="l.type" />
-                            </td>
-                            <td />
-                            <td />
-                            <td />
-                            <td>
-                                <span t-field="l.transaction_date" />
-                            </td>
-                            <td>
-                                <span t-field="l.amount_resold" />
-                            </td>
-                            <td />
-                        </tr>
-                        <tr t-foreach="o.transfered_lines" t-as="l">
-                            <td>
-                                <span t-field="l.type" />
-                            </td>
-                            <td />
-                            <td />
-                            <td />
-                            <td>
-                                <span t-field="l.transaction_date" />
-                            </td>
-                            <td>
-                                <span t-field="l.amount_transfered" />
-                            </td>
-                            <td />
                         </tr>
                     </tbody>
                 </table>
@@ -227,11 +192,11 @@
         </t>
     </template>
 
-    <template id="tax_shelter_shares_report">
+    <template id="tax_shelter_subscription_report">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t
-                    t-call="l10n_be_cooperator.tax_shelter_report_shares_document"
+                    t-call="l10n_be_cooperator.tax_shelter_report_subscription_document"
                     t-lang="o.partner_id.lang"
                 />
             </t>

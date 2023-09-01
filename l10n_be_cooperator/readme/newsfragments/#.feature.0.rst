@@ -1,0 +1,1 @@
+Update email template to the default Odoo layout (what also makes it shorter).
