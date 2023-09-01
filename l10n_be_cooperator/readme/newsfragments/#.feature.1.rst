@@ -1,0 +1,1 @@
+Move classes to separate files and rename some files to improve consistency.
