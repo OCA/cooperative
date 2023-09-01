@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+
     <template id="iban_template_be" inherit_id="cooperator_website.iban_template">
         <xpath expr="//div[@name='iban_template_container']" position="inside">
-            <div
-                class="form-group field-bank_account"
-                t-attf-class="form-group #{error and 'iban' in error and 'has-error' or ''}"
-                name="iban_container"
-            >
-                <label for="iban">Bank Account Number</label>
+            <div class="mb-3 field-bank_account" name="iban_container">
+                <label for="iban" class="form-label">Bank Account Number</label>
                 <input
-                    class="form-control form-control-sm"
+                    t-attf-class="form-control form-control-sm{{ error and 'iban' in error and ' is-invalid' or '' }}"
                     type="text"
                     name="iban"
                     id="iban"
                     required="True"
                     t-att-readonly="logged"
-                    t-attf-value="#{iban or ''}"
+                    t-att-value="iban"
                     placeholder="BE4852308076712"
                 />
-
             </div>
         </xpath>
     </template>
+
 </odoo>

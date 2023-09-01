@@ -28,7 +28,9 @@ def send_mail_with_additional_attachments(mail_template, res_id, attachments):
 
     # .send_mail() creates a mail message but does not send it yet. it will be
     # sent later when the email queue will be processed.
-    message_id = mail_template.send_mail(res_id)
+    message_id = mail_template.send_mail(
+        res_id, email_layout_xmlid="mail.mail_notification_layout"
+    )
     env = mail_template.env
     message = env["mail.mail"].browse(message_id)
     attachment_model = env["ir.attachment"]
@@ -46,7 +48,6 @@ def send_mail_with_additional_attachments(mail_template, res_id, attachments):
 
 
 class TaxShelterDeclaration(models.Model):
-
     _name = "tax.shelter.declaration"
     _description = "Tax Shelter Declaration"
 
@@ -299,7 +300,7 @@ class TaxShelterCertificate(models.Model):
 
     def generate_pdf_report(self, report_type):
         report, name = REPORTS[report_type]
-        report = self.env.ref(report)._render_qweb_pdf(self.id)[0]
+        report = self.env.ref(report)._render_qweb_pdf(report, [self.id])[0]
         report = base64.b64encode(report)
         report_name = (
             self.partner_id.name + " " + name + " " + self.declaration_id.name + ".pdf"
