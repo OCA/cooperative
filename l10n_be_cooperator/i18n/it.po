@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -15,52 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #. module: l10n_be_cooperator
-#: model:mail.template,body_html:l10n_be_cooperator.email_template_tax_shelter_certificate
-msgid ""
-"\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"    <p>Hello ${object.partner_id.name},</p>\n"
-"\n"
-"    <p>You have subscribed to some shares of ${object.company_id.name} on ${object.declaration_id.fiscal_year}.\n"
-"    You can benefit from the tax shelter, it means a tax reduction of ${object.declaration_id.tax_shelter_percentage} percent on the invested amount.\n"
-"    For this you will find in attachments the documents certifying that you've suscribed to ${object.company_id.name} shares</p>\n"
-"    <p>A dedicated FAQ is coming soon on ${object.company_id.website}.</p>\n"
-"    <p>For any additional questions, please contact ${object.company_id.coop_email_contact}</p>\n"
-"    <p>Sustainably yours,</p>\n"
-"    <p>${object.company_id.name}.</p>\n"
-"\n"
-"    % if object.company_id.street:\n"
-"        ${object.company_id.street}\n"
-"    % endif\n"
-"    % if object.company_id.street2:\n"
-"        ${object.company_id.street2}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.city or object.company_id.zip:\n"
-"        ${object.company_id.zip} ${object.company_id.city}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.country_id:\n"
-"        ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
-"    % endif\n"
-"    % if object.company_id.phone:\n"
-"        Phone:&nbsp; ${object.company_id.phone}\n"
-"    % endif\n"
-"\n"
-"    % if object.company_id.website:\n"
-"        <div>\n"
-"            Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
-"        </div>\n"
-"    %endif\n"
-"\n"
-"    <div>\n"
-"        <img src=${object.company_id.logo_web}>\n"
-"    </div>\n"
-"</div>\n"
-"            "
-msgstr ""
-
-#. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid "(et avant"
 msgstr ""
 
@@ -68,23 +23,23 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
 msgid ""
 ",\n"
-"                    vous êtes devenu coopérateur de"
+"                vous êtes devenu coopérateur de"
 msgstr ""
 
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
 msgid ""
 ",\n"
-"                    vous êtes toujours en possession de parts de"
+"                vous êtes toujours en possession de parts de"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 ", connu aussi\n"
-"                    comme normative Tax Shelter, donnent droit à une réduction\n"
-"                    d'impôt à hauteur de"
+"                        comme normative Tax Shelter, donnent droit à une "
+"réduction\n"
+"                        d'impôt à hauteur de"
 msgstr ""
 
 #. module: l10n_be_cooperator
@@ -98,19 +53,51 @@ msgid "45%"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
-msgid "<span>Déclaration Tax Shelter</span>"
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
+msgid ""
+"<br/>\n"
+"                            <small style=\"font-size: 80%;\">\n"
+"                                Attestation concernant une des quatre années "
+"suivant\n"
+"                                l'acquisition de parts\n"
+"                            </small>"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
+#: model:mail.template,body_html:l10n_be_cooperator.email_template_tax_shelter_certificate
 msgid ""
-"<span>Déclaration Tax Shelter</span>\n"
-"                    <br/>\n"
-"                    <small>\n"
-"                        Attestation concernant une des quatre années suivant\n"
-"                        l'acquisition de parts\n"
-"                    </small>"
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hello\n"
+"        <t t-out=\"object.partner_id.firstname\"></t>,\n"
+"        <br><br>\n"
+"        You have subscribed to some shares of <t t-out=\"object.company_id."
+"name\"></t>\n"
+"        during the year <t t-out=\"object.declaration_id.fiscal_year\"></"
+"t>.\n"
+"        You can benefit from the tax shelter, it means a tax reduction of\n"
+"        <t t-out=\"object.declaration_id.tax_shelter_percentage\"></t> "
+"percent on\n"
+"        the invested amount.\n"
+"        For this you will find in attachment the documents certifying that\n"
+"        you've suscribed to <t t-out=\"object.company_id.name\"></t> "
+"shares.\n"
+"        <br><br>\n"
+"        A dedicated FAQ is coming soon on <t t-out=\"object.company_id."
+"website\"></t>\n"
+"        <br><br>\n"
+"        For any additional questions, please contact\n"
+"        <t t-out=\"object.company_id.coop_email_contact\"></t>\n"
+"        <br><br>\n"
+"        Sustainably yours,\n"
+"    </p>\n"
+"</div>\n"
+"        "
+msgstr ""
+
+#. module: l10n_be_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
+msgid "<span>Déclaration Tax Shelter</span>"
 msgstr ""
 
 #. module: l10n_be_cooperator
@@ -125,8 +112,7 @@ msgid "Access warning"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_table
 msgid "Amount"
 msgstr ""
 
@@ -161,20 +147,18 @@ msgid "Bank Account Number"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
-msgid "Capital after"
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_table
+msgid "Capital After"
+msgstr ""
+
+#. module: l10n_be_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_table
+msgid "Capital Before"
 msgstr ""
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_certificate_line__capital_after_sub
 msgid "Capital after subscription"
-msgstr ""
-
-#. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
-msgid "Capital before"
 msgstr ""
 
 #. module: l10n_be_cooperator
@@ -203,14 +187,12 @@ msgid "Cette lettre confirme qu'en date du"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid "Cette lettre vaut donc comme certificat que"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid "Cher membre,"
 msgstr ""
 
@@ -246,7 +228,7 @@ msgid "Cooperator number"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid "Cooperator number:"
 msgstr ""
 
@@ -270,8 +252,7 @@ msgid "Customer Portal URL"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_table
 msgid "Date"
 msgstr ""
 
@@ -299,8 +280,6 @@ msgstr ""
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_certificate_line__display_name
-#: model:ir.model.fields,field_description:l10n_be_cooperator.field_res_partner__display_name
-#: model:ir.model.fields,field_description:l10n_be_cooperator.field_subscription_request__display_name
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__display_name
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_declaration__display_name
 msgid "Display Name"
@@ -318,9 +297,8 @@ msgid "Durant l'année"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
-msgid "Eligible amount"
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_table
+msgid "Eligible Amount"
 msgstr ""
 
 #. module: l10n_be_cooperator
@@ -339,9 +317,12 @@ msgid "Fiscal year"
 msgstr ""
 
 #. module: l10n_be_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
+msgid "For the board of"
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_certificate_line__id
-#: model:ir.model.fields,field_description:l10n_be_cooperator.field_res_partner__id
-#: model:ir.model.fields,field_description:l10n_be_cooperator.field_subscription_request__id
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__id
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_declaration__id
 msgid "ID"
@@ -360,24 +341,21 @@ msgid "Kept"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid "L'Article 145/26, CIR 92 sur les revenus"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "L'apport de capitaux par le chef d'entreprise lui-même ou\n"
-"                    par des administrateurs existants de la société ne permet\n"
-"                    pas de bénéficier du tax shelter."
+"                        par des administrateurs existants de la société ne "
+"permet\n"
+"                        pas de bénéficier du tax shelter."
 msgstr ""
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_certificate_line____last_update
-#: model:ir.model.fields,field_description:l10n_be_cooperator.field_res_partner____last_update
-#: model:ir.model.fields,field_description:l10n_be_cooperator.field_subscription_request____last_update
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate____last_update
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_declaration____last_update
 msgid "Last Modified on"
@@ -398,19 +376,25 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "Le maintien de la réduction d'impôt n'est possible que si\n"
-"                    l'investisseur conserve les parts de la coopérative pendant\n"
-"                    4 ans au minimum, sauf si la sortie est imposée par des\n"
-"                    conditions extérieures (telles que la faillite, par\n"
-"                    exemple). En cas de sortie volontaire avant la période de 4\n"
-"                    ans, l'avantage fiscal devra être remboursé au prorata du\n"
-"                    nombre de mois entre la sortie et les 4 ans. La coopérative\n"
-"                    s'engage à fournir pour chacune des quatre années suivant\n"
-"                    l'année d'acquisition une attestation certifiant que ces\n"
-"                    parts sont toujours en possession du souscripteur."
+"                        l'investisseur conserve les parts de la coopérative "
+"pendant\n"
+"                        4 ans au minimum, sauf si la sortie est imposée par "
+"des\n"
+"                        conditions extérieures (telles que la faillite, par\n"
+"                        exemple). En cas de sortie volontaire avant la "
+"période de 4\n"
+"                        ans, l'avantage fiscal devra être remboursé au "
+"prorata du\n"
+"                        nombre de mois entre la sortie et les 4 ans. La "
+"coopérative\n"
+"                        s'engage à fournir pour chacune des quatre années "
+"suivant\n"
+"                        l'année d'acquisition une attestation certifiant que "
+"ces\n"
+"                        parts sont toujours en possession du souscripteur."
 msgstr ""
 
 #. module: l10n_be_cooperator
@@ -430,8 +414,7 @@ msgid "Month to"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_line
 msgid "No"
 msgstr ""
 
@@ -446,36 +429,24 @@ msgid "Number of shares"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-msgid "Numéro de coopérateur :"
-msgstr ""
-
-#. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__access_url
 msgid "Portal Access URL"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "Pour bénéficier de la réduction d'impôts, vous pouvez\n"
-"                    joindre cette lettre à votre déclaration fiscale pour les\n"
-"                    revenus"
+"                        joindre cette lettre à votre déclaration fiscale "
+"pour les\n"
+"                        revenus"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
-msgid "Pour le Conseil d'administration de"
-msgstr ""
-
-#. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "Pour toute information complémentaire, consultez le texte de\n"
-"                    l'Arrêté Royal."
+"                        l'Arrêté Royal."
 msgstr ""
 
 #. module: l10n_be_cooperator
@@ -558,6 +529,11 @@ msgid "Sent"
 msgstr ""
 
 #. module: l10n_be_cooperator
+#: model:mail.template,description:l10n_be_cooperator.email_template_tax_shelter_certificate
+msgid "Sent to cooperators with their tax shelter certificate in attachment"
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_certificate_line__share_unit_price
 msgid "Share price"
 msgstr ""
@@ -620,6 +596,11 @@ msgid "Tax Shelter Certificate Line"
 msgstr ""
 
 #. module: l10n_be_cooperator
+#: model:mail.template,name:l10n_be_cooperator.email_template_tax_shelter_certificate
+msgid "Tax Shelter Certificate: Sending"
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.actions.act_window,name:l10n_be_cooperator.tax_shelter_certificate_action
 #: model:ir.ui.menu,name:l10n_be_cooperator.tax_shelter_certificate_menu
 msgid "Tax Shelter Certificates"
@@ -634,6 +615,11 @@ msgstr ""
 #. module: l10n_be_cooperator
 #: model:ir.actions.act_window,name:l10n_be_cooperator.tax_shelter_declaration_action
 msgid "Tax Shelter Declarations"
+msgstr ""
+
+#. module: l10n_be_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_table
+msgid "Tax Shelter Eligible"
 msgstr ""
 
 #. module: l10n_be_cooperator
@@ -654,28 +640,23 @@ msgstr ""
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_declaration__tax_shelter_certificates
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_certificate_tree
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_declaration_view_form
 msgid "Tax shelter certificates"
 msgstr ""
 
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_declaration_view_form
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_declaration_view_tree
 msgid "Tax shelter declaration"
 msgstr ""
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_certificate_line__tax_shelter
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
 msgid "Tax shelter eligible"
 msgstr ""
 
 #. module: l10n_be_cooperator
 #: model:ir.actions.server,name:l10n_be_cooperator.ir_cron_mail_tax_shelter_action_ir_actions_server
 #: model:ir.cron,cron_name:l10n_be_cooperator.ir_cron_mail_tax_shelter_action
-#: model:ir.cron,name:l10n_be_cooperator.ir_cron_mail_tax_shelter_action
 msgid "Tax shelter mail batch mail"
 msgstr ""
 
@@ -742,8 +723,7 @@ msgstr ""
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_certificate_line__type
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_table
 msgid "Type"
 msgstr ""
 
@@ -759,14 +739,12 @@ msgid "Validated"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_line
 msgid "Yes"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid "du montant de la valeur des parts souscrites depuis"
 msgstr ""
 
@@ -774,51 +752,48 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
 msgid ""
 "euros et que la condition prévue à l'article 145(26), §3,\n"
-"                    alinéa 2, CIR92 est remplie."
+"                alinéa 2, CIR92 est remplie."
 msgstr ""
 
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
 msgid ""
 "euros.\n"
-"                    <br/>"
+"                <br/>"
 msgstr ""
 
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
 msgid ""
 "euros.\n"
-"                    <br/>\n"
-"                    Le montant éligible pour le Tax shelter est de"
+"                <br/>\n"
+"                Le montant éligible pour le Tax shelter est de"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "la moyenne des travailleurs occupés pendant l'année\n"
-"                            est inférieure ou égale à 10."
+"                                est inférieure ou égale à 10."
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "le chiffre d'affaires, hors taxe sur la valeur\n"
-"                            ajoutée, est inférieur ou égal à 700.000 euros ;"
+"                                ajoutée, est inférieur ou égal à 700.000 "
+"euros ;"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "le total du bilan est inférieur ou égal à 350.000\n"
-"                            euros ;"
+"                                euros ;"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid "pour la déclaration des revenus"
 msgstr ""
 
@@ -829,15 +804,17 @@ msgid "pour un montant total de"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "remplit en effet tous les critères permettant un tel\n"
-"                    avantage fiscal. Dans les grandes lignes il faut être une\n"
-"                    micro-entreprise n'ayant encore jamais distribué de\n"
-"                    dividende et qui n'est pas issue d'une fusion ou scission de\n"
-"                    sociétés et qui répond à au moins deux des trois critères\n"
-"                    suivants :"
+"                        avantage fiscal. Dans les grandes lignes il faut "
+"être une\n"
+"                        micro-entreprise n'ayant encore jamais distribué de\n"
+"                        dividende et qui n'est pas issue d'une fusion ou "
+"scission de\n"
+"                        sociétés et qui répond à au moins deux des trois "
+"critères\n"
+"                        suivants :"
 msgstr ""
 
 #. module: l10n_be_cooperator
