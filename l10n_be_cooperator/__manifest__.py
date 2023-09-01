@@ -21,6 +21,7 @@
     "data": [
         "security/ir.model.access.csv",
         "report/tax_shelter_report.xml",
+        "report/tax_shelter_report_templates.xml",
         "report/tax_shelter_subscription_report.xml",
         "report/tax_shelter_shares_report.xml",
         "views/tax_shelter_declaration_view.xml",
