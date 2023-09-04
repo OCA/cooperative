@@ -7,9 +7,9 @@
 
 <!-- /!\ do not modify above this line -->
 
-# cooperative
+# Cooperative
 
-None
+Modules related to a cooperative registry (subscribtion requests, share transfer, ...).
 
 <!-- /!\ do not modify below this line -->
 
