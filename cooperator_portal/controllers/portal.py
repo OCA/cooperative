@@ -9,7 +9,6 @@ from odoo.exceptions import AccessError, MissingError
 from odoo.fields import Date
 from odoo.http import request, route
 
-from odoo.addons.payment.controllers.portal import PaymentProcessing
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
 
 
@@ -195,46 +194,34 @@ class CooperatorPortalAccount(CustomerPortal):
         return request.render("cooperator_portal.portal_my_capital_releases", values)
 
     @route(
-        ["/my/invoices/<int:move_id>"],
+        ["/my/invoices/<int:invoice_id>"],
         type="http",
         auth="public",
         website=True,
     )
-    # fmt: off
     def portal_my_invoice_detail(
-        self,
-        move_id,
-        access_token=None,
-        report_type=None,
-        download=False,
-        **kw
+        self, invoice_id, access_token=None, report_type=None, download=False, **kw
     ):
-        # fmt: on
         # override in order to not retrieve release capital request as invoices
         try:
-            move_sudo = self._document_check_access(
-                "account.move", move_id, access_token
+            invoice_sudo = self._document_check_access(
+                "account.move", invoice_id, access_token
             )
         except (AccessError, MissingError):
             return request.redirect("/my")
-        if move_sudo.release_capital_request:
+        if invoice_sudo.release_capital_request:
             report_ref = "cooperator.action_cooperator_invoices"
         else:
             report_ref = "account.account_invoices"
         if report_type in ("html", "pdf", "text"):
             return self._show_report(
-                model=move_sudo,
+                model=invoice_sudo,
                 report_type=report_type,
                 report_ref=report_ref,
                 download=download,
             )
 
-        values = self._invoice_get_page_view_values(
-            move_sudo, access_token, **kw
-        )
-        PaymentProcessing.remove_payment_transaction(
-            move_sudo.transaction_ids
-        )
+        values = self._invoice_get_page_view_values(invoice_sudo, access_token, **kw)
         return request.render("account.portal_invoice_page", values)
 
     @route(
