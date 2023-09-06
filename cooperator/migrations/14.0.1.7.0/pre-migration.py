@@ -41,4 +41,5 @@ def migrate(cr, version):
         remove_xmlid(env, "cooperator", "sequence_register_operation")
     # Create sequences for other companies.
     other_companies = env["res.company"].search([]) - company
-    other_companies._create_cooperator_sequences()
+    if other_companies:
+        other_companies._create_cooperator_sequences()
