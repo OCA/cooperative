@@ -4,12 +4,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Cooperator Portal",
-    "version": "14.0.1.0.1",
+    "version": "15.0.1.0.0",
     "depends": [
-        "account",
         "cooperator",
         "portal",
-        "website",
     ],
     "summary": "Show cooperator information in the website portal",
     "author": "Coop IT Easy SC, Odoo Community Association (OCA)",

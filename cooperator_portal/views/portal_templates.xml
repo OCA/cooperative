@@ -32,7 +32,7 @@
                             t-att-value="item[0]"
                             t-att-selected="item[0] == partner.gender"
                         >
-                            <t t-esc="item[1]" />
+                            <t t-out="item[1]" />
                         </option>
                     </t>
                 </select>
@@ -51,7 +51,7 @@
                             t-att-value="langue.code"
                             t-att-selected="langue.code == partner.lang"
                         >
-                            <t t-esc="langue.name" />
+                            <t t-out="langue.name" />
                         </option>
                     </t>
                 </select>
@@ -102,7 +102,7 @@
                 </p>
                 <p t-if="coop.cooperator_register_number">
                     <label>Cooperator Number:</label>
-                    <t t-esc="coop.cooperator_register_number" />
+                    <t t-out="coop.cooperator_register_number" />
                 </p>
                 <p t-if="coop.effective_date">
                     <label>Cooperator Entrance Date:</label>
@@ -110,27 +110,21 @@
                 </p>
                 <p t-if="coop.number_of_share">
                     <label>Number of Shares:</label>
-                    <t t-esc="coop.number_of_share" />
+                    <t t-out="coop.number_of_share" />
                 </p>
                 <p t-if="coop.share_ids">
                     <div t-foreach="coop.share_ids" t-as="share">
                         <span t-field="share.effective_date" />:
-                        <t t-esc="share.share_number" />
+                        <t t-out="share.share_number" />
                         x
-                        <t t-esc="share.share_short_name" />
+                        <t t-out="share.share_short_name" />
                         (<span
                             t-field="share.share_unit_price"
-                            t-field-options='{
-                "widget": "monetary",
-                "display_currency": "coop.company_id.currency_id"
-              }'
+                            t-options='{"widget": "monetary", "display_currency": coop.company_id.currency_id}'
                         />) -
                         <span
                             t-field="share.total_amount_line"
-                            t-field-options='{
-                "widget": "monetary",
-                "display_currency": "coop.company_id.currency_id"
-              }'
+                            t-options='{"widget": "monetary", "display_currency": coop.company_id.currency_id}'
                         />
                     </div>
                 </p>
@@ -138,10 +132,7 @@
                     <label>Total Value of Shares:</label>
                     <span
                         t-field="coop.total_value"
-                        t-field-options='{
-              "widget": "monetary",
-              "display_currency": "coop.company_id.currency_id"
-            }'
+                        t-options='{"widget": "monetary", "display_currency": coop.company_id.currency_id}'
                     />
                 </p>
 
@@ -151,19 +142,19 @@
                 </p>
                 <p t-if="coop.birthdate_date">
                     <label>Date of Birth:</label>
-                    <t t-esc="coop.birthdate_date" />
+                    <t t-out="coop.birthdate_date" />
                 </p>
                 <p t-if="coop_bank and coop_bank.acc_number">
                     <label>Bank Account Number:</label>
-                    <t t-esc="coop_bank.acc_number" />
+                    <t t-out="coop_bank.acc_number" />
                 </p>
                 <p t-if="coop.is_company and coop.company_register_number">
                     <label>Company Register Number:</label>
-                    <t t-esc="coop.company_register_number" />
+                    <t t-out="coop.company_register_number" />
                 </p>
                 <p t-if="coop.is_company and coop.representative">
                     <label>Legal Representative:</label>
-                    <t t-esc="coop.representative" />
+                    <t t-out="coop.representative" />
                 </p>
                 <p class="text-center">
                     <a href="/my/cooperator_certificate/pdf" class="btn btn-default">
@@ -195,7 +186,7 @@
                 <t t-else="">Capital Request</t>
             </li>
             <li t-if="capital_request" class="breadcrumb-item active">
-                <t t-esc="capital_request.name" t-if="capital_request.name" />
+                <t t-out="capital_request.name" t-if="capital_request.name" />
                 <t t-else="">
                     <em>Draft Request</em>
                 </t>
@@ -247,7 +238,7 @@
                                     t-att-title="capital_request.number"
                                 >
                                     <t
-                                        t-esc="capital_request.number"
+                                        t-out="capital_request.number"
                                         t-if="capital_request.number"
                                     />
                                     <em t-else="">Draft Request</em>
@@ -302,7 +293,7 @@
                             </td>
                             <td class="text-right">
                                 <span
-                                    t-esc="-capital_request.amount_residual if capital_request.type == 'out_refund' else capital_request.amount_residual"
+                                    t-out="-capital_request.amount_residual if capital_request.type == 'out_refund' else capital_request.amount_residual"
                                     t-options='{"widget": "monetary", "display_currency": capital_request.currency_id}'
                                 />
                             </td>
