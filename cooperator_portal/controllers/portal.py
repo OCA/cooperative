@@ -5,14 +5,13 @@
 
 
 from odoo import _
-from odoo.exceptions import AccessError, MissingError
 from odoo.fields import Date
 from odoo.http import request, route
 
-from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
+from odoo.addons.account.controllers.portal import PortalAccount, portal_pager
 
 
-class CooperatorPortalAccount(CustomerPortal):
+class CooperatorPortal(PortalAccount):
     def __init__(self, *args, **kwargs):
         super().__init__()
         # Class scope is accessible throughout the server even on
@@ -22,7 +21,7 @@ class CooperatorPortalAccount(CustomerPortal):
         #  if "MANDATORY_BILLING_FIELDS" in vars(self):
         if "MANDATORY_BILLING_FIELDS" not in vars(self):
             self.MANDATORY_BILLING_FIELDS = (
-                CustomerPortal.MANDATORY_BILLING_FIELDS.copy()
+                PortalAccount.MANDATORY_BILLING_FIELDS.copy()
             )
 
         self.MANDATORY_BILLING_FIELDS.extend(
@@ -35,28 +34,13 @@ class CooperatorPortalAccount(CustomerPortal):
         # partner itself or to the linked partner. So there is no
         # need to check if the partner is a "contact" or not.
         partner = request.env.user.partner_id
-        coop = partner.commercial_partner_id
+        coop_partner = partner.commercial_partner_id
+        coop_membership = coop_partner.cooperative_membership_id
         partner_model = request.env["res.partner"]
         coop_bank = (
             request.env["res.partner.bank"]
             .sudo()
-            .search([("partner_id", "in", [coop.id])], limit=1)
-        )
-        account_move_model = request.env["account.move"]
-        capital_request_count = account_move_model.search_count(
-            [
-                ("state", "!=", "draft"),
-                ("move_type", "in", account_move_model.get_invoice_types()),
-                # Get only the release capital request
-                ("release_capital_request", "=", True),
-            ]
-        )
-
-        invoice_count = account_move_model.search_count(
-            [
-                ("move_type", "in", account_move_model.get_invoice_types()),
-                ("release_capital_request", "=", False),
-            ]
+            .search([("partner_id", "=", coop_partner.id)], limit=1)
         )
         iban = ""
         if partner.bank_ids:
@@ -66,16 +50,38 @@ class CooperatorPortalAccount(CustomerPortal):
 
         values.update(
             {
-                "coop": coop,
+                "coop_partner": coop_partner,
+                "coop_membership": coop_membership,
                 "coop_bank": coop_bank,
-                "capital_request_count": capital_request_count,
-                "invoice_count": invoice_count,
                 "iban": iban,
                 "genders": fields_desc["gender"]["selection"],
                 "langs": request.env["res.lang"].search([]),
             }
         )
         return values
+
+    def _prepare_home_portal_values(self, counters):
+        values = super()._prepare_home_portal_values(counters)
+        if "capital_release_request_count" in counters:
+            capital_release_request_count = (
+                request.env["account.move"].search_count(
+                    self._get_capital_release_requests_domain()
+                )
+                if request.env["account.move"].check_access_rights(
+                    "read", raise_exception=False
+                )
+                else 0
+            )
+            values["capital_release_request_count"] = capital_release_request_count
+        return values
+
+    def _get_invoices_domain(self):
+        return super()._get_invoices_domain() + [
+            ("release_capital_request", "=", False)
+        ]
+
+    def _get_capital_release_requests_domain(self):
+        return super()._get_invoices_domain() + [("release_capital_request", "=", True)]
 
     def details_form_validate(self, data):
         error, error_message = super().details_form_validate(data)
@@ -107,39 +113,15 @@ class CooperatorPortalAccount(CustomerPortal):
         return res
 
     @route(
-        ["/my/invoices", "/my/invoices/page/<int:page>"],
-        type="http",
-        auth="user",
-        website=True,
-    )
-    def portal_my_invoices(
-        self, page=1, date_begin=None, date_end=None, sortby=None, **kw
-    ):
-        res = super().portal_my_invoices(page, date_begin, date_end, sortby, **kw)
-        account_move_model = request.env["account.move"]
-        qcontext = res.qcontext
-        if qcontext:
-            invoices = account_move_model.search(
-                [
-                    ("move_type", "in", account_move_model.get_invoice_types()),
-                    ("release_capital_request", "=", False),
-                ]
-            )
-            invoice_count = len(invoices)
-            qcontext["invoices"] = invoices
-            qcontext["pager"]["invoice_count"] = invoice_count
-        return res
-
-    @route(
         [
-            "/my/release_capital_request",
-            "/my/release_capital_request/page/<int:page>",
+            "/my/capital_release_requests",
+            "/my/capital_release_requests/page/<int:page>",
         ],
         type="http",
         auth="user",
         website=True,
     )
-    def portal_my_release_capital_request(
+    def portal_my_capital_release_requests(
         self, page=1, date_begin=None, date_end=None, sortby=None, **kw
     ):
         """Render a page with the list of release capital request.
@@ -153,7 +135,7 @@ class CooperatorPortalAccount(CustomerPortal):
         domain = [
             ("partner_id", "in", [partner.commercial_partner_id.id]),
             ("state", "in", ["open", "paid", "cancelled"]),
-            # Get only the release capital request
+            # Get only the capital release requests
             ("release_capital_request", "=", True),
         ]
         archive_groups = self._get_archive_groups_sudo("account.move", domain)
@@ -164,16 +146,16 @@ class CooperatorPortalAccount(CustomerPortal):
             ]
 
         # count for pager
-        capital_request_count = account_move_model.sudo().search_count(domain)
+        capital_release_request_count = account_move_model.sudo().search_count(domain)
         # pager
         pager = portal_pager(
-            url="/my/release_capital_request",
+            url="/my/capital_release_requests",
             url_args={
                 "date_begin": date_begin,
                 "date_end": date_end,
                 "sortby": sortby,
             },
-            total=capital_request_count,
+            total=capital_release_request_count,
             page=page,
             step=self._items_per_page,
         )
@@ -185,44 +167,20 @@ class CooperatorPortalAccount(CustomerPortal):
             {
                 "date": date_begin,
                 "capital_requests": invoices,
-                "page_name": "Release request",
+                "page_name": "capital release request",
                 "pager": pager,
                 "archive_groups": archive_groups,
-                "default_url": "/my/release_capital_request",
+                "default_url": "/my/capital_release_requests",
             }
         )
         return request.render("cooperator_portal.portal_my_capital_releases", values)
 
-    @route(
-        ["/my/invoices/<int:invoice_id>"],
-        type="http",
-        auth="public",
-        website=True,
-    )
-    def portal_my_invoice_detail(
-        self, invoice_id, access_token=None, report_type=None, download=False, **kw
-    ):
+    def _show_report(self, model, report_type, report_ref, download=False):
         # override in order to not retrieve release capital request as invoices
-        try:
-            invoice_sudo = self._document_check_access(
-                "account.move", invoice_id, access_token
-            )
-        except (AccessError, MissingError):
-            return request.redirect("/my")
-        if invoice_sudo.release_capital_request:
-            report_ref = "cooperator.action_cooperator_invoices"
-        else:
-            report_ref = "account.account_invoices"
-        if report_type in ("html", "pdf", "text"):
-            return self._show_report(
-                model=invoice_sudo,
-                report_type=report_type,
-                report_ref=report_ref,
-                download=download,
-            )
-
-        values = self._invoice_get_page_view_values(invoice_sudo, access_token, **kw)
-        return request.render("account.portal_invoice_page", values)
+        if isinstance(model, type(request.env["account.move"])):
+            if model.release_capital_request:
+                report_ref = "cooperator.action_cooperator_invoices"
+        return super()._show_report(model, report_type, report_ref, download)
 
     @route(
         ["/my/cooperator_certificate/pdf"],
@@ -230,25 +188,16 @@ class CooperatorPortalAccount(CustomerPortal):
         auth="user",
         website=True,
     )
-    def get_cooperator_certificat(self, **kw):
+    def get_cooperator_certificate(self, **kw):
         """Render the cooperator certificate pdf of the current user"""
         partner = request.env.user.partner_id
 
         return self._show_report(
             model=partner,
             report_type="pdf",
-            report_ref="cooperator.action_cooperator_report_certificat",
+            report_ref="cooperator.action_cooperator_report_certificate",
             download=True,
         )
-
-    def _render_pdf(self, pdf, filename):
-        """Render a http response for a pdf"""
-        pdfhttpheaders = [
-            ("Content-Disposition", 'inline; filename="%s.pdf"' % filename),
-            ("Content-Type", "application/pdf"),
-            ("Content-Length", len(pdf)),
-        ]
-        return request.make_response(pdf, headers=pdfhttpheaders)
 
     def _get_archive_groups_sudo(
         self,
