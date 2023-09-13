@@ -206,100 +206,29 @@
         </xpath>
     </template>
 
-    <!-- todo: inherit from portal_my_invoices -->
-    <template id="portal_my_capital_releases" name="My Capital Releases">
-        <t t-call="portal.portal_layout">
-            <t t-set="breadcrumbs_searchbar" t-value="True" />
-
-            <t t-call="portal.portal_searchbar">
-                <t t-set="title">My Capital Releases</t>
-            </t>
-            <t t-if="not capital_requests">
-                <p>There are currently no capital release requests for your account.</p>
-            </t>
-            <t t-if="capital_requests" t-call="portal.portal_table">
-                <thead>
-                    <tr class="active">
-                        <th>Request #</th>
-                        <th>Request Date</th>
-                        <th class='d-none d-md-table-cell'>Due Date</th>
-                        <th />
-                        <th class="text-right">Amount Due</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <t t-foreach="capital_requests" t-as="capital_request">
-                        <tr>
-                            <td>
-                                <a
-                                    t-att-href="capital_request.get_portal_url()"
-                                    t-att-title="capital_request.number"
-                                >
-                                    <t
-                                        t-out="capital_request.number"
-                                        t-if="capital_request.number"
-                                    />
-                                    <em t-else="">Draft Request</em>
-                                </a>
-                            </td>
-                            <td>
-                                <span t-field="capital_request.invoice_date" />
-                            </td>
-                            <td class='d-none d-md-table-cell'>
-                                <span t-field="capital_request.invoice_date_due" />
-                            </td>
-                            <td class="tx_status">
-                                <t t-if="capital_request.state == 'open'">
-                                    <span class="badge badge-pill badge-info">
-                                        <i
-                                            class="fa fa-fw fa-clock-o"
-                                            aria-label="Opened"
-                                            title="Opened"
-                                            role="img"
-                                        />
-                                        <span class="d-none d-md-inline">
-                                            Waiting for Payment
-                                        </span>
-                                    </span>
-                                </t>
-                                <t t-if="capital_request.state == 'paid'">
-                                    <span class="badge badge-pill badge-success">
-                                        <i
-                                            class="fa fa-fw fa-check"
-                                            aria-label="Paid"
-                                            title="Paid"
-                                            role="img"
-                                        />
-                                        <span class="d-none d-md-inline">
-                                            Paid
-                                        </span>
-                                    </span>
-                                </t>
-                                <t t-if="capital_request.state == 'cancel'">
-                                    <span class="badge badge-pill badge-warning">
-                                        <i
-                                            class="fa fa-fw fa-remove"
-                                            aria-label="Cancelled"
-                                            title="Cancelled"
-                                            role="img"
-                                        />
-                                        <span class="d-none d-md-inline">
-                                            Cancelled
-                                        </span>
-                                    </span>
-                                </t>
-                            </td>
-                            <td class="text-right">
-                                <span
-                                    t-out="-capital_request.amount_residual if capital_request.type == 'out_refund' else capital_request.amount_residual"
-                                    t-options='{"widget": "monetary", "display_currency": capital_request.currency_id}'
-                                />
-                            </td>
-                        </tr>
-                    </t>
-                </tbody>
-            </t>
-        </t>
+    <template
+        id="portal_my_capital_release_requests"
+        name="My Capital Release Requests"
+        inherit_id="account.portal_my_invoices"
+        primary="True"
+        priority="100"
+    >
+        <!-- replace invoice by capital release request -->
+        <xpath expr="//t[@t-call='portal.portal_layout']/t[3]/p" position="replace">
+            <p>There are currently no capital release requests for your account.</p>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='portal.portal_layout']/t[4]/thead/tr/th[1]"
+            position="replace"
+        >
+            <th>Request #</th>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='portal.portal_layout']/t[4]/thead/tr/th[2]"
+            position="replace"
+        >
+            <th>Request Date</th>
+        </xpath>
     </template>
 
 </odoo>

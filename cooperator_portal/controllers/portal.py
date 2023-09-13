@@ -5,8 +5,8 @@
 
 
 from odoo import _
-from odoo.fields import Date
 from odoo.http import request, route
+from odoo.osv import expression
 
 from odoo.addons.account.controllers.portal import PortalAccount, portal_pager
 
@@ -76,12 +76,18 @@ class CooperatorPortal(PortalAccount):
         return values
 
     def _get_invoices_domain(self):
-        return super()._get_invoices_domain() + [
-            ("release_capital_request", "=", False)
-        ]
+        capital_release_request = request.context.get("capital_release_requests", False)
+        return expression.AND(
+            [
+                super()._get_invoices_domain(),
+                [("release_capital_request", "=", capital_release_request)],
+            ]
+        )
 
     def _get_capital_release_requests_domain(self):
-        return super()._get_invoices_domain() + [("release_capital_request", "=", True)]
+        return expression.AND(
+            [super()._get_invoices_domain(), [("release_capital_request", "=", True)]]
+        )
 
     def details_form_validate(self, data):
         error, error_message = super().details_form_validate(data)
@@ -122,58 +128,33 @@ class CooperatorPortal(PortalAccount):
         website=True,
     )
     def portal_my_capital_release_requests(
-        self, page=1, date_begin=None, date_end=None, sortby=None, **kw
+        self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw
     ):
         """Render a page with the list of release capital request.
         A release capital request is an invoice with a flag that tell
         if it's a capital request or not.
         """
-        values = self._prepare_portal_layout_values()
-        partner = request.env.user.partner_id
-        account_move_model = request.env["account.move"]
+        request.update_context(capital_release_requests=True)
+        values = self._prepare_my_invoices_values(
+            page, date_begin, date_end, sortby, filterby
+        )
 
-        domain = [
-            ("partner_id", "in", [partner.commercial_partner_id.id]),
-            ("state", "in", ["open", "paid", "cancelled"]),
-            # Get only the capital release requests
-            ("release_capital_request", "=", True),
-        ]
-        archive_groups = self._get_archive_groups_sudo("account.move", domain)
-        if date_begin and date_end:
-            domain += [
-                ("create_date", ">=", date_begin),
-                ("create_date", "<", date_end),
-            ]
-
-        # count for pager
-        capital_release_request_count = account_move_model.sudo().search_count(domain)
         # pager
-        pager = portal_pager(
-            url="/my/capital_release_requests",
-            url_args={
-                "date_begin": date_begin,
-                "date_end": date_end,
-                "sortby": sortby,
-            },
-            total=capital_release_request_count,
-            page=page,
-            step=self._items_per_page,
-        )
+        pager = portal_pager(**values["pager"])
+
         # content according to pager and archive selected
-        invoices = account_move_model.sudo().search(
-            domain, limit=self._items_per_page, offset=pager["offset"]
-        )
+        invoices = values["invoices"](pager["offset"])
+        request.session["my_capital_release_requests"] = invoices.ids[:100]
+
         values.update(
             {
-                "date": date_begin,
-                "capital_requests": invoices,
-                "page_name": "capital release request",
+                "invoices": invoices,
                 "pager": pager,
-                "archive_groups": archive_groups,
-                "default_url": "/my/capital_release_requests",
             }
         )
-        return request.render("cooperator_portal.portal_my_capital_releases", values)
+        return request.render(
+            "cooperator_portal.portal_my_capital_release_requests", values
+        )
 
     def _show_report(self, model, report_type, report_ref, download=False):
         # override in order to not retrieve release capital request as invoices
@@ -198,44 +179,3 @@ class CooperatorPortal(PortalAccount):
             report_ref="cooperator.action_cooperator_report_certificate",
             download=True,
         )
-
-    def _get_archive_groups_sudo(
-        self,
-        model,
-        domain=None,
-        fields=None,
-        groupby="create_date",
-        order="create_date desc",
-    ):
-        """Same as the one from website_portal_v10 except that it runs
-        in root.
-        """
-        if not model:
-            return []
-        if domain is None:
-            domain = []
-        if fields is None:
-            fields = ["name", "create_date"]
-        groups = []
-        for group in (
-            request.env[model]
-            .sudo()
-            .read_group(domain, fields=fields, groupby=groupby, orderby=order)
-        ):
-            label = group[groupby]
-            date_begin = date_end = None
-            for leaf in group["__domain"]:
-                if leaf[0] == groupby:
-                    if leaf[1] == ">=":
-                        date_begin = leaf[2]
-                    elif leaf[1] == "<":
-                        date_end = leaf[2]
-            groups.append(
-                {
-                    "date_begin": Date.to_string(Date.from_string(date_begin)),
-                    "date_end": Date.to_string(Date.from_string(date_end)),
-                    "name": label,
-                    "item_count": group[groupby + "_count"],
-                }
-            )
-        return groups
