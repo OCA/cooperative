@@ -75,6 +75,25 @@ class CooperatorPortal(PortalAccount):
             values["capital_release_request_count"] = capital_release_request_count
         return values
 
+    def _invoice_get_page_view_values(self, invoice, access_token, **kwargs):
+        if not invoice.release_capital_request:
+            return super()._invoice_get_page_view_values(
+                invoice, access_token, **kwargs
+            )
+        # page_name is needed for the breadcrumbs
+        values = {
+            "page_name": "capital_release_request",
+            "invoice": invoice,
+        }
+        return self._get_page_view_values(
+            invoice,
+            access_token,
+            values,
+            "my_capital_release_requests_history",
+            False,
+            **kwargs
+        )
+
     def _get_invoices_domain(self):
         capital_release_request = request.context.get("capital_release_requests", False)
         return expression.AND(
@@ -138,13 +157,17 @@ class CooperatorPortal(PortalAccount):
         values = self._prepare_my_invoices_values(
             page, date_begin, date_end, sortby, filterby
         )
+        # remove filters (not needed for capital release requests)
+        del values["searchbar_filters"]
+        # change page name (needed for breadcrumbs)
+        values["page_name"] = "capital_release_request"
 
         # pager
         pager = portal_pager(**values["pager"])
 
         # content according to pager and archive selected
         invoices = values["invoices"](pager["offset"])
-        request.session["my_capital_release_requests"] = invoices.ids[:100]
+        request.session["my_capital_release_requests_history"] = invoices.ids[:100]
 
         values.update(
             {
@@ -162,6 +185,19 @@ class CooperatorPortal(PortalAccount):
             if model.release_capital_request:
                 report_ref = "cooperator.action_cooperator_invoices"
         return super()._show_report(model, report_type, report_ref, download)
+
+    @route(
+        ["/my/capital_release_requests/<int:invoice_id>"],
+        type="http",
+        auth="public",
+        website=True,
+    )
+    def portal_my_capital_release_request_detail(
+        self, invoice_id, access_token=None, report_type=None, download=False, **kw
+    ):
+        return self.portal_my_invoice_detail(
+            invoice_id, access_token, report_type, download, **kw
+        )
 
     @route(
         ["/my/cooperator_certificate/pdf"],
