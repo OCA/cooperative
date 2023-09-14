@@ -158,31 +158,22 @@
         </xpath>
     </template>
 
-
     <template
-        id="portal_breadcrumbs"
-        name="Portal layout : capital request menu entries"
-        inherit_id="portal.portal_breadcrumbs"
+        id="portal_my_home_menu_capital_release_request"
+        name="Portal layout : capital release request menu entries"
+        inherit_id="account.portal_my_home_menu_invoice"
         priority="30"
     >
-        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+        <xpath expr="//li[@t-if=&quot;page_name == 'invoice'&quot;]" position="after">
             <li
-                t-if="page_name == 'capital request'"
-                t-attf-class="breadcrumb-item #{'active ' if not capital_requests else ''}"
+                t-if="page_name == 'capital_release_request'"
+                t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}"
             >
                 <a
-                    t-if="capital_request"
-                    t-attf-href="/my/release_capital_request?{{ keep_query() }}"
-                >
-                    Capital Request
-                </a>
-                <t t-else="">Capital Request</t>
-            </li>
-            <li t-if="capital_request" class="breadcrumb-item active">
-                <t t-out="capital_request.name" t-if="capital_request.name" />
-                <t t-else="">
-                    <em>Draft Request</em>
-                </t>
+                    t-if="invoice"
+                    t-attf-href="/my/capital_release_requests?{{ keep_query() }}"
+                >Capital Release Requests</a>
+                <t t-else="">Capital Release Requests</t>
             </li>
         </xpath>
     </template>
