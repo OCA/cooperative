@@ -1,7 +1,9 @@
-# Copyright 2018 Coop IT Easy SC (<http://www.coopiteasy.be>)
-# - Rémy Taymans <remy@coopiteasy.be>
-# - Houssine Bakkali <houssine@coopiteasy.be>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+# SPDX-FileContributor: Rémy Taymans <remy@coopiteasy.be>
+# SPDX-FileContributor: Houssine Bakkali <houssine@coopiteasy.be>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 {
     "name": "Cooperator Portal",
     "version": "16.0.0.1.0",

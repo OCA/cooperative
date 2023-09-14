@@ -1,8 +1,9 @@
-# Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
-# Copyright 2017-2018 Rémy Taymans <remy@coopiteasy.be>
-# Copyright 2019 Houssine Bakkali <houssine@coopiteasy.be>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
+# SPDX-FileCopyrightText: 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+# SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+# SPDX-FileContributor: Rémy Taymans <remy@coopiteasy.be>
+# SPDX-FileContributor: Houssine Bakkali <houssine@coopiteasy.be>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 from odoo import _
 from odoo.http import request, route
