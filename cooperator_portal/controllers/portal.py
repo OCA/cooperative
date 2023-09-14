@@ -208,7 +208,9 @@ class CooperatorPortal(PortalAccount):
     )
     def get_cooperator_certificate(self, **kw):
         """Render the cooperator certificate pdf of the current user"""
-        partner = request.env.user.partner_id
+        # Same comment about commercial_partner_id as in
+        # _prepare_portal_layout_values().
+        partner = request.env.user.partner_id.commercial_partner_id
 
         return self._show_report(
             model=partner,
