@@ -197,3 +197,38 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
         certificate in attachment.
         """
         self._test_mail_template_share_increase(self.create_dummy_company_cooperator())
+
+    def _test_mail_template_share_transfer(self, cooperator):
+        subscription_request = self.create_dummy_subscription_from_partner(cooperator)
+        subscription_request.validate_subscription_request()
+        last_mail_id = self._get_last_mail_id()
+        self.pay_invoice(subscription_request.capital_release_request)
+        message = self._get_new_mail_messages(last_mail_id)
+        self.assertEqual(len(message), 1)
+        self.assertEqual(message.recipient_ids, subscription_request.partner_id)
+        self.assertIn("Hello first name,", message.body_html)
+        self.assertIn("for the new share(s) you have taken", message.body_html)
+        self.assertEqual(len(message.attachment_ids), 1)
+        # should be .pdf but pdf generation is disabled in test mode.
+        self.assertEqual(
+            message.attachment_ids.name,
+            "Certificate {number}.html".format(
+                number=cooperator.cooperator_register_number
+            ),
+        )
+
+    def test_mail_template_share_transfer(self):
+        """
+        Test that registering a payment for a capital release request for a
+        share transfer sends a message with the cooperator certificate in
+        attachment.
+        """
+        self._test_mail_template_share_transfer(self.create_dummy_cooperator())
+
+    def test_mail_template_share_transfer_company(self):
+        """
+        Test that registering a payment for a capital release request for a
+        share transfer for a company sends a message with the cooperator
+        certificate in attachment.
+        """
+        self._test_mail_template_share_transfer(self.create_dummy_company_cooperator())

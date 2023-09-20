@@ -46,7 +46,7 @@ class CooperativeMembership(models.Model):
                     break
             record.cooperator_type = share_type
 
-    @api.depends("partner_id.share_ids")
+    @api.depends("partner_id.share_ids.share_number")
     def _compute_share_info(self):
         for record in self:
             number_of_share = 0
