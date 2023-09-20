@@ -1171,6 +1171,8 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
                 "firstname": "first name 2",
                 "lastname": "last name 2",
                 "email": "email2@example.net",
+                "is_operation": True,
+                "source": "operation",
             }
         )
         operation_request = self.env["operation.request"].create(

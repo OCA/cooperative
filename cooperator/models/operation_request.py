@@ -3,8 +3,6 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-from datetime import datetime
-
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -14,10 +12,6 @@ class OperationRequest(models.Model):
     _description = "Operation request"
     _check_company_auto = True
 
-    def get_date_now(self):
-        # fixme odoo 12 uses date types
-        return datetime.strftime(datetime.now(), "%Y-%m-%d")
-
     @api.depends("share_product_id", "share_product_id.list_price", "quantity")
     def _compute_subscription_amount(self):
         for operation_request in self:
@@ -26,9 +20,7 @@ class OperationRequest(models.Model):
                 * operation_request.quantity
             )
 
-    request_date = fields.Date(
-        string="Request date", default=lambda self: self.get_date_now()
-    )
+    request_date = fields.Date(string="Request date", default=fields.Date.today)
     effective_date = fields.Date(string="Effective date")
     partner_id = fields.Many2one(
         "res.partner",
@@ -135,12 +127,26 @@ class OperationRequest(models.Model):
     def create(self, vals_list):
         records = super().create(vals_list)
         for record in records:
-            if (
-                record.operation_type == "transfer"
-                and record.subscription_request
-                and record.subscription_request.state != "transfer"
-            ):
-                record.subscription_request.state = "transfer"
+            if record.subscription_request:
+                if not record.subscription_request.is_operation:
+                    raise ValidationError(
+                        _(
+                            "The is_operation field of the subscription "
+                            "request must be true"
+                        )
+                    )
+                if record.subscription_request.source != "operation":
+                    raise ValidationError(
+                        _(
+                            "The source field of the subscription request "
+                            "must be set to operation"
+                        )
+                    )
+                if (
+                    record.operation_type == "transfer"
+                    and record.subscription_request.state != "transfer"
+                ):
+                    record.subscription_request.state = "transfer"
         return records
 
     @api.constrains("effective_date")
@@ -335,11 +341,8 @@ class OperationRequest(models.Model):
     def execute_operation(self):
         self.ensure_one()
 
-        if self.effective_date:
-            effective_date = self.effective_date
-        else:
-            effective_date = self.get_date_now()
-            self.effective_date = effective_date
+        if not self.effective_date:
+            self.effective_date = fields.Date.today()
         sub_request = self.env["subscription.request"]
 
         self.validate()
@@ -349,7 +352,7 @@ class OperationRequest(models.Model):
                 _("This operation must be approved before to be executed")
             )
 
-        values = self.get_subscription_register_vals(effective_date)
+        values = self.get_subscription_register_vals(self.effective_date)
 
         if self.operation_type == "sell_back":
             self.hand_share_over(self.partner_id, self.share_product_id, self.quantity)
@@ -417,7 +420,7 @@ class OperationRequest(models.Model):
                     "partner_id": self.partner_id_to.id,
                     "share_product_id": self.share_product_id.id,
                     "share_unit_price": self.share_unit_price,
-                    "effective_date": effective_date,
+                    "effective_date": self.effective_date,
                     "company_id": self.company_id.id,
                 }
             )

@@ -67,7 +67,7 @@ class SubscriptionRequest(models.Model):
                 )
 
     def _send_confirmation_mail(self):
-        if self.company_id.send_confirmation_email:
+        if self.company_id.send_confirmation_email and not self.is_operation:
             mail_template_notif = (
                 self.company_id.get_cooperator_confirmation_mail_template()
             )
@@ -233,7 +233,7 @@ class SubscriptionRequest(models.Model):
             # removed.
             ("transfer", "Transfer"),
             ("cancelled", "Cancelled"),
-            ("paid", "paid"),
+            ("paid", "Paid"),
         ],
         required=True,
         default="draft",
