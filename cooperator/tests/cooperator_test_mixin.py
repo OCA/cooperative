@@ -158,6 +158,16 @@ class CooperatorTestMixin:
         vals["contact_person_function"] = "dummy contact person function"
         return vals
 
+    def create_dummy_subscription_request(self):
+        return self.env["subscription.request"].create(
+            self.get_dummy_subscription_requests_vals()
+        )
+
+    def create_dummy_company_subscription_request(self):
+        return self.env["subscription.request"].create(
+            self.get_dummy_company_subscription_requests_vals()
+        )
+
     def create_dummy_subscription_from_partner(self, partner):
         vals = self.get_dummy_subscription_requests_vals()
         vals["partner_id"] = partner.id
@@ -173,24 +183,11 @@ class CooperatorTestMixin:
         self.pay_invoice(subscription_request.capital_release_request)
 
     def create_dummy_cooperator(self):
-        partner = self.env["res.partner"].create(
-            {
-                "name": "dummy partner 1",
-            }
-        )
-        subscription_request = self.create_dummy_subscription_from_partner(partner)
+        subscription_request = self.create_dummy_subscription_request()
         self.validate_subscription_request_and_pay(subscription_request)
-        return partner
+        return subscription_request.partner_id
 
     def create_dummy_company_cooperator(self):
-        partner = self.env["res.partner"].create(
-            {
-                "name": "dummy company partner 1",
-                "is_company": True,
-            }
-        )
-        subscription_request = self.create_dummy_subscription_from_company_partner(
-            partner
-        )
+        subscription_request = self.create_dummy_company_subscription_request()
         self.validate_subscription_request_and_pay(subscription_request)
-        return partner
+        return subscription_request.partner_id
