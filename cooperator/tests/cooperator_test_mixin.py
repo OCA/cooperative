@@ -151,11 +151,15 @@ class CooperatorTestMixin:
 
     def get_dummy_company_subscription_requests_vals(self):
         vals = self.get_dummy_subscription_requests_vals()
-        vals["is_company"] = True
-        vals["company_name"] = "dummy company"
-        vals["company_email"] = "companyemail@example.net"
-        vals["company_register_number"] = "dummy company register number"
-        vals["contact_person_function"] = "dummy contact person function"
+        vals.update(
+            {
+                "is_company": True,
+                "company_name": "dummy company",
+                "company_email": "companyemail@example.net",
+                "company_register_number": "dummy company register number",
+                "contact_person_function": "dummy contact person function",
+            }
+        )
         return vals
 
     def create_dummy_subscription_request(self):

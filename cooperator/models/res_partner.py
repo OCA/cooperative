@@ -222,10 +222,7 @@ class ResPartner(models.Model):
         return super().onchange_parent_id()
 
     def has_representative(self):
-        self.ensure_one()
-        if self.child_ids.filtered("representative"):
-            return True
-        return False
+        return bool(self.get_representative())
 
     def get_representative(self):
         self.ensure_one()
