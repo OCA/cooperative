@@ -205,8 +205,11 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
                 "firstname": "first name 2",
                 "lastname": "last name 2",
                 "email": "email2@example.net",
+                "is_operation": True,
+                "source": "operation",
             }
         )
+        last_mail_id = self._get_last_mail_id()
         operation_request = self.env["operation.request"].create(
             {
                 "operation_type": "transfer",
@@ -219,9 +222,10 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
                 ],
             }
         )
+        # this must not send a subscription request confirmation message
+        self.assertEqual(self._get_last_mail_id(), last_mail_id)
         operation_request.submit_operation()
         operation_request.approve_operation()
-        last_mail_id = self._get_last_mail_id()
         operation_request.execute_operation()
         messages = self._get_new_mail_messages(last_mail_id)
         # there should be 2 messages: one for the receiver and one for the
