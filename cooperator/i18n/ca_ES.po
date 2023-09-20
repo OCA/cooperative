@@ -18,6 +18,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "%s is not available to companies"
 msgstr ""
@@ -25,6 +26,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "%s is not available to individuals"
 msgstr ""
@@ -43,6 +45,162 @@ msgid ""
 "contain sensitive data (employee home addresses, ...).\n"
 "- Other: Other address for the company (e.g. subsidiary, ...)"
 msgstr ""
+
+#. module: cooperator
+#: model:mail.template,body_html:cooperator.email_template_share_update
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hello\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        We confirm that the adaptation on your shares portfolio has been "
+"performed succesfully. Your cooperator certificate has been adapted "
+"accordingly.\n"
+"        <br><br>\n"
+"        Please find in attachment your <t t-out=\"object.env.company.name"
+"\"></t> cooperator certificate.\n"
+"        <br><br>\n"
+"        Sustainably yours,\n"
+"    </p>\n"
+"</div>\n"
+"        "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hola\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        Confirmem els canvis de participacions que has fet recentment. Hem "
+"actualitzat el certificact de cooperacióper reflectir aquests canvis.\n"
+"        <br><br>\n"
+"        T'adjuntem el certificat de <t t-out=\"object.env.company.name\"></"
+"t>.\n"
+"        <br><br>\n"
+"        Cooperativament,\n"
+"    </p>\n"
+"</div>\n"
+"        "
+
+#. module: cooperator
+#: model:mail.template,body_html:cooperator.email_template_share_transfer
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hello\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        We confirm that the shares have been transferred to you. If you were "
+"not already a cooperator, you are now a shareholder of our cooperative.\n"
+"        <br><br>\n"
+"        Please find in attachment your <t t-out=\"object.env.company.name"
+"\"></t> cooperator certificate.\n"
+"        <br><br>\n"
+"        Sustainably yours,\n"
+"    </p>\n"
+"</div>\n"
+"        "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hola\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        Et confirmem que se t'han transferit participacions de la "
+"cooperativa. Si encara no eres soci/a, ara ja ho ets!</p>\n"
+"        <br><br>\n"
+"        T'adjuntem el certificat de <t t-out=\"object.env.company.name\"></"
+"t>.\n"
+"        <br><br>\n"
+"        Cooperativament,\n"
+"    </p>\n"
+"</div>\n"
+"        "
+
+#. module: cooperator
+#: model:mail.template,body_html:cooperator.email_template_share_increase
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hello\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        We confirm the reception of your payment for the new share(s) you "
+"have taken.\n"
+"        <br><br>\n"
+"        Please find in attachment your <t t-out=\"object.env.company.name"
+"\"></t> cooperator certificate.\n"
+"        <br><br>\n"
+"        Sustainably yours,\n"
+"    </p>\n"
+"</div>\n"
+"        "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hola\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        Hem rebut el teu pagament per les noves participacions que has "
+"adquirit.\n"
+"        <br><br>\n"
+"        N'adjuntem el certificat de <t t-out=\"object.env.company.name\"></"
+"t>.\n"
+"        <br><br>\n"
+"        Cooperativament,\n"
+"    </p>\n"
+"</div>\n"
+"        "
+
+#. module: cooperator
+#: model:mail.template,body_html:cooperator.email_template_certificate
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hello\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        We confirm the reception of your payment. You are now a shareholder "
+"of our cooperative.\n"
+"        <br><br>\n"
+"        Please find in attachment your <t t-out=\"object.env.company.name"
+"\"></t> cooperator certificate.\n"
+"        <br><br>\n"
+"        Sustainably yours,\n"
+"    </p>\n"
+"</div>\n"
+"        "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hola\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        Hem rebut el teu pagament. Ja ets soci/a de la cooperativa!</p>\n"
+"        <br><br>\n"
+"        T'adjuntem el certificat de <t t-out=\"object.env.company.name\"></"
+"t>.\n"
+"        <br><br>\n"
+"        Cooperativament,\n"
+"    </p>\n"
+"</div>\n"
+"        "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_waiting_list
@@ -73,8 +231,8 @@ msgid ""
 "        <t t-out=\"object.firstname\"></t>,\n"
 "        <br><br>\n"
 "        We have received your subscription request<t t-if=\"object.is_company"
-"\"> for <t t-out=\"object.company_name\"></t></t>. Thank you for your "
-"support.\n"
+"\"> on behalf of <t t-out=\"object.company_name\"></t></t>. Thank you for "
+"your support.\n"
 "        <br><br>\n"
 "        Your request will be soon processed by our team. If all the provided "
 "information is correct you will soon receive the payment information in "
@@ -93,8 +251,8 @@ msgstr ""
 "        <t t-out=\"object.firstname\"></t>,\n"
 "        <br><br>\n"
 "        Hem rebut la teva soŀlicitud de subscripció<t t-if=\"object."
-"is_company\"> de <t t-out=\"object.company_name\"></t></t>. Moltes gràcies "
-"pel teu suport!\n"
+"is_company\"> en nom de <t t-out=\"object.company_name\"></t></t>. Moltes "
+"gràcies pel teu suport!\n"
 "        <br><br>\n"
 "        Processarem aviat la teva soŀlicitud. Si és correcta tota la "
 "informació que ens has proporcionat, rebràs un altre correu amb la "
@@ -136,146 +294,6 @@ msgstr ""
 "pagament.\n"
 "        <br><br>\n"
 "        Comprova les instruccions adjuntes si us plau!\n"
-"        <br><br>\n"
-"        Cooperativament,\n"
-"    </p>\n"
-"</div>\n"
-"        "
-
-#. module: cooperator
-#: model:mail.template,body_html:cooperator.email_template_share_update
-msgid ""
-"<div style=\"margin: 0px; padding: 0px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hello\n"
-"        <t t-out=\"object.subscription_request_ids[0].firstname\"></t>,\n"
-"        <br><br>\n"
-"        We confirm that the adaptation on your shares portfolio has been "
-"performed succesfully. Your cooperator certificate has been adapted "
-"accordingly.\n"
-"        <br><br>\n"
-"        Please find in attachment your <t t-out=\"object.env.company.name"
-"\"></t> cooperator certificate.\n"
-"        <br><br>\n"
-"        Sustainably yours,\n"
-"    </p>\n"
-"</div>\n"
-"        "
-msgstr ""
-"<div style=\"margin: 0px; padding: 0px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hola\n"
-"        <t t-out=\"object.subscription_request_ids[0].firstname\"></t>,\n"
-"        <br><br>\n"
-"        Confirmem els canvis de participacions que has fet recentment. Hem "
-"actualitzat el certificact de cooperacióper reflectir aquests canvis.\n"
-"        <br><br>\n"
-"        T'adjuntem el certificat de <t t-out=\"object.env.company.name\"></"
-"t>.\n"
-"        <br><br>\n"
-"        Cooperativament,\n"
-"    </p>\n"
-"</div>\n"
-"        "
-
-#. module: cooperator
-#: model:mail.template,body_html:cooperator.email_template_share_transfer
-msgid ""
-"<div style=\"margin: 0px; padding: 0px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hello\n"
-"        <t t-out=\"object.subscription_request_ids[0].firstname\"></t>,\n"
-"        <br><br>\n"
-"        We confirm that the shares have been transfered to you. If you were "
-"not already a cooperator, you are now a shareholder of our cooperative.\n"
-"        <br><br>\n"
-"        Please find in attachment your <t t-out=\"object.env.company.name"
-"\"></t> cooperator certificate.\n"
-"        <br><br>\n"
-"        Sustainably yours,\n"
-"    </p>\n"
-"</div>\n"
-"        "
-msgstr ""
-"<div style=\"margin: 0px; padding: 0px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hola\n"
-"        <t t-out=\"object.subscription_request_ids[0].firstname\"></t>,\n"
-"        <br><br>\n"
-"        Et confirmem que se t'han transferit participacions de la "
-"cooperativa. Si encara no eres soci/a, ara ja ho ets!</p>\n"
-"        <br><br>\n"
-"        T'adjuntem el certificat de <t t-out=\"object.env.company.name\"></"
-"t>.\n"
-"        <br><br>\n"
-"        Cooperativament,\n"
-"    </p>\n"
-"</div>\n"
-"        "
-
-#. module: cooperator
-#: model:mail.template,body_html:cooperator.email_template_share_increase
-msgid ""
-"<div style=\"margin: 0px; padding: 0px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hello\n"
-"        <t t-out=\"object.subscription_request_ids[0].firstname\"></t>,\n"
-"        <br><br>\n"
-"        We confirm the reception of your payment for the new share(s) you "
-"have taken.\n"
-"        <br><br>\n"
-"        Please find in attachment your <t t-out=\"object.env.company.name"
-"\"></t> cooperator certificate.\n"
-"        <br><br>\n"
-"        Sustainably yours,\n"
-"    </p>\n"
-"</div>\n"
-"        "
-msgstr ""
-"<div style=\"margin: 0px; padding: 0px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hola\n"
-"        <t t-out=\"object.subscription_request_ids[0].firstname\"></t>,\n"
-"        <br><br>\n"
-"        Hem rebut el teu pagament per les noves participacions que has "
-"adquirit.\n"
-"        <br><br>\n"
-"        N'adjuntem el certificat de <t t-out=\"object.env.company.name\"></"
-"t>.\n"
-"        <br><br>\n"
-"        Cooperativament,\n"
-"    </p>\n"
-"</div>\n"
-"        "
-
-#. module: cooperator
-#: model:mail.template,body_html:cooperator.email_template_certificate
-msgid ""
-"<div style=\"margin: 0px; padding: 0px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hello\n"
-"        <t t-out=\"object.subscription_request_ids[0].firstname\"></t>,\n"
-"        <br><br>\n"
-"        We confirm the reception of your payment. You are now a shareholder "
-"of our cooperative.\n"
-"        <br><br>\n"
-"        Please find in attachment your <t t-out=\"object.env.company.name"
-"\"></t> cooperator certificate.\n"
-"        <br><br>\n"
-"        Sustainably yours,\n"
-"    </p>\n"
-"</div>\n"
-"        "
-msgstr ""
-"<div style=\"margin: 0px; padding: 0px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hola\n"
-"        <t t-out=\"object.subscription_request_ids[0].firstname\"></t>,\n"
-"        <br><br>\n"
-"        Hem rebut el teu pagament. Ja ets soci/a de la cooperativa!</p>\n"
-"        <br><br>\n"
-"        T'adjuntem el certificat de <t t-out=\"object.env.company.name\"></"
-"t>.\n"
 "        <br><br>\n"
 "        Cooperativament,\n"
 "    </p>\n"
@@ -335,6 +353,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/wizard/partner_create_subscription.py:0
+#: code:addons/src/oca/cooperative/cooperator/wizard/partner_create_subscription.py:0
 #, python-format
 msgid "A person can't be representative of two different companies."
 msgstr ""
@@ -534,6 +553,7 @@ msgstr "Canceŀlat"
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/res_partner.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/res_partner.py:0
 #, python-format
 msgid "Cannot set {name} field on {record}: {delegate} is not set"
 msgstr ""
@@ -728,6 +748,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/operation_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/operation_request.py:0
 #, python-format
 msgid "Converting just part of the shares is not yet implemented"
 msgstr ""
@@ -836,6 +857,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/res_company.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/res_company.py:0
 #, python-format
 msgid "Cooperator number sequence"
 msgstr ""
@@ -848,6 +870,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/res_company.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/res_company.py:0
 #, python-format
 msgid "Cooperator register operation sequence"
 msgstr ""
@@ -1066,6 +1089,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/wizard/update_share_line.py:0
+#: code:addons/src/oca/cooperative/cooperator/wizard/update_share_line.py:0
 #, python-format
 msgid "Error the update return more than one subscription register lines."
 msgstr ""
@@ -1078,6 +1102,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__gender__female
 #, python-format
 msgid "Female"
@@ -1413,6 +1438,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__gender__male
 #, python-format
 msgid "Male"
@@ -1518,7 +1544,7 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_subscription_request__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr ""
 
 #. module: cooperator
@@ -1538,6 +1564,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "Number of share must be greater than 0."
 msgstr ""
@@ -1569,6 +1596,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "Only blocked requests can be unblocked."
 msgstr ""
@@ -1576,6 +1604,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "Only draft request can be put on the waiting list."
 msgstr ""
@@ -1583,6 +1612,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "Only draft requests can be blocked."
 msgstr ""
@@ -1631,12 +1661,14 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__gender__other
 #, python-format
 msgid "Other"
 msgstr ""
 
 #. module: cooperator
+#: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__state__paid
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_request_filter
 msgid "Paid"
 msgstr "Pagat"
@@ -1675,6 +1707,7 @@ msgstr "Telèfon"
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #, python-format
 msgid ""
 "Please define income account for this product: \"{name}\" (id: {id}) - or "
@@ -1809,6 +1842,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "SUBJ"
 msgstr ""
@@ -2095,7 +2129,6 @@ msgid "Submit"
 msgstr "Desa"
 
 #. module: cooperator
-#: model:ir.model.fields.selection,name:cooperator.selection__operation_request__operation_type__subscription
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_register__type__subscription
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_register_filter
 msgid "Subscription"
@@ -2111,6 +2144,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #: model:ir.model.fields,field_description:cooperator.field_res_company__subscription_journal_id
 #, python-format
 msgid "Subscription Journal"
@@ -2217,6 +2251,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "The checkbox already cooperator is checked please select a cooperator."
 msgstr ""
@@ -2224,6 +2259,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/operation_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/operation_request.py:0
 #, python-format
 msgid "The cooperator can't hand over more shares that he/she owns."
 msgstr ""
@@ -2231,6 +2267,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/operation_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/operation_request.py:0
 #, python-format
 msgid ""
 "The cooperator doesn't own this share type. Please choose the appropriate "
@@ -2240,6 +2277,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/operation_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/operation_request.py:0
 #, python-format
 msgid "The effective date can not be in the future."
 msgstr ""
@@ -2247,6 +2285,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/operation_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/operation_request.py:0
 #, python-format
 msgid ""
 "The information of the receiver are not correct. Please correct the "
@@ -2255,15 +2294,32 @@ msgstr ""
 
 #. module: cooperator
 #. odoo-python
+#: code:addons/cooperator/models/operation_request.py:0
+#, python-format
+msgid "The is_operation field of the subscription request must be true"
+msgstr ""
+
+#. module: cooperator
+#. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "The request must be in draft or on waiting list to be validated"
 msgstr ""
 
 #. module: cooperator
 #. odoo-python
+#: code:addons/cooperator/models/operation_request.py:0
+#, python-format
+msgid "The source field of the subscription request must be set to operation"
+msgstr ""
+
+#. module: cooperator
+#. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
 #: code:addons/cooperator/wizard/partner_create_subscription.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/wizard/partner_create_subscription.py:0
 #, python-format
 msgid ""
 "There is two different persons with the same national register number. "
@@ -2280,6 +2336,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #, python-format
 msgid ""
 "This contact person is already defined for another company. Please select "
@@ -2289,6 +2346,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/operation_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/operation_request.py:0
 #, python-format
 msgid ""
 "This operation can't be executed if the cooperator is not an effective member"
@@ -2297,6 +2355,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/operation_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/operation_request.py:0
 #, python-format
 msgid "This operation is not yet implemented."
 msgstr ""
@@ -2304,6 +2363,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/operation_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/operation_request.py:0
 #, python-format
 msgid "This operation must be approved before to be executed"
 msgstr ""
@@ -2311,6 +2371,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/operation_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/operation_request.py:0
 #, python-format
 msgid "This share can not be subscribed an individual"
 msgstr ""
@@ -2318,6 +2379,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/operation_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/operation_request.py:0
 #, python-format
 msgid "This share can not be subscribed by a company"
 msgstr ""
@@ -2325,6 +2387,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/operation_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/operation_request.py:0
 #, python-format
 msgid "This share type could not be transfered to "
 msgstr ""
@@ -2501,6 +2564,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/operation_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/operation_request.py:0
 #, python-format
 msgid "You can't convert the share to the same share type."
 msgstr ""
@@ -2508,6 +2572,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "You cannot cancel a request in this state."
 msgstr ""
@@ -2515,6 +2580,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/operation_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/operation_request.py:0
 #, python-format
 msgid "You must convert all the shares to the selected type."
 msgstr ""
@@ -2522,6 +2588,7 @@ msgstr ""
 #. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
+#: code:addons/src/oca/cooperative/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "You must set a cooperator account on your company."
 msgstr ""
@@ -2549,11 +2616,6 @@ msgstr ""
 #. module: cooperator
 #: model:ir.actions.report,print_report_name:cooperator.action_cooperator_invoices
 msgid "object._get_report_base_filename()"
-msgstr ""
-
-#. module: cooperator
-#: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__state__paid
-msgid "paid"
 msgstr ""
 
 #. module: cooperator
