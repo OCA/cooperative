@@ -227,6 +227,10 @@ class SubscriptionRequest(models.Model):
             ("block", "Blocked"),  # todo reword to blocked
             ("done", "Done"),
             ("waiting", "Waiting"),
+            # fixme: this is only used when a subscription request is used for
+            # a transfer operation. once operation.request has been changed to
+            # not use a subscription request anymore, this state should be
+            # removed.
             ("transfer", "Transfer"),
             ("cancelled", "Cancelled"),
             ("paid", "paid"),
@@ -499,6 +503,7 @@ class SubscriptionRequest(models.Model):
             else:
                 self.get_person_info(partner)
 
+    # fixme: this is very specific and should not be here.
     # declare this function in order to be overriden
     def get_eater_vals(self, partner, share_product_id):  # noqa
         return {}
