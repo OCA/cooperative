@@ -380,7 +380,7 @@ class OperationRequest(models.Model):
         elif self.operation_type == "transfer":
             partner_vals = {"member": True}
             if self.receiver_not_member:
-                partner = self.subscription_request.create_coop_partner()
+                partner = self.subscription_request.setup_partner()
                 self.subscription_request.state = "done"
                 sub_reg_num = self.env["ir.sequence"].next_by_code("cooperator.number")
                 # fixme: get_eater_vals() is really specific and should not be
