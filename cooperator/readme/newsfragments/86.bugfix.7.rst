@@ -1,0 +1,2 @@
+Fix the display of the first name in email templates and add tests to cover
+this.
