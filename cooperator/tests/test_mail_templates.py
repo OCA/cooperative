@@ -4,6 +4,7 @@
 
 from freezegun import freeze_time
 
+from odoo import fields
 from odoo.tests.common import TransactionCase
 
 from .cooperator_test_mixin import CooperatorTestMixin
@@ -198,16 +199,38 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
         """
         self._test_mail_template_share_increase(self.create_dummy_company_cooperator())
 
-    def _test_mail_template_share_transfer(self, cooperator):
-        subscription_request = self.create_dummy_subscription_from_partner(cooperator)
-        subscription_request.validate_subscription_request()
+    def _test_mail_template_share_transfer(self, cooperator, subscription_request_vals):
+        subscription_request_vals.update(
+            {
+                "firstname": "first name 2",
+                "lastname": "last name 2",
+                "email": "email2@example.net",
+            }
+        )
+        operation_request = self.env["operation.request"].create(
+            {
+                "operation_type": "transfer",
+                "partner_id": cooperator.id,
+                "share_product_id": self.share_y.id,
+                "quantity": 1,
+                "receiver_not_member": True,
+                "subscription_request": [
+                    fields.Command.create(subscription_request_vals)
+                ],
+            }
+        )
+        operation_request.submit_operation()
+        operation_request.approve_operation()
         last_mail_id = self._get_last_mail_id()
-        self.pay_invoice(subscription_request.capital_release_request)
-        message = self._get_new_mail_messages(last_mail_id)
-        self.assertEqual(len(message), 1)
-        self.assertEqual(message.recipient_ids, subscription_request.partner_id)
+        operation_request.execute_operation()
+        messages = self._get_new_mail_messages(last_mail_id)
+        # there should be 2 messages: one for the receiver and one for the
+        # sender.
+        self.assertEqual(len(messages), 2)
+        message = messages[0]
+        self.assertEqual(message.recipient_ids, cooperator)
         self.assertIn("Hello first name,", message.body_html)
-        self.assertIn("for the new share(s) you have taken", message.body_html)
+        self.assertIn("adaptation on your shares portfolio", message.body_html)
         self.assertEqual(len(message.attachment_ids), 1)
         # should be .pdf but pdf generation is disabled in test mode.
         self.assertEqual(
@@ -216,19 +239,139 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
                 number=cooperator.cooperator_register_number
             ),
         )
+        message = messages[1]
+        if subscription_request_vals.get("is_company"):
+            new_cooperator_email = subscription_request_vals["company_email"]
+        else:
+            new_cooperator_email = subscription_request_vals["email"]
+        new_cooperator = self.env["res.partner"].search(
+            [("email", "=", new_cooperator_email)]
+        )
+        self.assertEqual(message.recipient_ids, new_cooperator)
+        self.assertIn("Hello first name 2,", message.body_html)
+        self.assertIn("shares have been transferred to you", message.body_html)
+        self.assertEqual(len(message.attachment_ids), 1)
+        # should be .pdf but pdf generation is disabled in test mode.
+        self.assertEqual(
+            message.attachment_ids.name,
+            "Certificate {number}.html".format(
+                number=new_cooperator.cooperator_register_number
+            ),
+        )
 
     def test_mail_template_share_transfer(self):
         """
-        Test that registering a payment for a capital release request for a
-        share transfer sends a message with the cooperator certificate in
-        attachment.
+        Test that executing a share transfer operation sends a message with
+        the cooperator certificate in attachment.
         """
-        self._test_mail_template_share_transfer(self.create_dummy_cooperator())
+        self._test_mail_template_share_transfer(
+            self.create_dummy_cooperator(), self.get_dummy_subscription_requests_vals()
+        )
 
     def test_mail_template_share_transfer_company(self):
         """
-        Test that registering a payment for a capital release request for a
-        share transfer for a company sends a message with the cooperator
-        certificate in attachment.
+        Test that executing a share transfer operation to a company sends a
+        message with the cooperator certificate in attachment.
         """
-        self._test_mail_template_share_transfer(self.create_dummy_company_cooperator())
+        subscription_request_vals = self.get_dummy_company_subscription_requests_vals()
+        subscription_request_vals.update(
+            {
+                "company_name": "dummy company 2",
+                "company_email": "companyemail2@example.net",
+                "company_register_number": "dummy company register number 2",
+            }
+        )
+        self._test_mail_template_share_transfer(
+            self.create_dummy_company_cooperator(), subscription_request_vals
+        )
+
+    def _test_mail_template_share_transfer_existing_cooperator(
+        self, cooperator, subscription_request_vals
+    ):
+        subscription_request_vals.update(
+            {
+                "firstname": "first name 2",
+                "lastname": "last name 2",
+                "email": "email2@example.net",
+            }
+        )
+        subscription_request = self.env["subscription.request"].create(
+            subscription_request_vals
+        )
+        self.validate_subscription_request_and_pay(subscription_request)
+        if subscription_request_vals.get("is_company"):
+            new_cooperator_email = subscription_request_vals["company_email"]
+        else:
+            new_cooperator_email = subscription_request_vals["email"]
+        new_cooperator = self.env["res.partner"].search(
+            [("email", "=", new_cooperator_email)]
+        )
+        operation_request = self.env["operation.request"].create(
+            {
+                "operation_type": "transfer",
+                "partner_id": cooperator.id,
+                "partner_id_to": new_cooperator.id,
+                "share_product_id": self.share_y.id,
+                "quantity": 1,
+            }
+        )
+        operation_request.submit_operation()
+        operation_request.approve_operation()
+        last_mail_id = self._get_last_mail_id()
+        operation_request.execute_operation()
+        messages = self._get_new_mail_messages(last_mail_id)
+        # there should be 2 messages: one for the receiver and one for the
+        # sender.
+        self.assertEqual(len(messages), 2)
+        message = messages[0]
+        self.assertEqual(message.recipient_ids, cooperator)
+        self.assertIn("Hello first name,", message.body_html)
+        self.assertIn("adaptation on your shares portfolio", message.body_html)
+        self.assertEqual(len(message.attachment_ids), 1)
+        # should be .pdf but pdf generation is disabled in test mode.
+        self.assertEqual(
+            message.attachment_ids.name,
+            "Certificate {number}.html".format(
+                number=cooperator.cooperator_register_number
+            ),
+        )
+        message = messages[1]
+        self.assertEqual(message.recipient_ids, new_cooperator)
+        self.assertIn("Hello first name 2,", message.body_html)
+        self.assertIn("shares have been transferred to you", message.body_html)
+        self.assertEqual(len(message.attachment_ids), 1)
+        # should be .pdf but pdf generation is disabled in test mode.
+        self.assertEqual(
+            message.attachment_ids.name,
+            "Certificate {number}.html".format(
+                number=new_cooperator.cooperator_register_number
+            ),
+        )
+
+    def test_mail_template_share_transfer_existing_cooperator(self):
+        """
+        Test that executing a share transfer operation to an existing
+        cooperator sends a message with the cooperator certificate in
+        attachment.
+        """
+        self._test_mail_template_share_transfer_existing_cooperator(
+            self.create_dummy_cooperator(), self.get_dummy_subscription_requests_vals()
+        )
+
+    def test_mail_template_share_transfer_existing_cooperator_company(self):
+        """
+        Test that executing a share transfer operation to an existing company
+        cooperator sends a message with the cooperator certificate in
+        attachment.
+        """
+        subscription_request_vals = self.get_dummy_company_subscription_requests_vals()
+        subscription_request_vals.update(
+            {
+                "company_name": "dummy company 2",
+                "company_email": "companyemail2@example.net",
+                "company_register_number": "dummy company register number 2",
+            }
+        )
+        self._test_mail_template_share_transfer_existing_cooperator(
+            self.create_dummy_company_cooperator(), subscription_request_vals
+        )

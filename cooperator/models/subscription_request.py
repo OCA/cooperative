@@ -798,17 +798,11 @@ class SubscriptionRequest(models.Model):
             else:
                 contact.write({"parent_id": self.partner_id.id, "representative": True})
 
-    def validate_subscription_request(self):
-        # todo rename to validate (careful with iwp dependencies)
-        self.ensure_one()
-        if self.state not in ("draft", "waiting"):
-            raise ValidationError(
-                _("The request must be in draft or on waiting list to be validated")
-            )
-
-        if self.ordered_parts <= 0:
-            raise UserError(_("Number of share must be greater than 0."))
-
+    def setup_partner(self):
+        """
+        Ensure a partner with all required properties is linked to this
+        subscription request (creating one if necessary) and return it.
+        """
         # fixme: when re-using an existing partner (as self.partner_id or as a
         # representative), their values are not updated with the values of the
         # subscription request. this includes partner information (name,
@@ -828,6 +822,21 @@ class SubscriptionRequest(models.Model):
 
         if self.is_company and not partner.has_representative():
             self._find_or_create_representative()
+
+        return partner
+
+    def validate_subscription_request(self):
+        # todo rename to validate (careful with iwp dependencies)
+        self.ensure_one()
+        if self.state not in ("draft", "waiting"):
+            raise ValidationError(
+                _("The request must be in draft or on waiting list to be validated")
+            )
+
+        if self.ordered_parts <= 0:
+            raise UserError(_("Number of share must be greater than 0."))
+
+        partner = self.setup_partner()
 
         invoice = self.create_invoice(partner)
         self.write({"state": "done"})

@@ -130,10 +130,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <div style="margin: 0px; padding: 0px;">
     <p style="margin: 0px; padding: 0px; font-size: 13px;">
         Hello
-        <t
-                        t-if="object.is_company"
-                        t-out="object.child_ids.filtered(lambda c: c.representative).firstname"
-                    />
+        <t t-if="object.is_company" t-out="object.get_representative().firstname" />
         <t t-else="" t-out="object.firstname" />,
         <br /><br />
         We confirm the reception of your payment. You are now a shareholder of our cooperative.
@@ -172,10 +169,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <div style="margin: 0px; padding: 0px;">
     <p style="margin: 0px; padding: 0px; font-size: 13px;">
         Hello
-        <t
-                        t-if="object.is_company"
-                        t-out="object.child_ids.filtered(lambda c: c.representative).firstname"
-                    />
+        <t t-if="object.is_company" t-out="object.get_representative().firstname" />
         <t t-else="" t-out="object.firstname" />,
         <br /><br />
         We confirm the reception of your payment for the new share(s) you have taken.
@@ -212,9 +206,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <div style="margin: 0px; padding: 0px;">
     <p style="margin: 0px; padding: 0px; font-size: 13px;">
         Hello
-        <t t-out="object.firstname" />,
+        <t t-if="object.is_company" t-out="object.get_representative().firstname" />
+        <t t-else="" t-out="object.firstname" />,
         <br /><br />
-        We confirm that the shares have been transfered to you. If you were not already a cooperator, you are now a shareholder of our cooperative.
+        We confirm that the shares have been transferred to you. If you were not already a cooperator, you are now a shareholder of our cooperative.
         <br /><br />
         Please find in attachment your <t
                         t-out="object.env.company.name"
@@ -248,7 +243,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <div style="margin: 0px; padding: 0px;">
     <p style="margin: 0px; padding: 0px; font-size: 13px;">
         Hello
-        <t t-out="object.firstname" />,
+        <t t-if="object.is_company" t-out="object.get_representative().firstname" />
+        <t t-else="" t-out="object.firstname" />,
         <br /><br />
         We confirm that the adaptation on your shares portfolio has been performed succesfully. Your cooperator certificate has been adapted accordingly.
         <br /><br />
