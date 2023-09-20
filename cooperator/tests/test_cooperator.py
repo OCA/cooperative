@@ -1146,3 +1146,208 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         invoice = self.subscription_request_1.capital_release_request
         self.assertFalse(invoice.invoice_line_ids.tax_ids)
         self.assertEqual(len(invoice.line_ids), 2)
+
+    def _get_last_register_id(self):
+        return self.env["subscription.register"].search([], order="id desc", limit=1).id
+
+    def _get_new_register_records(self, last_register_id):
+        return self.env["subscription.register"].search([("id", ">", last_register_id)])
+
+    def _get_last_register_sequence_value(self):
+        register_sequence = self.env["ir.sequence"].search(
+            [("code", "=", "register.operation"), ("company_id", "=", self.company.id)]
+        )
+        return register_sequence.number_next_actual - 1
+
+    @freeze_time("2023-06-21")
+    def test_transfer_operation(self):
+        """
+        Test that the share transfer operation works correctly.
+        """
+        cooperator = self.create_dummy_cooperator()
+        subscription_request_vals = self.get_dummy_subscription_requests_vals()
+        subscription_request_vals.update(
+            {
+                "firstname": "first name 2",
+                "lastname": "last name 2",
+                "email": "email2@example.net",
+            }
+        )
+        operation_request = self.env["operation.request"].create(
+            {
+                "operation_type": "transfer",
+                "partner_id": cooperator.id,
+                "share_product_id": self.share_y.id,
+                "quantity": 1,
+                "receiver_not_member": True,
+                "subscription_request": [
+                    fields.Command.create(subscription_request_vals)
+                ],
+            }
+        )
+        self.assertEqual(operation_request.subscription_request.state, "transfer")
+        operation_request.submit_operation()
+        operation_request.approve_operation()
+        last_register_id = self._get_last_register_id()
+        operation_request.execute_operation()
+        self.assertEqual(cooperator.number_of_share, 1)
+        new_cooperator = self.env["res.partner"].search(
+            [("email", "=", "email2@example.net")]
+        )
+        self.assertTrue(new_cooperator.member)
+        self.assertEqual(new_cooperator.number_of_share, 1)
+        # the dummy subscription request should be set as done to avoid
+        # validating it twice.
+        self.assertEqual(operation_request.subscription_request.state, "done")
+        register_entry = self._get_new_register_records(last_register_id)
+        self.assertEqual(register_entry.partner_id, cooperator)
+        self.assertEqual(register_entry.partner_id_to, new_cooperator)
+        self.assertEqual(register_entry.quantity, 1)
+        self.assertEqual(register_entry.share_product_id, self.share_y)
+        self.assertEqual(register_entry.type, "transfer")
+        self.assertEqual(register_entry.share_unit_price, self.share_y.list_price)
+        self.assertEqual(register_entry.date, date(2023, 6, 21))
+        seq_number = self._get_last_register_sequence_value()
+        self.assertEqual(register_entry.name, str(seq_number))
+        self.assertEqual(register_entry.register_number_operation, seq_number)
+
+    @freeze_time("2023-06-21")
+    def test_transfer_operation_existing_cooperator(self):
+        """
+        Test that the share transfer operation to an existing cooperator works
+        correctly.
+        """
+        cooperator = self.create_dummy_cooperator()
+        subscription_request_vals = self.get_dummy_subscription_requests_vals()
+        subscription_request_vals.update(
+            {
+                "firstname": "first name 2",
+                "lastname": "last name 2",
+                "email": "email2@example.net",
+            }
+        )
+        subscription_request = self.env["subscription.request"].create(
+            subscription_request_vals
+        )
+        self.validate_subscription_request_and_pay(subscription_request)
+        new_cooperator = self.env["res.partner"].search(
+            [("email", "=", "email2@example.net")]
+        )
+        operation_request = self.env["operation.request"].create(
+            {
+                "operation_type": "transfer",
+                "partner_id": cooperator.id,
+                "partner_id_to": new_cooperator.id,
+                "share_product_id": self.share_y.id,
+                "quantity": 1,
+            }
+        )
+        operation_request.submit_operation()
+        operation_request.approve_operation()
+        last_register_id = self._get_last_register_id()
+        operation_request.execute_operation()
+        self.assertEqual(cooperator.number_of_share, 1)
+        self.assertEqual(new_cooperator.number_of_share, 3)
+        register_entry = self._get_new_register_records(last_register_id)
+        self.assertEqual(register_entry.partner_id, cooperator)
+        self.assertEqual(register_entry.partner_id_to, new_cooperator)
+        self.assertEqual(register_entry.quantity, 1)
+        self.assertEqual(register_entry.share_product_id, self.share_y)
+        self.assertEqual(register_entry.type, "transfer")
+        self.assertEqual(register_entry.share_unit_price, self.share_y.list_price)
+        self.assertEqual(register_entry.date, date(2023, 6, 21))
+        seq_number = self._get_last_register_sequence_value()
+        self.assertEqual(register_entry.name, str(seq_number))
+        self.assertEqual(register_entry.register_number_operation, seq_number)
+
+    @freeze_time("2023-06-21")
+    def test_sell_back_operation(self):
+        """
+        Test that the sell back operation works correctly.
+        """
+        cooperator = self.create_dummy_cooperator()
+        operation_request = self.env["operation.request"].create(
+            {
+                "operation_type": "sell_back",
+                "partner_id": cooperator.id,
+                "share_product_id": self.share_y.id,
+                "quantity": 1,
+            }
+        )
+        operation_request.submit_operation()
+        operation_request.approve_operation()
+        last_register_id = self._get_last_register_id()
+        operation_request.execute_operation()
+        self.assertEqual(cooperator.number_of_share, 1)
+        register_entry = self._get_new_register_records(last_register_id)
+        self.assertEqual(register_entry.partner_id, cooperator)
+        self.assertFalse(register_entry.partner_id_to)
+        self.assertEqual(register_entry.quantity, 1)
+        self.assertEqual(register_entry.share_product_id, self.share_y)
+        self.assertEqual(register_entry.type, "sell_back")
+        self.assertEqual(register_entry.share_unit_price, self.share_y.list_price)
+        self.assertEqual(register_entry.date, date(2023, 6, 21))
+        seq_number = self._get_last_register_sequence_value()
+        self.assertEqual(register_entry.name, str(seq_number))
+        self.assertEqual(register_entry.register_number_operation, seq_number)
+        self.assertTrue(cooperator.member)
+
+    def test_sell_back_all_shares(self):
+        """
+        Test that selling back all shares results in the cooperator to not be
+        a cooperator anymore.
+        """
+        cooperator = self.create_dummy_cooperator()
+        operation_request = self.env["operation.request"].create(
+            {
+                "operation_type": "sell_back",
+                "partner_id": cooperator.id,
+                "share_product_id": self.share_y.id,
+                "quantity": 2,
+            }
+        )
+        operation_request.submit_operation()
+        operation_request.approve_operation()
+        operation_request.execute_operation()
+        self.assertFalse(cooperator.member)
+        self.assertTrue(cooperator.old_member)
+
+    @freeze_time("2023-06-21")
+    def test_convert_operation(self):
+        """
+        Test that the share conversion operation works correctly.
+        """
+        cooperator = self.create_dummy_cooperator()
+        operation_request = self.env["operation.request"].create(
+            {
+                "operation_type": "convert",
+                "partner_id": cooperator.id,
+                "share_product_id": self.share_y.id,
+                "share_to_product_id": self.share_x.id,
+                "quantity": 2,
+            }
+        )
+        operation_request.submit_operation()
+        operation_request.approve_operation()
+        last_register_id = self._get_last_register_id()
+        operation_request.execute_operation()
+        # share_x costs twice as much as share_y, so there is only one share
+        self.assertEqual(cooperator.number_of_share, 1)
+        self.assertEqual(cooperator.cooperator_type, "share_x")
+        share_line = cooperator.share_ids
+        self.assertEqual(share_line.share_product_id, self.share_x)
+        self.assertEqual(share_line.share_number, 1)
+        self.assertEqual(share_line.share_unit_price, self.share_x.list_price)
+        register_entry = self._get_new_register_records(last_register_id)
+        self.assertEqual(register_entry.partner_id, cooperator)
+        self.assertFalse(register_entry.partner_id_to)
+        self.assertEqual(register_entry.quantity, 2)
+        self.assertEqual(register_entry.share_product_id, self.share_y)
+        self.assertEqual(register_entry.share_to_product_id, self.share_x)
+        self.assertEqual(register_entry.quantity_to, 1)
+        self.assertEqual(register_entry.type, "convert")
+        self.assertEqual(register_entry.share_unit_price, self.share_y.list_price)
+        self.assertEqual(register_entry.date, date(2023, 6, 21))
+        seq_number = self._get_last_register_sequence_value()
+        self.assertEqual(register_entry.name, str(seq_number))
+        self.assertEqual(register_entry.register_number_operation, seq_number)
