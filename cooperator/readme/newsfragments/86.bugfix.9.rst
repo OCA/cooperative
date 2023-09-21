@@ -1,0 +1,1 @@
+Fix required company fields on subscription request form.
