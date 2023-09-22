@@ -143,9 +143,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     <label>Company Register Number:</label>
                     <span t-field="coop_partner.company_register_number" />
                 </div>
-                <div t-if="coop_partner.is_company and partner.representative">
+                <div
+                    t-if="coop_partner.is_company and coop_partner.get_representative()"
+                >
                     <label>Legal Representative:</label>
-                    <t t-out="partner.representative" />
+                    <t t-out="coop_partner.get_representative().name" />
                 </div>
                 <div class="o_download_pdf btn-toolbar flex-sm-nowrap mt-2">
                     <div class="btn-group flex-grow-1 me-1 mb-1">
