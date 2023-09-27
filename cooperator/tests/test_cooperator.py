@@ -1353,3 +1353,16 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         seq_number = self._get_last_register_sequence_value()
         self.assertEqual(register_entry.name, str(seq_number))
         self.assertEqual(register_entry.register_number_operation, seq_number)
+
+    def test_company_and_representative_email_different(self):
+        """
+        Test that it is not possible to create a subscription request with
+        the same email address for the company and the representative.
+        """
+        subscription_request_vals = self.get_dummy_company_subscription_requests_vals()
+        subscription_request_vals["company_email"] = subscription_request_vals["email"]
+        with self.assertRaises(ValidationError) as cm:
+            self.env["subscription.request"].create(subscription_request_vals)
+        self.assertEqual(
+            str(cm.exception), "Email and Company Email must be different."
+        )
