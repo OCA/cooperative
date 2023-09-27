@@ -44,6 +44,17 @@ _xml_ids_renames = [
 ]
 
 
+def rename_subscription_request_state(cr):
+    cr.execute(
+        """
+        update subscription_request
+        set state = 'blocked'
+        where state = 'block'
+        """
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     openupgrade.rename_xmlids(env.cr, _xml_ids_renames)
+    rename_subscription_request_state(env.cr)

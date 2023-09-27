@@ -224,7 +224,7 @@ class SubscriptionRequest(models.Model):
     state = fields.Selection(
         [
             ("draft", "Draft"),
-            ("block", "Blocked"),  # todo reword to blocked
+            ("blocked", "Blocked"),
             ("done", "Done"),
             ("waiting", "Waiting"),
             # fixme: this is only used when a subscription request is used for
