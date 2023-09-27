@@ -1,0 +1,3 @@
+Prevent to create a subscription request where Email and Company Email have
+the same value, to avoid trying to create a recursive partner hierarchy when
+validating the subscription request (the partner being the parent of itself).

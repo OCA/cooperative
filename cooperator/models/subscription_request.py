@@ -66,6 +66,12 @@ class SubscriptionRequest(models.Model):
                     % request.share_product_id.name
                 )
 
+    @api.constrains("email", "company_email")
+    def _check_company_and_representative_email_different(self):
+        for record in self:
+            if record.email == record.company_email:
+                raise ValidationError(_("Email and Company Email must be different."))
+
     def _send_confirmation_mail(self):
         if self.company_id.send_confirmation_email and not self.is_operation:
             mail_template_notif = (
