@@ -29,7 +29,7 @@ class TaxShelterDeclaration(models.Model):
     month_from = fields.Char(string="Month from", required=True)
     month_to = fields.Char(string="Month to", required=True)
     tax_shelter_percentage = fields.Selection(
-        [("30", "30%"), ("45", "45%")],
+        [("25", "25%"), ("30", "30%"), ("45", "45%")],
         string="Tax Shelter percentage",
         required=True,
     )

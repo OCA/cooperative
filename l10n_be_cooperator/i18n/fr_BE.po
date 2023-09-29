@@ -43,6 +43,11 @@ msgid ""
 msgstr ""
 
 #. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__tax_shelter_declaration__tax_shelter_percentage__25
+msgid "25%"
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__tax_shelter_declaration__tax_shelter_percentage__30
 msgid "30%"
 msgstr ""
