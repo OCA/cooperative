@@ -1,0 +1,2 @@
+Fix form for companies by using a common layout for both forms (for
+individuals and for companies).
