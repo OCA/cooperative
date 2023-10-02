@@ -21,7 +21,7 @@
             </li>
             <li t-if="taxshelter" class="breadcrumb-item active">
                 <t
-                    t-esc="taxshelter.declaration_id.name"
+                    t-out="taxshelter.declaration_id.name"
                     t-if="taxshelter.declaration_id.name"
                 />
             </li>
@@ -71,7 +71,7 @@
                                 t-att-title="tax_shelter.declaration_id.name"
                             >
                                 <t
-                                    t-esc="tax_shelter.declaration_id.name"
+                                    t-out="tax_shelter.declaration_id.name"
                                     t-if="tax_shelter.declaration_id.name"
                                 />
                                 <em t-else="">Draft Tax Shelter Certificate</em>

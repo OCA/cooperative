@@ -4,7 +4,7 @@
 
 {
     "name": "Tax Shelter reports in Portal",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "depends": [
         "portal",
         "l10n_be_cooperator",
