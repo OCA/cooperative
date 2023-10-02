@@ -26,68 +26,71 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
             <xpath expr="/form/sheet/group" position='before'>
                 <group>
-                    <group>
-                        <field name="member" invisible="1" />
-                        <field
-                            name="representative"
-                            attrs="{'invisible':['|',('parent_id','=',False),('is_company','=',True)]}"
-                        />
-                        <field
-                            name="legal_form"
-                            attrs="{'invisible':[('is_company','=',False)]}"
-                        />
+                    <field name="cooperator" invisible="true" />
+                    <group
+                        groups="cooperator.cooperator_group_user"
+                        attrs="{'invisible': [('cooperator', '=', False)]}"
+                    >
                         <field
                             name="cooperator_register_number"
-                            readonly="True"
-                            attrs="{'invisible':[('member','=',False)]}"
+                            attrs="{'invisible': [('member', '=', False)]}"
                         />
-                        <field
-                            name="company_register_number"
-                            readonly="True"
-                            attrs="{'invisible':[('is_company','=',False)]}"
-                        />
-                        <field
-                            name="coop_candidate"
-                            groups="cooperator.cooperator_group_user"
-                        />
-                        <field name="cooperator" invisible="True" />
-                        <field
-                            name="member"
-                            groups="cooperator.cooperator_group_manager"
-                        />
+                        <field name="coop_candidate" />
+                        <field name="member" />
                         <field
                             name="cooperator_type"
-                            attrs="{'invisible':[('member','=',False)]}"
+                            attrs="{'invisible': [('member', '=', False)]}"
                         />
                         <field
                             name="effective_date"
-                            attrs="{'invisible':[('member','=',False)]}"
-                        />
-                    </group>
-                    <group>
-                        <field
-                            name="gender"
-                            attrs="{'invisible':[('is_company','=',True)]}"
+                            attrs="{'invisible': [('member', '=', False)]}"
                         />
                     </group>
                     <group
                         name="approvals"
-                        attrs="{'invisible':[('cooperator','=',False)]}"
+                        groups="cooperator.cooperator_group_user"
+                        attrs="{'invisible': [('cooperator', '=', False)]}"
                     >
-                        <field name="internal_rules_approved" />
-                        <field name="data_policy_approved" />
-                        <field name="financial_risk_approved" />
-                        <field name="generic_rules_approved" />
+                        <field
+                            name="internal_rules_approved"
+                            attrs="{'readonly': [('cooperator', '=', False)]}"
+                        />
+                        <field
+                            name="data_policy_approved"
+                            attrs="{'readonly': [('cooperator', '=', False)]}"
+                        />
+                        <field
+                            name="financial_risk_approved"
+                            attrs="{'readonly': [('cooperator', '=', False)]}"
+                        />
+                        <field
+                            name="generic_rules_approved"
+                            attrs="{'readonly': [('cooperator', '=', False)]}"
+                        />
+                    </group>
+                    <group>
+                        <field
+                            name="representative"
+                            attrs="{'invisible': ['|', ('parent_id', '=', False), ('is_company', '=', True)]}"
+                        />
+                        <field
+                            name="legal_form"
+                            attrs="{'invisible': [('is_company', '=', False)]}"
+                        />
+                        <field
+                            name="company_register_number"
+                            attrs="{'invisible': [('is_company', '=', False)], 'readonly': [('id', '!=', False)]}"
+                        />
                     </group>
                 </group>
             </xpath>
 
-            <page name='sales_purchases' position="after">
+            <page name="sales_purchases" position="after">
                 <field name="member" invisible="1" />
                 <page
                     string="Shares"
                     name="share"
-                    attrs="{'invisible':[('member','=',False)]}"
+                    attrs="{'invisible': [('member', '=', False)]}"
                     groups="cooperator.cooperator_group_user"
                 >
                     <group>
@@ -114,7 +117,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <page
                     string="Share subscriptions"
                     name="share_subscription"
-                    attrs="{'invisible':[('cooperator','=',False)]}"
+                    attrs="{'invisible': [('cooperator', '=', False)]}"
                     groups="cooperator.cooperator_group_user"
                 >
                     <field name="subscription_request_ids">
@@ -202,8 +205,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="name">Cooperators</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="domain">[('cooperative_membership_ids.member', '=', True)]</field>
-        <field name="context">{'create':False}</field>
+        <field name="domain">[("cooperative_membership_ids.member", "=", True)]</field>
+        <field name="context">{"create": False}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Cooperators
@@ -218,8 +221,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="domain">[('coop_candidate', '=',True)]</field>
-        <field name="context">{'create':False}</field>
+        <field name="domain">[("coop_candidate", "=", True)]</field>
+        <field name="context">{"create": False}</field>
         <field name="filter" eval="True" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -235,7 +238,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="domain">[('representative_of_member_company','=',True)]</field>
+        <field name="domain">[("representative_of_member_company", "=", True)]</field>
         <field name="filter" eval="True" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
