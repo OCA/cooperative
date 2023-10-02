@@ -150,7 +150,7 @@ class TaxShelterCertificate(models.Model):
         report = base64.b64encode(report)
         report_name = (
             self.partner_id.name + " " + name + " " + self.declaration_id.name + ".pdf"
-        )
+        ).replace("/", "_")
 
         return (report_name, report)
 
