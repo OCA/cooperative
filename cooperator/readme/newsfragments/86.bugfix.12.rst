@@ -1,0 +1,1 @@
+Fix error when creating a new partner from the normal partner form.
