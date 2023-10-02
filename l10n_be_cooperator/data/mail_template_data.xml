@@ -36,8 +36,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         For this you will find in attachment the documents certifying that
         you've suscribed to <t t-out="object.company_id.name" /> shares.
         <br /><br />
-        A dedicated FAQ is coming soon on <t t-out="object.company_id.website" />
-        <br /><br />
         For any additional questions, please contact
         <t t-out="object.company_id.coop_email_contact" />
         <br /><br />
