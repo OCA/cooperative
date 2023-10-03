@@ -614,7 +614,8 @@ class SubscriptionRequest(models.Model):
         partner_vals = {
             "name": self.company_name,
             "is_company": self.is_company,
-            "company_register_number": self.company_register_number,  # noqa
+            "company_register_number": self.company_register_number,
+            "legal_form": self.company_type,
             "street": self.address,
             "zip": self.zip_code,
             "city": self.city,

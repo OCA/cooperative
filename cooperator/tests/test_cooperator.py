@@ -1366,3 +1366,31 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         self.assertEqual(
             str(cm.exception), "Email and Company Email must be different."
         )
+
+    def test_company_type_to_legal_form(self):
+        """
+        Test that the value of the company_type field of subscription request
+        is copied to the legal form field of the created partner.
+        """
+        subscription_request_vals = self.get_dummy_company_subscription_requests_vals()
+        # an existing type cannot be used because they are only defined in
+        # localization modules.
+        subscription_request_model = self.env["subscription.request"]
+        res_partner_model = self.env["res.partner"]
+        subscription_request_company_type = subscription_request_model._fields[
+            "company_type"
+        ]
+        subscription_request_company_types = subscription_request_company_type.selection
+        subscription_request_company_type.selection = [("dummy_type", "Dummy Type")]
+        res_partner_legal_form = res_partner_model._fields["legal_form"]
+        res_partner_legal_forms = res_partner_legal_form.selection
+        res_partner_legal_form.selection = [("dummy_type", "Dummy Type")]
+        subscription_request_vals["company_type"] = "dummy_type"
+        subscription_request = subscription_request_model.create(
+            subscription_request_vals
+        )
+        self.validate_subscription_request_and_pay(subscription_request)
+        self.assertEqual(subscription_request.partner_id.legal_form, "dummy_type")
+        # restore previous values
+        subscription_request_company_type.selection = subscription_request_company_types
+        res_partner_legal_form.selection = res_partner_legal_forms
