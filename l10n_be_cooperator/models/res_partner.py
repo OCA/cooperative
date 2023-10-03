@@ -6,11 +6,19 @@ from odoo import fields, models
 
 
 def get_company_type_selection():
+    # this list comes from
+    # https://www.belgium.be/fr/economie/entreprise/creation/types_de_societe
     return [
-        ("scrl", "SCRL"),
+        ("aisbl", "AISBL"),
         ("asbl", "ASBL"),
-        ("sprl", "SPRL"),
         ("sa", "SA"),
+        ("sc", "SC"),
+        ("scomm", "SComm"),
+        ("snc", "SNC"),
+        ("srl", "SRL"),
+        # former types (before 2019)
+        ("scrl", "SCRL"),
+        ("sprl", "SPRL"),
     ]
 
 

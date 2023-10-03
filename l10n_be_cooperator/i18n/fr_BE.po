@@ -124,6 +124,12 @@ msgid "<span>Déclaration Tax Shelter</span>"
 msgstr ""
 
 #. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__aisbl
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__aisbl
+msgid "AISBL"
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__asbl
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__asbl
 msgid "ASBL"
@@ -521,15 +527,39 @@ msgid "SA"
 msgstr ""
 
 #. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__sc
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__sc
+msgid "SC"
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__scrl
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__scrl
 msgid "SCRL"
 msgstr ""
 
 #. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__scomm
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__scomm
+msgid "SComm"
+msgstr ""
+
+#. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__snc
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__snc
+msgid "SNC"
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__sprl
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__sprl
 msgid "SPRL"
+msgstr ""
+
+#. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__srl
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__srl
+msgid "SRL"
 msgstr ""
 
 #. module: l10n_be_cooperator
