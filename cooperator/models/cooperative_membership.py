@@ -19,6 +19,7 @@ class CooperativeMembership(models.Model):
             "Only one cooperative membership record can exist per company per partner",
         )
     ]
+    _order = "cooperator_register_number"
 
     @api.depends("partner_id.share_ids")
     def _compute_effective_date(self):
@@ -46,7 +47,9 @@ class CooperativeMembership(models.Model):
                     break
             record.cooperator_type = share_type
 
-    @api.depends("partner_id.share_ids.share_number")
+    @api.depends(
+        "partner_id.share_ids.share_number", "partner_id.share_ids.share_unit_price"
+    )
     def _compute_share_info(self):
         for record in self:
             number_of_share = 0
@@ -119,6 +122,9 @@ class CooperativeMembership(models.Model):
         ondelete="cascade",
         index=True,
     )
+    name = fields.Char(related="partner_id.name")
+    is_company = fields.Boolean(related="partner_id.is_company", store=True)
+    email = fields.Char(related="partner_id.email")
     # todo: remove this. this was used on res.partner. the existence of a
     # cooperative.membership record should be enough.
     cooperator = fields.Boolean(
@@ -149,17 +155,21 @@ class CooperativeMembership(models.Model):
         search=_search_share_ids,
     )
     cooperator_register_number = fields.Integer(
-        string="Cooperator Number", readonly=True, copy=False
+        string="Cooperator Number",
+        readonly=True,
+        copy=False,
+        group_operator=None,
     )
     number_of_share = fields.Integer(
         compute=_compute_share_info,
         string="Number of share",
+        store=True,
     )
     total_value = fields.Float(
         compute=_compute_share_info,
         string="Total value of shares",
+        store=True,
     )
-    # company_register_number = fields.Char(string="Company Register Number")
     cooperator_type = fields.Selection(
         selection=_get_share_type,
         compute=_compute_cooperator_type,

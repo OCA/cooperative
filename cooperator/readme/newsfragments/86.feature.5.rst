@@ -1,0 +1,2 @@
+Add a new "Registers" menu entry and move the "Subscription Register" menu
+entry there.

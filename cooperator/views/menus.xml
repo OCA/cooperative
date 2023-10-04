@@ -45,19 +45,34 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         sequence="140"
     />
     <menuitem
-        name="Subscription Register"
-        id="menu_cooperator_subscription_register"
-        action="subscription_register_action"
-        parent="menu_cooperator_main_subscription"
-        sequence="150"
-    />
-    <menuitem
         name="Operation request"
         id="menu_cooperator_operation_request"
         action="operation_request_action"
         parent="menu_cooperator_main_subscription"
         groups="cooperator.cooperator_group_user"
         sequence="160"
+    />
+
+    <menuitem
+        name="Registers"
+        id="menu_cooperator_main_register"
+        parent="menu_cooperator_main"
+        groups="cooperator.cooperator_group_user"
+        sequence="15"
+    />
+    <menuitem
+        name="Subscription Register"
+        id="menu_cooperator_subscription_register"
+        action="subscription_register_action"
+        parent="menu_cooperator_main_register"
+        sequence="10"
+    />
+    <menuitem
+        name="Cooperator Register"
+        id="menu_cooperator_register"
+        action="cooperator_register_action"
+        parent="menu_cooperator_main_register"
+        sequence="20"
     />
 
     <menuitem
