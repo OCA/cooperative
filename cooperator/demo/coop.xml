@@ -91,8 +91,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </function>
 
     <record id="product_template_share_type_1_demo" model="product.template">
-        <field name="name">Part A - Founder</field>
-        <field name="short_name">Part A</field>
+        <field name="name">Share A - Founder</field>
+        <field name="short_name">Share A</field>
         <field name="default_code">share_a</field>
         <field name="categ_id" ref="product_category_company_share" />
         <field name="is_share" eval="True" />
@@ -106,8 +106,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </record>
 
     <record id="product_template_share_type_2_demo" model="product.template">
-        <field name="name">Part B - Worker</field>
-        <field name="short_name">Part B</field>
+        <field name="name">Share B - Worker</field>
+        <field name="short_name">Share B</field>
         <field name="default_code">share_b</field>
         <field name="categ_id" ref="product_category_company_share" />
         <field name="is_share" eval="True" />

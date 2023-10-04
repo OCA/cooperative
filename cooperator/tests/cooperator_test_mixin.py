@@ -19,7 +19,7 @@ class CooperatorTestMixin:
         cls.share_x = cls.env["product.product"].create(
             {
                 "name": "Share X - Founder",
-                "short_name": "Part X",
+                "short_name": "Share X",
                 "default_code": "share_x",
                 "categ_id": company_share_category.id,
                 "is_share": True,
@@ -31,7 +31,7 @@ class CooperatorTestMixin:
         cls.share_y = cls.env["product.product"].create(
             {
                 "name": "Share Y - Worker",
-                "short_name": "Part Y",
+                "short_name": "Share Y",
                 "default_code": "share_y",
                 "categ_id": company_share_category.id,
                 "is_share": True,
