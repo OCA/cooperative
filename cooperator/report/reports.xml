@@ -9,7 +9,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
     <record model="ir.actions.report" id="action_cooperator_invoices">
         <field name="model">account.move</field>
-        <field name="name">Capital release request</field>
+        <field name="name">Capital Release Request</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">cooperator.report_invoice</field>
         <field name="report_file">cooperator.report_invoice</field>
@@ -23,7 +23,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
     <record model="ir.actions.report" id="action_cooperator_subscription_report">
         <field name="model">subscription.register</field>
-        <field name="name">Subscription Register Report</field>
+        <field name="name">Subscription Register</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">cooperator.report_subscription_register</field>
         <field name="report_file">cooperator.report_subscription_register</field>
@@ -34,7 +34,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
     <record model="ir.actions.report" id="action_cooperator_report_certificate">
         <field name="model">res.partner</field>
-        <field name="name">Cooperator certificate</field>
+        <field name="name">Cooperator Certificate</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">cooperator.report_cooperator_certificate</field>
         <field name="report_file">cooperator.report_cooperator_certificate</field>
@@ -44,13 +44,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </record>
 
     <record model="ir.actions.report" id="action_report_cooperator_register">
-        <field name="model">res.partner</field>
-        <field name="name">Cooperator register</field>
+        <field name="model">cooperative.membership</field>
+        <field name="name">Cooperator Register</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">cooperator.report_cooperator_register</field>
         <field name="report_file">cooperator.report_cooperator_register</field>
         <field name="multi" eval="True" />
-        <field name="binding_model_id" ref="model_res_partner" />
+        <field name="binding_model_id" ref="model_cooperative_membership" />
         <field name="binding_type">report</field>
     </record>
 

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2023 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <record id="cooperative_membership_view_tree" model="ir.ui.view">
+        <field name="name">cooperative.membership.tree</field>
+        <field name="model">cooperative.membership</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false">
+                <field name="cooperator_register_number" string="Number" />
+                <field name="partner_id" widget="many2one" />
+                <field name="email" />
+                <field name="is_company" />
+                <field name="effective_date" />
+                <field name="cooperator_type" />
+                <field name="number_of_share" sum="Total Shares" />
+                <field name="total_value" sum="Total Shares Value" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="cooperative_membership_view_search" model="ir.ui.view">
+        <field name="name">cooperative.membership.search</field>
+        <field name="model">cooperative.membership</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id" />
+                <field name="cooperator_register_number" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <separator />
+                <filter
+                    string="Individuals"
+                    name="cooperator_is_individual"
+                    domain="[('is_company', '=', False)]"
+                />
+                <filter
+                    string="Companies"
+                    name="cooperator_is_company"
+                    domain="[('is_company', '=', True)]"
+                />
+                <filter name="filter_by_effective_date" date="effective_date" />
+                <group>
+                    <filter
+                        name="group_by_cooperator_type"
+                        context="{'group_by' : 'cooperator_type'}"
+                    />
+                    <filter
+                        name="group_by_is_company"
+                        context="{'group_by' : 'is_company'}"
+                    />
+                    <filter
+                        name="group_by_effective_date"
+                        context="{'group_by' : 'effective_date'}"
+                    />
+                    <filter
+                        name="group_by_company"
+                        context="{'group_by' : 'company_id'}"
+                        groups="base.group_multi_company"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="cooperator_register_action" model="ir.actions.act_window">
+        <field name="name">Cooperator Register</field>
+        <field name="res_model">cooperative.membership</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[("member", "=", True)]</field>
+    </record>
+
+</odoo>
