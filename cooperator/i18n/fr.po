@@ -715,6 +715,12 @@ msgid "Company Register Number"
 msgstr "Numéro d'entreprise"
 
 #. module: cooperator
+#: model:ir.ui.menu,name:cooperator.menu_cooperator_company_representative
+#: model_terms:ir.ui.view,arch_db:cooperator.view_res_partner_filter
+msgid "Company Representatives"
+msgstr "Représentants de personne morale"
+
+#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__company_email
 msgid "Company email"
 msgstr "Courriel de la société"
@@ -728,13 +734,6 @@ msgstr "Nom de la société"
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__company_register_number
 msgid "Company register number"
 msgstr "Numéro d'entreprise"
-
-#. module: cooperator
-#: model:ir.actions.act_window,name:cooperator.action_company_representative_form
-#: model:ir.ui.menu,name:cooperator.menu_cooperator_company_representative
-#: model_terms:ir.actions.act_window,help:cooperator.action_company_representative_form
-msgid "Company representative"
-msgstr "Représentant de personne morale"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__company_type
@@ -758,6 +757,9 @@ msgid "Contact email address for the cooperator"
 msgstr "Courriel du coopérateur"
 
 #. module: cooperator
+#: model:ir.actions.act_window,name:cooperator.action_company_representative_form
+#: model:ir.actions.act_window,name:cooperator.action_partner_cooperator_candidate_form
+#: model:ir.actions.act_window,name:cooperator.action_partner_cooperator_form
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_main_coop
 msgid "Contacts"
 msgstr "Contacts"
@@ -858,11 +860,6 @@ msgid "Cooperator Number"
 msgstr "Numéro de coopérateur"
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.view_res_partner_filter
-msgid "Cooperator Partners"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.actions.act_window,name:cooperator.cooperator_register_action
 #: model:ir.actions.report,name:cooperator.action_report_cooperator_register
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_register
@@ -882,12 +879,6 @@ msgstr "Type de coopérateur"
 #: model:ir.model.fields,field_description:cooperator.field_res_users__coop_candidate
 msgid "Cooperator candidate"
 msgstr "Candidat coopérateur"
-
-#. module: cooperator
-#: model:ir.actions.act_window,name:cooperator.action_partner_cooperator_candidate_form
-#: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_candidate_form
-msgid "Cooperator candidates"
-msgstr "Candidats coopérateurs"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_mail_template__is_cooperator_template
@@ -911,10 +902,8 @@ msgid "Cooperator register operation sequence"
 msgstr ""
 
 #. module: cooperator
-#: model:ir.actions.act_window,name:cooperator.action_partner_cooperator_form
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_cooperator
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_main
-#: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_form
 #: model_terms:ir.ui.view,arch_db:cooperator.view_res_partner_filter
 msgid "Cooperators"
 msgstr "Coopérateurs"
@@ -1575,6 +1564,13 @@ msgid "Next Activity Type"
 msgstr "Type d'Activités à Venir"
 
 #. module: cooperator
+#: model_terms:ir.actions.act_window,help:cooperator.action_company_representative_form
+#: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_candidate_form
+#: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_form
+msgid "No contacts found"
+msgstr "Aucun contact trouvé"
+
+#. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperative_membership_view_tree
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_register
 msgid "Number"
@@ -1637,13 +1633,6 @@ msgstr "Le nombre de parts doit être supérieur à 0."
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__quantity_to
 msgid "Number of share to"
 msgstr "Nombre de parts à"
-
-#. module: cooperator
-#: model_terms:ir.actions.act_window,help:cooperator.action_company_representative_form
-#: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_candidate_form
-#: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_form
-msgid "Odoo helps you track all activities related to your cooperators."
-msgstr ""
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.view_res_partner_filter

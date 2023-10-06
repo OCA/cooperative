@@ -1,0 +1,1 @@
+Move the "Cooperator Candidates" menu entry to the "Cooperators" menu.
