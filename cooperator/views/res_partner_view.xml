@@ -142,19 +142,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </field>
     </record>
 
-    <record id="view_partner_tree" model="ir.ui.view">
-        <field name="name">view_partner_tree</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_tree" />
-        <field name="arch" type="xml">
-            <xpath expr="/tree/field[@name='display_name']" position='after'>
-                <field name="cooperator_register_number" />
-                <field name="cooperator_type" />
-                <field name="effective_date" />
-            </xpath>
-        </field>
-    </record>
-
     <record id="view_res_partner_filter" model="ir.ui.view">
         <field name="name">res.partner.select</field>
         <field name="model">res.partner</field>
@@ -163,21 +150,23 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <filter name="supplier" position='after'>
                 <filter
                     string="Cooperators"
-                    name="cooperators"
+                    name="cooperator"
                     domain="[('cooperative_membership_ids.member', '=' , True)]"
-                    help="Cooperator Partners"
-                />
-                <filter
-                    string="Old Cooperators"
-                    name="old_cooperators"
-                    domain="[('cooperative_membership_ids.old_member', '=', True)]"
-                    help="Cooperator Partners"
                 />
                 <filter
                     string="Cooperator Candidates"
-                    name="cooperator_candidates"
+                    name="cooperator_candidate"
                     domain="[('cooperative_membership_ids.coop_candidate', '=', True)]"
-                    help="Cooperator Partners"
+                />
+                <filter
+                    string="Old Cooperators"
+                    name="old_cooperator"
+                    domain="[('cooperative_membership_ids.old_member', '=', True)]"
+                />
+                <filter
+                    string="Company Representatives"
+                    name="cooperator_company_representative"
+                    domain="[('representative_of_member_company', '=', True)]"
                 />
             </filter>
             <!--
@@ -202,50 +191,47 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </record>
 
     <record id="action_partner_cooperator_form" model="ir.actions.act_window">
-        <field name="name">Cooperators</field>
+        <field name="name">Contacts</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="domain">[("cooperative_membership_ids.member", "=", True)]</field>
-        <field name="context">{"create": False}</field>
+        <field name="context">
+            {
+                "create": False,
+                "search_default_cooperator": True,
+            }
+        </field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Cooperators
-            </p><p>
-                Odoo helps you track all activities related to your cooperators.
-            </p>
+            <p class="o_view_nocontent_neutral_face">No contacts found</p>
         </field>
     </record>
 
     <record id="action_partner_cooperator_candidate_form" model="ir.actions.act_window">
-        <field name="name">Cooperator candidates</field>
-        <field name="type">ir.actions.act_window</field>
+        <field name="name">Contacts</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="domain">[("coop_candidate", "=", True)]</field>
-        <field name="context">{"create": False}</field>
-        <field name="filter" eval="True" />
+        <field name="context">
+            {
+                "create": False,
+                "search_default_cooperator_candidate": True,
+            }
+        </field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Cooperator candidates
-            </p><p>
-                Odoo helps you track all activities related to your cooperators.
-            </p>
+            <p class="o_view_nocontent_neutral_face">No contacts found</p>
         </field>
     </record>
 
     <record id="action_company_representative_form" model="ir.actions.act_window">
-        <field name="name">Company representative</field>
-        <field name="type">ir.actions.act_window</field>
+        <field name="name">Contacts</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="domain">[("representative_of_member_company", "=", True)]</field>
-        <field name="filter" eval="True" />
+        <field name="context">
+            {
+                "create": False,
+                "search_default_cooperator_company_representative": True,
+            }
+        </field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Company representative
-            </p><p>
-                Odoo helps you track all activities related to your cooperators.
-            </p>
+            <p class="o_view_nocontent_neutral_face">No contacts found</p>
         </field>
     </record>
 

@@ -27,7 +27,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         id="menu_cooperator_subscription_request"
         action="subscription_request_action"
         parent="menu_cooperator_main_subscription"
-        sequence="110"
+        sequence="10"
     />
     <menuitem
         name="Register Payment"
@@ -35,14 +35,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         action="action_move_out_invoice_type"
         parent="menu_cooperator_main_subscription"
         groups="cooperator.cooperator_group_user"
-        sequence="130"
-    />
-    <menuitem
-        name="Cooperator Candidates"
-        id="menu_cooperator_cooperator_candidate"
-        action="action_partner_cooperator_candidate_form"
-        parent="menu_cooperator_main_subscription"
-        sequence="140"
+        sequence="30"
     />
     <menuitem
         name="Operation request"
@@ -50,7 +43,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         action="operation_request_action"
         parent="menu_cooperator_main_subscription"
         groups="cooperator.cooperator_group_user"
-        sequence="160"
+        sequence="60"
     />
 
     <menuitem
@@ -58,7 +51,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         id="menu_cooperator_main_register"
         parent="menu_cooperator_main"
         groups="cooperator.cooperator_group_user"
-        sequence="15"
+        sequence="20"
     />
     <menuitem
         name="Subscription Register"
@@ -79,22 +72,28 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         name="Contacts"
         id="menu_cooperator_main_coop"
         parent="menu_cooperator_main"
-        sequence="20"
+        sequence="30"
     />
     <menuitem
         name="Cooperators"
         id="menu_cooperator_cooperator"
         action="action_partner_cooperator_form"
         parent="menu_cooperator_main_coop"
-        sequence="210"
+        sequence="10"
     />
     <menuitem
-        name="Company representative"
+        name="Cooperator Candidates"
+        id="menu_cooperator_cooperator_candidate"
+        action="action_partner_cooperator_candidate_form"
+        parent="menu_cooperator_main_coop"
+        sequence="20"
+    />
+    <menuitem
+        name="Company Representatives"
         id="menu_cooperator_company_representative"
         action="action_company_representative_form"
         parent="menu_cooperator_main_coop"
-        groups="base.group_erp_manager"
-        sequence="220"
+        sequence="30"
     />
 
     <menuitem
@@ -102,14 +101,14 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         id="menu_cooperator_main_reporting"
         parent="menu_cooperator_main"
         groups="cooperator.cooperator_group_user"
-        sequence="30"
+        sequence="80"
     />
 
     <menuitem
         name="Configuration"
         id="menu_cooperator_config"
         parent="menu_cooperator_main"
-        sequence="40"
+        sequence="100"
         groups="cooperator_group_manager"
     />
     <menuitem
@@ -117,14 +116,14 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         id="menu_cooperator_share_product"
         action="product_template_action"
         parent="menu_cooperator_config"
-        sequence="410"
+        sequence="10"
     />
     <menuitem
         name="Mail Templates"
         id="menu_cooperator_templates"
         action="mail_template_action"
         parent="menu_cooperator_config"
-        sequence="430"
+        sequence="30"
     />
 
 </odoo>

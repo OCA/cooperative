@@ -568,6 +568,12 @@ msgid "Company Register Number"
 msgstr ""
 
 #. module: cooperator
+#: model:ir.ui.menu,name:cooperator.menu_cooperator_company_representative
+#: model_terms:ir.ui.view,arch_db:cooperator.view_res_partner_filter
+msgid "Company Representatives"
+msgstr ""
+
+#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__company_email
 msgid "Company email"
 msgstr ""
@@ -580,13 +586,6 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__company_register_number
 msgid "Company register number"
-msgstr ""
-
-#. module: cooperator
-#: model:ir.actions.act_window,name:cooperator.action_company_representative_form
-#: model:ir.ui.menu,name:cooperator.menu_cooperator_company_representative
-#: model_terms:ir.actions.act_window,help:cooperator.action_company_representative_form
-msgid "Company representative"
 msgstr ""
 
 #. module: cooperator
@@ -611,6 +610,9 @@ msgid "Contact email address for the cooperator"
 msgstr ""
 
 #. module: cooperator
+#: model:ir.actions.act_window,name:cooperator.action_company_representative_form
+#: model:ir.actions.act_window,name:cooperator.action_partner_cooperator_candidate_form
+#: model:ir.actions.act_window,name:cooperator.action_partner_cooperator_form
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_main_coop
 msgid "Contacts"
 msgstr ""
@@ -715,11 +717,6 @@ msgid "Cooperator Number"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.view_res_partner_filter
-msgid "Cooperator Partners"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.actions.act_window,name:cooperator.cooperator_register_action
 #: model:ir.actions.report,name:cooperator.action_report_cooperator_register
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_register
@@ -738,12 +735,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_res_partner__coop_candidate
 #: model:ir.model.fields,field_description:cooperator.field_res_users__coop_candidate
 msgid "Cooperator candidate"
-msgstr ""
-
-#. module: cooperator
-#: model:ir.actions.act_window,name:cooperator.action_partner_cooperator_candidate_form
-#: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_candidate_form
-msgid "Cooperator candidates"
 msgstr ""
 
 #. module: cooperator
@@ -770,10 +761,8 @@ msgid "Cooperator register operation sequence"
 msgstr ""
 
 #. module: cooperator
-#: model:ir.actions.act_window,name:cooperator.action_partner_cooperator_form
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_cooperator
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_main
-#: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_form
 #: model_terms:ir.ui.view,arch_db:cooperator.view_res_partner_filter
 msgid "Cooperators"
 msgstr ""
@@ -1430,6 +1419,13 @@ msgid "Next Activity Type"
 msgstr ""
 
 #. module: cooperator
+#: model_terms:ir.actions.act_window,help:cooperator.action_company_representative_form
+#: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_candidate_form
+#: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_form
+msgid "No contacts found"
+msgstr ""
+
+#. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperative_membership_view_tree
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_register
 msgid "Number"
@@ -1492,13 +1488,6 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__quantity_to
 msgid "Number of share to"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.actions.act_window,help:cooperator.action_company_representative_form
-#: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_candidate_form
-#: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_form
-msgid "Odoo helps you track all activities related to your cooperators."
 msgstr ""
 
 #. module: cooperator
