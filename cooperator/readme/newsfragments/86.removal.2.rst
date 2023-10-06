@@ -1,0 +1,2 @@
+Remove the extra columns in the contacts list view; they can now be found in
+the cooperator register.
