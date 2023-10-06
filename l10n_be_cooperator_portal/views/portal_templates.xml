@@ -36,10 +36,10 @@
         priority="25"
     >
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
-            <t t-if="tax_shelter_count" t-call="portal.portal_docs_entry">
+            <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Tax Shelter Certificates</t>
                 <t t-set="url" t-value="'/my/tax_shelter_certificates'" />
-                <t t-set="count" t-value="tax_shelter_count" />
+                <t t-set="placeholder_count" t-value="'tax_shelter_count'" />
             </t>
         </xpath>
     </template>
@@ -60,7 +60,7 @@
                     <tr class="active">
                         <th>Declaration Year</th>
 
-                        <th class="text-right">Total Amount</th>
+                        <th class="text-end">Total Amount</th>
                     </tr>
                 </thead>
                 <t t-foreach="tax_shelters" t-as="tax_shelter">
@@ -77,7 +77,7 @@
                                 <em t-else="">Draft Tax Shelter Certificate</em>
                             </a>
                         </td>
-                        <td class="text-right">
+                        <td class="text-end">
                             <span
                                 t-field="tax_shelter.total_amount"
                                 t-options='{"widget": "monetary", "display_currency": company_id.currency_id}'

@@ -12,15 +12,18 @@ from odoo.addons.portal.controllers.portal import CustomerPortal, pager as porta
 
 
 class PortalTaxShelter(CustomerPortal):
-    def _prepare_portal_layout_values(self):
-        values = super()._prepare_portal_layout_values()
-        partner = request.env.user.partner_id
-        tax_shelter_count = (
-            request.env["tax.shelter.certificate"]
-            .sudo()
-            .search_count([("partner_id", "in", [partner.commercial_partner_id.id])])
-        )
-        values["tax_shelter_count"] = tax_shelter_count
+    def _prepare_home_portal_values(self, counters):
+        values = super()._prepare_home_portal_values(counters)
+        if "tax_shelter_count" in counters:
+            partner = request.env.user.partner_id
+            tax_shelter_count = (
+                request.env["tax.shelter.certificate"]
+                .sudo()
+                .search_count(
+                    [("partner_id", "in", [partner.commercial_partner_id.id])]
+                )
+            )
+            values["tax_shelter_count"] = tax_shelter_count
         return values
 
     def _taxshelter_certificate_get_page_view_values(
@@ -56,7 +59,7 @@ class PortalTaxShelter(CustomerPortal):
         * Tax Shelter Certificates
         * Shares Certifcates
         """
-        values = self._prepare_portal_layout_values()
+        values = self._prepare_home_portal_values("tax_shelter_count")
         TaxShelterCertificate = request.env["tax.shelter.certificate"]
         partner = request.env.user.partner_id
         domain = [("partner_id", "in", [partner.commercial_partner_id.id])]
