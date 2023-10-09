@@ -42,7 +42,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="country_id" ref="base.be" />
     </record>
 
-    <record id="cooperator_membership_2_demo" model="cooperative.membership">
+    <record id="cooperative_membership_2_demo" model="cooperative.membership">
         <field name="company_id" ref="base.main_company" />
         <field name="partner_id" ref="res_partner_cooperator_2_demo" />
         <field name="cooperator" eval="True" />

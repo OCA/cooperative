@@ -16,6 +16,13 @@ class SubscriptionRegister(models.Model):
     _name = "subscription.register"
     _description = "Subscription register"
     _check_company_auto = True
+    _sql_constraints = [
+        (
+            "company_id_register_number_operation_key",
+            "unique (company_id, register_number_operation)",
+            "A register operation number must be unique (per company)",
+        ),
+    ]
 
     def _compute_total_line(self):
         for line in self:

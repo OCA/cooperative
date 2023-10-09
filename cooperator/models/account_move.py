@@ -5,7 +5,7 @@
 
 from datetime import datetime
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class AccountMove(models.Model):
@@ -76,14 +76,6 @@ class AccountMove(models.Model):
             return self.company_id.get_cooperator_certificate_increase_mail_template()
         return self.company_id.get_cooperator_certificate_mail_template()
 
-    @api.model
-    def get_next_cooperator_number(self):
-        return self.env["ir.sequence"].next_by_code("cooperator.number")
-
-    @api.model
-    def get_next_register_operation(self):
-        return self.env["ir.sequence"].next_by_code("register.operation")
-
     def get_share_line_vals(self, line, effective_date):
         return {
             "share_number": line.quantity,
@@ -113,7 +105,7 @@ class AccountMove(models.Model):
             self.company_id.id
         )
         if not cooperative_membership.member and not cooperative_membership.old_member:
-            sub_reg_num = self.get_next_cooperator_number()
+            sub_reg_num = self.company_id.get_next_cooperator_number()
             vals = {
                 "member": True,
                 "old_member": False,
@@ -145,7 +137,7 @@ class AccountMove(models.Model):
 
         self.set_membership()
 
-        sub_reg_operation = self.get_next_register_operation()
+        sub_reg_operation = self.company_id.get_next_register_operation_number()
 
         for line in self.invoice_line_ids:
             sub_reg_vals = self.get_subscription_register_vals(line, effective_date)
@@ -188,18 +180,26 @@ class AccountMove(models.Model):
     def _invoice_paid_hook(self):
         result = super()._invoice_paid_hook()
         for invoice in self:
+            cooperative_membership = invoice.partner_id.get_cooperative_membership(
+                invoice.company_id.id
+            )
+            if not (
+                invoice.move_type == "out_invoice"
+                and invoice.release_capital_request
+                and cooperative_membership
+                and cooperative_membership.cooperator
+            ):
+                continue
+
             # we check if there is an open refund for this invoice. in this
             # case we don't run the process_subscription function as the
             # invoice has been reconciled with a refund and not a payment.
             domain = self.get_refund_domain(invoice)
             refund = self.search(domain)
-
-            if (
-                invoice.partner_id.cooperator
-                and invoice.release_capital_request
-                and invoice.move_type == "out_invoice"
-                and not refund
-            ):
+            if refund:
+                # if there is a open refund we mark the subscription as cancelled
+                invoice.subscription_request.state = "cancelled"
+            else:
                 # take the effective date from the payment.
                 # by default the confirmation date is the payment date
                 effective_date = datetime.now()
@@ -211,14 +211,6 @@ class AccountMove(models.Model):
 
                 invoice.subscription_request.state = "paid"
                 invoice.post_process_confirm_paid(effective_date)
-            # if there is a open refund we mark the subscription as cancelled
-            elif (
-                invoice.partner_id.cooperator
-                and invoice.release_capital_request
-                and invoice.move_type == "out_invoice"
-                and refund
-            ):
-                invoice.subscription_request.state = "cancelled"
         return result
 
     def _get_capital_release_mail_template(self):

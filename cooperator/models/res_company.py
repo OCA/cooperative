@@ -239,6 +239,20 @@ class ResCompany(models.Model):
     def get_cooperator_share_update_mail_template(self):
         return self._get_cooperator_template("cooperator_share_update_mail_template")
 
+    def get_next_cooperator_number(self):
+        self.ensure_one()
+        return (
+            self.env["ir.sequence"].with_company(self).next_by_code("cooperator.number")
+        )
+
+    def get_next_register_operation_number(self):
+        self.ensure_one()
+        return (
+            self.env["ir.sequence"]
+            .with_company(self)
+            .next_by_code("register.operation")
+        )
+
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)

@@ -41,6 +41,10 @@ _xml_ids_renames = [
         "cooperator.cooperator_register_G001",
         "cooperator.report_cooperator_register",
     ),
+    (
+        "cooperator.cooperator_membership_2_demo",
+        "cooperator.cooperative_membership_2_demo",
+    ),
 ]
 
 
