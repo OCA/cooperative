@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* l10n_be_cooperator_website_national_number
+# 	* l10n_be_cooperator_website_national_number
 #
 msgid ""
 msgstr ""
