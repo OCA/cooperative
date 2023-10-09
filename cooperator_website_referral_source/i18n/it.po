@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* cooperator_website_referral_source
+# 	* cooperator_website_referral_source
 #
 msgid ""
 msgstr ""
