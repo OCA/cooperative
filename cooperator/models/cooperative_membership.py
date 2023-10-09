@@ -14,10 +14,19 @@ class CooperativeMembership(models.Model):
     _check_company_auto = True
     _sql_constraints = [
         (
-            "cooperative_membership_company_id_partner_id_key",
+            "company_id_partner_id_key",
             "unique (company_id, partner_id)",
-            "Only one cooperative membership record can exist per company per partner",
-        )
+            "Only one cooperative membership record can exist per partner (per company)",
+        ),
+        (
+            # "numbe" instead of "number" because the constraint name is
+            # appended to the table name and it must be 63 characters maximum.
+            # following the default postgresql naming by appending the column
+            # names and truncating before _key.
+            "company_id_cooperator_register_numbe_key",
+            "unique (company_id, cooperator_register_number)",
+            "A cooperator register number must be unique (per company)",
+        ),
     ]
     _order = "cooperator_register_number"
 

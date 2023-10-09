@@ -1,0 +1,2 @@
+Ensure per-company sequences are used (for the cooperator register number and
+the operation register number).
