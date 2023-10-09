@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* l10n_es_cooperator
+# 	* l10n_es_cooperator
 #
 msgid ""
 msgstr ""
@@ -18,8 +18,10 @@ msgstr ""
 
 #. module: l10n_es_cooperator
 #: model:ir.model.fields,help:l10n_es_cooperator.field_subscription_request__vat
-msgid "\n"
-"        The Tax Identification Number. Complete it if the contact is subjected to\n"
+msgid ""
+"\n"
+"        The Tax Identification Number. Complete it if the contact is "
+"subjected to\n"
 "        government taxes. Used in some legal statements.\"\n"
 "        "
 msgstr ""
