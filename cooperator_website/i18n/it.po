@@ -301,8 +301,8 @@ msgstr "Modulo sito web contatto cooperatore"
 msgid ""
 "You can't subscribe for an amount that exceeds {amount}{currency_symbol}."
 msgstr ""
-"Non è possibile sottoscrivere un valore superiore a "
-"{amount}{currency_symbol}."
+"Non è possibile sottoscrivere un valore superiore a {amount}"
+"{currency_symbol}."
 
 #. module: cooperator_website
 #: code:addons/cooperator_website/controllers/main.py:0
