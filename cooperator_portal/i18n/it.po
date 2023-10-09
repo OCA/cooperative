@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* cooperator_portal
+# 	* cooperator_portal
 #
 msgid ""
 msgstr ""
@@ -23,8 +23,10 @@ msgstr "<em>Richiesta bozza</em>"
 
 #. module: cooperator_portal
 #: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_capital_releases
-msgid "<span class=\"badge badge-pill badge-info\">\n"
-"                                        <i class=\"fa fa-fw fa-clock-o\" aria-label=\"Opened\" title=\"Opened\" role=\"img\"/>\n"
+msgid ""
+"<span class=\"badge badge-pill badge-info\">\n"
+"                                        <i class=\"fa fa-fw fa-clock-o\" "
+"aria-label=\"Opened\" title=\"Opened\" role=\"img\"/>\n"
 "                                        <span class=\"d-none d-md-inline\">\n"
 "                                            Waiting for Payment\n"
 "                                        </span>\n"
@@ -40,8 +42,10 @@ msgstr ""
 
 #. module: cooperator_portal
 #: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_capital_releases
-msgid "<span class=\"badge badge-pill badge-success\">\n"
-"                                        <i class=\"fa fa-fw fa-check\" aria-label=\"Paid\" title=\"Paid\" role=\"img\"/>\n"
+msgid ""
+"<span class=\"badge badge-pill badge-success\">\n"
+"                                        <i class=\"fa fa-fw fa-check\" aria-"
+"label=\"Paid\" title=\"Paid\" role=\"img\"/>\n"
 "                                        <span class=\"d-none d-md-inline\">\n"
 "                                            Paid\n"
 "                                        </span>\n"
@@ -57,8 +61,10 @@ msgstr ""
 
 #. module: cooperator_portal
 #: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_capital_releases
-msgid "<span class=\"badge badge-pill badge-warning\">\n"
-"                                        <i class=\"fa fa-fw fa-remove\" aria-label=\"Cancelled\" title=\"Cancelled\" role=\"img\"/>\n"
+msgid ""
+"<span class=\"badge badge-pill badge-warning\">\n"
+"                                        <i class=\"fa fa-fw fa-remove\" aria-"
+"label=\"Cancelled\" title=\"Cancelled\" role=\"img\"/>\n"
 "                                        <span class=\"d-none d-md-inline\">\n"
 "                                            Cancelled\n"
 "                                        </span>\n"
