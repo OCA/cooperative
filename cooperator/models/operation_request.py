@@ -385,23 +385,21 @@ class OperationRequest(models.Model):
             if self.receiver_not_member:
                 partner = self.subscription_request.setup_partner()
                 self.subscription_request.state = "done"
-                sub_reg_num = self.env["ir.sequence"].next_by_code("cooperator.number")
+                cooperator_number = self.company_id.get_next_cooperator_number()
                 # fixme: get_eater_vals() is really specific and should not be
                 # called from here.
                 partner_vals.update(
                     sub_request.get_eater_vals(partner, self.share_product_id)
                 )
-                partner_vals["cooperator_register_number"] = sub_reg_num
+                partner_vals["cooperator_register_number"] = cooperator_number
                 partner.write(partner_vals)
                 self.partner_id_to = partner
             else:
                 # means an old member or cooperator candidate
                 if not self.partner_id_to.member:
                     if self.partner_id_to.cooperator_register_number == 0:
-                        sub_reg_num = self.env["ir.sequence"].next_by_code(
-                            "cooperator.number"
-                        )
-                        partner_vals["cooperator_register_number"] = sub_reg_num
+                        cooperator_number = self.company_id.get_next_cooperator_number()
+                        partner_vals["cooperator_register_number"] = cooperator_number
                     # fixme: get_eater_vals() is really specific and should
                     # not be called from here.
                     partner_vals.update(
@@ -428,7 +426,7 @@ class OperationRequest(models.Model):
         else:
             raise ValidationError(_("This operation is not yet implemented."))
 
-        sub_reg_operation = self.env["ir.sequence"].next_by_code("register.operation")
+        sub_reg_operation = self.company_id.get_next_register_operation_number()
         values["name"] = sub_reg_operation
         values["register_number_operation"] = int(sub_reg_operation)
 

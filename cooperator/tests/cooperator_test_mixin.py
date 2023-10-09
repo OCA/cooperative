@@ -87,7 +87,7 @@ class CooperatorTestMixin:
             .with_context(**ctx)
             .create(register_payments_vals)
         )
-        register_payment.with_company(invoice.company_id).action_create_payments()
+        register_payment.action_create_payments()
 
     def create_payment_account_move(self, invoice, date, amount=None):
         if amount is None:

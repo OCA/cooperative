@@ -1,0 +1,2 @@
+Add unique per-company constraints on the cooperator register number and the
+operation register number.

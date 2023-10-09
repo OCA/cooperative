@@ -660,19 +660,19 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         current one works and keeps data correctly separated per company.
         """
         company_2 = self.company_2
-        subscription_request = (
-            self.env["subscription.request"]
-            .with_company(company_2)
-            .create(self.get_dummy_subscription_requests_vals())
+        subscription_request_vals = self.get_dummy_subscription_requests_vals()
+        subscription_request_vals["company_id"] = company_2.id
+        subscription_request = self.env["subscription.request"].create(
+            subscription_request_vals
         )
-        # validate subscription request for company_2 but with self.company as
-        # the current company.
-        subscription_request.with_company(self.company).validate_subscription_request()
+        subscription_request.validate_subscription_request()
         invoice = subscription_request.capital_release_request
         self.assertEqual(invoice.company_id, company_2)
-        # register a payment for company_2 but with self.company as the
-        # current company.
-        self.pay_invoice(invoice.with_company(self.company))
+        self.pay_invoice(invoice)
+        partner = subscription_request.partner_id
+        cooperative_membership = partner.cooperative_membership_ids
+        self.assertEqual(cooperative_membership.company_id, company_2)
+        self.assertNotEqual(cooperative_membership.cooperator_register_number, 0)
         partner = subscription_request.partner_id.with_company(self.company)
         self.assertFalse(partner.coop_candidate)
         self.assertFalse(partner.member)
@@ -1394,3 +1394,35 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         # restore previous values
         subscription_request_company_type.selection = subscription_request_company_types
         res_partner_legal_form.selection = res_partner_legal_forms
+
+    def test_cooperator_register_number_sequence_per_company(self):
+        """
+        Test that the cooperator register number sequence is different per
+        company.
+        """
+        company_1 = self.create_company("test company 1")
+        company_2 = self.create_company("test company 2")
+        subscription_request_vals = self.get_dummy_subscription_requests_vals()
+        subscription_request_vals["company_id"] = company_1.id
+        subscription_request = self.env["subscription.request"].create(
+            subscription_request_vals
+        )
+        self.validate_subscription_request_and_pay(subscription_request)
+        cooperator_1 = subscription_request.partner_id
+        subscription_request_vals = self.get_dummy_subscription_requests_vals()
+        subscription_request_vals["company_id"] = company_2.id
+        subscription_request = self.env["subscription.request"].create(
+            subscription_request_vals
+        )
+        self.validate_subscription_request_and_pay(subscription_request)
+        cooperator_2 = subscription_request.partner_id
+        # since both subscription requests use the same email address, the
+        # partner should be the same.
+        self.assertEqual(cooperator_1, cooperator_2)
+        self.assertEqual(len(cooperator_1.cooperative_membership_ids), 2)
+        cooperative_membership_1 = cooperator_1.cooperative_membership_ids[0]
+        self.assertEqual(cooperative_membership_1.company_id, company_1)
+        self.assertEqual(cooperative_membership_1.cooperator_register_number, 1)
+        cooperative_membership_2 = cooperator_2.cooperative_membership_ids[1]
+        self.assertEqual(cooperative_membership_2.company_id, company_2)
+        self.assertEqual(cooperative_membership_2.cooperator_register_number, 1)
