@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* cooperator_website
+# 	* cooperator_website
 #
 msgid ""
 msgstr ""
@@ -49,7 +49,9 @@ msgstr "Indirizzo"
 #. module: cooperator_website
 #: code:addons/cooperator_website/controllers/main.py:307
 #, python-format
-msgid "An account already exists for this email address. Please log in before filling in the form."
+msgid ""
+"An account already exists for this email address. Please log in before "
+"filling in the form."
 msgstr ""
 "Esiste già un account per questo indirizzo e-mail. Accedere prima di "
 "compilare il modulo."
@@ -296,10 +298,11 @@ msgstr "Modulo sito web contatto cooperatore"
 #. module: cooperator_website
 #: code:addons/cooperator_website/controllers/main.py:362
 #, python-format
-msgid "You can't subscribe for an amount that exceeds {amount}{currency_symbol}."
+msgid ""
+"You can't subscribe for an amount that exceeds {amount}{currency_symbol}."
 msgstr ""
-"Non è possibile sottoscrivere un valore superiore a "
-"{amount}{currency_symbol}."
+"Non è possibile sottoscrivere un valore superiore a {amount}"
+"{currency_symbol}."
 
 #. module: cooperator_website
 #: code:addons/cooperator_website/controllers/main.py:354
