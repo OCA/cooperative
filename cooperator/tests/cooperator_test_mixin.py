@@ -77,29 +77,31 @@ class CooperatorTestMixin:
         cls.company.chart_template_id.try_loading(company)
         return company
 
-    def pay_invoice(self, invoice, payment_date=None):
+    @classmethod
+    def pay_invoice(cls, invoice, payment_date=None):
         ctx = {"active_model": "account.move", "active_ids": [invoice.id]}
         register_payments_vals = {"payment_type": "inbound"}
         if payment_date is not None:
             register_payments_vals["payment_date"] = payment_date
         register_payment = (
-            self.env["account.payment.register"]
+            cls.env["account.payment.register"]
             .with_context(**ctx)
             .create(register_payments_vals)
         )
         register_payment.action_create_payments()
 
-    def create_payment_account_move(self, invoice, date, amount=None):
+    @classmethod
+    def create_payment_account_move(cls, invoice, date, amount=None):
         if amount is None:
             amount = invoice.line_ids[0].credit
-        journal = self.env["account.journal"].search(
+        journal = cls.env["account.journal"].search(
             [
                 ("type", "=", "bank"),
                 ("company_id", "=", invoice.company_id.id),
             ],
             limit=1,
         )
-        am = self.env["account.move"].create(
+        am = cls.env["account.move"].create(
             {
                 "journal_id": journal.id,
                 "date": date,
@@ -130,9 +132,10 @@ class CooperatorTestMixin:
         (invoice.line_ids[-1] + am.line_ids[-1]).reconcile()
         return am
 
-    def get_dummy_subscription_requests_vals(self):
-        return {
-            "share_product_id": self.share_y.id,
+    @classmethod
+    def get_dummy_subscription_requests_vals(cls, **custom_vals):
+        vals = {
+            "share_product_id": cls.share_y.id,
             "ordered_parts": 2,
             "firstname": "first name",
             "lastname": "last name",
@@ -141,7 +144,7 @@ class CooperatorTestMixin:
             "address": "dummy street",
             "zip_code": "dummy zip",
             "city": "dummy city",
-            "country_id": self.ref("base.be"),
+            "country_id": cls.env.ref("base.be").id,
             "lang": "en_US",
             "gender": "other",
             "birthdate": "1980-01-01",
@@ -149,49 +152,56 @@ class CooperatorTestMixin:
             "source": "manual",
         }
 
-    def get_dummy_company_subscription_requests_vals(self):
-        vals = self.get_dummy_subscription_requests_vals()
-        vals.update(
-            {
-                "is_company": True,
-                "company_name": "dummy company",
-                "company_email": "companyemail@example.net",
-                "company_register_number": "dummy company register number",
-                "contact_person_function": "dummy contact person function",
-            }
+        vals.update(custom_vals)
+        return vals
+
+    @classmethod
+    def get_dummy_company_subscription_requests_vals(cls):
+        vals = cls.get_dummy_subscription_requests_vals(
+            is_company=True,
+            company_name="dummy company",
+            company_email="companyemail@example.net",
+            company_register_number="dummy company register number",
+            contact_person_function="dummy contact person function",
         )
         return vals
 
-    def create_dummy_subscription_request(self):
-        return self.env["subscription.request"].create(
-            self.get_dummy_subscription_requests_vals()
+    @classmethod
+    def create_dummy_subscription_request(cls):
+        return cls.env["subscription.request"].create(
+            cls.get_dummy_subscription_requests_vals()
         )
 
-    def create_dummy_company_subscription_request(self):
-        return self.env["subscription.request"].create(
-            self.get_dummy_company_subscription_requests_vals()
+    @classmethod
+    def create_dummy_company_subscription_request(cls):
+        return cls.env["subscription.request"].create(
+            cls.get_dummy_company_subscription_requests_vals()
         )
 
-    def create_dummy_subscription_from_partner(self, partner):
-        vals = self.get_dummy_subscription_requests_vals()
-        vals["partner_id"] = partner.id
-        return self.env["subscription.request"].create(vals)
+    @classmethod
+    def create_dummy_subscription_from_partner(cls, partner):
+        vals = cls.get_dummy_subscription_requests_vals(partner_id=partner.id)
+        return cls.env["subscription.request"].create(vals)
 
-    def create_dummy_subscription_from_company_partner(self, partner):
-        vals = self.get_dummy_company_subscription_requests_vals()
+    @classmethod
+    def create_dummy_subscription_from_company_partner(cls, partner):
+        vals = cls.get_dummy_company_subscription_requests_vals()
         vals["partner_id"] = partner.id
-        return self.env["subscription.request"].create(vals)
+        return cls.env["subscription.request"].create(vals)
 
-    def validate_subscription_request_and_pay(self, subscription_request):
+    @classmethod
+    def validate_subscription_request_and_pay(cls, subscription_request):
         subscription_request.validate_subscription_request()
-        self.pay_invoice(subscription_request.capital_release_request)
+        cls.pay_invoice(subscription_request.capital_release_request)
 
-    def create_dummy_cooperator(self):
-        subscription_request = self.create_dummy_subscription_request()
-        self.validate_subscription_request_and_pay(subscription_request)
+    @classmethod
+    def create_dummy_cooperator(cls):
+        subscription_request = cls.create_dummy_subscription_request()
+        cls.validate_subscription_request_and_pay(subscription_request)
         return subscription_request.partner_id
 
-    def create_dummy_company_cooperator(self):
-        subscription_request = self.create_dummy_company_subscription_request()
-        self.validate_subscription_request_and_pay(subscription_request)
+    @classmethod
+    def create_dummy_company_cooperator(cls):
+        subscription_request = cls.create_dummy_company_subscription_request()
+        cls.validate_subscription_request_and_pay(subscription_request)
         return subscription_request.partner_id
