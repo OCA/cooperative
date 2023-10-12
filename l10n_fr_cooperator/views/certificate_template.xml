@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
         <template
-            id="certificate_i18n_fr"
-            inherit_id="cooperator.cooperator_certificat_G001_document"
-            name="French Layout Certificate"
-        >
-
-
+        id="certificate_i18n_fr"
+        inherit_id="cooperator.cooperator_certificat_G001_document"
+        name="French Layout Certificate"
+    >
             <xpath expr="//div[@name='total_table']" position="after">
                 <!-- TODO: English source text -->
                 <p name="legal_text">
@@ -80,5 +77,4 @@
             </xpath>
 
         </template>
-    </data>
 </odoo>
