@@ -10,5 +10,11 @@ class ResPartner(models.Model):
             ("eurl", "EURL / Entreprise individuelle"),
             ("sarl", "SARL"),
             ("sa", "SA / SAS"),
-        ]
+        ],
+        ondelete={
+            "asso": "set null",
+            "eurl": "set null",
+            "sarl": "set null",
+            "sa": "set null",
+        },
     )
