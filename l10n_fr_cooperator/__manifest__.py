@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).#
 {
     "name": "Cooperator France Localization",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "depends": ["cooperator", "cooperator_website", "l10n_fr"],
     "author": "Coop IT Easy SC",
     "category": "Cooperative management",
