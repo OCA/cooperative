@@ -6,7 +6,7 @@
     "name": "Cooperator France Localization",
     "version": "16.0.1.0.0",
     "depends": ["cooperator", "cooperator_website", "l10n_fr"],
-    "author": "Coop IT Easy SC",
+    "author": "Coop IT Easy SC, Odoo Community Association (OCA)",
     "category": "Cooperative management",
     "website": "https://github.com/OCA/cooperative",
     "license": "AGPL-3",
