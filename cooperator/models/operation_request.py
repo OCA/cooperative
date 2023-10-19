@@ -176,18 +176,6 @@ class OperationRequest(models.Model):
         for rec in self:
             rec.write({"state": "draft"})
 
-    def get_total_share_dic(self, partner):
-        total_share_dic = {}
-        share_products = self.env["product.product"].search([("is_share", "=", True)])
-
-        for share_product in share_products:
-            total_share_dic[share_product.id] = 0
-
-        for line in partner.share_ids:
-            total_share_dic[line.share_product_id.id] += line.share_number
-
-        return total_share_dic
-
     # This function doesn't handle the case of a cooperator can own
     # different kinds of share type
     def hand_share_over(self, partner, share_product_id, quantity):
@@ -214,17 +202,13 @@ class OperationRequest(models.Model):
             i += 1
         # if the cooperator sold all his shares he's no more
         # an effective member
-        remaning_share_dict = 0
-        for share_quant in self.get_total_share_dic(partner).values():
-            remaning_share_dict += share_quant
-        if remaning_share_dict == 0:
+        remaining_shares = partner.get_total_shares()
+        if remaining_shares == 0:
             self.partner_id.write({"member": False, "old_member": True})
 
     def has_share_type(self):
-        for line in self.partner_id.share_ids:
-            if line.share_product_id.id == self.share_product_id.id:
-                return True
-        return False
+        share_quantities = self.partner_id.get_share_quantities()
+        return bool(share_quantities[self.share_product_id.id])
 
     def validate(self):
         if not self.has_share_type() and self.operation_type in [
@@ -240,7 +224,7 @@ class OperationRequest(models.Model):
             )
 
         if self.operation_type in ["sell_back", "convert", "transfer"]:
-            total_share_dic = self.get_total_share_dic(self.partner_id)
+            total_share_dic = self.partner_id.get_share_quantities()
 
             if self.quantity > total_share_dic[self.share_product_id.id]:
                 raise ValidationError(

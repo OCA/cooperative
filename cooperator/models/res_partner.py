@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+from collections import defaultdict
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -283,3 +285,21 @@ class ResPartner(models.Model):
                 }
             )
         return result
+
+    def get_share_quantities(self):
+        """Return a defaultdict(int) with the amount of shares per product id."""
+        self.ensure_one()
+        total_shares = defaultdict(int)
+
+        for line in self.share_ids:
+            total_shares[line.share_product_id.id] = line.share_number
+
+        return total_shares
+
+    def get_total_shares(self):
+        """Return the total amount of shares belonging to a partner."""
+        self.ensure_one()
+        amount = 0
+        for qty in self.get_share_quantities().values():
+            amount += qty
+        return amount
