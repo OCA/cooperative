@@ -11,6 +11,14 @@ class ShareLine(models.Model):
     _description = "Share line"
     _check_company_auto = True
 
+    _sql_constraints = [
+        (
+            "share_number_is_positive",
+            "check (share_number >= 0)",
+            "The number of shares cannot be negative.",
+        ),
+    ]
+
     def _compute_total_line(self):
         res = {}
         for line in self:
