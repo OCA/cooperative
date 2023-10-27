@@ -1,8 +1,7 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: v1.15.1
+_commit: v1.17.2
 _src_path: gh:oca/oca-addons-repo-template
 ci: GitHub
-dependency_installation_mode: PIP
 generate_requirements_txt: true
 github_check_license: true
 github_ci_extra_env: {}
@@ -21,6 +20,4 @@ repo_description: Modules related to a cooperative registry (subscribtion reques
 repo_name: Cooperative
 repo_slug: cooperative
 repo_website: https://github.com/OCA/cooperative
-travis_apt_packages: []
-travis_apt_sources: []
 
