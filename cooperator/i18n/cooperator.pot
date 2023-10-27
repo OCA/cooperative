@@ -1420,7 +1420,6 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_subscription_request__message_has_error
-#: model:ir.model.fields,help:cooperator.field_subscription_request__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -2046,11 +2045,6 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__activity_user_id
 msgid "Responsible User"
-msgstr ""
-
-#. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_has_sms_error
-msgid "SMS Delivery error"
 msgstr ""
 
 #. module: cooperator
