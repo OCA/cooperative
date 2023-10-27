@@ -267,7 +267,9 @@ class OperationRequest(models.Model):
         return self.company_id.get_cooperator_share_transfer_mail_template()
 
     def _get_share_update_mail_template(self):
-        return self.company_id.get_cooperator_share_update_mail_template()
+        if self.partner_id.get_total_shares():
+            return self.company_id.get_cooperator_share_update_mail_template()
+        return self.company_id.get_cooperator_share_update_no_shares_mail_template()
 
     def _send_share_transfer_mail(
         self, sub_register_line

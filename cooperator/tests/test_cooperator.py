@@ -604,6 +604,50 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         with self.assertRaises(UserError):
             self.env["operation.request"].with_company(company_2).create(vals)
 
+    def test_execute_operation_request_transfer(self):
+        self.validate_subscription_request_and_pay(self.subscription_request_1)
+        from_partner = self.subscription_request_1.partner_id
+        target_partner = self.env["res.partner"].create({"name": "Target Partner"})
+
+        subscription_request = self.create_dummy_subscription_from_partner(from_partner)
+        self.validate_subscription_request_and_pay(subscription_request)
+
+        request = self.env["operation.request"].create(
+            {
+                "partner_id": from_partner.id,
+                "partner_id_to": target_partner.id,
+                "operation_type": "transfer",
+                "share_product_id": self.share_y.id,
+                "quantity": 1,
+                "subscription_request": subscription_request.ids,
+                # TODO: Honestly this field should be computed or shouldn't
+                # exist.
+                "receiver_not_member": True,
+            }
+        )
+        request._get_share_update_mail_template() == self.env.ref(
+            "cooperator.email_template_share_update"
+        )
+        request.quantity = 2
+        request._get_share_update_mail_template() == self.env.ref(
+            "cooperator.email_template_share_update_no_shares"
+        )
+        request.approve_operation()
+        request.execute_operation()
+
+        messages = self.env["mail.message"].search([], order="id desc")
+        # The order of these emails is an implementation detail.
+        self.assertIn(
+            "We confirm you that the adaptation on shares portfolio has been"
+            " succesfully performed. You have no remaining shares.",
+            messages[0].body,
+        )
+        self.assertFalse(messages[0].attachment_ids)
+        self.assertIn(
+            "We confirm you that the shares have been transfered to you.",
+            messages[1].body,
+        )
+
     def test_create_cooperator_for_other_company(self):
         """
         Test that creating a cooperator for a different company works and
