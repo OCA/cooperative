@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-09 09:13+0000\n"
+"PO-Revision-Date: 2023-11-22 09:34+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -659,7 +659,7 @@ msgstr ""
 "    <p>Salve ${object.subscription_request_ids[0].firstname},</p>\n"
 "\n"
 "    <p>Confermiamo che è stato eseguito con successo l'adeguamento nel "
-"portfolio delle quote. Il suo certificato di cooperazine è stato aggiornato "
+"portfolio delle quote. Il suo certificato di cooperazione è stato aggiornato "
 "di conseguenza.</p>\n"
 "\n"
 "    <br/>\n"
@@ -688,8 +688,8 @@ msgstr ""
 "\n"
 "    % if object.env.company.website:\n"
 "        <div>\n"
-"            Web :&nbsp;<a href=\"${object.env.company.website}\">${object."
-"env.company.website}</a>\n"
+"            Web :&nbsp;<a href=\"${object.env.company.website}\">${object.env"
+".company.website}</a>\n"
 "        </div>\n"
 "    %endif\n"
 "\n"
@@ -2284,7 +2284,7 @@ msgid ""
 "                            number"
 msgstr ""
 "Numero\n"
-"                            operazine"
+"                            operazione"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperator_subscription_G001
@@ -2882,28 +2882,28 @@ msgstr "TOTALE :"
 #: model:ir.model.fields,help:cooperator.field_res_company__data_policy_approval_text
 msgid "Text to display aside the checkbox to approve data policy."
 msgstr ""
-"Testo da visualizzare a lato dell'opzione per l'approvazine della politica "
+"Testo da visualizzare a lato dell'opzione per l'approvazione della politica "
 "dati."
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__financial_risk_approval_text
 msgid "Text to display aside the checkbox to approve financial risk."
 msgstr ""
-"Testo da visualizzare a lato dell'opzione per l'approvazine del rischio "
+"Testo da visualizzare a lato dell'opzione per l'approvazione del rischio "
 "finanziario."
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__internal_rules_approval_text
 msgid "Text to display aside the checkbox to approve internal rules."
 msgstr ""
-"Testo da visualizzare a lato dell'opzione per l'approvazine delle regole "
+"Testo da visualizzare a lato dell'opzione per l'approvazione delle regole "
 "interne."
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__generic_rules_approval_text
 msgid "Text to display aside the checkbox to approve the generic rules."
 msgstr ""
-"Testo da visualizzare a lato dell'opzione per l'approvazine delle regole "
+"Testo da visualizzare a lato dell'opzione per l'approvazione delle regole "
 "generiche."
 
 #. module: cooperator
