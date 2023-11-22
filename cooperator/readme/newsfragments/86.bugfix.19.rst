@@ -1,0 +1,2 @@
+Display an error message instead of failing when trying to create a
+subscription request from a partner and no default share product is found.

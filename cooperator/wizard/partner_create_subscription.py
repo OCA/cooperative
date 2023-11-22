@@ -29,8 +29,12 @@ class PartnerCreateSubscription(models.TransientModel):
                 domain.append(("by_company", "=", True))
             else:
                 domain.append(("by_individual", "=", True))
-
-        return self.env["product.product"].search(domain)[0]
+        products = self.env["product.product"].search(domain)
+        if not products:
+            raise UserError(
+                _("No default share product found for this type of partner.")
+            )
+        return products[0]
 
     def _get_representative(self):
         partner = self._get_partner()
