@@ -1462,7 +1462,6 @@ msgstr "Indien aangevinkt vragen nieuwe berichten uw aandacht."
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_subscription_request__message_has_error
-#: model:ir.model.fields,help:cooperator.field_subscription_request__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "indien aangevinkt hebben sommige leveringen een fout."
 
@@ -1896,11 +1895,6 @@ msgid "Operation request"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.operation_request_tree
-msgid "Operation requests"
-msgstr ""
-
-#. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:0
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__gender__other
 #, python-format
@@ -2089,11 +2083,6 @@ msgstr "Verantwoordelijke"
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__activity_user_id
 msgid "Responsible User"
 msgstr "Verantwoordelijke gebruiker"
-
-#. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:0
@@ -2366,7 +2355,6 @@ msgstr ""
 #: model:ir.actions.act_window,name:cooperator.subscription_register_action
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_subscription_register
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_register_form
-#: model_terms:ir.ui.view,arch_db:cooperator.subscription_register_tree
 msgid "Subscription Register"
 msgstr ""
 
@@ -2382,7 +2370,6 @@ msgstr ""
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
-#: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_tree
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
 msgid "Subscription Requests"
 msgstr ""

@@ -688,8 +688,8 @@ msgstr ""
 "\n"
 "    % if object.env.company.website:\n"
 "        <div>\n"
-"            Web :&nbsp;<a href=\"${object.env.company.website}\">${object.env"
-".company.website}</a>\n"
+"            Web :&nbsp;<a href=\"${object.env.company.website}\">${object."
+"env.company.website}</a>\n"
 "        </div>\n"
 "    %endif\n"
 "\n"
@@ -1873,7 +1873,6 @@ msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_subscription_request__message_has_error
-#: model:ir.model.fields,help:cooperator.field_subscription_request__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
@@ -2320,11 +2319,6 @@ msgid "Operation request"
 msgstr "Rchiesta operazione"
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.operation_request_tree
-msgid "Operation requests"
-msgstr "Rchieste operazione"
-
-#. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:0
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__gender__other
 #, python-format
@@ -2519,11 +2513,6 @@ msgstr "Responsabile"
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__activity_user_id
 msgid "Responsible User"
 msgstr "Utente responsabile"
-
-#. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Errore consegna SMS"
 
 #. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:0
@@ -2800,7 +2789,6 @@ msgstr "Registro iscrizione"
 #: model:ir.actions.act_window,name:cooperator.subscription_register_action
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_subscription_register
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_register_form
-#: model_terms:ir.ui.view,arch_db:cooperator.subscription_register_tree
 msgid "Subscription Register"
 msgstr "Registro iscrizione"
 
@@ -2816,7 +2804,6 @@ msgstr "Richista iscrizione"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
-#: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_tree
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
 msgid "Subscription Requests"
 msgstr "Richiste iscrizione"
@@ -3271,3 +3258,9 @@ msgstr "object._get_report_base_filename()"
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__state__paid
 msgid "paid"
 msgstr "pagata"
+
+#~ msgid "Operation requests"
+#~ msgstr "Rchieste operazione"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Errore consegna SMS"
