@@ -122,14 +122,14 @@
                             t-field="share.share_unit_price"
                             t-options='{
                 "widget": "monetary",
-                "display_currency": "coop.company_id.currency_id"
+                "display_currency": coop.company_id.currency_id
               }'
                         />) -
                         <span
                             t-field="share.total_amount_line"
                             t-options='{
                 "widget": "monetary",
-                "display_currency": "coop.company_id.currency_id"
+                "display_currency": coop.company_id.currency_id
               }'
                         />
                     </div>
@@ -140,7 +140,7 @@
                         t-field="coop.total_value"
                         t-options='{
               "widget": "monetary",
-              "display_currency": "coop.company_id.currency_id"
+              "display_currency": coop.company_id.currency_id
             }'
                     />
                 </p>
