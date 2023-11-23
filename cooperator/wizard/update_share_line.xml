@@ -15,11 +15,11 @@
                     </group>
                     <footer>
                         <button
-                            name="update"
-                            string="Update Info"
-                            type="object"
-                            class="btn-primary"
-                        />
+                        name="update"
+                        string="Update Info"
+                        type="object"
+                        class="btn-primary"
+                    />
                         <button string="Cancel" class="btn-default" special="cancel" />
                     </footer>
                 </form>
@@ -33,9 +33,9 @@
             <field name="view_mode">form</field>
             <field name="target">new</field>
             <field
-                name="groups_id"
-                eval="[(4,ref('cooperator.cooperator_group_manager'))]"
-            />
+            name="groups_id"
+            eval="[(4,ref('cooperator.cooperator_group_manager'))]"
+        />
         </record>
 
 </odoo>
