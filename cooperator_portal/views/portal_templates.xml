@@ -120,14 +120,14 @@
                         <t t-esc="share.share_short_name" />
                         (<span
                             t-field="share.share_unit_price"
-                            t-field-options='{
+                            t-options='{
                 "widget": "monetary",
                 "display_currency": "coop.company_id.currency_id"
               }'
                         />) -
                         <span
                             t-field="share.total_amount_line"
-                            t-field-options='{
+                            t-options='{
                 "widget": "monetary",
                 "display_currency": "coop.company_id.currency_id"
               }'
@@ -138,7 +138,7 @@
                     <label>Total Value of Shares:</label>
                     <span
                         t-field="coop.total_value"
-                        t-field-options='{
+                        t-options='{
               "widget": "monetary",
               "display_currency": "coop.company_id.currency_id"
             }'

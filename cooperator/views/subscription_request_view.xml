@@ -5,7 +5,7 @@
         <field name="name">subscription.request.tree</field>
         <field name="model">subscription.request</field>
         <field name="arch" type="xml">
-            <tree string="Subscription Requests">
+            <tree>
                 <field name="firstname" />
                 <field name="lastname" />
                 <field name="company_name" />

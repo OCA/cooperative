@@ -43,7 +43,7 @@
                     pour un montant total de
                     <span
                         t-field="o.partner_id.total_value"
-                        t-field-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'
+                        t-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'
                     />
                     euros et que la condition prévue à l'article 145(26), §3,
                     alinéa 2, CIR92 est remplie.

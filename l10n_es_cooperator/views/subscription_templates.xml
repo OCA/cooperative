@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
         <template
             id="become_company_cooperator_es"
             inherit_id="cooperator_website.becomecompanycooperator"
             name="Become company cooperator"
+            priority="150"
         >
             <xpath
                 expr="//label[@for='company_register_number']/.."
@@ -62,5 +62,4 @@
                 <attribute name="hidden">1</attribute>
             </xpath>
         </template>
-    </data>
 </odoo>
