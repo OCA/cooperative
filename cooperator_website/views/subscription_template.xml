@@ -832,11 +832,13 @@
         id="company_description_coop_email_contact"
         inherit_id="website.company_description"
         name="Company Description Email Contact"
+        priority="100"
     >
+        <!-- TODO: Do we really need to replace here? -->
         <xpath expr="//div[@t-field='res_company.partner_id']" position="replace">
             <div
                 t-field="res_company.partner_id"
-                t-field-options='{
+                t-options='{
                 "widget": "contact",
                 "fields": ["name", "address", "phone", "mobile", "fax"]}'
             />

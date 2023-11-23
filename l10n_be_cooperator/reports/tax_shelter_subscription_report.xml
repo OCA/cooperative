@@ -31,14 +31,14 @@
                     pour un montant total de
                     <span
                         t-field="o.total_amount_subscribed"
-                        t-field-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'
+                        t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'
                     />
                     euros.
                     <br />
                     Le montant éligible pour le Tax shelter est de
                     <span
                         t-field="o.total_amount_eligible"
-                        t-field-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'
+                        t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'
                     />
                     euros.
                     <br />

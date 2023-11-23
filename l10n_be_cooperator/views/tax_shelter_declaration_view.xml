@@ -83,7 +83,7 @@
         <field name="name">tax.shelter.declaration.view.tree</field>
         <field name="model">tax.shelter.declaration</field>
         <field name="arch" type="xml">
-            <tree string="Tax shelter declaration">
+            <tree>
                 <field name="name" />
                 <field name="date_from" />
                 <field name="date_to" />
@@ -220,7 +220,7 @@
         <field name="name">tax.shelter.certificate.tree</field>
         <field name="model">tax.shelter.certificate</field>
         <field name="arch" type="xml">
-            <tree string="Tax shelter certificates">
+            <tree>
                 <field name="declaration_id" />
                 <field name="partner_id" />
                 <field name="cooperator_number" />

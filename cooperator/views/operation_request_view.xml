@@ -4,7 +4,7 @@
         <field name="name">operation.request.tree</field>
         <field name="model">operation.request</field>
         <field name="arch" type="xml">
-            <tree string="Operation requests">
+            <tree>
                 <field name="request_date" />
                 <field name="effective_date" />
                 <field name="partner_id" />
