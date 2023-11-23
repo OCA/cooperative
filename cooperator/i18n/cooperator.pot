@@ -1853,11 +1853,6 @@ msgid "Operation request"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.operation_request_tree
-msgid "Operation requests"
-msgstr ""
-
-#. module: cooperator
 #: code:addons/cooperator/models/subscription_request.py:0
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__gender__other
 #, python-format
@@ -2314,7 +2309,6 @@ msgstr ""
 #: model:ir.actions.act_window,name:cooperator.subscription_register_action
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_subscription_register
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_register_form
-#: model_terms:ir.ui.view,arch_db:cooperator.subscription_register_tree
 msgid "Subscription Register"
 msgstr ""
 
@@ -2330,7 +2324,6 @@ msgstr ""
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
-#: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_tree
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
 msgid "Subscription Requests"
 msgstr ""
