@@ -1,1 +1,0 @@
-Use default filters instead of domains in contact views.
