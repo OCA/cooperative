@@ -162,6 +162,12 @@ class ResCompany(models.Model):
         domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
         help="If left empty, the default global mail template will be used.",
     )
+    cooperator_share_update_no_shares_mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Share transfer (no remaining shares) email template",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
+        help="If left empty, the default global mail template will be used.",
+    )
     send_share_transfer_email = fields.Boolean(default=True)
     cooperator_share_update_mail_template = fields.Many2one(
         comodel_name="mail.template",
@@ -206,6 +212,9 @@ class ResCompany(models.Model):
             "cooperator_share_transfer_mail_template": (
                 "cooperator.email_template_share_transfer"
             ),
+            "cooperator_share_update_no_shares_mail_template": (
+                "cooperator.email_template_share_update_no_shares"
+            ),
             "cooperator_share_update_mail_template": "cooperator.email_template_share_update",
         }
 
@@ -235,6 +244,11 @@ class ResCompany(models.Model):
 
     def get_cooperator_share_transfer_mail_template(self):
         return self._get_cooperator_template("cooperator_share_transfer_mail_template")
+
+    def get_cooperator_share_update_no_shares_mail_template(self):
+        return self._get_cooperator_template(
+            "cooperator_share_update_no_shares_mail_template"
+        )
 
     def get_cooperator_share_update_mail_template(self):
         return self._get_cooperator_template("cooperator_share_update_mail_template")

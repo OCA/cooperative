@@ -202,12 +202,12 @@ class OperationRequest(models.Model):
             i += 1
         # if the cooperator sold all his shares he's no more
         # an effective member
-        remaining_shares = partner.get_total_shares()
+        remaining_shares = partner.number_of_share
         if remaining_shares == 0:
             self.partner_id.write({"member": False, "old_member": True})
 
     def has_share_type(self):
-        share_quantities = self.partner_id.get_share_quantities()
+        share_quantities = self.partner_id.get_share_quantities(self.company_id)
         return bool(share_quantities[self.share_product_id.id])
 
     def validate(self):
@@ -224,7 +224,7 @@ class OperationRequest(models.Model):
             )
 
         if self.operation_type in ["sell_back", "convert", "transfer"]:
-            total_share_dic = self.partner_id.get_share_quantities()
+            total_share_dic = self.partner_id.get_share_quantities(self.company_id)
 
             if self.quantity > total_share_dic[self.share_product_id.id]:
                 raise ValidationError(
@@ -291,7 +291,9 @@ class OperationRequest(models.Model):
         return self.company_id.get_cooperator_share_transfer_mail_template()
 
     def _get_share_update_mail_template(self):
-        return self.company_id.get_cooperator_share_update_mail_template()
+        if self.partner_id.number_of_share:
+            return self.company_id.get_cooperator_share_update_mail_template()
+        return self.company_id.get_cooperator_share_update_no_shares_mail_template()
 
     def _send_share_transfer_mail(
         self, sub_register_line

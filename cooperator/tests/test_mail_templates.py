@@ -216,6 +216,7 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
                 "partner_id": cooperator.id,
                 "share_product_id": self.share_y.id,
                 "quantity": 1,
+                # TODO: this field should be computed or shouldn't exist.
                 "receiver_not_member": True,
                 "subscription_request": [
                     fields.Command.create(subscription_request_vals)
@@ -287,6 +288,69 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
         )
         self._test_mail_template_share_transfer(
             self.create_dummy_company_cooperator(), subscription_request_vals
+        )
+
+    def _test_mail_template_share_transfer_all_shares(
+        self, cooperator, subscription_request_vals
+    ):
+        subscription_request_vals.update(
+            {
+                "firstname": "first name 2",
+                "lastname": "last name 2",
+                "email": "email2@example.net",
+                "is_operation": True,
+                "source": "operation",
+            }
+        )
+        last_mail_id = self._get_last_mail_id()
+        operation_request = self.env["operation.request"].create(
+            {
+                "operation_type": "transfer",
+                "partner_id": cooperator.id,
+                "share_product_id": self.share_y.id,
+                # 2 is all the quality that the partner has.
+                "quantity": 2,
+                # TODO: this field should be computed or shouldn't exist.
+                "receiver_not_member": True,
+                "subscription_request": [
+                    fields.Command.create(subscription_request_vals)
+                ],
+            }
+        )
+        # this must not send a subscription request confirmation message
+        self.assertEqual(self._get_last_mail_id(), last_mail_id)
+        operation_request.submit_operation()
+        operation_request.approve_operation()
+        operation_request.execute_operation()
+        messages = self._get_new_mail_messages(last_mail_id)
+        # there should be 2 messages: one for the receiver and one for the
+        # sender.
+        self.assertEqual(len(messages), 2)
+        message = messages[0]
+        self.assertEqual(message.recipient_ids, cooperator)
+        self.assertIn("Hello first name,", message.body_html)
+        self.assertIn("adaptation on your shares portfolio", message.body_html)
+        self.assertIn("You have no remaining shares", message.body_html)
+        self.assertEqual(len(message.attachment_ids), 0)
+        # Don't test the other message; already tested by different test.
+
+    def test_mail_template_share_transfer_all_shares(self):
+        """
+        Test that executing a share transfer wherein all shares are
+        transferred sends a message with no certificate in attachment.
+        """
+        self._test_mail_template_share_transfer_all_shares(
+            self.create_dummy_cooperator(), self.get_dummy_subscription_requests_vals()
+        )
+
+    def test_mail_template_share_transfer_all_shares_company(self):
+        """
+        Test that executing a share transfer from a company wherein all shares
+        are transferred sends a message with no certificate in attachment.
+        """
+        self._test_mail_template_share_transfer_all_shares(
+            self.create_dummy_company_cooperator(),
+            self.get_dummy_subscription_requests_vals(),
         )
 
     def _test_mail_template_share_transfer_existing_cooperator(

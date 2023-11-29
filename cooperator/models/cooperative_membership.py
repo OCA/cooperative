@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+from collections import defaultdict
+
 from odoo import api, fields, models
 
 from . import share_type
@@ -231,3 +233,13 @@ class CooperativeMembership(models.Model):
             if partner:
                 cooperator = partner.cooperator_id
         return cooperator
+
+    def get_share_quantities(self):
+        """Return a defaultdict(int) with the amount of shares per product id."""
+        self.ensure_one()
+        total_shares = defaultdict(int)
+
+        for line in self.share_ids:
+            total_shares[line.share_product_id.id] += line.share_number
+
+        return total_shares
