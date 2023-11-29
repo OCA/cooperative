@@ -1,2 +1,0 @@
-Ensure creating a cooperator for a non-current company works (when a capital
-release request is paid).

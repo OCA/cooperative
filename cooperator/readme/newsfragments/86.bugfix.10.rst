@@ -1,2 +1,0 @@
-Rename internal string value of "Blocked" subscription request state from
-``block`` to ``blocked``.

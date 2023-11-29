@@ -1,2 +1,0 @@
-Update email templates to the default Odoo layout (what also makes them
-shorter).

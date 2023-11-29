@@ -1,2 +1,0 @@
-Ensure that the company_type value of a subscription request is copied to the
-legal_form field of the created partner.
