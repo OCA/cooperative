@@ -265,4 +265,37 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="is_cooperator_template" eval="True" />
     </record>
 
+    <record id="email_template_share_update_no_shares" model="mail.template">
+        <field
+            name="name"
+        >Share Update (No Remaining Shares): Cooperator Certificate</field>
+        <field name="model_id" ref="model_res_partner" />
+        <field
+            name="email_from"
+        >{{ object.env.company.coop_email_contact or object.user_id.email_formatted or user.email_formatted }}</field>
+        <field name="partner_to">{{ object.id }}</field>
+        <field name="subject">Share Update Confirmation</field>
+        <field
+            name="description"
+        >Sent to cooperators in case of share update and they have no remaining shares (ergo no attachment)</field>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello
+        <t t-if="object.is_company" t-out="object.get_representative().firstname" />
+        <t t-else="" t-out="object.firstname" />,
+        <br /><br />
+        We confirm that the adaptation on your shares portfolio has been performed succesfully. You have no remaining shares.
+        <br /><br />
+        Thank you for your support.
+        <br /><br />
+        Sustainably yours,
+    </p>
+</div>
+        </field>
+        <field name="lang">{{ object.lang }}</field>
+        <field name="auto_delete" eval="True" />
+        <field name="is_cooperator_template" eval="True" />
+    </record>
+
 </odoo>
