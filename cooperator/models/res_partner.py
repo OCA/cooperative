@@ -286,20 +286,20 @@ class ResPartner(models.Model):
             )
         return result
 
-    def get_share_quantities(self):
-        """Return a defaultdict(int) with the amount of shares per product id."""
+    def get_share_quantities(self, company_id=None):
+        """Return a defaultdict(int) with the amount of shares per product id,
+        for the partner's cooperative_membership_id.
+
+        The partner's cooperative_membership_id is chosen via the company_id
+        argument. If none is given, the company is divined from the context.
+        """
         self.ensure_one()
-        total_shares = defaultdict(int)
 
-        for line in self.share_ids:
-            total_shares[line.share_product_id.id] = line.share_number
+        if company_id is None:
+            company_id = self.env.company
 
-        return total_shares
-
-    def get_total_shares(self):
-        """Return the total amount of shares belonging to a partner."""
-        self.ensure_one()
-        amount = 0
-        for qty in self.get_share_quantities().values():
-            amount += qty
-        return amount
+        coop_membership = self.get_cooperative_membership(company_id.id)
+        if coop_membership:
+            return coop_membership.get_share_quantities()
+        else:
+            return defaultdict(int)

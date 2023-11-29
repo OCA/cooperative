@@ -1,0 +1,2 @@
+Don't send a cooperator certificate if there are no remaining shares after an
+operation.
