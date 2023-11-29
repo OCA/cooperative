@@ -44,6 +44,27 @@ msgid ""
 msgstr ""
 
 #. module: cooperator
+#: model:mail.template,body_html:cooperator.email_template_share_update_no_shares
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hello\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        We confirm that the adaptation on your shares portfolio has been "
+"performed succesfully. You have no remaining shares.\n"
+"        <br><br>\n"
+"        Thank you for your support.\n"
+"        <br><br>\n"
+"        Sustainably yours,\n"
+"    </p>\n"
+"</div>\n"
+"        "
+msgstr ""
+
+#. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_share_update
 msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
@@ -1172,6 +1193,7 @@ msgstr ""
 #: model:ir.model.fields,help:cooperator.field_res_company__cooperator_confirmation_mail_template
 #: model:ir.model.fields,help:cooperator.field_res_company__cooperator_share_transfer_mail_template
 #: model:ir.model.fields,help:cooperator.field_res_company__cooperator_share_update_mail_template
+#: model:ir.model.fields,help:cooperator.field_res_company__cooperator_share_update_no_shares_mail_template
 #: model:ir.model.fields,help:cooperator.field_res_company__cooperator_waiting_list_mail_template
 msgid "If left empty, the default global mail template will be used."
 msgstr ""
@@ -1451,6 +1473,13 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_candidate_form
 #: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_form
 msgid "No contacts found"
+msgstr ""
+
+#. module: cooperator
+#. odoo-python
+#: code:addons/cooperator/wizard/partner_create_subscription.py:0
+#, python-format
+msgid "No default share product found for this type of partner."
 msgstr ""
 
 #. module: cooperator
@@ -1847,6 +1876,13 @@ msgid ""
 msgstr ""
 
 #. module: cooperator
+#: model:mail.template,description:cooperator.email_template_share_update_no_shares
+msgid ""
+"Sent to cooperators in case of share update and they have no remaining "
+"shares (ergo no attachment)"
+msgstr ""
+
+#. module: cooperator
 #: model:mail.template,description:cooperator.email_template_share_update
 msgid ""
 "Sent to cooperators in case of share update with their cooperator "
@@ -1937,7 +1973,13 @@ msgid "Share Type"
 msgstr ""
 
 #. module: cooperator
+#: model:mail.template,name:cooperator.email_template_share_update_no_shares
+msgid "Share Update (No Remaining Shares): Cooperator Certificate"
+msgstr ""
+
+#. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_share_update
+#: model:mail.template,subject:cooperator.email_template_share_update_no_shares
 msgid "Share Update Confirmation"
 msgstr ""
 
@@ -1992,6 +2034,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_operation_request__share_to_short_name
 #: model:ir.model.fields,field_description:cooperator.field_subscription_register__share_to_short_name
 msgid "Share to type name"
+msgstr ""
+
+#. module: cooperator
+#: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_share_update_no_shares_mail_template
+msgid "Share transfer (no remaining shares) email template"
 msgstr ""
 
 #. module: cooperator
@@ -2222,6 +2269,11 @@ msgstr ""
 #: code:addons/cooperator/models/operation_request.py:0
 #, python-format
 msgid "The is_operation field of the subscription request must be true"
+msgstr ""
+
+#. module: cooperator
+#: model:ir.model.constraint,message:cooperator.constraint_share_line_share_number_is_positive
+msgid "The number of shares cannot be negative."
 msgstr ""
 
 #. module: cooperator
