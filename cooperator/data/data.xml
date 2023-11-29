@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2017 Open Architects Consulting SPRL
+SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo noupdate="1">
+
+    <record model="ir.module.category" id="module_category_cooperator_management">
+        <field name="name">Cooperative Management</field>
+        <field name="description">Manage your cooperative.</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <!-- Product -->
+    <record id="product_category_company_share" model="product.category">
+        <field name="name">Company Share</field>
+    </record>
+
+    <function model="res.company" name="_create_cooperator_sequences">
+        <function model="res.company" name="search" eval="[[]]" />
+    </function>
+
+    <function model="res.company" name="_init_cooperator_data">
+        <function model="res.company" name="search" eval="[[]]" />
+    </function>
+
+</odoo>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2017 Open Architects Consulting SPRL
+SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <template
+        id="report_invoice_document"
+        inherit_id="account.report_invoice_document"
+        primary="True"
+        priority="100"
+    >
+        <!-- rename heading contents -->
+        <xpath
+            expr="//div[hasclass('mt-5')]/div[hasclass('page')]/h2/span[@t-if=&quot;o.move_type == 'out_invoice' and o.state == 'posted'&quot;]"
+            position="replace"
+        >
+            <span
+                t-if="o.move_type == 'out_invoice' and o.state == 'posted'"
+            >Request to Release Capital</span>
+        </xpath>
+        <!-- rename invoice date to request date -->
+        <xpath
+            expr="//div[@id='informations']/div[@name='invoice_date']/t[@t-if=&quot;o.move_type == 'out_invoice'&quot;]"
+            position="replace"
+        >
+            <t t-if="o.move_type == 'out_invoice'"><strong>Request Date:</strong></t>
+        </xpath>
+        <!-- remove due date -->
+        <xpath
+            expr="//div[@id='informations']/div[@name='due_date']"
+            position="replace"
+        >
+        </xpath>
+        <!-- remove source -->
+        <xpath expr="//div[@id='informations']/div[@name='origin']" position="replace">
+        </xpath>
+        <!-- remove customer code -->
+        <xpath
+            expr="//div[@id='informations']/div[@name='customer_code']"
+            position="replace"
+        >
+        </xpath>
+        <!--
+            remove reference and add account number and contact
+        -->
+        <xpath
+            expr="//div[@id='informations']/div[@name='reference']"
+            position="replace"
+        >
+            <div class="col-auto col-3 mw-100 mb-2" name="account_number">
+                <strong>Account Number:</strong>
+                <t t-foreach="o.company_id.bank_journal_ids" t-as="journal">
+                    <t t-set="b" t-value="journal.bank_account_id" />
+                    <t t-if="journal.get_cooperator_payment">
+                        <p class="m-0" t-field="b.acc_number" />
+                    </t>
+                </t>
+            </div>
+            <div class="col-auto col-3 mw-100 mb-2" name="contact">
+                <strong>Your Contact:</strong>
+                <p class="m-0" t-field="o.user_id" />
+            </div>
+        </xpath>
+        <!-- add part type table header -->
+        <xpath
+            expr="//table[@name='invoice_line_table']/thead/tr/th[@name='th_description']"
+            position="after"
+        >
+            <th name="th_part_type" class="text-start"><span>Part Type</span></th>
+        </xpath>
+        <!-- remove tax table header -->
+        <xpath
+            expr="//table[@name='invoice_line_table']/thead/tr/th[@name='th_taxes']"
+            position="replace"
+        >
+        </xpath>
+        <!-- add part type table cell -->
+        <xpath
+            expr="//table[@name='invoice_line_table']/tbody/t/tr/t/td[@name='account_invoice_line_name']"
+            position="after"
+        >
+            <td name="account_invoice_part_type"><span
+                    t-field="line.product_id.short_name"
+                    t-options="{'widget': 'text'}"
+                /></td>
+        </xpath>
+        <!-- remove tax table cell -->
+        <xpath
+            expr="//table[@name='invoice_line_table']/tbody/t/tr/t/td[span[@id='line_tax_ids']]"
+            position="replace"
+        >
+        </xpath>
+    </template>
+
+    <template id="report_invoice">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t
+                    t-call="cooperator.report_invoice_document"
+                    t-lang="o.partner_id.lang"
+                />
+            </t>
+        </t>
+    </template>
+
+</odoo>

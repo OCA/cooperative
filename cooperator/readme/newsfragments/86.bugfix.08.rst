@@ -1,0 +1,3 @@
+Fix subscription requests created by transfer operations: ensure that no
+confirmation email is sent, that they don't appear in the list of subscription
+requests and cannot be erroneously validated.

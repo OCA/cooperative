@@ -1,0 +1,2 @@
+Remove deprecated ``subscription.request.create_comp_sub_req()``. Use
+the normal ``subscription.request.create()`` instead.

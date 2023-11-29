@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2017 Open Architects Consulting SPRL
+SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <!--
+        the structure of this report comes from
+        account.report_invoice_document
+    -->
+    <template id="report_subscription_register">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="mt-5">
+                    <div class="page">
+                        <h2>
+                            <span>Subscription Register</span>
+                        </h2>
+
+                        <p name="register_generation_date" class="mt-4 mb-4">
+                            <span
+                                t-out="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"
+                            />
+                        </p>
+
+                        <table
+                            class="table table-sm o_main_table table-borderless"
+                            name="share_line_table"
+                        >
+                            <thead>
+                                <tr>
+                                    <th class="text-start">Operation Number</th>
+                                    <th class="text-start">Cooperator</th>
+                                    <th class="text-start">Subscription Date</th>
+                                    <th class="text-start">Operation Type</th>
+                                    <th class="text-end">Number of Shares</th>
+                                </tr>
+                            </thead>
+                            <tbody class="invoice_tbody">
+                                <t t-foreach="docs" t-as="transaction">
+                                    <tr>
+                                        <td class="text-start" name="operation_number">
+                                            <span
+                                                t-field="transaction.register_number_operation"
+                                            />
+                                        </td>
+                                        <td class="text-start" name="cooperator_name">
+                                            <span
+                                                t-field="transaction.partner_id.name"
+                                            />
+                                        </td>
+                                        <td class="text-start" name="subscription_date">
+                                            <span t-field="transaction.date" />
+                                        </td>
+                                        <td class="text-start" name="transaction_type">
+                                            <span t-field="transaction.type" />
+                                        </td>
+                                        <td class="text-end" name="quantity">
+                                            <span t-field="transaction.quantity" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

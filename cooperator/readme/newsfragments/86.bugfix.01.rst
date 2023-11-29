@@ -1,0 +1,2 @@
+Fix the footer layout to add company logos: wrap the original layout instead
+of overwriting it.

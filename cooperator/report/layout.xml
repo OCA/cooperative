@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2019 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <template
+        id="external_layout_standard"
+        name="Cooperator Template Layout"
+        inherit_id="web.external_layout_standard"
+        primary="True"
+        priority="100"
+    >
+        <!-- remove horizontal line above footer -->
+        <xpath
+            expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div"
+            position="attributes"
+        >
+            <attribute name="style" />
+        </xpath>
+        <!--
+            display logos on the right side of the footer according to the
+            company properties
+        -->
+        <xpath
+            expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div"
+            position="replace"
+        >
+            <t t-if="company.display_logo1 or company.display_logo2">
+                <div style="font-size: 0.8em;">
+                    <div class="row">
+                        <div class="col-10">$0</div>
+                        <div name="logos" class="col-2 text-center">
+                            <img
+                                class="img img-responsive"
+                                t-if="company.display_logo1"
+                                t-attf-src="data:image/*;base64,{{company.bottom_logo1}}"
+                                style="display: block; margin: auto; max-width: 100%; max-height: 3em;"
+                            />
+                            <img
+                                class="img img-responsive"
+                                t-if="company.display_logo2"
+                                t-attf-src="data:image/*;base64,{{company.bottom_logo2}}"
+                                style="display: block; margin: auto; max-width: 100%; max-height: 3em;"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </t>
+            <t t-else="">$0</t>
+        </xpath>
+    </template>
+
+</odoo>

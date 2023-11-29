@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2017 Open Architects Consulting SPRL
+SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<!--
+    Mail template are declared in a NOUPDATE block
+    so users can freely customize/delete them
+-->
+<odoo noupdate="1">
+
+    <record id="email_template_release_capital" model="mail.template">
+        <field name="name">Capital Release Request: Sending</field>
+        <field name="model_id" ref="account.model_account_move" />
+        <field
+            name="email_from"
+        >{{ object.company_id.coop_email_contact or object.invoice_user_id.email_formatted or user.email_formatted }}</field>
+        <field name="partner_to">{{ object.partner_id.id }}</field>
+        <field
+            name="subject"
+        >{{ object.company_id.name }} Capital Release Request (Ref {{ object.name or 'n/a' }})</field>
+        <field
+            name="description"
+        >Sent to cooperators with their capital release request in attachment</field>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello
+        <t t-out="object.subscription_request.firstname" />,
+        <br /><br />
+        Please find in attachment all the necessary information for the payment. We kindly remind you that your subscription will be effective only once we received the payment.
+        <br /><br />
+        Do not forget to add the structured communication to the payment.
+        <br /><br />
+        Sustainably yours,
+    </p>
+</div>
+        </field>
+        <field name="report_template" ref="action_cooperator_invoices" />
+        <field
+            name="report_name"
+        >{{ (object.name or "capital_release_request").replace("/", "_") }}{{ object.state == "draft" and "_draft" or "" }}</field>
+        <field name="lang">{{ object.partner_id.lang }}</field>
+        <field name="auto_delete" eval="True" />
+        <field name="is_cooperator_template" eval="True" />
+    </record>
+
+    <record id="email_template_confirmation" model="mail.template">
+        <field name="name">Subscription Request Confirmation</field>
+        <field name="model_id" ref="model_subscription_request" />
+        <field
+            name="email_from"
+        >{{ object.company_id.coop_email_contact or object.user_id.email_formatted or user.email_formatted }}</field>
+        <field
+            name="email_to"
+        >{{ object.email }}{{ object.is_company and (", " + object.company_email) }}</field>
+        <field name="subject">Subscription Request Confirmation</field>
+        <field
+            name="description"
+        >Sent to cooperators to confirm their subscription request</field>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello
+        <t t-out="object.firstname" />,
+        <br /><br />
+        We have received your subscription request<t
+                        t-if="object.is_company"
+                    > on behalf of <t
+                            t-out="object.company_name"
+                        /></t>. Thank you for your support.
+        <br /><br />
+        Your request will be soon processed by our team. If all the provided information is correct you will soon receive the payment information in another message.
+        <br /><br />
+        Do not hesitate to contact us if you have any questions.
+        <br /><br />
+        Sustainably yours,
+    </p>
+</div>
+        </field>
+        <field name="lang">{{ object.lang }}</field>
+        <field name="auto_delete" eval="True" />
+        <field name="is_cooperator_template" eval="True" />
+    </record>
+
+    <record id="email_template_waiting_list" model="mail.template">
+        <field name="name">Subscription Request on Waiting List</field>
+        <field name="model_id" ref="model_subscription_request" />
+        <field
+            name="email_from"
+        >{{ object.company_id.coop_email_contact or object.user_id.email_formatted or user.email_formatted }}</field>
+        <field name="email_to">{{ object.email }}</field>
+        <field name="subject">Subscription Request Added to Waiting List</field>
+        <field
+            name="description"
+        >Sent to cooperators when their subscription request is added to the waiting list</field>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello
+        <t t-out="object.firstname" />,
+        <br /><br />
+        Thank you for your subscription request. There are currently no projects to raise funds for, thus we added it on waiting list. We will contact you as soon as the subscription requests are re-opened.
+        <br /><br />
+        Do not hesitate to contact us if you have any questions.
+        <br /><br />
+        Sustainably yours,
+    </p>
+</div>
+        </field>
+        <field name="lang">{{ object.lang }}</field>
+        <field name="auto_delete" eval="True" />
+        <field name="is_cooperator_template" eval="True" />
+    </record>
+
+    <record id="email_template_certificate" model="mail.template">
+        <field name="name">Payment Received Confirmation: Cooperator Certificate</field>
+        <field name="model_id" ref="model_res_partner" />
+        <field
+            name="email_from"
+        >{{ object.env.company.coop_email_contact or object.user_id.email_formatted or user.email_formatted }}</field>
+        <field name="partner_to">{{ object.id }}</field>
+        <field name="subject">Payment Received Confirmation</field>
+        <field
+            name="description"
+        >Sent to cooperators with their cooperator certificate in attachment</field>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello
+        <t t-if="object.is_company" t-out="object.get_representative().firstname" />
+        <t t-else="" t-out="object.firstname" />,
+        <br /><br />
+        We confirm the reception of your payment. You are now a shareholder of our cooperative.
+        <br /><br />
+        Please find in attachment your <t
+                        t-out="object.env.company.name"
+                    /> cooperator certificate.
+        <br /><br />
+        Sustainably yours,
+    </p>
+</div>
+        </field>
+        <field name="report_template" ref="action_cooperator_report_certificate" />
+        <field
+            name="report_name"
+        >Certificate {{ (object.cooperator_register_number or '') }}</field>
+        <field name="lang">{{ object.lang }}</field>
+        <field name="auto_delete" eval="True" />
+        <field name="is_cooperator_template" eval="True" />
+    </record>
+
+    <record id="email_template_share_increase" model="mail.template">
+        <field
+            name="name"
+        >Share Increase: Payment Received Confirmation: Cooperator Certificate</field>
+        <field name="model_id" ref="model_res_partner" />
+        <field
+            name="email_from"
+        >{{ object.env.company.coop_email_contact or object.user_id.email_formatted or user.email_formatted }}</field>
+        <field name="partner_to">{{ object.id }}</field>
+        <field name="subject">Payment Received Confirmation</field>
+        <field
+            name="description"
+        >Sent to cooperators in case of share increase with their cooperator certificate in attachment</field>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello
+        <t t-if="object.is_company" t-out="object.get_representative().firstname" />
+        <t t-else="" t-out="object.firstname" />,
+        <br /><br />
+        We confirm the reception of your payment for the new share(s) you have taken.
+        <br /><br />
+        Please find in attachment your <t
+                        t-out="object.env.company.name"
+                    /> cooperator certificate.
+        <br /><br />
+        Sustainably yours,
+    </p>
+</div>
+        </field>
+        <field name="report_template" ref="action_cooperator_report_certificate" />
+        <field
+            name="report_name"
+        >Certificate {{ (object.cooperator_register_number or '') }}</field>
+        <field name="lang">{{ object.lang }}</field>
+        <field name="auto_delete" eval="True" />
+        <field name="is_cooperator_template" eval="True" />
+    </record>
+
+    <record id="email_template_share_transfer" model="mail.template">
+        <field name="name">Share Transfer: Cooperator Certificate</field>
+        <field name="model_id" ref="model_res_partner" />
+        <field
+            name="email_from"
+        >{{ object.env.company.coop_email_contact or object.user_id.email_formatted or user.email_formatted }}</field>
+        <field name="partner_to">{{ object.id }}</field>
+        <field name="subject">Share Transfer Confirmation</field>
+        <field
+            name="description"
+        >Sent to cooperators in case of share transfer with their cooperator certificate in attachment</field>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello
+        <t t-if="object.is_company" t-out="object.get_representative().firstname" />
+        <t t-else="" t-out="object.firstname" />,
+        <br /><br />
+        We confirm that the shares have been transferred to you. If you were not already a cooperator, you are now a shareholder of our cooperative.
+        <br /><br />
+        Please find in attachment your <t
+                        t-out="object.env.company.name"
+                    /> cooperator certificate.
+        <br /><br />
+        Sustainably yours,
+    </p>
+</div>
+        </field>
+        <field name="report_template" ref="action_cooperator_report_certificate" />
+        <field
+            name="report_name"
+        >Certificate {{ (object.cooperator_register_number or '') }}</field>
+        <field name="lang">{{ object.lang }}</field>
+        <field name="auto_delete" eval="True" />
+        <field name="is_cooperator_template" eval="True" />
+    </record>
+
+    <record id="email_template_share_update" model="mail.template">
+        <field name="name">Share Update: Cooperator Certificate</field>
+        <field name="model_id" ref="model_res_partner" />
+        <field
+            name="email_from"
+        >{{ object.env.company.coop_email_contact or object.user_id.email_formatted or user.email_formatted }}</field>
+        <field name="partner_to">{{ object.id }}</field>
+        <field name="subject">Share Update Confirmation</field>
+        <field
+            name="description"
+        >Sent to cooperators in case of share update with their cooperator certificate in attachment</field>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello
+        <t t-if="object.is_company" t-out="object.get_representative().firstname" />
+        <t t-else="" t-out="object.firstname" />,
+        <br /><br />
+        We confirm that the adaptation on your shares portfolio has been performed succesfully. Your cooperator certificate has been adapted accordingly.
+        <br /><br />
+        Please find in attachment your <t
+                        t-out="object.env.company.name"
+                    /> cooperator certificate.
+        <br /><br />
+        Sustainably yours,
+    </p>
+</div>
+        </field>
+        <field name="report_template" ref="action_cooperator_report_certificate" />
+        <field
+            name="report_name"
+        >Certificate {{ (object.cooperator_register_number or '') }}</field>
+        <field name="lang">{{ object.lang }}</field>
+        <field name="auto_delete" eval="True" />
+        <field name="is_cooperator_template" eval="True" />
+    </record>
+
+    <record id="email_template_share_update_no_shares" model="mail.template">
+        <field
+            name="name"
+        >Share Update (No Remaining Shares): Cooperator Certificate</field>
+        <field name="model_id" ref="model_res_partner" />
+        <field
+            name="email_from"
+        >{{ object.env.company.coop_email_contact or object.user_id.email_formatted or user.email_formatted }}</field>
+        <field name="partner_to">{{ object.id }}</field>
+        <field name="subject">Share Update Confirmation</field>
+        <field
+            name="description"
+        >Sent to cooperators in case of share update and they have no remaining shares (ergo no attachment)</field>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello
+        <t t-if="object.is_company" t-out="object.get_representative().firstname" />
+        <t t-else="" t-out="object.firstname" />,
+        <br /><br />
+        We confirm that the adaptation on your shares portfolio has been performed succesfully. You have no remaining shares.
+        <br /><br />
+        Thank you for your support.
+        <br /><br />
+        Sustainably yours,
+    </p>
+</div>
+        </field>
+        <field name="lang">{{ object.lang }}</field>
+        <field name="auto_delete" eval="True" />
+        <field name="is_cooperator_template" eval="True" />
+    </record>
+
+</odoo>

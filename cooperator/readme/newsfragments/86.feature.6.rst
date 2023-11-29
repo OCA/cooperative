@@ -1,0 +1,3 @@
+Add a new "Cooperator Register" view (and menu entry) to display the
+cooperative memberships and allow to print the cooperator register (report
+that was previously on the partner model).

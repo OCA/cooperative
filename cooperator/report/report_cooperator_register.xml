@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2017 Open Architects Consulting SPRL
+SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <!--
+        the structure of this report comes from
+        account.report_invoice_document
+    -->
+    <template id="report_cooperator_register">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="mt-5">
+                    <div class="page">
+                        <h2>
+                            <span>Cooperator Register</span>
+                        </h2>
+
+                        <p name="register_generation_date" class="mt-4 mb-4">
+                            <span
+                                t-out="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"
+                            />
+                        </p>
+
+                        <table
+                            class="table table-sm o_main_table table-borderless"
+                            name="share_line_table"
+                        >
+                            <thead>
+                                <tr>
+                                    <th class="text-start">Number</th>
+                                    <th class="text-start">Name</th>
+                                    <th class="text-start">Email</th>
+                                    <th class="text-start">Effective Date</th>
+                                    <th class="text-start">Share Type</th>
+                                    <th class="text-end">Quantity</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody class="invoice_tbody">
+                                <t t-foreach="docs" t-as="coop_membership">
+                                    <t t-set="new_coop_membership" t-value="True" />
+                                    <t
+                                        t-foreach="coop_membership.share_ids"
+                                        t-as="line"
+                                    >
+                                        <tr>
+                                            <t t-if="new_coop_membership">
+                                                <td
+                                                    class="text-start"
+                                                    name="cooperator_number"
+                                                >
+                                                    <span
+                                                        t-field="coop_membership.cooperator_register_number"
+                                                    />
+                                                </td>
+                                                <td
+                                                    class="text-start"
+                                                    name="cooperator_name"
+                                                >
+                                                    <span
+                                                        t-field="coop_membership.partner_id.name"
+                                                    />
+                                                </td>
+                                                <td
+                                                    class="text-start"
+                                                    name="cooperator_email"
+                                                >
+                                                    <span
+                                                        t-field="coop_membership.partner_id.email"
+                                                    />
+                                                </td>
+                                            </t>
+                                            <t t-else="">
+                                                <td colspan="3" />
+                                            </t>
+                                            <td
+                                                class="text-start"
+                                                name="effective_date"
+                                            >
+                                                <span t-field="line.effective_date" />
+                                            </td>
+                                            <td
+                                                class="text-start"
+                                                name="share_short_name"
+                                            >
+                                                <span t-field="line.share_short_name" />
+                                            </td>
+                                            <td class="text-end" name="share_number">
+                                                <span t-field="line.share_number" />
+                                            </td>
+                                            <td
+                                                class="text-end o_price_total"
+                                                name="total_amount_line"
+                                            >
+                                                <span
+                                                    class="text-nowrap"
+                                                    t-field="line.total_amount_line"
+                                                />
+                                            </td>
+                                        </tr>
+                                        <t
+                                            t-set="new_coop_membership"
+                                            t-value="False"
+                                        />
+                                    </t>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>
