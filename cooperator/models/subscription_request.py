@@ -819,12 +819,10 @@ class SubscriptionRequest(models.Model):
 
         partner = self._find_or_create_partner()
 
-        cooperative_membership = partner.get_cooperative_membership(self.company_id.id)
-        if not cooperative_membership:
-            cooperative_membership = partner.create_cooperative_membership(
-                self.company_id.id
-            )
-        elif not cooperative_membership.cooperator:
+        cooperative_membership = partner.get_create_cooperative_membership(
+            self.company_id.id
+        )
+        if not cooperative_membership.cooperator:
             cooperative_membership.cooperator = True
 
         if self.is_company and not partner.has_representative():

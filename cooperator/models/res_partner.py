@@ -286,6 +286,13 @@ class ResPartner(models.Model):
             )
         return result
 
+    def get_create_cooperative_membership(self, company_id):
+        self.ensure_one()
+        membership = self.get_cooperative_membership(company_id)
+        if not membership:
+            membership = self.create_cooperative_membership(company_id)
+        return membership
+
     def get_share_quantities(self, company_id=None):
         """Return a defaultdict(int) with the amount of shares per product id,
         for the partner's cooperative_membership_id.
