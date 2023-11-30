@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-12 17:39+0000\n"
+"PO-Revision-Date: 2023-11-30 16:35+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -196,7 +196,7 @@ msgstr "ONLUS"
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__access_warning
 msgid "Access warning"
-msgstr "Avviso di accesso"
+msgstr "Avviso accesso"
 
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
