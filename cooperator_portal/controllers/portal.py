@@ -96,6 +96,12 @@ class CooperatorPortal(PortalAccount):
         )
 
     def _get_invoices_domain(self):
+        # this is an override. by default, capital release requests are
+        # excluded from invoices. this allows to avoid to override
+        # _prepare_my_invoices_values() and the handling of invoices in
+        # _prepare_home_portal_values(). by using the context,
+        # _prepare_home_portal_values() can be reused as it is for capital
+        # release requests.
         capital_release_request = request.context.get("capital_release_requests", False)
         return expression.AND(
             [
@@ -138,6 +144,9 @@ class CooperatorPortal(PortalAccount):
                     )
         return res
 
+    # this method is a copy of PortalAccount.portal_my_invoices() from the
+    # account module in odoo 16, with a few changes. please update accordingly
+    # when porting to newer versions.
     @route(
         [
             "/my/capital_release_requests",
