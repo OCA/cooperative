@@ -125,6 +125,7 @@ class ResPartner(models.Model):
     cooperator = fields.Boolean(
         string="Cooperator",
         help="Check this box if this contact is a cooperator (effective or not).",
+        readonly=True,
         copy=False,
     )
     member = fields.Boolean(
@@ -142,6 +143,7 @@ class ResPartner(models.Model):
     old_member = fields.Boolean(
         string="Old cooperator",
         help="Check this box if this cooperator is no more an effective member.",
+        readonly=True,
     )
     share_ids = fields.One2many("share.line", "partner_id", string="Share Lines")
     cooperator_register_number = fields.Integer(string="Cooperator Number", copy=False)
