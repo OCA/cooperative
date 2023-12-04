@@ -1,1 +1,0 @@
-Fix layout of cooperator details on the portal home page.

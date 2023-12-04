@@ -1,2 +1,0 @@
-Fix capital release requests not appearing on the capital release requests
-portal page.
