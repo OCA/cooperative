@@ -52,7 +52,6 @@ msgstr "Adresse"
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid ""
 "An account already exists for this email address. Please log in before "
@@ -162,7 +161,6 @@ msgstr "Courriel"
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid "Email and confirmation email addresses don't match."
 msgstr "Le courriel et le courriel de confirmation ne sont pas identiques."
@@ -235,7 +233,6 @@ msgstr "Téléphone"
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid "Please upload a scan of your ID card."
 msgstr "Veuillez charger une copie de votre carte d'identité."
@@ -248,7 +245,6 @@ msgstr "Politique de gestion des données"
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid "Provided IBAN is not valid."
 msgstr "L'IBAN fourni n'est pas valide."
@@ -271,7 +267,6 @@ msgstr "Type de part"
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid "Some mandatory fields have not been filled."
 msgstr "Certains champs obligatoires sont vides."
@@ -289,7 +284,6 @@ msgstr ""
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid ""
 "You can't subscribe for an amount that exceeds {amount}{currency_symbol}."
@@ -299,7 +293,6 @@ msgstr ""
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid "You can't subscribe to two different types of share."
 msgstr "Vous ne pouvez souscrire à des types de parts différents."
