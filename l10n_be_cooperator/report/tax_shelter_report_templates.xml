@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2023 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <template id="tax_shelter_report_line">
+        <t t-foreach="lines" t-as="line">
+            <tr>
+                <td class="text-start">
+                    <span t-field="line.type" />
+                </td>
+                <td class="text-end">
+                    <span
+                        t-field="line.capital_before_sub"
+                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                    />
+                </td>
+                <td class="text-end">
+                    <span
+                        t-field="line.capital_after_sub"
+                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                    />
+                </td>
+                <td class="text-center">
+                    <span t-if="line.tax_shelter">Yes</span>
+                    <span t-else="">No</span>
+                </td>
+                <td class="text-start">
+                    <span t-field="line.transaction_date" />
+                </td>
+                <td class="text-end">
+                    <span
+                        t-field="line.amount_subscribed"
+                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                    />
+                </td>
+                <td class="text-end">
+                    <span
+                        t-field="line.amount_subscribed_eligible"
+                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                    />
+                </td>
+            </tr>
+        </t>
+    </template>
+
+    <template id="tax_shelter_report_table">
+        <table
+            class="table table-sm o_main_table table-borderless"
+            name="taxshelter_line_table"
+        >
+            <thead>
+                <tr>
+                    <th class="text-start">Type</th>
+                    <th class="text-end">Capital Before</th>
+                    <th class="text-end">Capital After</th>
+                    <th class="text-center">Tax Shelter Eligible</th>
+                    <th class="text-start">Date</th>
+                    <th class="text-end">Amount</th>
+                    <th class="text-end">Eligible Amount</th>
+                </tr>
+            </thead>
+            <tbody class="invoice_tbody">
+                <t t-out="0" />
+            </tbody>
+        </table>
+    </template>
+
+    <!--
+        the structure of this report comes from
+        account.report_invoice_document
+    -->
+    <template id="tax_shelter_report_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)" />
+            <div class="row">
+                <div class="offset-col-6 col-6">
+                    <t t-set="address">
+                        <address
+                            class="mb-0"
+                            t-field="o.partner_id"
+                            t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'
+                        />
+                        <div t-if="o.partner_id.cooperator_register_number">
+                            Cooperator number:
+                            <span t-field="o.partner_id.cooperator_register_number" />
+                        </div>
+                    </t>
+                </div>
+            </div>
+            <div class="mt-5">
+                <div class="page" style="font-size: 10px !important;">
+                    <!-- TODO: Translate below to English -->
+                    <h2 style="font-size: 3em;">
+                        <span>Déclaration Tax Shelter</span>
+                        <t t-if="is_shares_certificate">
+                            <br />
+                            <small style="font-size: 80%;">
+                                Attestation concernant une des quatre années suivant
+                                l'acquisition de parts
+                            </small>
+                        </t>
+                    </h2>
+
+                    <p>
+                        Cher membre,
+                    </p>
+
+                    <t t-out="0" />
+
+                    <!-- TODO: Translate below to English -->
+                    <p>
+                        L'Article 145/26, CIR 92 sur les revenus
+                        <span t-field="o.declaration_id.fiscal_year" />, connu aussi
+                        comme normative Tax Shelter, donnent droit à une réduction
+                        d'impôt à hauteur de
+                        <span t-field="o.declaration_id.tax_shelter_percentage" />
+                        du montant de la valeur des parts souscrites depuis
+                        <span t-field="o.declaration_id.month_from" />
+                        (et avant
+                        <span t-field="o.declaration_id.month_to" />
+                        pour la déclaration des revenus
+                        <span t-field="o.declaration_id.fiscal_year" />).
+                    </p>
+
+                    <p>
+                        Cette lettre vaut donc comme certificat que
+                        <span t-field="o.company_id.name" />
+                        remplit en effet tous les critères permettant un tel
+                        avantage fiscal. Dans les grandes lignes il faut être une
+                        micro-entreprise n'ayant encore jamais distribué de
+                        dividende et qui n'est pas issue d'une fusion ou scission de
+                        sociétés et qui répond à au moins deux des trois critères
+                        suivants :
+                        <ul>
+                            <li>le total du bilan est inférieur ou égal à 350.000
+                                euros ;
+                            </li>
+                            <li>le chiffre d'affaires, hors taxe sur la valeur
+                                ajoutée, est inférieur ou égal à 700.000 euros ;
+                            </li>
+                            <li>la moyenne des travailleurs occupés pendant l'année
+                                est inférieure ou égale à 10.
+                            </li>
+                        </ul>
+                    </p>
+
+                    <p>
+                        Le maintien de la réduction d'impôt n'est possible que si
+                        l'investisseur conserve les parts de la coopérative pendant
+                        4 ans au minimum, sauf si la sortie est imposée par des
+                        conditions extérieures (telles que la faillite, par
+                        exemple). En cas de sortie volontaire avant la période de 4
+                        ans, l'avantage fiscal devra être remboursé au prorata du
+                        nombre de mois entre la sortie et les 4 ans. La coopérative
+                        s'engage à fournir pour chacune des quatre années suivant
+                        l'année d'acquisition une attestation certifiant que ces
+                        parts sont toujours en possession du souscripteur.
+                    </p>
+
+                    <p>
+                        L'apport de capitaux par le chef d'entreprise lui-même ou
+                        par des administrateurs existants de la société ne permet
+                        pas de bénéficier du tax shelter.
+                    </p>
+
+                    <p>
+                        Pour bénéficier de la réduction d'impôts, vous pouvez
+                        joindre cette lettre à votre déclaration fiscale pour les
+                        revenus <span t-field="o.declaration_id.fiscal_year" />.
+                    </p>
+
+                    <p>
+                        Pour toute information complémentaire, consultez le texte de
+                        l'Arrêté Royal.
+                    </p>
+
+                    <div class="row">
+                        <div name="board_commitee">
+                            <p>
+                                For the board of <span t-field="o.company_id.name" />,
+                            </p>
+                            <p>
+                                <strong>
+                                    <span t-field="o.company_id.board_representative" />
+                                </strong>
+                            </p>
+                            <img
+                                t-if="o.company_id.signature_scan"
+                                class="w-50 mt-1"
+                                t-attf-style="{{ 'min-width: 100px; max-width: 250px' if report_type == 'pdf' else '' }}"
+                                t-att-src="'data:image/png;base64,%s' % o.company_id.signature_scan.decode()"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2017 Open Architects Consulting SPRL
+SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<!--
+    Mail template are declared in a NOUPDATE block
+    so users can freely customize/delete them
+-->
+<odoo noupdate="1">
+
+    <record id="email_template_tax_shelter_certificate" model="mail.template">
+        <field name="name">Tax Shelter Certificate: Sending</field>
+        <field name="model_id" ref="model_tax_shelter_certificate" />
+        <field
+            name="email_from"
+        >{{ object.company_id.coop_email_contact or object.company_id.partner_id.email_formatted or user.email_formatted }}</field>
+        <field name="partner_to">{{ object.partner_id.id }}</field>
+        <field name="subject">Tax Shelter Certificate</field>
+        <field
+            name="description"
+        >Sent to cooperators with their tax shelter certificate in attachment</field>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello
+        <t t-out="object.partner_id.firstname" />,
+        <br /><br />
+        You have subscribed to some shares of <t t-out="object.company_id.name" />
+        during the year <t t-out="object.declaration_id.fiscal_year" />.
+        You can benefit from the tax shelter, it means a tax reduction of
+        <t t-out="object.declaration_id.tax_shelter_percentage" /> percent on
+        the invested amount.
+        For this you will find in attachment the documents certifying that
+        you've suscribed to <t t-out="object.company_id.name" /> shares.
+        <br /><br />
+        For any additional questions, please contact
+        <t t-out="object.company_id.coop_email_contact" />
+        <br /><br />
+        Sustainably yours,
+    </p>
+</div>
+        </field>
+        <field name="lang">{{ object.partner_id.lang }}</field>
+        <field name="auto_delete" eval="True" />
+        <field name="is_cooperator_template" eval="True" />
+    </record>
+
+</odoo>

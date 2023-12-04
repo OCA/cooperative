@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2022 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <template id="iban_template_be" inherit_id="cooperator_website.iban_template">
+        <xpath expr="//div[@name='iban_template_container']" position="inside">
+            <div class="mb-3 field-bank_account" name="iban_container">
+                <label for="iban" class="form-label">Bank Account Number</label>
+                <input
+                    t-attf-class="form-control form-control-sm{{ error and 'iban' in error and ' is-invalid' or '' }}"
+                    type="text"
+                    name="iban"
+                    id="iban"
+                    required="True"
+                    t-att-readonly="logged"
+                    t-att-value="iban"
+                    placeholder="BE4852308076712"
+                />
+            </div>
+        </xpath>
+    </template>
+
+</odoo>
