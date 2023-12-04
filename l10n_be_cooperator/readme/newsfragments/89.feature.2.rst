@@ -1,1 +1,0 @@
-Use common templates for Tax shelter reports to remove duplication.

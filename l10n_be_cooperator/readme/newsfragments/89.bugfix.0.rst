@@ -1,2 +1,0 @@
-Fix the misspelled ``auto_install`` manifest property to ensure that the
-module gets automatically installed.
