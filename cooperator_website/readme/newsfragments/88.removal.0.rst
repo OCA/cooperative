@@ -1,0 +1,2 @@
+Remove display of company registry number, bank account number and cooperative
+email address on website pages.
