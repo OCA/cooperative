@@ -5,7 +5,7 @@
 
 {
     "name": "Cooperators Website",
-    "version": "14.0.1.1.3",
+    "version": "14.0.1.1.4",
     "depends": [
         "cooperator",
         "website",
