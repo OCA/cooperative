@@ -123,6 +123,7 @@ class CooperativeMembership(models.Model):
     cooperator = fields.Boolean(
         string="Cooperator",
         help="Check this box if this contact is a cooperator (effective or not).",
+        readonly=True,
         copy=False,
     )
     member = fields.Boolean(
@@ -139,6 +140,7 @@ class CooperativeMembership(models.Model):
     old_member = fields.Boolean(
         string="Old cooperator",
         help="Check this box if this cooperator is no more an effective member.",
+        readonly=True,
     )
     share_ids = fields.One2many(
         "share.line",

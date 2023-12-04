@@ -1,0 +1,1 @@
+Rework ``res.partner`` form view as has been done in version 16.
