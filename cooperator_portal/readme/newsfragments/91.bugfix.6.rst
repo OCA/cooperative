@@ -1,1 +1,0 @@
-Fix generation of cooperator certificate for company representatives.

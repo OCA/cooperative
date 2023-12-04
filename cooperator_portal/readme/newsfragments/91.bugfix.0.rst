@@ -1,1 +1,0 @@
-Fix form controls styling and attributes.

@@ -1,1 +1,0 @@
-Fix breadcrumbs of capital release requests portal pages.
