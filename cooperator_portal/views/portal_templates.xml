@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+SPDX-FileContributor: Rémy Taymans <remy@coopiteasy.be>
+SPDX-FileContributor: Houssine Bakkali <houssine@coopiteasy.be>
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <template
+        id="portal_my_details_fields"
+        inherit_id="portal.portal_my_details_fields"
+    >
+        <input name="name" position="attributes">
+            <attribute name="readonly">true</attribute>
+        </input>
+        <input name="email" position="attributes">
+            <attribute name="readonly">true</attribute>
+        </input>
+        <xpath expr="//input[@name='phone']/.." position="after">
+            <div
+                t-attf-class="mb-3 #{error.get('gender') and 'o_has_error' or ''} col-xl-6"
+            >
+                <label class="col-form-label" for="gender">Gender</label>
+                <select
+                    name="gender"
+                    t-attf-class="form-select #{error.get('gender') and 'is-invalid' or ''}"
+                >
+                    <option value="" />
+                    <t t-foreach="genders or []" t-as="item">
+                        <option
+                            t-att-value="item[0]"
+                            t-att-selected="item[0] == partner.gender"
+                        >
+                            <t t-out="item[1]" />
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div
+                t-attf-class="mb-3 #{error.get('lang') and 'o_has_error' or ''} col-xl-6"
+            >
+                <label class="col-form-label" for="lang">Language</label>
+                <select
+                    name="lang"
+                    t-attf-class="form-select #{error.get('lang') and 'is-invalid' or ''}"
+                >
+                    <option value="" />
+                    <t t-foreach="langs or []" t-as="language">
+                        <option
+                            t-att-value="language.code"
+                            t-att-selected="language.code == partner.lang"
+                        >
+                            <t t-out="language.name" />
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div
+                t-attf-class="mb-3 #{error.get('birthdate_date') and 'o_has_error' or ''} col-xl-6"
+            >
+                <label class="col-form-label" for="birthdate_date">Date of Birth</label>
+                <input
+                    type="date"
+                    name="birthdate_date"
+                    t-attf-class="form-control #{error.get('birthdate_date') and 'is-invalid' or ''}"
+                    t-att-value="birthdate_date or partner.birthdate_date"
+                />
+            </div>
+            <div
+                t-attf-class="mb-3 #{error.get('iban') and 'o_has_error' or ''} col-xl-6"
+            >
+                <label class="col-form-label" for="iban">Bank Account Number</label>
+                <input
+                    type="text"
+                    name="iban"
+                    t-attf-class="form-control #{error.get('iban') and 'is-invalid' or ''}"
+                    t-att-value="iban"
+                />
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Add cooperator information -->
+    <template id="portal_layout" inherit_id="portal.portal_layout">
+        <xpath expr="//div[hasclass('o_portal_my_details')]" position="after">
+            <div class="o_portal_my_details_coop mt-3" t-if="coop_membership.member">
+                <h4>Cooperator Details</h4>
+                <hr class="mt-1 mb-1" />
+                You are an effective cooperator.
+                <div t-if="coop_membership.cooperator_register_number">
+                    <label>Cooperator Number:</label>
+                    <span t-field="coop_membership.cooperator_register_number" />
+                </div>
+                <div t-if="coop_membership.effective_date">
+                    <label>Cooperator Entrance Date:</label>
+                    <span t-field="coop_membership.effective_date" />
+                </div>
+                <div t-if="coop_membership.number_of_share">
+                    <label>Number of Shares:</label>
+                    <span t-field="coop_membership.number_of_share" />
+                </div>
+                <div t-if="coop_membership.share_ids">
+                    <t t-foreach="coop_membership.share_ids" t-as="share">
+                        <span t-field="share.effective_date" />:
+                        <span t-field="share.share_number" />
+                        x
+                        <span t-field="share.share_short_name" />
+                        (<span
+                            t-field="share.share_unit_price"
+                            t-options='{"widget": "monetary", "display_currency": coop_membership.company_id.currency_id}'
+                        />):
+                        <span
+                            t-field="share.total_amount_line"
+                            t-options='{"widget": "monetary", "display_currency": coop_membership.company_id.currency_id}'
+                        />
+                    </t>
+                </div>
+                <div t-if="coop_membership.total_value">
+                    <label>Total Value of Shares:</label>
+                    <span
+                        t-field="coop_membership.total_value"
+                        t-options='{"widget": "monetary", "display_currency": coop_membership.company_id.currency_id}'
+                    />
+                </div>
+                <div t-if="coop_partner.gender">
+                    <label>Gender:</label>
+                    <span t-field="coop_partner.gender" />
+                </div>
+                <div t-if="coop_partner.birthdate_date">
+                    <label>Date of Birth:</label>
+                    <span t-field="coop_partner.birthdate_date" />
+                </div>
+                <div t-if="coop_bank and coop_bank.acc_number">
+                    <label>Bank Account Number:</label>
+                    <span t-field="coop_bank.acc_number" />
+                </div>
+                <div
+                    t-if="coop_partner.is_company and coop_partner.company_register_number"
+                >
+                    <label>Company Register Number:</label>
+                    <span t-field="coop_partner.company_register_number" />
+                </div>
+                <div
+                    t-if="coop_partner.is_company and coop_partner.get_representative()"
+                >
+                    <label>Legal Representative:</label>
+                    <t t-out="coop_partner.get_representative().name" />
+                </div>
+                <div class="o_download_pdf btn-toolbar flex-sm-nowrap mt-2">
+                    <div class="btn-group flex-grow-1 me-1 mb-1">
+                        <a
+                            class="btn btn-secondary btn-block o_download_btn"
+                            href="/my/cooperator_certificate/pdf"
+                            title="Download"
+                        ><i class="fa fa-download" /> Cooperator Certificate</a>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template
+        id="portal_my_home_menu_capital_release_request"
+        name="Portal layout : capital release request menu entries"
+        inherit_id="account.portal_my_home_menu_invoice"
+        priority="30"
+    >
+        <xpath expr="//li[@t-if=&quot;page_name == 'invoice'&quot;]" position="after">
+            <li
+                t-if="page_name == 'capital_release_request'"
+                t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}"
+            >
+                <a
+                    t-if="invoice"
+                    t-attf-href="/my/capital_release_requests?{{ keep_query() }}"
+                >Capital Release Requests</a>
+                <t t-else="">Capital Release Requests</t>
+            </li>
+        </xpath>
+    </template>
+
+    <template
+        id="portal_my_home_capital_release_request"
+        name="Show Capital Release Requests"
+        inherit_id="portal.portal_my_home"
+        customize_show="True"
+        priority="30"
+    >
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Capital Release Requests</t>
+                <t t-set="url" t-value="'/my/capital_release_requests'" />
+                <t
+                    t-set="placeholder_count"
+                    t-value="'capital_release_request_count'"
+                />
+            </t>
+        </xpath>
+    </template>
+
+    <template
+        id="portal_my_capital_release_requests"
+        name="My Capital Release Requests"
+        inherit_id="account.portal_my_invoices"
+        primary="True"
+        priority="100"
+    >
+        <!-- replace invoice by capital release request -->
+        <xpath expr="//t[@t-call='portal.portal_layout']/t[3]/p" position="replace">
+            <p>There are currently no capital release requests for your account.</p>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='portal.portal_layout']/t[4]/thead/tr/th[1]"
+            position="replace"
+        >
+            <th>Request #</th>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='portal.portal_layout']/t[4]/thead/tr/th[2]"
+            position="replace"
+        >
+            <th>Request Date</th>
+        </xpath>
+    </template>
+
+</odoo>

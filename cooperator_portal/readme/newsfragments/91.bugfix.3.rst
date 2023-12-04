@@ -1,0 +1,1 @@
+Fix URL of capital release requests portal pages.
