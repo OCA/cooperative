@@ -52,8 +52,6 @@ msgstr ""
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid ""
 "An account already exists for this email address. Please log in before "
@@ -161,8 +159,6 @@ msgstr ""
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid "Email and confirmation email addresses don't match."
 msgstr ""
@@ -235,8 +231,6 @@ msgstr ""
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid "Please upload a scan of your ID card."
 msgstr ""
@@ -249,8 +243,6 @@ msgstr ""
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid "Provided IBAN is not valid."
 msgstr ""
@@ -273,8 +265,6 @@ msgstr ""
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid "Some mandatory fields have not been filled."
 msgstr ""
@@ -292,8 +282,6 @@ msgstr ""
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid ""
 "You can't subscribe for an amount that exceeds {amount}{currency_symbol}."
@@ -302,8 +290,6 @@ msgstr ""
 #. module: cooperator_website
 #. odoo-python
 #: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/cooperator_website/controllers/main.py:0
-#: code:addons/src/oca/cooperative/cooperator_website/controllers/main.py:0
 #, python-format
 msgid "You can't subscribe to two different types of share."
 msgstr ""
