@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [cooperator](cooperator/) | 16.0.1.0.0 |  | Manage your cooperators
+[cooperator_website](cooperator_website/) | 16.0.1.0.0 |  | This module adds the cooperator subscription form allowing to subscribe for shares online.
 
 [//]: # (end addons)
 

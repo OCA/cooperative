@@ -1,2 +1,0 @@
-Fix confirmation email disappearing when re-rendering the form when a required
-field is missing.
