@@ -86,7 +86,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </xpath>
 
             <page name="sales_purchases" position="after">
-                <field name="member" invisible="1" />
                 <page
                     string="Shares"
                     name="share"
