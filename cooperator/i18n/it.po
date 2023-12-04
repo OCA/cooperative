@@ -2262,14 +2262,10 @@ msgstr "Può esistere solo una iscrizione cooperativa per azienda per partner"
 #: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_form
 msgid ""
 "OpenERP helps you easily track all activities related to\n"
-"                    a cooperator: discussions, history of business\n"
-"                    opportunities,\n"
-"                    documents, etc."
+"                a cooperator: discussions, history of business\n"
+"                opportunities,\n"
+"                documents, etc."
 msgstr ""
-"OpenERP aiuta a tracciare facilmente tutte le attività relative a\n"
-"                    un cooperatore: discussioni, strico opportunità\n"
-"                    di business,\n"
-"                    documenti, ecc."
 
 #. module: cooperator
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__source__operation
@@ -3258,6 +3254,17 @@ msgstr "object._get_report_base_filename()"
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__state__paid
 msgid "paid"
 msgstr "pagata"
+
+#~ msgid ""
+#~ "OpenERP helps you easily track all activities related to\n"
+#~ "                    a cooperator: discussions, history of business\n"
+#~ "                    opportunities,\n"
+#~ "                    documents, etc."
+#~ msgstr ""
+#~ "OpenERP aiuta a tracciare facilmente tutte le attività relative a\n"
+#~ "                    un cooperatore: discussioni, strico opportunità\n"
+#~ "                    di business,\n"
+#~ "                    documenti, ecc."
 
 #~ msgid "Operation requests"
 #~ msgstr "Rchieste operazione"

@@ -1921,14 +1921,10 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_form
 msgid ""
 "OpenERP helps you easily track all activities related to\n"
-"                    a cooperator: discussions, history of business\n"
-"                    opportunities,\n"
-"                    documents, etc."
+"                a cooperator: discussions, history of business\n"
+"                opportunities,\n"
+"                documents, etc."
 msgstr ""
-"Odoo us ajuda a fer un seguiment fàcil de totes les activitats relacionades\n"
-"                    un cooperador: debats, història dels negocis\n"
-"                    oportunitats,\n"
-"                    documents, etc."
 
 #. module: cooperator
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__source__operation
@@ -2895,6 +2891,18 @@ msgstr ""
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__state__paid
 msgid "paid"
 msgstr "pagat"
+
+#~ msgid ""
+#~ "OpenERP helps you easily track all activities related to\n"
+#~ "                    a cooperator: discussions, history of business\n"
+#~ "                    opportunities,\n"
+#~ "                    documents, etc."
+#~ msgstr ""
+#~ "Odoo us ajuda a fer un seguiment fàcil de totes les activitats "
+#~ "relacionades\n"
+#~ "                    un cooperador: debats, història dels negocis\n"
+#~ "                    oportunitats,\n"
+#~ "                    documents, etc."
 
 #~ msgid "Operation requests"
 #~ msgstr "Petició operació"

@@ -1847,9 +1847,9 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_form
 msgid ""
 "OpenERP helps you easily track all activities related to\n"
-"                    a cooperator: discussions, history of business\n"
-"                    opportunities,\n"
-"                    documents, etc."
+"                a cooperator: discussions, history of business\n"
+"                opportunities,\n"
+"                documents, etc."
 msgstr ""
 
 #. module: cooperator
