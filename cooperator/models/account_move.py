@@ -70,7 +70,7 @@ class AccountMove(models.Model):
 
         certificate_email_template = self.get_mail_template_certificate()
 
-        self.partner_id.get_cooperative_membership(self.company_id.id).set_effective()
+        self.partner_id.get_cooperative_membership(self.company_id).set_effective()
 
         sub_reg_operation = self.company_id.get_next_register_operation_number()
 
@@ -113,7 +113,7 @@ class AccountMove(models.Model):
         result = super()._invoice_paid_hook()
         for invoice in self:
             cooperative_membership = invoice.partner_id.get_cooperative_membership(
-                invoice.company_id.id
+                invoice.company_id
             )
             if not (
                 invoice.move_type == "out_invoice"
