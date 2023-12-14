@@ -372,7 +372,7 @@ class OperationRequest(models.Model):
                 self.subscription_request.state = "done"
                 self.partner_id_to = partner
             to_membership = self.partner_id_to.get_cooperative_membership(
-                self.company_id.id
+                self.company_id
             )
             to_membership.set_effective()
             self.partner_id_to.write(

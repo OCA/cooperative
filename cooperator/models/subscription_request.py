@@ -113,10 +113,11 @@ class SubscriptionRequest(models.Model):
         update it if needed and set vals accordingly.
         """
         company_id = vals.get("company_id", self.env.company.id)
+        company_id = self.env["res.company"].browse(company_id)
         cooperative_membership = partner.get_cooperative_membership(company_id)
         member = cooperative_membership and cooperative_membership.member
         pending_requests_domain = [
-            ("company_id", "=", company_id),
+            ("company_id", "=", company_id.id),
             ("partner_id", "=", partner.id),
             ("state", "in", ("draft", "waiting", "done")),
         ]
@@ -820,7 +821,7 @@ class SubscriptionRequest(models.Model):
         partner = self._find_or_create_partner()
 
         cooperative_membership = partner.get_create_cooperative_membership(
-            self.company_id.id
+            self.company_id
         )
         if not cooperative_membership.cooperator:
             cooperative_membership.cooperator = True
