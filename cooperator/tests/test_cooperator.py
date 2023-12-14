@@ -1529,3 +1529,58 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         self.assertEqual(new_user, user)
         self.assertEqual(user.company_id, other_company)
         self.assertEqual(user.company_ids, self.env.company | other_company)
+
+    def test_create_user_different_login(self):
+        """If a partner has a user but the user has a different login address,
+        correctly detect that.
+        """
+        partner = self.env["res.partner"].create(
+            {"name": "Jane Doe", "email": "jane@example.com"}
+        )
+        other_company = self.env["res.company"].create({"name": "Foo Company"})
+        user = self.env["res.users"].create(
+            {
+                "partner_id": partner.id,
+                "login": "other@example.com",
+                "company_id": other_company.id,
+                "company_ids": [fields.Command.set([other_company.id])],
+            }
+        )
+        membership = partner.create_cooperative_membership(self.env.company)
+        membership.create_user()
+        self.assertEqual(partner.user_ids, user)
+        self.assertEqual(user.company_ids, self.env.company | other_company)
+        self.assertFalse(
+            self.env["res.users"].search([("login", "=", "jane@example.com")])
+        )
+
+    def test_create_user_multiple_users(self):
+        """If a partner has multiple users, add the company to all of them."""
+        partner = self.env["res.partner"].create(
+            {"name": "Jane Doe", "email": "jane@example.com"}
+        )
+        other_company = self.env["res.company"].create({"name": "Foo Company"})
+        active_user = self.env["res.users"].create(
+            {
+                "partner_id": partner.id,
+                "login": "other@example.com",
+                "company_id": other_company.id,
+                "company_ids": [fields.Command.set([other_company.id])],
+            }
+        )
+        inactive_user = self.env["res.users"].create(
+            {
+                "partner_id": partner.id,
+                "login": "foobar@example.com",
+                "company_id": other_company.id,
+                "company_ids": [fields.Command.set([other_company.id])],
+            }
+        )
+        inactive_user.active = False
+        membership = partner.create_cooperative_membership(self.env.company)
+        membership.create_user()
+        self.assertEqual(len(partner.user_ids), 2)
+        self.assertEqual(active_user.company_ids, self.env.company | other_company)
+        self.assertEqual(inactive_user.company_ids, self.env.company)
+        self.assertEqual(inactive_user.company_id, self.env.company)
+        self.assertTrue(inactive_user.active)
