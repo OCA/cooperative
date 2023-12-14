@@ -288,25 +288,25 @@ class CooperativeMembership(models.Model):
             partner = membership.partner_id
             email = partner.email
 
-            user = user_obj.with_context(active_test=False).search(
-                [("login", "=", email)]
+            users = user_obj.with_context(active_test=False).search(
+                [("partner_id", "=", partner.id)]
             )
-            if user:
-                user_values = {}
-                if not user.active:
-                    user_values["active"] = True
-                    # set the company as the only company of the user for
-                    # returning users
-                    user_values["company_id"] = membership.company_id.id
-                    user_values["company_ids"] = [
-                        fields.Command.set([membership.company_id.id])
-                    ]
-                elif membership.company_id not in user.company_ids:
-                    # add the company to the user's companies
-                    user_values["company_ids"] = [
-                        fields.Command.link(membership.company_id.id)
-                    ]
-                user.write(user_values)
+            if users:
+                inactive = users.filtered(lambda user: not user.active)
+                active = users - inactive
+                inactive.write(
+                    {
+                        "active": True,
+                        # set the company as the only company of the user for
+                        # returning users
+                        "company_id": membership.company_id.id,
+                        "company_ids": [fields.Command.set([membership.company_id.id])],
+                    }
+                )
+                active.write(
+                    # add the company to the users' companies
+                    {"company_ids": [fields.Command.link(membership.company_id.id)]}
+                )
             else:
                 user_values = {
                     "partner_id": partner.id,
