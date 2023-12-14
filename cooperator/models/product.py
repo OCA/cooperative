@@ -17,7 +17,12 @@ class ProductTemplate(models.Model):
     force_min_qty = fields.Boolean(string="Force minimum quantity?")
     by_company = fields.Boolean(string="Can be subscribed by companies?")
     by_individual = fields.Boolean(string="Can be subscribed by individuals?")
-    mail_template = fields.Many2one("mail.template", string="Mail template")
+    mail_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Certificate email template",
+        domain=[("model", "=", "res.partner"), ("is_cooperator_template", "=", True)],
+        help="If left empty, the default global mail template will be used.",
+    )
 
     def get_web_share_products(self, is_company):
         if is_company is True:
