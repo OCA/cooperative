@@ -446,7 +446,7 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
                 "email": "dummy@example.net",
             }
         )
-        partner2.create_cooperative_membership(self.company.id)
+        partner2.create_cooperative_membership(self.company)
         vals = self.get_dummy_subscription_requests_vals()
         vals["email"] = "dummy@example.net"
         subscription_request = self.env["subscription.request"].create(vals)
@@ -520,7 +520,7 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
                 "is_company": True,
             }
         )
-        company_partner2.create_cooperative_membership(self.company.id)
+        company_partner2.create_cooperative_membership(self.company)
         company_partner2.cooperator = True
         vals = self.get_dummy_company_subscription_requests_vals()
         subscription_request = self.env["subscription.request"].create(vals)
@@ -1451,15 +1451,15 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
     def test_get_create_cooperative_membership_create(self):
         """Create a membership if one does not yet exist."""
         partner = self.env["res.partner"].create({"name": "Jane Doe"})
-        membership = partner.get_create_cooperative_membership(self.env.company.id)
+        membership = partner.get_create_cooperative_membership(self.env.company)
         self.assertTrue(membership)
 
     def test_get_create_cooperative_membership_get(self):
         """Get the membership if one exists."""
         partner = self.env["res.partner"].create({"name": "Jane Doe"})
-        partner.create_cooperative_membership(self.env.company.id)
-        expected = partner.get_cooperative_membership(self.env.company.id)
-        result = partner.get_create_cooperative_membership(self.env.company.id)
+        partner.create_cooperative_membership(self.env.company)
+        expected = partner.get_cooperative_membership(self.env.company)
+        result = partner.get_create_cooperative_membership(self.env.company)
         self.assertEqual(result, expected)
 
     def test_set_effective(self):
@@ -1467,7 +1467,7 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         partner = self.env["res.partner"].create(
             {"name": "Jane Doe", "email": "jane@example.com"}
         )
-        membership = partner.create_cooperative_membership(self.env.company.id)
+        membership = partner.create_cooperative_membership(self.env.company)
         self.assertFalse(membership.member)
         self.assertFalse(membership.cooperator_register_number)
         self.assertFalse(membership.partner_id.user_ids)
@@ -1500,7 +1500,7 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
             }
         )
         user.active = False
-        membership = partner.create_cooperative_membership(self.env.company.id)
+        membership = partner.create_cooperative_membership(self.env.company)
         membership.create_user()
         new_user = self.env["res.users"].search([("login", "=", "jane@example.com")])
         self.assertEqual(new_user, user)
@@ -1523,7 +1523,7 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
                 "company_ids": [fields.Command.set([other_company.id])],
             }
         )
-        membership = partner.create_cooperative_membership(self.env.company.id)
+        membership = partner.create_cooperative_membership(self.env.company)
         membership.create_user()
         new_user = self.env["res.users"].search([("login", "=", "jane@example.com")])
         self.assertEqual(new_user, user)

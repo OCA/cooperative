@@ -74,7 +74,7 @@ class ResPartner(models.Model):
 
     @api.depends_context("company")
     def _compute_cooperative_membership_id(self):
-        company_id = self.env.company.id
+        company_id = self.env.company
         for record in self:
             record.cooperative_membership_id = record.get_cooperative_membership(
                 company_id
@@ -268,7 +268,7 @@ class ResPartner(models.Model):
         self.ensure_one()
         return self.env["cooperative.membership"].search(
             [
-                ("company_id", "=", company_id),
+                ("company_id", "=", company_id.id),
                 ("partner_id", "=", self.id),
             ]
         )
@@ -279,7 +279,7 @@ class ResPartner(models.Model):
         for record in self:
             result |= cooperative_membership_model.create(
                 {
-                    "company_id": company_id,
+                    "company_id": company_id.id,
                     "partner_id": record.id,
                     "cooperator": True,
                 }
@@ -305,7 +305,7 @@ class ResPartner(models.Model):
         if company_id is None:
             company_id = self.env.company
 
-        coop_membership = self.get_cooperative_membership(company_id.id)
+        coop_membership = self.get_cooperative_membership(company_id)
         if coop_membership:
             return coop_membership.get_share_quantities()
         else:
