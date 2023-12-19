@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [cooperator_portal](cooperator_portal/) | 16.0.1.0.0 |  | Show cooperator information in the website portal
 [cooperator_website](cooperator_website/) | 16.0.1.0.0 |  | This module adds the cooperator subscription form allowing to subscribe for shares online.
 [l10n_be_cooperator](l10n_be_cooperator/) | 16.0.1.0.0 |  | Cooperators Belgium Localization
+[l10n_fr_cooperator](l10n_fr_cooperator/) | 16.0.1.0.0 |  | This is the French localization for the Cooperators module
 
 [//]: # (end addons)
 
