@@ -523,7 +523,7 @@ msgstr "Revendu"
 #. module: l10n_be_cooperator
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__sa
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__sa
-msgid "SA"
+msgid "SA / SAS"
 msgstr ""
 
 #. module: l10n_be_cooperator
