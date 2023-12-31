@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-30 22:37+0000\n"
+"PO-Revision-Date: 2023-12-31 20:35+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -2667,7 +2667,7 @@ msgstr "Valida la richiesta iscrizione."
 #: model:ir.model.fields.selection,name:cooperator.selection__operation_request__state__waiting
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__state__waiting
 msgid "Waiting"
-msgstr "Attesa"
+msgstr "In attesa"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
