@@ -6,7 +6,7 @@
         name="Become Cooperator"
     >
         <xpath expr="//t[@t-call='cooperator_website.rules_template']" position="after">
-            <t t-call="portal_recaptcha.recaptcha_widget" />
+            <t t-call="website_recaptcha_v2.recaptcha_widget" />
         </xpath>
     </template>
 
@@ -16,7 +16,7 @@
         name="Become Cooperator"
     >
         <xpath expr="//t[@t-call='cooperator_website.rules_template']" position="after">
-            <t t-call="portal_recaptcha.recaptcha_widget" />
+            <t t-call="website_recaptcha_v2.recaptcha_widget" />
         </xpath>
     </template>
 </odoo>

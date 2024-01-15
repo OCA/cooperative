@@ -9,7 +9,7 @@ class RecaptchaWebsiteSubscription(WebsiteSubscription):
         result = super()._additional_validate(kwargs, logged, values, post_file)
         if result is not True:
             return result
-        result, error_msg = request.env["portal.mixin"].is_captcha_valid(kwargs)
+        result, error_msg = request.website.is_recaptcha_v2_valid(kwargs)
         if not result:
             values["error_msg"] = _("Error validating the CAPTCHA: {0}").format(
                 error_msg

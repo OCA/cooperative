@@ -11,7 +11,7 @@
     "license": "AGPL-3",
     "depends": [
         "cooperator_website",
-        "portal_recaptcha",
+        "website_recaptcha_v2",
     ],
     "data": [
         "views/subscription_template.xml",
