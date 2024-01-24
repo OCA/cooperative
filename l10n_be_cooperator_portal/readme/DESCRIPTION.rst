@@ -1,1 +1,1 @@
-Give access to Tax Shelter Report in the website portal.
+This module gives access to Tax Shelter reports in the website portal.

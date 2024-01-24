@@ -7,21 +7,21 @@ from werkzeug.exceptions import Forbidden
 from odoo import http
 from odoo.exceptions import AccessError, MissingError
 from odoo.http import request
+from odoo.osv import expression
 
-from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
+from odoo.addons.portal.controllers.portal import CustomerPortal
 
 
-class PortalTaxShelter(CustomerPortal):
+class TaxShelterPortal(CustomerPortal):
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)
         if "tax_shelter_count" in counters:
-            partner = request.env.user.partner_id
+            # sudo is needed because regular users don't have access to the
+            # tax.shelter.certificate model, even for their own records.
             tax_shelter_count = (
                 request.env["tax.shelter.certificate"]
                 .sudo()
-                .search_count(
-                    [("partner_id", "in", [partner.commercial_partner_id.id])]
-                )
+                .search_count(self._get_tax_shelter_certificates_domain())
             )
             values["tax_shelter_count"] = tax_shelter_count
         return values
@@ -43,76 +43,72 @@ class PortalTaxShelter(CustomerPortal):
             **kwargs,
         )
 
+    def _get_tax_shelter_certificates_domain(self):
+        partner = request.env.user.partner_id
+        return [("partner_id", "=", partner.commercial_partner_id.id)]
+
     @http.route(
         [
             "/my/tax_shelter_certificates",
-            "/my/tax_shelter_certificates/page/<int:page>",
         ],
         type="http",
         auth="user",
         website=True,
     )
-    def portal_my_tax_shelter_certificates(
-        self, page=1, date_begin=None, date_end=None, **kw
-    ):
-        """Render a page that lits the tax shelter report:
+    def portal_my_tax_shelter_certificates(self, **kw):
+        """Render a page that lists the tax shelter reports:
         * Tax Shelter Certificates
         * Shares Certifcates
         """
-        values = self._prepare_home_portal_values("tax_shelter_count")
-        TaxShelterCertificate = request.env["tax.shelter.certificate"]
-        partner = request.env.user.partner_id
-        domain = [("partner_id", "in", [partner.commercial_partner_id.id])]
+        values = self._prepare_my_tax_shelter_certificates_values()
+        tax_shelters = values["tax_shelters"]
+        request.session["my_taxshelter_certificates_history"] = tax_shelters.ids
+        return request.render("l10n_be_cooperator_portal.portal_my_tax_shelter", values)
 
-        if date_begin and date_end:
-            domain += [
-                ("create_date", ">=", date_begin),
-                ("create_date", "<", date_end),
+    # this method is a copy of PortalAccount._prepare_my_invoices_values()
+    # from the account module in odoo 16, with a few changes (most notably:
+    # the pager has been removed). please update accordingly when porting to
+    # newer versions.
+    def _prepare_my_tax_shelter_certificates_values(
+        self, domain=None, url="/my/tax_shelter_certificates"
+    ):
+        values = self._prepare_portal_layout_values()
+        # sudo is needed because regular users don't have access to the
+        # tax.shelter.certificate model, even for their own records.
+        TaxShelterCertificate = request.env["tax.shelter.certificate"].sudo()
+
+        domain = expression.AND(
+            [
+                domain or [],
+                self._get_tax_shelter_certificates_domain(),
             ]
+        )
 
-        # count for pager
-        tax_shelter_count = TaxShelterCertificate.sudo().search_count(domain)
-        # pager
-        pager = portal_pager(
-            url="/my/tax_shelter_certificates",
-            url_args={"date_begin": date_begin, "date_end": date_end},
-            total=tax_shelter_count,
-            page=page,
-            step=self._items_per_page,
-        )
-        # content according to pager and archive selected
-        tax_shelters = TaxShelterCertificate.sudo().search(
-            domain, limit=self._items_per_page, offset=pager["offset"]
-        )
-        tax_shelters = tax_shelters.sorted(
-            key=lambda r: r.declaration_id.fiscal_year, reverse=True
-        )
-        request.session["my_taxshelter_certificates_history"] = tax_shelters.ids[:100]
+        # sorting, filtering and pager support has been removed because:
+        # * the number of records is very small
+        # * the ordering cannot be computed by the database because it is
+        #   computed with declaration_id.fiscal_year. database ordering only
+        #   works with fields on the model itself.
 
         values.update(
             {
                 "company_id": request.env.company,
-                "date": date_begin,
-                "tax_shelters": tax_shelters,
+                "tax_shelters": TaxShelterCertificate.search(domain).sorted(
+                    key=lambda r: r.declaration_id.fiscal_year, reverse=True
+                ),
                 "page_name": "taxshelter",
-                "pager": pager,
-                "default_url": "/my/tax_shelter_certificates",
+                "default_url": url,
             }
         )
-        return request.render("l10n_be_cooperator_portal.portal_my_tax_shelter", values)
+        return values
 
-    # Black adds a trailing comma after last argument of function definition
-    #  this syntax is invalid for python < 3.6
-    # Exclude for formatting while not fixed, follow status here:
-    # https://github.com/psf/black/issues/1657
-    # fmt: off
     @http.route(
         ["/my/tax_shelter_certificates/<int:certificate_id>"],
         type="http",
         auth="public",
         website=True,
     )
-    def portal_taxshelter_certificate(
+    def portal_my_tax_shelter_certificate_detail(
         self,
         certificate_id,
         access_token=None,
@@ -121,13 +117,12 @@ class PortalTaxShelter(CustomerPortal):
         query_string=None,
         **kw
     ):
-        # fmt: on
         partner = request.env.user.partner_id
         try:
             taxshelter_certificate_sudo = self._document_check_access(
                 "tax.shelter.certificate", certificate_id, access_token
             )
-            if taxshelter_certificate_sudo.partner_id != partner:
+            if taxshelter_certificate_sudo.partner_id != partner.commercial_partner_id:
                 raise Forbidden()
         except (AccessError, MissingError):
             return request.redirect("/my")
@@ -136,9 +131,8 @@ class PortalTaxShelter(CustomerPortal):
             "subscription",
             "shares",
         ):
-            report_ref = (
-                "l10n_be_cooperator.action_tax_shelter_%s_report"
-                % (query_string)
+            report_ref = "l10n_be_cooperator.action_tax_shelter_%s_report" % (
+                query_string
             )
             return self._show_report(
                 model=taxshelter_certificate_sudo,
