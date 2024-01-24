@@ -10,7 +10,7 @@
     >
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li
-                t-if="page_name == 'taxshelter' or taxshelter and taxshelter.state in ('validated', 'sent')"
+                t-if="page_name == 'taxshelter'"
                 t-attf-class="breadcrumb-item #{'active ' if not taxshelter else ''}"
             >
                 <a

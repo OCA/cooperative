@@ -45,7 +45,10 @@ class TaxShelterPortal(CustomerPortal):
 
     def _get_tax_shelter_certificates_domain(self):
         partner = request.env.user.partner_id
-        return [("partner_id", "=", partner.commercial_partner_id.id)]
+        return [
+            ("partner_id", "=", partner.commercial_partner_id.id),
+            ("state", "in", ("validated", "sent")),
+        ]
 
     @http.route(
         [
