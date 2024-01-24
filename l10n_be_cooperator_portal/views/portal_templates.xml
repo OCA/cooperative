@@ -61,6 +61,7 @@
                         <th>Declaration Year</th>
 
                         <th class="text-end">Total Amount</th>
+                        <th />
                     </tr>
                 </thead>
                 <t t-foreach="tax_shelters" t-as="tax_shelter">
@@ -82,6 +83,20 @@
                                 t-field="tax_shelter.total_amount"
                                 t-options='{"widget": "monetary", "display_currency": company_id.currency_id}'
                             />
+                        </td>
+                        <td class="text-end">
+                            <a
+                                class="btn btn-secondary btn-block o_print_btn"
+                                t-att-href="tax_shelter.get_portal_url(report_type='pdf', query_string='&amp;query_string=subscription')"
+                                title="Print Subscription"
+                                target="_blank"
+                            ><i class="fa fa-print" /> Subscription Certificate</a>
+                            <a
+                                class="btn btn-secondary btn-block o_print_btn"
+                                t-att-href="tax_shelter.get_portal_url(report_type='pdf', query_string='&amp;query_string=shares')"
+                                title="Print Shares"
+                                target="_blank"
+                            ><i class="fa fa-print" /> Shares Certificate</a>
                         </td>
                     </tr>
                 </t>
