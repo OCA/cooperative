@@ -26,19 +26,19 @@ class TaxShelterPortal(CustomerPortal):
             values["tax_shelter_count"] = tax_shelter_count
         return values
 
-    def _taxshelter_certificate_get_page_view_values(
-        self, taxshelter_certificate, access_token, **kwargs
+    def _tax_shelter_certificate_get_page_view_values(
+        self, tax_shelter_certificate, access_token, **kwargs
     ):
         values = {
             "company_id": request.env.company,
-            "page_name": "taxshelter",
-            "taxshelter": taxshelter_certificate,
+            "page_name": "tax_shelter_certificate",
+            "tax_shelter_certificate": tax_shelter_certificate,
         }
         return self._get_page_view_values(
-            taxshelter_certificate,
+            tax_shelter_certificate,
             access_token,
             values,
-            "my_taxshelter_certificates_history",
+            "my_tax_shelter_certificates_history",
             False,
             **kwargs,
         )
@@ -64,9 +64,13 @@ class TaxShelterPortal(CustomerPortal):
         * Shares Certifcates
         """
         values = self._prepare_my_tax_shelter_certificates_values()
-        tax_shelters = values["tax_shelters"]
-        request.session["my_taxshelter_certificates_history"] = tax_shelters.ids
-        return request.render("l10n_be_cooperator_portal.portal_my_tax_shelter", values)
+        tax_shelter_certificates = values["tax_shelter_certificates"]
+        request.session[
+            "my_tax_shelter_certificates_history"
+        ] = tax_shelter_certificates.ids
+        return request.render(
+            "l10n_be_cooperator_portal.portal_my_tax_shelter_certificate", values
+        )
 
     # this method is a copy of PortalAccount._prepare_my_invoices_values()
     # from the account module in odoo 16, with a few changes (most notably:
@@ -96,10 +100,10 @@ class TaxShelterPortal(CustomerPortal):
         values.update(
             {
                 "company_id": request.env.company,
-                "tax_shelters": TaxShelterCertificate.search(domain).sorted(
+                "tax_shelter_certificates": TaxShelterCertificate.search(domain).sorted(
                     key=lambda r: r.declaration_id.fiscal_year, reverse=True
                 ),
-                "page_name": "taxshelter",
+                "page_name": "tax_shelter_certificate",
                 "default_url": url,
             }
         )
@@ -122,10 +126,10 @@ class TaxShelterPortal(CustomerPortal):
     ):
         partner = request.env.user.partner_id
         try:
-            taxshelter_certificate_sudo = self._document_check_access(
+            tax_shelter_certificate_sudo = self._document_check_access(
                 "tax.shelter.certificate", certificate_id, access_token
             )
-            if taxshelter_certificate_sudo.partner_id != partner.commercial_partner_id:
+            if tax_shelter_certificate_sudo.partner_id != partner.commercial_partner_id:
                 raise Forbidden()
         except (AccessError, MissingError):
             return request.redirect("/my")
@@ -138,15 +142,15 @@ class TaxShelterPortal(CustomerPortal):
                 query_string
             )
             return self._show_report(
-                model=taxshelter_certificate_sudo,
+                model=tax_shelter_certificate_sudo,
                 report_type=report_type,
                 report_ref=report_ref,
                 download=download,
             )
 
-        values = self._taxshelter_certificate_get_page_view_values(
-            taxshelter_certificate_sudo, access_token, **kw
+        values = self._tax_shelter_certificate_get_page_view_values(
+            tax_shelter_certificate_sudo, access_token, **kw
         )
         return request.render(
-            "l10n_be_cooperator_portal.portal_taxshelter_page", values
+            "l10n_be_cooperator_portal.portal_tax_shelter_page", values
         )
