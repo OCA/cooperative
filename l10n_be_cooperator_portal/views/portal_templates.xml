@@ -46,7 +46,7 @@
 
 
     <!-- Tax Shelter Certificate page -->
-    <template id="portal_my_tax_shelter_certificate" name="My Tax Shelter">
+    <template id="portal_my_tax_shelter_certificate" name="My Tax Shelter Certificates">
         <t t-call="portal.portal_layout">
             <t t-set="breadcrumbs_searchbar" t-value="True" />
             <t t-call="portal.portal_searchbar">
@@ -107,7 +107,7 @@
     <!-- Tax Shelter Certificate Content -->
     <template
         id="portal_tax_shelter_page"
-        name="Tax Shelter Portal Template"
+        name="Tax Shelter Certificate"
         inherit_id="portal.portal_sidebar"
         primary="True"
     >
