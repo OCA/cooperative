@@ -121,7 +121,7 @@ class TaxShelterPortal(CustomerPortal):
         access_token=None,
         report_type=None,
         download=False,
-        query_string=None,
+        certificate_type=None,
         **kw
     ):
         partner = request.env.user.partner_id
@@ -134,12 +134,12 @@ class TaxShelterPortal(CustomerPortal):
         except (AccessError, MissingError):
             return request.redirect("/my")
 
-        if report_type in ("html", "pdf", "text") and query_string in (
+        if report_type in ("html", "pdf", "text") and certificate_type in (
             "subscription",
             "shares",
         ):
             report_ref = "l10n_be_cooperator.action_tax_shelter_%s_report" % (
-                query_string
+                certificate_type
             )
             return self._show_report(
                 model=tax_shelter_certificate_sudo,

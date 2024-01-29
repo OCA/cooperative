@@ -49,6 +49,29 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </xpath>
     </template>
 
+    <template id="print_certificate_button">
+        <a
+            id="print_tax_shelter_subscription"
+            class="btn btn-secondary btn-block o_print_btn"
+            t-att-href="tax_shelter_certificate.get_portal_url(report_type='pdf', query_string='&amp;certificate_type=' + certificate_type)"
+            t-attf-title="Print {{ certificate_name }}"
+            target="_blank"
+        ><i class="fa fa-print" /> <t t-out="certificate_name" /></a>
+    </template>
+
+    <template id="print_subscription_certificate_button">
+        <t t-call="l10n_be_cooperator_portal.print_certificate_button">
+            <t t-set="certificate_type" t-value="'subscription'" />
+            <t t-set="certificate_name">Subscription Certificate</t>
+        </t>
+    </template>
+
+    <template id="print_shares_certificate_button">
+        <t t-call="l10n_be_cooperator_portal.print_certificate_button">
+            <t t-set="certificate_type" t-value="'shares'" />
+            <t t-set="certificate_name">Shares Certificate</t>
+        </t>
+    </template>
 
     <!-- Tax Shelter Certificate page -->
     <template id="portal_my_tax_shelter_certificate" name="My Tax Shelter Certificates">
@@ -90,18 +113,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             />
                         </td>
                         <td class="text-end">
-                            <a
-                                class="btn btn-secondary btn-block o_print_btn"
-                                t-att-href="tax_shelter_certificate.get_portal_url(report_type='pdf', query_string='&amp;query_string=subscription')"
-                                title="Print Subscription"
-                                target="_blank"
-                            ><i class="fa fa-print" /> Subscription Certificate</a>
-                            <a
-                                class="btn btn-secondary btn-block o_print_btn"
-                                t-att-href="tax_shelter_certificate.get_portal_url(report_type='pdf', query_string='&amp;query_string=shares')"
-                                title="Print Shares"
-                                target="_blank"
-                            ><i class="fa fa-print" /> Shares Certificate</a>
+                            <t
+                                t-call="l10n_be_cooperator_portal.print_subscription_certificate_button"
+                            />
+                            <t
+                                t-call="l10n_be_cooperator_portal.print_shares_certificate_button"
+                            />
                         </td>
                     </tr>
                 </t>
@@ -136,28 +153,16 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             <li class="list-group-item flex-grow-1">
                                 <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
                                     <div class="btn-group flex-grow-1 mb-1">
-                                        <a
-                                            id="print_tax_shelter_subscription"
-                                            class="btn btn-secondary btn-block o_print_btn"
-                                            t-att-href="tax_shelter_certificate.get_portal_url(report_type='pdf', query_string='&amp;query_string=subscription')"
-                                            title="Print Subscription"
-                                            target="_blank"
-                                        ><i
-                                                class="fa fa-print"
-                                            /> Subscription Certificate</a>
+                                        <t
+                                            t-call="l10n_be_cooperator_portal.print_subscription_certificate_button"
+                                        />
                                     </div>
                                 </div>
                                 <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
                                     <div class="btn-group flex-grow-1 mb-1">
-                                        <a
-                                            id="print_tax_shelter_shares"
-                                            class="btn btn-secondary btn-block o_print_btn"
-                                            t-att-href="tax_shelter_certificate.get_portal_url(report_type='pdf', query_string='&amp;query_string=shares')"
-                                            title="Print Shares"
-                                            target="_blank"
-                                        ><i
-                                                class="fa fa-print"
-                                            /> Shares Certificate</a>
+                                        <t
+                                            t-call="l10n_be_cooperator_portal.print_shares_certificate_button"
+                                        />
                                     </div>
                                 </div>
                             </li>
