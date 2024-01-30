@@ -846,6 +846,8 @@ msgid "Certificate ${(object.cooperator_register_number or '')}"
 msgstr ""
 
 #. module: cooperator
+#: model:ir.model.fields,field_description:cooperator.field_product_product__mail_template
+#: model:ir.model.fields,field_description:cooperator.field_product_template__mail_template
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_certificate_mail_template
 msgid "Certificate email template"
 msgstr ""
@@ -1523,6 +1525,8 @@ msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: cooperator
+#: model:ir.model.fields,help:cooperator.field_product_product__mail_template
+#: model:ir.model.fields,help:cooperator.field_product_template__mail_template
 #: model:ir.model.fields,help:cooperator.field_res_company__cooperator_capital_release_mail_template
 #: model:ir.model.fields,help:cooperator.field_res_company__cooperator_certificate_increase_mail_template
 #: model:ir.model.fields,help:cooperator.field_res_company__cooperator_certificate_mail_template
@@ -1717,12 +1721,6 @@ msgstr ""
 #: model:ir.actions.act_window,name:cooperator.mail_template_action
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_templates
 msgid "Mail Templates"
-msgstr ""
-
-#. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_product_product__mail_template
-#: model:ir.model.fields,field_description:cooperator.field_product_template__mail_template
-msgid "Mail template"
 msgstr ""
 
 #. module: cooperator

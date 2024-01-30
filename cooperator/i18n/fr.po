@@ -1169,6 +1169,8 @@ msgid "Certificate ${(object.cooperator_register_number or '')}"
 msgstr ""
 
 #. module: cooperator
+#: model:ir.model.fields,field_description:cooperator.field_product_product__mail_template
+#: model:ir.model.fields,field_description:cooperator.field_product_template__mail_template
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_certificate_mail_template
 msgid "Certificate email template"
 msgstr ""
@@ -1860,6 +1862,8 @@ msgid "If checked, some messages have a delivery error."
 msgstr "Si actif, certains messages ont une erreur de livraison."
 
 #. module: cooperator
+#: model:ir.model.fields,help:cooperator.field_product_product__mail_template
+#: model:ir.model.fields,help:cooperator.field_product_template__mail_template
 #: model:ir.model.fields,help:cooperator.field_res_company__cooperator_capital_release_mail_template
 #: model:ir.model.fields,help:cooperator.field_res_company__cooperator_certificate_increase_mail_template
 #: model:ir.model.fields,help:cooperator.field_res_company__cooperator_certificate_mail_template
@@ -2058,12 +2062,6 @@ msgstr "Forme légale"
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_templates
 msgid "Mail Templates"
 msgstr "Modèles de courriel"
-
-#. module: cooperator
-#: model:ir.model.fields,field_description:cooperator.field_product_product__mail_template
-#: model:ir.model.fields,field_description:cooperator.field_product_template__mail_template
-msgid "Mail template"
-msgstr "Modèle de courriel"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_main_attachment_id
@@ -3222,6 +3220,9 @@ msgstr ""
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__state__paid
 msgid "paid"
 msgstr "payé"
+
+#~ msgid "Mail template"
+#~ msgstr "Modèle de courriel"
 
 #~ msgid "Operation requests"
 #~ msgstr "Demandes de transaction"
