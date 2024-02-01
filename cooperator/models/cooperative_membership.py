@@ -243,3 +243,83 @@ class CooperativeMembership(models.Model):
             total_shares[line.share_product_id.id] += line.share_number
 
         return total_shares
+
+    def set_effective(self):
+        """Make sure the following things are in order for all memberships in
+        the recordset:
+
+        - ``member`` is set to True and ``old_member`` is set to False.
+        - A cooperator register number is assigned if one did not yet exist.
+        - A user is created if one did not yet exist.
+
+        This should all be idempotent.
+        """
+        self.write({"member": True, "old_member": False})
+        self.assign_cooperator_register_number()
+        for membership in self:
+            if membership.company_id.create_user:
+                membership.create_user()
+
+    def assign_cooperator_register_number(self):
+        """Set a new cooperator register number on the memberships if one is not
+        already assigned.
+        """
+        for membership in self:
+            # Already exists; nothing to do.
+            if membership.cooperator_register_number:
+                continue
+            membership.cooperator_register_number = (
+                self.company_id.get_next_cooperator_number()
+            )
+
+    def create_user(self):
+        """Create a new user for the memberships if one does not already exist.
+
+        If a user exists, but its 'active' field is False, then the user is
+        reactivated and the membership's company_id becomes the user's only
+        company_id.
+
+        If a new partner is created, an e-mail is sent to them with instructions
+        on how to set their passport.
+        """
+        user_obj = self.env["res.users"].sudo()
+
+        for membership in self:
+            partner = membership.partner_id
+            email = partner.email
+
+            users = user_obj.with_context(active_test=False).search(
+                [("partner_id", "=", partner.id)]
+            )
+            if users:
+                inactive = users.filtered(lambda user: not user.active)
+                active = users - inactive
+                inactive.write(
+                    {
+                        "active": True,
+                        # set the company as the only company of the user for
+                        # returning users
+                        "company_id": membership.company_id.id,
+                        "company_ids": [fields.Command.set([membership.company_id.id])],
+                    }
+                )
+                active.write(
+                    # add the company to the users' companies
+                    {"company_ids": [fields.Command.link(membership.company_id.id)]}
+                )
+            else:
+                user_values = {
+                    "partner_id": partner.id,
+                    "login": email,
+                }
+                user = user_obj._signup_create_user(user_values)
+                # passing these values in _signup_create_user() does not work
+                # if the website module is loaded, because it overrides the
+                # method and overwrites them.
+                user.write(
+                    {
+                        "company_id": membership.company_id.id,
+                        "company_ids": [fields.Command.set([membership.company_id.id])],
+                    }
+                )
+                user.with_context(create_user=True).action_reset_password()

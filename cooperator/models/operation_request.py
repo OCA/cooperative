@@ -367,34 +367,19 @@ class OperationRequest(models.Model):
                     _("Converting just part of the shares is not yet implemented")
                 )
         elif self.operation_type == "transfer":
-            partner_vals = {"member": True}
             if self.receiver_not_member:
                 partner = self.subscription_request.setup_partner()
                 self.subscription_request.state = "done"
-                cooperator_number = self.company_id.get_next_cooperator_number()
-                # fixme: get_eater_vals() is really specific and should not be
-                # called from here.
-                partner_vals.update(
-                    sub_request.get_eater_vals(partner, self.share_product_id)
-                )
-                partner_vals["cooperator_register_number"] = cooperator_number
-                partner.write(partner_vals)
                 self.partner_id_to = partner
-            else:
-                # means an old member or cooperator candidate
-                if not self.partner_id_to.member:
-                    if self.partner_id_to.cooperator_register_number == 0:
-                        cooperator_number = self.company_id.get_next_cooperator_number()
-                        partner_vals["cooperator_register_number"] = cooperator_number
-                    # fixme: get_eater_vals() is really specific and should
-                    # not be called from here.
-                    partner_vals.update(
-                        sub_request.get_eater_vals(
-                            self.partner_id_to, self.share_product_id
-                        )
-                    )
-                    partner_vals["old_member"] = False
-                    self.partner_id_to.write(partner_vals)
+            to_membership = self.partner_id_to.get_cooperative_membership(
+                self.company_id
+            )
+            to_membership.set_effective()
+            self.partner_id_to.write(
+                # FIXME: get_eater_vals() is really specific and should not be
+                # called from here.
+                sub_request.get_eater_vals(self.partner_id_to, self.share_product_id)
+            )
             # remove the parts to the giver
             self.hand_share_over(self.partner_id, self.share_product_id, self.quantity)
             # give the share to the receiver

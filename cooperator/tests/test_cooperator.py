@@ -107,6 +107,27 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         self.assertEqual(partner.effective_date, date(2022, 6, 21))
 
     @users("user-cooperator")
+    def test_pay_invoice_sets_effective(self):
+        self.subscription_request_1.validate_subscription_request()
+        partner = self.subscription_request_1.partner_id
+        membership = partner.cooperative_membership_id
+        self.assertFalse(membership.member)
+        self.assertFalse(membership.cooperator_register_number)
+        self.assertFalse(membership.partner_id.user_ids)
+        # Make sure to create a user.
+        self.env.company.sudo().create_user = True
+
+        invoice = self.subscription_request_1.capital_release_request
+        self.pay_invoice(invoice, date(2022, 6, 21))
+
+        self.assertTrue(membership.member)
+        self.assertFalse(membership.old_member)
+        self.assertTrue(membership.cooperator_register_number)
+        self.assertTrue(membership.partner_id.user_ids)
+        self.assertEqual(membership.partner_id.user_ids.company_id, self.env.company)
+        self.assertEqual(membership.partner_id.user_ids.company_ids, self.env.company)
+
+    @users("user-cooperator")
     def test_effective_date_from_account_move_date(self):
         # the effective date should also work with an account.move without an
         # account.payment.
@@ -425,7 +446,7 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
                 "email": "dummy@example.net",
             }
         )
-        partner2.create_cooperative_membership(self.company.id)
+        partner2.create_cooperative_membership(self.company)
         vals = self.get_dummy_subscription_requests_vals()
         vals["email"] = "dummy@example.net"
         subscription_request = self.env["subscription.request"].create(vals)
@@ -499,7 +520,7 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
                 "is_company": True,
             }
         )
-        company_partner2.create_cooperative_membership(self.company.id)
+        company_partner2.create_cooperative_membership(self.company)
         company_partner2.cooperator = True
         vals = self.get_dummy_company_subscription_requests_vals()
         subscription_request = self.env["subscription.request"].create(vals)
@@ -1426,3 +1447,140 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         cooperative_membership_2 = cooperator_2.cooperative_membership_ids[1]
         self.assertEqual(cooperative_membership_2.company_id, company_2)
         self.assertEqual(cooperative_membership_2.cooperator_register_number, 1)
+
+    def test_get_create_cooperative_membership_create(self):
+        """Create a membership if one does not yet exist."""
+        partner = self.env["res.partner"].create({"name": "Jane Doe"})
+        membership = partner.get_create_cooperative_membership(self.env.company)
+        self.assertTrue(membership)
+
+    def test_get_create_cooperative_membership_get(self):
+        """Get the membership if one exists."""
+        partner = self.env["res.partner"].create({"name": "Jane Doe"})
+        partner.create_cooperative_membership(self.env.company)
+        expected = partner.get_cooperative_membership(self.env.company)
+        result = partner.get_create_cooperative_membership(self.env.company)
+        self.assertEqual(result, expected)
+
+    def test_set_effective(self):
+        """Expect set_effective to do the things it says it does."""
+        partner = self.env["res.partner"].create(
+            {"name": "Jane Doe", "email": "jane@example.com"}
+        )
+        membership = partner.create_cooperative_membership(self.env.company)
+        self.assertFalse(membership.member)
+        self.assertFalse(membership.cooperator_register_number)
+        self.assertFalse(membership.partner_id.user_ids)
+        # Falsely set this to True.
+        membership.old_member = True
+        # Make sure to create a user.
+        self.env.company.create_user = True
+        membership.set_effective()
+        self.assertTrue(membership.member)
+        self.assertFalse(membership.old_member)
+        self.assertTrue(membership.cooperator_register_number)
+        self.assertTrue(membership.partner_id.user_ids)
+        self.assertEqual(membership.partner_id.user_ids.company_id, self.env.company)
+        self.assertEqual(membership.partner_id.user_ids.company_ids, self.env.company)
+
+    def test_create_user_inactive(self):
+        """When creating a user that is inactive, set it active and replace the
+        companies.
+        """
+        partner = self.env["res.partner"].create(
+            {"name": "Jane Doe", "email": "jane@example.com"}
+        )
+        other_company = self.env["res.company"].create({"name": "Foo Company"})
+        user = self.env["res.users"].create(
+            {
+                "partner_id": partner.id,
+                "login": partner.email,
+                "company_id": other_company.id,
+                "company_ids": [fields.Command.set([other_company.id])],
+            }
+        )
+        user.active = False
+        membership = partner.create_cooperative_membership(self.env.company)
+        membership.create_user()
+        new_user = self.env["res.users"].search([("login", "=", "jane@example.com")])
+        self.assertEqual(new_user, user)
+        self.assertEqual(user.company_id, self.env.company)
+        self.assertEqual(user.company_ids, self.env.company)
+
+    def test_create_user_new_company(self):
+        """If calling create_user for a user that already exists, but which
+        doesn't belong to the membership's company yet, add the company.
+        """
+        partner = self.env["res.partner"].create(
+            {"name": "Jane Doe", "email": "jane@example.com"}
+        )
+        other_company = self.env["res.company"].create({"name": "Foo Company"})
+        user = self.env["res.users"].create(
+            {
+                "partner_id": partner.id,
+                "login": partner.email,
+                "company_id": other_company.id,
+                "company_ids": [fields.Command.set([other_company.id])],
+            }
+        )
+        membership = partner.create_cooperative_membership(self.env.company)
+        membership.create_user()
+        new_user = self.env["res.users"].search([("login", "=", "jane@example.com")])
+        self.assertEqual(new_user, user)
+        self.assertEqual(user.company_id, other_company)
+        self.assertEqual(user.company_ids, self.env.company | other_company)
+
+    def test_create_user_different_login(self):
+        """If a partner has a user but the user has a different login address,
+        correctly detect that.
+        """
+        partner = self.env["res.partner"].create(
+            {"name": "Jane Doe", "email": "jane@example.com"}
+        )
+        other_company = self.env["res.company"].create({"name": "Foo Company"})
+        user = self.env["res.users"].create(
+            {
+                "partner_id": partner.id,
+                "login": "other@example.com",
+                "company_id": other_company.id,
+                "company_ids": [fields.Command.set([other_company.id])],
+            }
+        )
+        membership = partner.create_cooperative_membership(self.env.company)
+        membership.create_user()
+        self.assertEqual(partner.user_ids, user)
+        self.assertEqual(user.company_ids, self.env.company | other_company)
+        self.assertFalse(
+            self.env["res.users"].search([("login", "=", "jane@example.com")])
+        )
+
+    def test_create_user_multiple_users(self):
+        """If a partner has multiple users, add the company to all of them."""
+        partner = self.env["res.partner"].create(
+            {"name": "Jane Doe", "email": "jane@example.com"}
+        )
+        other_company = self.env["res.company"].create({"name": "Foo Company"})
+        active_user = self.env["res.users"].create(
+            {
+                "partner_id": partner.id,
+                "login": "other@example.com",
+                "company_id": other_company.id,
+                "company_ids": [fields.Command.set([other_company.id])],
+            }
+        )
+        inactive_user = self.env["res.users"].create(
+            {
+                "partner_id": partner.id,
+                "login": "foobar@example.com",
+                "company_id": other_company.id,
+                "company_ids": [fields.Command.set([other_company.id])],
+            }
+        )
+        inactive_user.active = False
+        membership = partner.create_cooperative_membership(self.env.company)
+        membership.create_user()
+        self.assertEqual(len(partner.user_ids), 2)
+        self.assertEqual(active_user.company_ids, self.env.company | other_company)
+        self.assertEqual(inactive_user.company_ids, self.env.company)
+        self.assertEqual(inactive_user.company_id, self.env.company)
+        self.assertTrue(inactive_user.active)

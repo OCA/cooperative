@@ -31,46 +31,6 @@ class AccountMove(models.Model):
             starting_sequence = "R" + starting_sequence
         return starting_sequence
 
-    def create_user(self, partner):
-        user_obj = self.env["res.users"]
-        email = partner.email
-
-        user = user_obj.search([("login", "=", email)])
-        if user:
-            if self.company_id not in user.company_ids:
-                # add the company to the user's companies
-                user.company_ids = [(4, self.company_id.id, 0)]
-        else:
-            # set the company as the only company of the user
-            company_ids = [(6, 0, [self.company_id.id])]
-            user = user_obj.search([("login", "=", email), ("active", "=", False)])
-            if user:
-                user.sudo().write(
-                    {
-                        "active": True,
-                        "company_id": self.company_id.id,
-                        "company_ids": company_ids,
-                    }
-                )
-            else:
-                user_values = {
-                    "partner_id": partner.id,
-                    "login": email,
-                }
-                user = user_obj.sudo()._signup_create_user(user_values)
-                # passing these values in _signup_create_user() does not work
-                # if the website module is loaded, because it overrides the
-                # method and overwrites them.
-                user.sudo().write(
-                    {
-                        "company_id": self.company_id.id,
-                        "company_ids": company_ids,
-                    }
-                )
-                user.sudo().with_context(create_user=True).action_reset_password()
-
-        return user
-
     def get_mail_template_certificate(self):
         if self.partner_id.member:
             return self.company_id.get_cooperator_certificate_increase_mail_template()
@@ -97,31 +57,6 @@ class AccountMove(models.Model):
             "company_id": self.company_id.id,
         }
 
-    def get_membership_vals(self):
-        # flag the partner as an effective member
-        # if not yet cooperator we generate a cooperator number
-        vals = {}
-        cooperative_membership = self.partner_id.get_cooperative_membership(
-            self.company_id.id
-        )
-        if not cooperative_membership.member and not cooperative_membership.old_member:
-            sub_reg_num = self.company_id.get_next_cooperator_number()
-            vals = {
-                "member": True,
-                "old_member": False,
-                "cooperator_register_number": int(sub_reg_num),
-            }
-        elif cooperative_membership.old_member:
-            vals = {"member": True, "old_member": False}
-
-        return vals
-
-    def set_membership(self):
-        vals = self.get_membership_vals()
-        self.partner_id.get_cooperative_membership(self.company_id.id).write(vals)
-
-        return True
-
     def _send_certificate_mail(self, certificate_email_template, sub_reg_line):
         if self.company_id.send_certificate_email:
             # we send the email with the certificate in attachment
@@ -135,7 +70,7 @@ class AccountMove(models.Model):
 
         certificate_email_template = self.get_mail_template_certificate()
 
-        self.set_membership()
+        self.partner_id.get_cooperative_membership(self.company_id).set_effective()
 
         sub_reg_operation = self.company_id.get_next_register_operation_number()
 
@@ -153,9 +88,6 @@ class AccountMove(models.Model):
                 certificate_email_template = line.product_id.mail_template
 
         self._send_certificate_mail(certificate_email_template, sub_reg_line)
-
-        if self.company_id.create_user:
-            self.create_user(self.partner_id)
 
         return True
 
@@ -181,7 +113,7 @@ class AccountMove(models.Model):
         result = super()._invoice_paid_hook()
         for invoice in self:
             cooperative_membership = invoice.partner_id.get_cooperative_membership(
-                invoice.company_id.id
+                invoice.company_id
             )
             if not (
                 invoice.move_type == "out_invoice"
