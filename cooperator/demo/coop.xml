@@ -15,6 +15,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="street">Avenue des Dessus-de-Livres, 2</field>
         <field name="city">Namur (Loyers)</field>
         <field name="zip">5101</field>
+        <field name="birthdate_date">1980-01-01</field>
         <field name="country_id" ref="base.be" />
     </record>
 
@@ -39,6 +40,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="street">Avenue des Dessous-de-Livres, 3</field>
         <field name="city">Namur (Loyers)</field>
         <field name="zip">5101</field>
+        <field name="birthdate_date">1980-01-01</field>
         <field name="country_id" ref="base.be" />
     </record>
 
@@ -62,6 +64,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="street">Rue de la colocation, 23</field>
         <field name="city">Namur (Loyers)</field>
         <field name="zip">5101</field>
+        <field name="birthdate_date">1990-01-01</field>
         <field name="country_id" ref="base.be" />
     </record>
 
@@ -77,6 +80,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="email">remy@demo.net</field>
         <field name="street">Rue Guido Van Rossum, 2</field>
         <field name="city">Evere</field>
+        <field name="birthdate_date">1992-10-01</field>
         <field name="zip">5101</field>
         <field name="country_id" ref="base.be" />
     </record>
@@ -164,6 +168,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             eval="obj(ref('product_template_share_type_1_demo')).product_variant_id.id"
         />
         <field name="lang">en_US</field>
+        <field name="birthdate">1990-12-21</field>
         <field name="skip_iban_control" eval="True" />
         <field name="state">waiting</field>
         <field name="data_policy_approved" eval="True" />

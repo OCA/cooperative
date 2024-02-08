@@ -211,6 +211,7 @@ class SubscriptionRequest(models.Model):
     birthdate = fields.Date(
         string="Date of birth",
         readonly=True,
+        required=True,
         states={"draft": [("readonly", False)]},
     )
     gender = fields.Selection(
