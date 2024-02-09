@@ -17,20 +17,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <span t-field="o.company_id.name" />.
             </p>
 
-            <p>
-                Cette lettre confirme qu'en date du
-                <span t-field="o.declaration_id.date_to" />,
-                vous êtes toujours en possession de parts de
-                <span t-field="o.company_id.name" />
-                pour un montant total de
-                <span
-                    t-field="o.partner_id.total_value"
-                    t-options='{"widget": "float", "precision": 2}'
-                />
-                euros et que la condition prévue à l'article 145(26), §3,
-                alinéa 2, CIR92 est remplie.
-            </p>
-
             <t t-call="l10n_be_cooperator.tax_shelter_report_table">
                 <t t-call="l10n_be_cooperator.tax_shelter_report_line">
                     <t t-set="lines" t-value="o.previously_subscribed_lines" />
@@ -43,12 +29,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         <span t-field="l.type" />
                     </td>
                     <td />
-                    <td />
-                    <td />
                     <td class="text-start">
                         <span t-field="l.transaction_date" />
                     </td>
-                    <td class="text-end">
+                    <td class="text-start">
                         <span t-field="l.amount_resold" />
                     </td>
                     <td />
@@ -58,12 +42,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         <span t-field="l.type" />
                     </td>
                     <td />
-                    <td />
-                    <td />
                     <td class="text-start">
                         <span t-field="l.transaction_date" />
                     </td>
-                    <td class="text-end">
+                    <td class="text-start">
                         <span t-field="l.amount_transfered" />
                     </td>
                     <td />

@@ -33,9 +33,7 @@ class TestTaxShelter(TransactionCase, CooperatorTestMixin):
                 "fiscal_year": 2021,
                 "date_from": date(2021, 1, 1),
                 "date_to": date(2021, 12, 31),
-                "month_from": "janvier",
-                "month_to": "décembre",
-                "tax_shelter_percentage": "45",
+                "tax_shelter_type": "start_up_micro",
                 "tax_shelter_capital_limit": 250000,
             }
         )
