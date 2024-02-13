@@ -168,20 +168,13 @@ class TaxShelterCertificate(models.Model):
         tax_shelter_mail_template = self.env.ref(
             "l10n_be_cooperator.email_template_tax_shelter_certificate"
         )
-        for certificate in self:
-            if (
-                certificate.total_amount_eligible
-                + certificate.total_amount_eligible_previously_subscribed
-                > 0
-            ):
-                attachments = certificate.generate_certificates_report()
-                if len(attachments) > 0:
-                    send_mail_with_additional_attachments(
-                        tax_shelter_mail_template, certificate.id, attachments
-                    )
-                certificate.state = "sent"
-            else:
-                certificate.state = "no_eligible"
+        for certificate in self.filtered(lambda x: x.state == "validated"):
+            attachments = certificate.generate_certificates_report()
+            if len(attachments) > 0:
+                send_mail_with_additional_attachments(
+                    tax_shelter_mail_template, certificate.id, attachments
+                )
+            certificate.state = "sent"
 
     def print_subscription_certificate(self):
         self.ensure_one()
@@ -233,6 +226,13 @@ class TaxShelterCertificate(models.Model):
                 + certificate.total_amount_resold
                 + certificate.total_amount_transfered
             )
+
+            if (
+                certificate.total_amount_eligible
+                + certificate.total_amount_eligible_previously_subscribed
+                == 0
+            ):
+                certificate.state = "no_eligible"
 
     @api.depends("lines")
     def _compute_certificate_lines(self):

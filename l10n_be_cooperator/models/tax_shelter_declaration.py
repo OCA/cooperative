@@ -192,7 +192,9 @@ class TaxShelterDeclaration(models.Model):
 
     def validate_declaration(self):
         self.ensure_one()
-        self.tax_shelter_certificates.write({"state": "validated"})
+        self.tax_shelter_certificates.filtered(lambda x: x.state == "draft").write(
+            {"state": "validated"}
+        )
         self.state = "validated"
 
     def reset_declaration(self):
