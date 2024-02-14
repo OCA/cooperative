@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-12 17:39+0000\n"
+"PO-Revision-Date: 2024-02-14 16:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -864,7 +864,7 @@ msgstr "Valida dichiarazione"
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__tax_shelter_certificate__state__validated
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__tax_shelter_declaration__state__validated
 msgid "Validated"
-msgstr "Validata"
+msgstr "Approvata"
 
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
