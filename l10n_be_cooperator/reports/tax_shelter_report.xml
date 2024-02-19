@@ -11,6 +11,8 @@
             name="report_file"
         >l10n_be_cooperator.tax_shelter_subscription_report.xml</field>
         <field name="multi">True</field>
+        <field name="binding_model_id" ref="model_tax_shelter_certificate" />
+        <field name="binding_type">report</field>
     </record>
     <record model="ir.actions.report" id="action_tax_shelter_shares_report">
         <field name="model">tax.shelter.certificate</field>
@@ -21,5 +23,7 @@
             name="report_file"
         >l10n_be_cooperator.tax_shelter_shares_report.xml</field>
         <field name="multi">True</field>
+        <field name="binding_model_id" ref="model_tax_shelter_certificate" />
+        <field name="binding_type">report</field>
     </record>
 </odoo>
