@@ -232,6 +232,7 @@ class SubscriptionRequest(models.Model):
         ],
         string="Type of Subscription",
         default="new",
+        required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
