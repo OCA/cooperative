@@ -192,7 +192,7 @@ class SubscriptionRequest(models.Model):
             )
 
     already_cooperator = fields.Boolean(
-        string="I'm already cooperator",
+        string="Already a cooperator",
         readonly=True,
         compute="_compute_already_cooperator",
     )
@@ -228,7 +228,7 @@ class SubscriptionRequest(models.Model):
     type = fields.Selection(
         [
             ("new", "New Cooperator"),
-            ("increase", "Increase number of share"),
+            ("increase", "Increase number of shares"),
         ],
         string="Type of Subscription",
         default="new",
@@ -847,6 +847,15 @@ class SubscriptionRequest(models.Model):
 
         if self.ordered_parts <= 0:
             raise UserError(_("Number of share must be greater than 0."))
+
+        if self.already_cooperator and self.type != "increase":
+            raise UserError(
+                _(
+                    "Partner %s is already a cooperator, subscription type"
+                    " must be 'Increase number of shares'."
+                )
+                % self.partner_id.name
+            )
 
         partner = self.setup_partner()
 

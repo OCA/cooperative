@@ -912,8 +912,12 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
                 "lang": "en_US",
             }
         )
+        partner.create_cooperative_membership(self.env.company)
+        partner.member = True
         with Form(self.env["subscription.request"]) as request_form:
+            self.assertEqual(request_form.type, "new")
             request_form.partner_id = partner
+            self.assertEqual(request_form.type, "increase")
             self.assertEqual(request_form.firstname, partner.firstname)
             self.assertEqual(request_form.lastname, partner.lastname)
             self.assertEqual(request_form.email, partner.email)
@@ -928,6 +932,23 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
 
             # This is to make sure that the form can be saved.
             request_form.share_product_id = self.share_x
+
+    def test_constrain_type_if_already_cooperator(self):
+        """
+        If a partner is already a cooperator, don't allow the 'new' type.
+        """
+        partner = self.env["res.partner"].create({"name": "Test Partner"})
+        partner.create_cooperative_membership(self.env.company)
+        partner.member = True
+        vals = self.get_dummy_subscription_requests_vals()
+        vals["type"] = "new"
+        subscription_request = self.env["subscription.request"].create(vals)
+        subscription_request.partner_id = partner
+        self.assertTrue(subscription_request.already_cooperator)
+        with self.assertRaises(UserError):
+            subscription_request.validate_subscription_request()
+        subscription_request.type = "increase"
+        subscription_request.validate_subscription_request()
 
     @freeze_time("2023-06-21")
     def test_partner_company_dependent_fields_with_membership(self):
