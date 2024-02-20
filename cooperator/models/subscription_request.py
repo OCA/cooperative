@@ -486,7 +486,6 @@ class SubscriptionRequest(models.Model):
 
     def get_person_info(self, partner):
         self.firstname = partner.firstname
-        self.name = partner.name
         self.lastname = partner.lastname
         self.email = partner.email
         self.birthdate = partner.birthdate_date

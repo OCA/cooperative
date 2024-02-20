@@ -9,7 +9,7 @@ from freezegun import freeze_time
 
 from odoo import fields
 from odoo.exceptions import AccessError, UserError, ValidationError
-from odoo.tests.common import TransactionCase, users
+from odoo.tests.common import Form, TransactionCase, users
 
 from .cooperator_test_mixin import CooperatorTestMixin
 
@@ -891,6 +891,43 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
             partner.generic_rules_approved,
             cooperative_membership.generic_rules_approved,
         )
+
+    def test_partner_existing(self):
+        """
+        Test that selecting an existing partner automatically changes certain
+        fields to default values.
+        """
+        partner = self.env["res.partner"].create(
+            {
+                "firstname": "Test",
+                "lastname": "Partner",
+                "email": "test@example.com",
+                "birthdate_date": "2018-01-01",
+                "gender": "other",
+                "street": "Example Street 1",
+                "city": "Brussels",
+                "zip": "1000",
+                "country_id": self.env.ref("base.be").id,
+                "phone": "1234",
+                "lang": "en_US",
+            }
+        )
+        with Form(self.env["subscription.request"]) as request_form:
+            request_form.partner_id = partner
+            self.assertEqual(request_form.firstname, partner.firstname)
+            self.assertEqual(request_form.lastname, partner.lastname)
+            self.assertEqual(request_form.email, partner.email)
+            self.assertEqual(request_form.birthdate, partner.birthdate_date)
+            self.assertEqual(request_form.gender, partner.gender)
+            self.assertEqual(request_form.address, partner.street)
+            self.assertEqual(request_form.city, partner.city)
+            self.assertEqual(request_form.zip_code, partner.zip)
+            self.assertEqual(request_form.country_id, partner.country_id)
+            self.assertEqual(request_form.phone, partner.phone)
+            self.assertEqual(request_form.lang, partner.lang)
+
+            # This is to make sure that the form can be saved.
+            request_form.share_product_id = self.share_x
 
     @freeze_time("2023-06-21")
     def test_partner_company_dependent_fields_with_membership(self):
