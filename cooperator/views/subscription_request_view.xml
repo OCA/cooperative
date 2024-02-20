@@ -102,6 +102,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         <group>
                             <field name="type" />
                             <field name="partner_id" options="{'no_create':True}" />
+                        </group>
+                        <group string="Company Details">
                             <field
                                 name="is_company"
                                 groups="cooperator.cooperator_group_manager"
@@ -128,6 +130,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                 name="company_register_number"
                                 attrs="{'invisible': [('is_company', '=', False)], 'required': [('is_company', '=', True)]}"
                             />
+                        </group>
+                        <group string="Contact Details">
                             <field name="firstname" />
                             <field name="lastname" />
                             <field name="birthdate" />
@@ -145,7 +149,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             <field name="city" />
                             <field name="country_id" options="{'no_create':True}" />
                         </group>
-                        <group>
+                        <group string="Subscription Information">
                             <field
                                 name="capital_release_request_date"
                                 groups="cooperator.cooperator_group_manager"
