@@ -224,6 +224,7 @@ class SubscriptionRequest(models.Model):
             ("new", "New Cooperator"),
             ("increase", "Increase number of share"),
         ],
+        string="Type of Subscription",
         default="new",
         readonly=True,
         states={"draft": [("readonly", False)]},
@@ -258,7 +259,7 @@ class SubscriptionRequest(models.Model):
     )
     partner_id = fields.Many2one(
         "res.partner",
-        string="Cooperator",
+        string="Existing Contact",
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
