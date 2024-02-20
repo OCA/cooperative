@@ -260,7 +260,7 @@ class SubscriptionRequest(models.Model):
         states={"draft": [("readonly", False)]},
     )
     iban = fields.Char(
-        string="Account Number",
+        string="Bank Account Number",
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
