@@ -125,8 +125,6 @@ class SubscriptionRequest(models.Model):
         # handle draft and waiting requests.
         if member or self.search(pending_requests_domain):
             vals["type"] = "increase"
-        if member:
-            vals["already_cooperator"] = True
         if not cooperative_membership:
             cooperative_membership = partner.create_cooperative_membership(company_id)
         elif not cooperative_membership.cooperator:
@@ -170,6 +168,14 @@ class SubscriptionRequest(models.Model):
                     if part
                 )
 
+    @api.depends("partner_id.member")
+    def _compute_already_cooperator(self):
+        for sub_request in self:
+            if sub_request.partner_id:
+                sub_request.already_cooperator = sub_request.partner_id.member
+            else:
+                sub_request.already_cooperator = False
+
     @api.depends("iban", "skip_iban_control")
     def _compute_is_valid_iban(self):
         for sub_request in self:
@@ -188,7 +194,7 @@ class SubscriptionRequest(models.Model):
     already_cooperator = fields.Boolean(
         string="I'm already cooperator",
         readonly=True,
-        states={"draft": [("readonly", False)]},
+        compute="_compute_already_cooperator",
     )
 
     # previously, this was a normal field. it is now computed, and is used for
@@ -496,7 +502,6 @@ class SubscriptionRequest(models.Model):
         partner = self.partner_id
         if partner:
             self.is_company = partner.is_company
-            self.already_cooperator = partner.member
             if partner.bank_ids:
                 self.iban = partner.bank_ids[0].acc_number
             if partner.member:

@@ -100,7 +100,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     <field name="is_valid_iban" invisible="True" />
                     <group>
                         <group>
-                            <field name="already_cooperator" />
                             <field name="type" />
                             <field name="partner_id" options="{'no_create':True}" />
                             <field
