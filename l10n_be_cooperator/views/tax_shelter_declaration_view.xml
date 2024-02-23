@@ -30,7 +30,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     />
                     <button
                         name="validate_declaration"
-                        string="Validate Declaration"
+                        string="Validate and Send"
                         type="object"
                         states="computed"
                         groups="cooperator.cooperator_group_user"
@@ -70,7 +70,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                         type="object"
                                         name="send_certificates"
                                         icon="fa-play"
-                                        string="Send Certificates"
+                                        string="Send Again"
                                         attrs="{'invisible':[('state','=','not_eligible')]}"
                                     />
                                 </tree>

@@ -168,7 +168,7 @@ class TaxShelterCertificate(models.Model):
         tax_shelter_mail_template = self.env.ref(
             "l10n_be_cooperator.email_template_tax_shelter_certificate"
         )
-        for certificate in self.filtered(lambda x: x.state == "validated"):
+        for certificate in self.filtered(lambda x: x.state in ("validated", "sent")):
             attachments = certificate.generate_certificates_report()
             if len(attachments) > 0:
                 send_mail_with_additional_attachments(
