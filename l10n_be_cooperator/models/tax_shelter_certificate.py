@@ -62,7 +62,7 @@ class TaxShelterCertificate(models.Model):
         [
             ("draft", "Draft"),
             ("validated", "Validated"),
-            ("no_eligible", "Not Eligible"),
+            ("not_eligible", "Not Eligible"),
             ("sent", "Sent"),
         ],
         required=True,
@@ -227,12 +227,13 @@ class TaxShelterCertificate(models.Model):
                 + certificate.total_amount_transfered
             )
 
-            if (
-                certificate.total_amount_eligible
-                + certificate.total_amount_eligible_previously_subscribed
-                == 0
-            ):
-                certificate.state = "no_eligible"
+    def compute_not_eligible(self):
+        if (
+            self.total_amount_eligible
+            + self.total_amount_eligible_previously_subscribed
+            == 0
+        ):
+            self.state = "not_eligible"
 
     @api.depends("lines")
     def _compute_certificate_lines(self):

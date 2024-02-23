@@ -163,6 +163,7 @@ class TaxShelterDeclaration(models.Model):
             if entry.type == "subscription" and not excluded:
                 ongoing_capital_sub += entry.total_amount_line
 
+            certificate.compute_not_eligible()
         return partner_certificate
 
     def compute_declaration(self):

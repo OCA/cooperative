@@ -61,7 +61,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     <notebook>
                         <page string="Tax shelter certificates">
                             <field name="tax_shelter_certificates">
-                                <tree decoration-muted="state == 'no_eligible'">
+                                <tree decoration-muted="state == 'not_eligible'">
                                     <field name="partner_id" />
                                     <field name="cooperator_number" />
                                     <field name="total_amount" sum="Total amount" />
@@ -71,7 +71,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                         name="send_certificates"
                                         icon="fa-play"
                                         string="Send Certificates"
-                                        attrs="{'invisible':[('state','=','no_eligible')]}"
+                                        attrs="{'invisible':[('state','=','not_eligible')]}"
                                     />
                                 </tree>
                             </field>
