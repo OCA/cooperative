@@ -2,8 +2,10 @@
 # SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
+from datetime import date
 
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 TYPE_MAP = {
     "subscription": "subscribed",
@@ -34,15 +36,22 @@ class TaxShelterDeclaration(models.Model):
     _name = "tax.shelter.declaration"
     _description = "Tax Shelter Declaration"
 
-    name = fields.Char(string="Declaration year", required=True)
-    fiscal_year = fields.Char(required=True)
+    name = fields.Char(
+        string="Declaration year",
+        required=True,
+        compute="_compute_years",
+        readonly=False,
+    )
+    fiscal_year = fields.Integer(
+        required=True, compute="_compute_years", readonly=False
+    )
     tax_shelter_certificates = fields.One2many(
         "tax.shelter.certificate",
         "declaration_id",
         readonly=True,
     )
-    date_from = fields.Date(required=True)
-    date_to = fields.Date(required=True)
+    date_from = fields.Date(required=True, default=date(date.today().year - 1, 1, 1))
+    date_to = fields.Date(required=True, default=date(date.today().year - 1, 12, 31))
     tax_shelter_type = fields.Selection("_get_tax_shelter_types", required=True)
     tax_shelter_percentage = fields.Float(
         compute="_compute_tax_shelter_percentage", digits=(3, 0)
@@ -104,6 +113,12 @@ class TaxShelterDeclaration(models.Model):
             tax_shelter_type = TAX_SHELTER_TYPES[record.tax_shelter_type]
             record.tax_shelter_percentage = tax_shelter_type["percentage"]
 
+    @api.depends("date_from", "date_to")
+    def _compute_years(self):
+        for declaration in self:
+            declaration.fiscal_year = declaration.date_from.year
+            declaration.name = declaration.date_from.year + 1
+
     def _excluded_from_declaration(self, entry):
         if entry.date >= self.date_from and entry.date <= self.date_to:
             declaration = self
@@ -139,7 +154,8 @@ class TaxShelterDeclaration(models.Model):
                 line_vals["tax_shelter"] = True
         return line_vals
 
-    def _compute_certificates(self, entries, partner_certificate):
+    def _compute_certificates(self, entries):
+        partner_certificate = {}
         ongoing_capital_sub = 0.0
         for entry in entries:
             certificate = partner_certificate.get(entry.partner_id.id, False)
@@ -162,9 +178,16 @@ class TaxShelterDeclaration(models.Model):
 
             if entry.type == "subscription" and not excluded:
                 ongoing_capital_sub += entry.total_amount_line
-
+        for certificate in partner_certificate.values():
             certificate.compute_not_eligible()
         return partner_certificate
+
+    @api.constrains("date_from", "date_to")
+    def _check_date_from_date_to(self):
+        if self.date_from.year != self.date_to.year:
+            raise ValidationError(_("Dates should belong in the same year."))
+        if self.date_from > self.date_to:
+            raise ValidationError(_("Date From should be before Date To."))
 
     def compute_declaration(self):
         self.ensure_one()
@@ -185,9 +208,7 @@ class TaxShelterDeclaration(models.Model):
 
         self.previously_subscribed_capital = cap_prev_sub
 
-        partner_cert = {}
-
-        partner_cert = self._compute_certificates(entries, partner_cert)
+        self._compute_certificates(entries)
 
         self.state = "computed"
 

@@ -47,15 +47,15 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <sheet>
                     <group>
                         <group>
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field name="fiscal_year" widget="char" />
                             <field name="name" />
-                            <field name="fiscal_year" />
+                        </group>
+                        <group>
                             <field name="tax_shelter_type" />
                             <field name="tax_shelter_capital_limit" />
                             <field name="previously_subscribed_capital" />
-                        </group>
-                        <group>
-                            <field name="date_from" />
-                            <field name="date_to" />
                         </group>
                     </group>
                     <notebook>
@@ -71,7 +71,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                         name="send_certificates"
                                         icon="fa-play"
                                         string="Send Again"
-                                        attrs="{'invisible':[('state','=','not_eligible')]}"
+                                        attrs="{'invisible':['|', ('state','=','draft'), ('state','=','not_eligible')]}"
                                     />
                                 </tree>
                             </field>
