@@ -169,12 +169,16 @@ class SubscriptionRequest(models.Model):
                 )
 
     @api.depends("partner_id.member")
-    def _compute_already_cooperator(self):
+    def _compute_type(self):
         for sub_request in self:
             if sub_request.partner_id:
                 sub_request.already_cooperator = sub_request.partner_id.member
+                sub_request.type = (
+                    "increase" if sub_request.partner_id.member else "new"
+                )
             else:
                 sub_request.already_cooperator = False
+                sub_request.type = "new"
 
     @api.depends("iban", "skip_iban_control")
     def _compute_is_valid_iban(self):
@@ -191,10 +195,12 @@ class SubscriptionRequest(models.Model):
                 sub_request.share_product_id.list_price * sub_request.ordered_parts
             )
 
+    # The field is technically kind of superfluous, but it's also handy as a
+    # shorthand.
     already_cooperator = fields.Boolean(
         string="Already a cooperator",
         readonly=True,
-        compute="_compute_already_cooperator",
+        compute="_compute_type",
     )
 
     # previously, this was a normal field. it is now computed, and is used for
@@ -231,10 +237,10 @@ class SubscriptionRequest(models.Model):
             ("increase", "Increase number of shares"),
         ],
         string="Type of Subscription",
+        compute="_compute_type",
         default="new",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     state = fields.Selection(
         [
