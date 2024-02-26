@@ -290,8 +290,8 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
 
     def test_create_multiple_subscriptions_from_non_cooperator_partner(self):
         """
-        Test that creating a subscription from a partner that has no parts yet
-        creates a subscription request with the correct type.
+        Test that creating a subscription from a partner is not member yet
+        creates a subscription request with type 'new'.
         """
         partner = self.env["res.partner"].create(
             {
@@ -301,12 +301,12 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         subscription_request = self.create_dummy_subscription_from_partner(partner)
         self.assertEqual(subscription_request.type, "new")
         subscription_request2 = self.create_dummy_subscription_from_partner(partner)
-        self.assertEqual(subscription_request2.type, "increase")
+        self.assertEqual(subscription_request2.type, "new")
 
     def test_create_multiple_subscriptions_from_non_cooperator_company_partner(self):
         """
-        Test that creating a subscription from a company partner that has no
-        parts yet creates a subscription request with the correct type.
+        Test that creating a subscription from a company partner is not member yet
+         creates a subscription request with the type 'new'.
         """
         partner = self.env["res.partner"].create(
             {
@@ -321,7 +321,7 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         subscription_request2 = self.create_dummy_subscription_from_company_partner(
             partner
         )
-        self.assertEqual(subscription_request2.type, "increase")
+        self.assertEqual(subscription_request2.type, "new")
 
     def test_create_subscription_from_cooperator_partner(self):
         """
@@ -935,19 +935,16 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
 
     def test_constrain_type_if_already_cooperator(self):
         """
-        If a partner is already a cooperator, don't allow the 'new' type.
+        If a partner is already a cooperator, check that type is 'increase'
         """
         partner = self.env["res.partner"].create({"name": "Test Partner"})
         partner.create_cooperative_membership(self.env.company)
         partner.member = True
         vals = self.get_dummy_subscription_requests_vals()
-        vals["type"] = "new"
         subscription_request = self.env["subscription.request"].create(vals)
         subscription_request.partner_id = partner
         self.assertTrue(subscription_request.already_cooperator)
-        with self.assertRaises(UserError):
-            subscription_request.validate_subscription_request()
-        subscription_request.type = "increase"
+        self.assertEqual(subscription_request.type, "increase")
         subscription_request.validate_subscription_request()
 
     @freeze_time("2023-06-21")
