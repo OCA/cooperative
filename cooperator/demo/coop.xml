@@ -16,6 +16,7 @@
         <field name="city">Namur (Loyers)</field>
         <field name="zip">5101</field>
         <field name="country_id" ref="base.be" />
+        <field name="cooperator" eval="True" />
         <field name="member" eval="True" />
     </record>
 
@@ -35,6 +36,7 @@
         <field name="city">Namur (Loyers)</field>
         <field name="zip">5101</field>
         <field name="country_id" ref="base.be" />
+        <field name="cooperator" eval="True" />
         <field name="member" eval="True" />
     </record>
 
