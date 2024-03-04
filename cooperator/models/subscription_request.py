@@ -754,14 +754,7 @@ class SubscriptionRequest(models.Model):
         if partner:
             return partner
         domain = []
-        if self.already_cooperator:
-            raise UserError(
-                _(
-                    "The checkbox already cooperator is"
-                    " checked please select a cooperator."
-                )
-            )
-        elif self.is_company and self.company_register_number:
+        if self.is_company and self.company_register_number:
             domain = [
                 (
                     "company_register_number",
@@ -853,15 +846,6 @@ class SubscriptionRequest(models.Model):
 
         if self.ordered_parts <= 0:
             raise UserError(_("Number of share must be greater than 0."))
-
-        if self.already_cooperator and self.type != "increase":
-            raise UserError(
-                _(
-                    "Partner %s is already a cooperator, subscription type"
-                    " must be 'Increase number of shares'."
-                )
-                % self.partner_id.name
-            )
 
         partner = self.setup_partner()
 
