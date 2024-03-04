@@ -115,16 +115,6 @@ class SubscriptionRequest(models.Model):
         company_id = vals.get("company_id", self.env.company.id)
         company_id = self.env["res.company"].browse(company_id)
         cooperative_membership = partner.get_cooperative_membership(company_id)
-        member = cooperative_membership and cooperative_membership.member
-        pending_requests_domain = [
-            ("company_id", "=", company_id.id),
-            ("partner_id", "=", partner.id),
-            ("state", "in", ("draft", "waiting", "done")),
-        ]
-        # we don't use partner.coop_candidate because we want to also
-        # handle draft and waiting requests.
-        if member or self.search(pending_requests_domain):
-            vals["type"] = "increase"
         if not cooperative_membership:
             cooperative_membership = partner.create_cooperative_membership(company_id)
         elif not cooperative_membership.cooperator:
@@ -510,8 +500,6 @@ class SubscriptionRequest(models.Model):
             self.is_company = partner.is_company
             if partner.bank_ids:
                 self.iban = partner.bank_ids[0].acc_number
-            if partner.member:
-                self.type = "increase"
             if partner.is_company:
                 self.company_name = partner.name
                 self.company_email = partner.email
