@@ -1,0 +1,1 @@
+Improve reports based on the templates provided by the administration (`for start-ups <https://finances.belgium.be/fr/entreprises/tax-shelter-petites-entreprises/debutantes-start-up>`_ and `for scale-ups <https://finances.belgium.be/fr/entreprises/tax-shelter-petites-entreprises/en-croissance-scale-up>`_).

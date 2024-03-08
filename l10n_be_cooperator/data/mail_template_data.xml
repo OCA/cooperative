@@ -31,7 +31,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         You have subscribed to some shares of <t t-out="object.company_id.name" />
         during the year <t t-out="object.declaration_id.fiscal_year" />.
         You can benefit from the tax shelter, it means a tax reduction of
-        <t t-out="object.declaration_id.tax_shelter_percentage" /> percent on
+        <span t-field="object.declaration_id.tax_shelter_percentage" />% on
         the invested amount.
         For this you will find in attachment the documents certifying that
         you've suscribed to <t t-out="object.company_id.name" /> shares.

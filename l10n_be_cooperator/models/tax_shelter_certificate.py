@@ -62,7 +62,7 @@ class TaxShelterCertificate(models.Model):
         [
             ("draft", "Draft"),
             ("validated", "Validated"),
-            ("no_eligible", "No eligible"),
+            ("no_eligible", "Not Eligible"),
             ("sent", "Sent"),
         ],
         required=True,

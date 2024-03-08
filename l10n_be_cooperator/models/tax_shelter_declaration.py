@@ -3,12 +3,30 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-from odoo import fields, models
+from odoo import _, api, fields, models
 
 TYPE_MAP = {
     "subscription": "subscribed",
     "transfer": "transfered",
     "sell_back": "resold",
+}
+
+TAX_SHELTER_TYPES = {
+    "scale_up": {
+        "name": _("Scale-up"),
+        "percentage": 25,
+        "capital_limit": 1000000,
+    },
+    "start_up_small": {
+        "name": _("Start-up (small company)"),
+        "percentage": 30,
+        "capital_limit": 500000,
+    },
+    "start_up_micro": {
+        "name": _("Start-up (micro company)"),
+        "percentage": 45,
+        "capital_limit": 500000,
+    },
 }
 
 
@@ -17,22 +35,19 @@ class TaxShelterDeclaration(models.Model):
     _description = "Tax Shelter Declaration"
 
     name = fields.Char(string="Declaration year", required=True)
-    fiscal_year = fields.Char(string="Fiscal year", required=True)
+    fiscal_year = fields.Char(required=True)
     tax_shelter_certificates = fields.One2many(
         "tax.shelter.certificate",
         "declaration_id",
-        string="Tax shelter certificates",
         readonly=True,
     )
-    date_from = fields.Date(string="Date from", required=True)
-    date_to = fields.Date(string="Date to", required=True)
-    month_from = fields.Char(string="Month from", required=True)
-    month_to = fields.Char(string="Month to", required=True)
-    tax_shelter_percentage = fields.Selection(
-        [("25", "25%"), ("30", "30%"), ("45", "45%")],
-        string="Tax Shelter percentage",
-        required=True,
+    date_from = fields.Date(required=True)
+    date_to = fields.Date(required=True)
+    tax_shelter_type = fields.Selection("_get_tax_shelter_types", required=True)
+    tax_shelter_percentage = fields.Float(
+        compute="_compute_tax_shelter_percentage", digits=(3, 0)
     )
+
     state = fields.Selection(
         [
             ("draft", "Draft"),
@@ -51,14 +66,18 @@ class TaxShelterDeclaration(models.Model):
         default=lambda self: self.env.company,
     )
     tax_shelter_capital_limit = fields.Float(
-        string="Tax shelter capital limit", required=True
+        string="Tax shelter capital limit",
+        required=True,
+        compute="_compute_tax_shelter_capital_limit",
+        default=500000,
+        readonly=False,
+        store=True,
     )
     previously_subscribed_capital = fields.Float(
         string="Capital previously subscribed", readonly=True
     )
     excluded_cooperator = fields.Many2many(
         "res.partner",
-        string="Excluded cooperator",
         domain=[("cooperator", "=", True)],
         help="If these cooperator have"
         " subscribed share during the time"
@@ -66,6 +85,24 @@ class TaxShelterDeclaration(models.Model):
         "Declaration. They will be marked "
         "as non eligible",
     )
+
+    def _get_tax_shelter_types(self):
+        return [
+            (k, _("{percentage}% - {name}").format(**v))
+            for k, v in TAX_SHELTER_TYPES.items()
+        ]
+
+    @api.depends("tax_shelter_type")
+    def _compute_tax_shelter_capital_limit(self):
+        for record in self:
+            tax_shelter_type = TAX_SHELTER_TYPES[record.tax_shelter_type]
+            record.tax_shelter_capital_limit = tax_shelter_type["capital_limit"]
+
+    @api.depends("tax_shelter_type")
+    def _compute_tax_shelter_percentage(self):
+        for record in self:
+            tax_shelter_type = TAX_SHELTER_TYPES[record.tax_shelter_type]
+            record.tax_shelter_percentage = tax_shelter_type["percentage"]
 
     def _excluded_from_declaration(self, entry):
         if entry.date >= self.date_from and entry.date <= self.date_to:

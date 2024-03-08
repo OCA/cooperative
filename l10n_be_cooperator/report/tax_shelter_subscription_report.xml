@@ -19,14 +19,14 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     t-field="o.total_amount_subscribed"
                     t-options='{"widget": "float", "precision": 2}'
                 />
-                euros.
+                EUR.
                 <br />
-                Le montant éligible pour le Tax shelter est de
+                Le montant éligible pour la réduction d'impôt est de
                 <span
                     t-field="o.total_amount_eligible"
                     t-options='{"widget": "float", "precision": 2}'
                 />
-                euros.
+                EUR.
                 <br />
             </p>
 
