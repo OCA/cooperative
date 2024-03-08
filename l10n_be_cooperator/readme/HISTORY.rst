@@ -1,3 +1,11 @@
+16.0.1.1.0 (2024-03-08)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Improve reports based on the templates provided by the administration (`for start-ups <https://finances.belgium.be/fr/entreprises/tax-shelter-petites-entreprises/debutantes-start-up>`_ and `for scale-ups <https://finances.belgium.be/fr/entreprises/tax-shelter-petites-entreprises/en-croissance-scale-up>`_). (`#112 <https://github.com/OCA/cooperative/issues/112>`_)
+
+
 16.0.1.0.0 (2023-12-04)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
