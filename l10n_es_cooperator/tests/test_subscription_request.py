@@ -12,30 +12,10 @@ class TestSubscriptionRequest(SavepointCase):
         # a test chart of account.
         # cf _load in chart_template.py in account module
 
-        account_model = self.env["account.account"]
         self.company = self.env.user.company_id
         self.company.coop_email_contact = "coop_email@example.org"
         self.demo_partner = self.env.ref("base.partner_demo")
 
-        receivable_account_type = self.env.ref("account.data_account_type_receivable")
-        equity_account_type = self.env.ref("account.data_account_type_equity")
-        cooperator_account = account_model.create(
-            {
-                "name": "Cooperator Test",
-                "code": "416109",
-                "user_type_id": receivable_account_type.id,
-                "reconcile": True,
-            }
-        )
-        self.company.property_cooperator_account = cooperator_account
-        self.equity_account = account_model.create(
-            {
-                "name": "Equity Test ",
-                "code": "100919",
-                "user_type_id": equity_account_type.id,
-                "reconcile": True,
-            }
-        )
         self.subscription_journal = self.env["account.journal"].create(
             {
                 "name": "Subscriptions Test",
