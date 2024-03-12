@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[cooperator](cooperator/) | 16.0.1.0.1 |  | Manage your cooperators
+[cooperator](cooperator/) | 16.0.1.0.2 |  | Manage your cooperators
 [cooperator_portal](cooperator_portal/) | 16.0.1.0.0 |  | Show cooperator information in the website portal
 [cooperator_website](cooperator_website/) | 16.0.1.0.0 |  | This module adds the cooperator subscription form allowing to subscribe for shares online.
 [l10n_be_cooperator](l10n_be_cooperator/) | 16.0.1.1.0 |  | Cooperators Belgium Localization
