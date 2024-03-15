@@ -7,11 +7,6 @@ class TestSubscriptionRequest(SavepointCase):
     def setUp(self):
         super().setUp()
         self.env = self.env(context=dict(self.env.context, tracking_disable=True))
-        # accounting data needs to be created even if created in module data
-        # because when launching tests, accounting data will be deleted when odoo loads
-        # a test chart of account.
-        # cf _load in chart_template.py in account module
-
         self.company = self.env.user.company_id
         self.company.coop_email_contact = "coop_email@example.org"
         self.demo_partner = self.env.ref("base.partner_demo")
