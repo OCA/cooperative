@@ -13,7 +13,7 @@ class SubscriptionRequest(models.Model):
     )
 
     def get_partner_vals(self):
-        vals = super(SubscriptionRequest, self).get_partner_vals()
+        vals = super().get_partner_vals()
         vals["vat"] = self.vat
         return vals
 
