@@ -1,0 +1,1 @@
+National number should be editable from the cooperator portal. Indeed, if the national number is required and was not provided on the first subscription, a cooperator will not be able to subscribe more shares from the website form. 
