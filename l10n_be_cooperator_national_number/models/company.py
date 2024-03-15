@@ -10,8 +10,8 @@ from odoo.exceptions import ValidationError
 class ResCompany(models.Model):
     _inherit = "res.company"
 
-    display_national_number = fields.Boolean(string="Display National Number")
-    require_national_number = fields.Boolean(string="Require National Number")
+    display_national_number = fields.Boolean()
+    require_national_number = fields.Boolean()
 
     @api.constrains("display_national_number", "require_national_number")
     def _check_national_number(self):

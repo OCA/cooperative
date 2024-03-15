@@ -3,8 +3,11 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.exceptions import UserError, ValidationError
+from odoo.tests.common import TransactionCase
 
 from odoo.addons.cooperator.tests.cooperator_test_mixin import CooperatorTestMixin
+
+NATIONAL_NUMBER = 90010100123
 
 
 class TestCooperatorNationalNumber(TransactionCase, CooperatorTestMixin):
@@ -47,12 +50,11 @@ class TestCooperatorNationalNumber(TransactionCase, CooperatorTestMixin):
     def test_national_number_applied_to_partner(self):
         self.set_national_number_required()
         subscription_request = self.create_subscription_request()
-        id_number = 12345
-        subscription_request.national_number = id_number
+        subscription_request.national_number = NATIONAL_NUMBER
         subscription_request.validate_subscription_request()
         partner = subscription_request.partner_id
         created_id_number = self.env["res.partner.id_number"].search(
-            [("name", "=", id_number)]
+            [("name", "=", NATIONAL_NUMBER)]
         )
         self.assertTrue(created_id_number)
         self.assertEqual(created_id_number.partner_id, partner)
@@ -75,7 +77,7 @@ class TestCooperatorNationalNumber(TransactionCase, CooperatorTestMixin):
         """Expect no error when a number is given but not required."""
         vals = self.get_dummy_subscription_requests_vals()
         subscription_request = self.env["subscription.request"].create(vals)
-        subscription_request.national_number = 12345
+        subscription_request.national_number = NATIONAL_NUMBER
         subscription_request.validate_subscription_request()
 
     def test_no_national_number_provided_not_required(self):

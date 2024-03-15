@@ -13,7 +13,7 @@ class ResPartner(models.Model):
         result = None
         if national_number:
             belgian_cat = self.env.ref(
-                "l10n_be_national_number.l10n_be_national_number_category"
+                "l10n_be_partner_identification.l10n_be_national_registry_number_category"
             )
             existing = self.env["res.partner.id_number"].search(
                 [

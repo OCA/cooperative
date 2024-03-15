@@ -5,7 +5,7 @@ from odoo.exceptions import UserError
 class SubscriptionRequest(models.Model):
     _inherit = "subscription.request"
 
-    national_number = fields.Char(string="National Number")
+    national_number = fields.Char()
     display_national_number = fields.Boolean(
         compute="_compute_display_national_number",
     )
@@ -27,7 +27,7 @@ class SubscriptionRequest(models.Model):
 
     def get_national_number_from_partner(self, partner):
         national_number_id_category = self.env.ref(
-            "l10n_be_national_number.l10n_be_national_number_category"
+            "l10n_be_partner_identification.l10n_be_national_registry_number_category"
         ).id
         national_number = partner.id_numbers.filtered(
             lambda rec: rec.category_id.id == national_number_id_category
@@ -47,3 +47,4 @@ class SubscriptionRequest(models.Model):
     def get_person_info(self, partner):
         super().get_person_info(partner)
         self.national_number = self.get_national_number_from_partner(partner)
+        return True
