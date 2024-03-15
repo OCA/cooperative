@@ -3,12 +3,11 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests.common import SavepointCase
 
 from odoo.addons.cooperator.tests.cooperator_test_mixin import CooperatorTestMixin
 
 
-class TestCooperatorNationalNumber(SavepointCase, CooperatorTestMixin):
+class TestCooperatorNationalNumber(TransactionCase, CooperatorTestMixin):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
