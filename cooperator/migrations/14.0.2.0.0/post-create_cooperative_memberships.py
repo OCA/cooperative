@@ -20,7 +20,7 @@ def migrate(cr, version):
         _logger.warning(
             "Multiple companies found. "
             "All cooperators will be linked to the company with id {company_id}".format(
-                company_id=company_id[0]
+                company_id=company_id
             )
         )
     cr.execute(
