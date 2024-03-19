@@ -633,6 +633,7 @@ class SubscriptionRequest(models.Model):
             "email": self.company_email,
             "country_id": self.country_id.id,
             "lang": self.lang,
+            "company_id": self.company_id.id,
             "cooperative_membership_ids": [
                 (
                     0,
@@ -664,6 +665,7 @@ class SubscriptionRequest(models.Model):
             "country_id": self.country_id.id,
             "lang": self.lang,
             "birthdate_date": self.birthdate,
+            "company_id": self.company_id.id,
             "cooperative_membership_ids": [
                 (
                     0,
@@ -700,6 +702,7 @@ class SubscriptionRequest(models.Model):
             "representative": True,
             "function": self.contact_person_function,
             "type": "representative",
+            "company_id": self.company_id.id,
             "cooperative_membership_ids": [
                 (
                     0,
