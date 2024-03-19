@@ -691,6 +691,7 @@ class CooperatorCase(SavepointCase, CooperatorTestMixin):
         )
         self.validate_subscription_request_and_pay(subscription_request_1)
         partner_1 = subscription_request_1.partner_id
+        partner_1.company_id = False
         company_2 = self.company_2
         company_2.create_user = True
         subscription_request_2 = (
