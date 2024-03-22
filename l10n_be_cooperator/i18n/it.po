@@ -294,8 +294,22 @@ msgid "Date From"
 msgstr ""
 
 #. module: l10n_be_cooperator
+#. odoo-python
+#: code:addons/l10n_be_cooperator/models/tax_shelter_declaration.py:0
+#, python-format
+msgid "Date From should be before Date To."
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_declaration__date_to
 msgid "Date To"
+msgstr ""
+
+#. module: l10n_be_cooperator
+#. odoo-python
+#: code:addons/l10n_be_cooperator/models/tax_shelter_declaration.py:0
+#, python-format
+msgid "Dates should belong in the same year."
 msgstr ""
 
 #. module: l10n_be_cooperator
@@ -586,8 +600,12 @@ msgid "Sell back"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_certificate_view_form
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_declaration_view_form
+msgid "Send Again"
+msgstr ""
+
+#. module: l10n_be_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_certificate_view_form
 msgid "Send Certificates"
 msgstr ""
 
@@ -816,7 +834,7 @@ msgstr ""
 
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_declaration_view_form
-msgid "Validate Declaration"
+msgid "Validate and Send"
 msgstr ""
 
 #. module: l10n_be_cooperator
