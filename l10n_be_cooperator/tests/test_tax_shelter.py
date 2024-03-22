@@ -26,7 +26,7 @@ class TestTaxShelter(TransactionCase, CooperatorTestMixin):
         )
         return subscription_request.partner_id
 
-    def _create_tax_shelter_declaration_2022(self):
+    def _create_tax_shelter_declaration_2022(self, capital_limit):
         declaration = self.env["tax.shelter.declaration"].create(
             {
                 "name": "2022",
@@ -34,16 +34,16 @@ class TestTaxShelter(TransactionCase, CooperatorTestMixin):
                 "date_from": date(2021, 1, 1),
                 "date_to": date(2021, 12, 31),
                 "tax_shelter_type": "start_up_micro",
-                "tax_shelter_capital_limit": 250000,
+                "tax_shelter_capital_limit": capital_limit,
             }
         )
         declaration.compute_declaration()
-        declaration.validate_declaration()
         return declaration
 
     def test_tax_shelter_certificates(self):
         cooperator = self._create_dummy_cooperator_2021()
-        declaration = self._create_tax_shelter_declaration_2022()
+        declaration = self._create_tax_shelter_declaration_2022(250000)
+        declaration.validate_declaration()
         certificates = declaration.tax_shelter_certificates
         self.assertEqual(len(certificates), 1)
         certificate = certificates[0]
@@ -51,9 +51,20 @@ class TestTaxShelter(TransactionCase, CooperatorTestMixin):
         self.assertEqual(certificate.state, "validated")
         self.assertEqual(certificate.total_amount, 50)
 
+    def test_tax_shelter_certificates_not_eligible(self):
+        cooperator = self._create_dummy_cooperator_2021()
+        declaration = self._create_tax_shelter_declaration_2022(0)
+        declaration.validate_declaration()
+        certificates = declaration.tax_shelter_certificates
+        self.assertEqual(len(certificates), 1)
+        certificate = certificates[0]
+        self.assertEqual(certificate.partner_id, cooperator)
+        self.assertEqual(certificate.state, "not_eligible")
+
     def test_tax_shelter_certificates_mail(self):
         cooperator = self._create_dummy_cooperator_2021()
-        declaration = self._create_tax_shelter_declaration_2022()
+        declaration = self._create_tax_shelter_declaration_2022(250000)
+        declaration.validate_declaration()
         self.env["tax.shelter.certificate"].batch_send_tax_shelter_certificate()
         certificates = declaration.tax_shelter_certificates
         self.assertEqual(certificates[0].state, "sent")

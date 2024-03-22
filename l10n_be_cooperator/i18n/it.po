@@ -457,7 +457,7 @@ msgid "No"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__tax_shelter_certificate__state__no_eligible
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__tax_shelter_certificate__state__not_eligible
 msgid "Not Eligible"
 msgstr ""
 

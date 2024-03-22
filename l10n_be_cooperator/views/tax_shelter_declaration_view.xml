@@ -30,7 +30,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     />
                     <button
                         name="validate_declaration"
-                        string="Validate Declaration"
+                        string="Validate and Send"
                         type="object"
                         states="computed"
                         groups="cooperator.cooperator_group_user"
@@ -47,21 +47,21 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <sheet>
                     <group>
                         <group>
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field name="fiscal_year" widget="char" />
                             <field name="name" />
-                            <field name="fiscal_year" />
+                        </group>
+                        <group>
                             <field name="tax_shelter_type" />
                             <field name="tax_shelter_capital_limit" />
                             <field name="previously_subscribed_capital" />
-                        </group>
-                        <group>
-                            <field name="date_from" />
-                            <field name="date_to" />
                         </group>
                     </group>
                     <notebook>
                         <page string="Tax shelter certificates">
                             <field name="tax_shelter_certificates">
-                                <tree>
+                                <tree decoration-muted="state == 'not_eligible'">
                                     <field name="partner_id" />
                                     <field name="cooperator_number" />
                                     <field name="total_amount" sum="Total amount" />
@@ -70,7 +70,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                         type="object"
                                         name="send_certificates"
                                         icon="fa-play"
-                                        string="Send Certificates"
+                                        string="Send Again"
+                                        attrs="{'invisible':['|', ('state','=','draft'), ('state','=','not_eligible')]}"
                                     />
                                 </tree>
                             </field>
