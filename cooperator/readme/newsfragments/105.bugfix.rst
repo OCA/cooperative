@@ -1,0 +1,2 @@
+Fix error when creating a new contact (``res.partner``) as has been done in
+version 16.
