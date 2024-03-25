@@ -368,7 +368,7 @@
                         id="ordered_parts"
                         step="1"
                         min="1"
-                        value="1"
+                        t-attf-value="#{ordered_parts}"
                         class="form-control form-control-sm"
                     />
                 </div>
