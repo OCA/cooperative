@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2024-03-27 16:33+0000\n"
+"Last-Translator: Victor Champonnois <victor@coopiteasy.be>\n"
 "Language-Team: \n"
 "Language: nl_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: cooperator
 #. odoo-python
@@ -42,6 +44,15 @@ msgid ""
 "contain sensitive data (employee home addresses, ...).\n"
 "- Other: Other address for the company (e.g. subsidiary, ...)"
 msgstr ""
+"- Contact: Gebruik dit om de contactgegevens van werknemers van een bepaald "
+"bedrijf te organiseren (bijv. CEO, CFO, ...).\n"
+"- Factuuradres : Voorkeursadres voor alle facturen. Standaard geselecteerd "
+"wanneer je een bestelling factureert die bij dit bedrijf hoort.\n"
+"- Afleveradres : Voorkeursadres voor alle leveringen. Standaard geselecteerd "
+"wanneer je een bestelling aflevert die bij dit bedrijf hoort.\n"
+"- Privé: Privé-adressen zijn alleen zichtbaar voor geautoriseerde gebruikers "
+"en bevatten gevoelige gegevens (thuisadressen van werknemers, ...).\n"
+"- Andere: Ander adres van het bedrijf (bv. dochteronderneming, ...)"
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_share_update_no_shares
@@ -63,6 +74,22 @@ msgid ""
 "</div>\n"
 "        "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hallo\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"       We bevestigen dat de aanpassing van uw aandelenportefeuille succesvol "
+"is uitgevoerd. U heeft geen resterende aandelen.\n"
+"        <br><br>\n"
+"Hartelijk dank voor uw steun.\n"
+"        <br><br>\n"
+"Met vriendelijke groet,\n"
+"    </p>\n"
+"</div>\n"
+"        "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_share_update
@@ -86,6 +113,22 @@ msgid ""
 "</div>\n"
 "        "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hallo\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"Wij bevestigen dat de aanpassing van uw aandelenportefeuille succesvol is "
+"uitgevoerd. Uw venootschapscertificaat is overeenkomstig aangepast.\n"
+"        <br><br>\n"
+"In de bijlage vindt u uw venootschapscertificaat.\n"
+"        <br><br>\n"
+"Met vriendelijke groet,\n"
+"    </p>\n"
+"</div>\n"
+"        "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_share_transfer
@@ -108,6 +151,22 @@ msgid ""
 "</div>\n"
 "        "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hallo\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        Wij bevestigen dat de aandelen aan u zijn overgedragen. Als u nog "
+"geen aandeelhouder was, bent u nu aandeelhouder van onze coöperatie.\n"
+"        <br><br>\n"
+"        In de bijlage vindt u uw venootschapscertificaat.\n"
+"        <br><br>\n"
+"Met vriendelijke groet,\n"
+"    </p>\n"
+"</div>\n"
+"        "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_share_increase
@@ -130,6 +189,21 @@ msgid ""
 "</div>\n"
 "        "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hallo\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"       We bevestigen hierbij de goede ontvangst van uw betaling.\n"
+"        <br><br>\n"
+"        Gelieve in bijlage uw certificaat te vinden.\n"
+"        <br><br>\n"
+"Met vriendelijke groeten\n"
+"    </p>\n"
+"</div>\n"
+"        "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_certificate
@@ -152,6 +226,22 @@ msgid ""
 "</div>\n"
 "        "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hallo\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        Wij bevestigen de ontvangst van uw betaling. U bent nu aandeelhouder "
+"van onze coöperatie.\n"
+"        <br><br>\n"
+"        In bijlage vindt u uw venootschapscertificaat.\n"
+"        <br><br>\n"
+"Met vriendelijke groet,\n"
+"    </p>\n"
+"</div>\n"
+"        "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_waiting_list
@@ -172,6 +262,22 @@ msgid ""
 "</div>\n"
 "        "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hallo\n"
+"        <t t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        Bedankt voor je inschrijvingsverzoek. Er zijn momenteel geen "
+"projecten om fondsen voor te werven, daarom hebben we het op de wachtlijst "
+"gezet. We nemen contact met je op zodra de inschrijvingsaanvragen weer "
+"worden geopend.\n"
+"        <br><br>\n"
+"Aarzel niet om contact met ons op te nemen als je vragen hebt.\n"
+"        <br><br>\n"
+"Duurzame groet,\n"
+"    </p>\n"
+"</div>\n"
+"        "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_confirmation
@@ -196,6 +302,25 @@ msgid ""
 "</div>\n"
 "        "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hallo\n"
+"        <t t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        We hebben uw inschrijvingsaanvraag ontvangen<t t-if=\"object."
+"is_company\">  namens <t t-out=\"object.company_name\"></t></t>. Bedankt "
+"voor uw steun.\n"
+"        <br><br>\n"
+"        Uw aanvraag wordt binnenkort door ons team verwerkt. Als alle "
+"verstrekte informatie correct is, ontvang je binnenkort de "
+"betalingsinformatie in een ander bericht.\n"
+"        <br><br>\n"
+"Aarzel niet om contact met ons op te nemen als je vragen hebt.\n"
+"        <br><br>\n"
+"Duurzame groet, \n"
+"    </p>\n"
+"</div>\n"
+"        "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_release_capital
@@ -216,16 +341,32 @@ msgid ""
 "</div>\n"
 "        "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hallo,\n"
+"        <t t-out=\"object.subscription_request.firstname\"></t>,\n"
+"        <br><br>\n"
+"        In bijlage vindt u alle benodigde informatie voor de betaling. We "
+"herinneren je er vriendelijk aan dat je inschrijving pas effectief zal zijn "
+"na ontvangst van de betaling.\n"
+"        <br><br>\n"
+"    Vergeet niet de gestructureerde mededeling toe te voegen aan de betaling."
+"\n"
+"        <br><br>\n"
+"Met vriendelijke groet, \n"
+"    </p>\n"
+"</div>\n"
+"        "
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 msgid "<span>Certificate generated on</span>"
-msgstr ""
+msgstr "<span>Certificaat gegenereerd op</span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 msgid "<span>Cooperator Certificate</span>"
-msgstr ""
+msgstr "<span>Venootschapscertificaat</span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_register
@@ -245,7 +386,7 @@ msgstr ""
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 msgid "<span>share(s)</span>"
-msgstr ""
+msgstr "<span>Aandeel</span>"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.report_invoice_document
@@ -287,7 +428,7 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_account_chart_template
 msgid "Account Chart Template"
-msgstr ""
+msgstr "Grootboekschema sjabloon"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__iban
@@ -353,7 +494,7 @@ msgstr "Adres"
 #: model:ir.model.fields,field_description:cooperator.field_res_partner__type
 #: model:ir.model.fields,field_description:cooperator.field_res_users__type
 msgid "Address Type"
-msgstr ""
+msgstr "Soort adres"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__allow_id_card_upload
@@ -491,7 +632,7 @@ msgstr ""
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_release_capital
 msgid "Capital Release Request: Sending"
-msgstr ""
+msgstr "Verzoek om kapitaalvrijgave: Verzenden"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_capital_release_mail_template
@@ -977,7 +1118,7 @@ msgstr "Concept"
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_register
 msgid "Effective Date"
-msgstr ""
+msgstr "Ingangsdatum"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_cooperative_membership__member
@@ -1070,7 +1211,7 @@ msgstr ""
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 msgid "For the board of"
-msgstr ""
+msgstr "Voor de directie van"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_product_product__force_min_qty
@@ -1282,12 +1423,12 @@ msgstr "Dagboek"
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Boeking"
 
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_account_move_line
 msgid "Journal Item"
-msgstr ""
+msgstr "Boekingsregel"
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_subscription_request__capital_release_request_date
@@ -1625,12 +1766,12 @@ msgstr ""
 #: model:mail.template,subject:cooperator.email_template_certificate
 #: model:mail.template,subject:cooperator.email_template_share_increase
 msgid "Payment Received Confirmation"
-msgstr ""
+msgstr "Bevestiging betaling ontvangen"
 
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_certificate
 msgid "Payment Received Confirmation: Cooperator Certificate"
-msgstr ""
+msgstr "Bevestiging betaling ontvangen: Venootschapscertificaat"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__phone
@@ -1888,11 +2029,12 @@ msgstr ""
 #: model:mail.template,description:cooperator.email_template_release_capital
 msgid "Sent to cooperators with their capital release request in attachment"
 msgstr ""
+"Verzonden aan medewerkers met hun verzoek om kapitaalvrijgave in bijlage"
 
 #. module: cooperator
 #: model:mail.template,description:cooperator.email_template_certificate
 msgid "Sent to cooperators with their cooperator certificate in attachment"
-msgstr ""
+msgstr "Bevestiging ontvangen betaling"
 
 #. module: cooperator
 #: model:product.template,name:cooperator.product_template_share_type_1_demo
@@ -1907,7 +2049,7 @@ msgstr ""
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_share_increase
 msgid "Share Increase: Payment Received Confirmation: Cooperator Certificate"
-msgstr ""
+msgstr "Share Increase: Bevestiging betaling ontvangen: Venootschapscertificaat"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.product_template_form_view
@@ -1940,12 +2082,12 @@ msgstr ""
 #. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_share_transfer
 msgid "Share Transfer Confirmation"
-msgstr ""
+msgstr "Bevestiging aandelenoverdracht"
 
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_share_transfer
 msgid "Share Transfer: Cooperator Certificate"
-msgstr ""
+msgstr "Overdracht van aandelen: Venootschapscertificaat"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__share_product
@@ -1953,23 +2095,23 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_register
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_tree
 msgid "Share Type"
-msgstr ""
+msgstr "Soort aandeel"
 
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_share_update_no_shares
 msgid "Share Update (No Remaining Shares): Cooperator Certificate"
-msgstr ""
+msgstr "Share Update (Geen resterende aandelen): Venootschapscertificaat"
 
 #. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_share_update
 #: model:mail.template,subject:cooperator.email_template_share_update_no_shares
 msgid "Share Update Confirmation"
-msgstr ""
+msgstr "Bevestiging aandelenupdate"
 
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_share_update
 msgid "Share Update: Cooperator Certificate"
-msgstr ""
+msgstr "Aandeelupdate: Venootschapscertificaat"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_confirmation_mail_template
@@ -2134,18 +2276,18 @@ msgstr ""
 #. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_waiting_list
 msgid "Subscription Request Added to Waiting List"
-msgstr ""
+msgstr "Abonnementsaanvraag op wachtlijst"
 
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_confirmation
 #: model:mail.template,subject:cooperator.email_template_confirmation
 msgid "Subscription Request Confirmation"
-msgstr ""
+msgstr "Bevestiging van inschrijving"
 
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_waiting_list
 msgid "Subscription Request on Waiting List"
-msgstr ""
+msgstr "Abonnementsaanvraag op wachtlijst"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
@@ -2566,7 +2708,7 @@ msgstr ""
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
 msgid "is recorded in the register of cooperators under number"
-msgstr ""
+msgstr "is ingeschreven in het register van coöperanten onder nummer"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__logo_url
@@ -2591,3 +2733,5 @@ msgid ""
 "{{ object.company_id.name }} Capital Release Request (Ref {{ object.name or "
 "'n/a' }})"
 msgstr ""
+"{{ object.company_id.name }} Verzoek om kapitaalvrijgave (Ref {{ object.name "
+"or 'n/a' }})"
