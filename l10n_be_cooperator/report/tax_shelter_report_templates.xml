@@ -123,7 +123,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         <t t-elif="report_type == 'scale_up'">
                             145<sup>27</sup>
                         </t>, CIR 92 sur les revenus
-                        <span t-field="o.declaration_id.fiscal_year" />, donne droit à
+                        <span
+                            t-field="o.declaration_id.fiscal_year"
+                            t-options='{"widget": "char"}'
+                        />, donne droit à
                         une réduction d'impôt à hauteur de
                         <span t-field="o.declaration_id.tax_shelter_percentage" /> %
                         du montant de la valeur des parts souscrites avant le
@@ -198,7 +201,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     <p>
                         Pour bénéficier de la réduction d'impôts, vous pouvez joindre
                         cette lettre à votre déclaration fiscale pour les revenus
-                        <span t-field="o.declaration_id.fiscal_year" />.
+                        <span
+                            t-field="o.declaration_id.fiscal_year"
+                            t-options='{"widget": "char"}'
+                        />.
                     </p>
 
                     <p>

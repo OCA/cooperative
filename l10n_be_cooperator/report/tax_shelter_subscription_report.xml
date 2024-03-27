@@ -11,7 +11,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <t t-call="l10n_be_cooperator.tax_shelter_report_document">
             <p>
                 Durant l'année
-                <span t-field="o.declaration_id.fiscal_year" />
+                <span
+                    t-field="o.declaration_id.fiscal_year"
+                    t-options='{"widget": "char"}'
+                />
                 vous avez souscrit des parts de
                 <span t-field="o.company_id.name" />
                 pour un montant total de
