@@ -17,7 +17,7 @@ class TaxShelterDeclaration(models.Model):
     _description = "Tax Shelter Declaration"
 
     name = fields.Char(string="Declaration year", required=True)
-    fiscal_year = fields.Char(string="Fiscal year", required=True)
+    fiscal_year = fields.Char(string="Fiscal year", required=True, widget="char")
     tax_shelter_certificates = fields.One2many(
         "tax.shelter.certificate",
         "declaration_id",
