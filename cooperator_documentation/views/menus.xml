@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2024 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <!-- At time of writing (2024-04-05), in Firefox v124, the 'pop-up' (read:
+         new tab) created by this action is blocked by default. A bar appears
+         below the address bar asking whether to allow the pop-up anyway. -->
+    <record model="ir.actions.act_url" id="action_cooperator_documentation">
+        <field name="name">Open Cooperator documentation</field>
+        <!-- This is in French. Should the link differ based on the user's
+             language, somehow? Should the link redirect to the correct page
+             depending on the user's browser language preferences? -->
+        <field
+            name="url"
+        >https://doc.it4socialeconomy.org/books/application-cooperators-v16/</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        name="Documentation"
+        id="menu_cooperator_main_documentation"
+        parent="cooperator.menu_cooperator_main"
+        groups="cooperator.cooperator_group_user"
+        action="action_cooperator_documentation"
+        sequence="99"
+    />
+
+</odoo>
