@@ -225,6 +225,7 @@ add_cooperative_membership_field(
     fields.Boolean,
     string="Cooperator",
     help="Check this box if this contact is a cooperator (effective or not).",
+    readonly=True,
 )
 add_cooperative_membership_field(
     "member",
@@ -244,6 +245,7 @@ add_cooperative_membership_field(
     fields.Boolean,
     string="Old cooperator",
     help="Check this box if this cooperator is no more an effective member.",
+    readonly=True,
 )
 add_cooperative_membership_field(
     "cooperator_register_number",
