@@ -1,3 +1,18 @@
+14.0.2.1.0 (2024-04-15)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Rework ``res.partner`` form view as has been done in version 16. (`#105 <https://github.com/OCA/cooperative/issues/105>`_)
+
+
+**Bugfixes**
+
+- Remove duplicated member field in ``res.partner`` form view. (`#47 <https://github.com/OCA/cooperative/issues/47>`_)
+- Fix error when creating a new contact (``res.partner``) as has been done in
+  version 16. (`#105 <https://github.com/OCA/cooperative/issues/105>`_)
+
+
 14.0.2.0.0 (2023-07-25)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
