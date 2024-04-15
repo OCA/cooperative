@@ -1,3 +1,16 @@
+12.0.6.5.0 (2024-04-15)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Rework ``res.partner`` form view as has been done in version 16. (`#104 <https://github.com/OCA/cooperative/issues/104>`_)
+
+
+**Bugfixes**
+
+- Remove duplicated member field in ``res.partner`` form view. (`#47 <https://github.com/OCA/cooperative/issues/47>`_)
+
+
 12.0.6.4.0 (2023-02-23)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
