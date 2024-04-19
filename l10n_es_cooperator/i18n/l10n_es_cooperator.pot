@@ -28,23 +28,8 @@ msgid "Bank Account Number"
 msgstr ""
 
 #. module: l10n_es_cooperator
-#: model:ir.model.fields,field_description:l10n_es_cooperator.field_subscription_request__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: l10n_es_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_es_cooperator.iban_template_es
 msgid "ES9000246912501234567891"
-msgstr ""
-
-#. module: l10n_es_cooperator
-#: model:ir.model.fields,field_description:l10n_es_cooperator.field_subscription_request__id
-msgid "ID"
-msgstr ""
-
-#. module: l10n_es_cooperator
-#: model:ir.model.fields,field_description:l10n_es_cooperator.field_subscription_request____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: l10n_es_cooperator
