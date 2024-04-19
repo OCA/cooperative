@@ -497,16 +497,16 @@ class WebsiteSubscription(http.Controller):
                     "[^0-9a-zA-Z]+", "", kwargs.get("company_register_number")
                 )
 
-        subscription_id = sub_req_obj.sudo().create(values)
+        subscription_request = sub_req_obj.sudo().create(values)
+        values["subscription_request"] = subscription_request
 
-        if subscription_id:
-            for field_value in post_file:
-                attachment_value = {
-                    "name": field_value.filename,
-                    "res_model": "subscription.request",
-                    "res_id": subscription_id,
-                    "datas": base64.encodebytes(field_value.read()),
-                }
-                attach_obj.sudo().create(attachment_value)
+        for field_value in post_file:
+            attachment_value = {
+                "name": field_value.filename,
+                "res_model": "subscription.request",
+                "res_id": subscription_request,
+                "datas": base64.encodebytes(field_value.read()),
+            }
+            attach_obj.sudo().create(attachment_value)
 
         return self.get_subscription_response(values, kwargs)
