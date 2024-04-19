@@ -1,0 +1,76 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_es_cooperator
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-10-29 08:30+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: l10n_es_cooperator
+#: model:ir.model.fields,help:l10n_es_cooperator.field_subscription_request__vat
+msgid ""
+"\n"
+"        The Tax Identification Number. Complete it if the contact is "
+"subjected to\n"
+"        government taxes. Used in some legal statements.\"\n"
+"        "
+msgstr ""
+"\n"
+"        Il codice fiscale. Compilarlo se il contatto è soggetto alle\n"
+"        tasse governative. Utilizzato in alcuni documenti legali.\"\n"
+"        "
+
+#. module: l10n_es_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_es_cooperator.iban_template_es
+msgid "Bank Account Number"
+msgstr "Numero conto bancario"
+
+#. module: l10n_es_cooperator
+#: model:ir.model.fields,field_description:l10n_es_cooperator.field_subscription_request__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: l10n_es_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_es_cooperator.iban_template_es
+msgid "ES9000246912501234567891"
+msgstr "ES9000246912501234567891"
+
+#. module: l10n_es_cooperator
+#: model:ir.model.fields,field_description:l10n_es_cooperator.field_subscription_request__id
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_es_cooperator
+#: model:ir.model.fields,field_description:l10n_es_cooperator.field_subscription_request____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: l10n_es_cooperator
+#: model:ir.model,name:l10n_es_cooperator.model_subscription_request
+msgid "Subscription Request"
+msgstr "Richista iscrizione"
+
+#. module: l10n_es_cooperator
+#: model:ir.model.fields,field_description:l10n_es_cooperator.field_subscription_request__vat
+msgid "Tax ID"
+msgstr "Partita IVA"
+
+#. module: l10n_es_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_es_cooperator.iban_template_es
+msgid "VAT"
+msgstr "IVA"
+
+#. module: l10n_es_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_es_cooperator.iban_template_es
+msgid "Y5643925S"
+msgstr "Y5643925S"
