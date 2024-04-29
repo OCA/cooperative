@@ -1,1 +1,2 @@
-National number should be editable from the cooperator portal. Indeed, if the national number is required and was not provided on the first subscription, a cooperator will not be able to subscribe more shares from the website form. 
+- National number should be editable from the cooperator portal. Indeed, if the national number is required and was not provided on the first subscription, a cooperator will not be able to subscribe more shares from the website form.
+- Note that since the check on the Belgian national number is enforced upon validation, it is possible to submit the request form with an invalid national number.
