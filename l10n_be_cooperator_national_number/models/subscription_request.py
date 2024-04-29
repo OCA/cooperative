@@ -44,7 +44,7 @@ class SubscriptionRequest(models.Model):
             partner.update_belgian_national_number(self.national_number)
         return invoice
 
-    def get_person_info(self, partner):
-        super().get_person_info(partner)
+    def set_person_info(self, partner):
+        super().set_person_info(partner)
         self.national_number = self.get_national_number_from_partner(partner)
         return True
