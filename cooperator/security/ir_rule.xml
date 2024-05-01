@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2023 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <record model="ir.rule" id="subscription_request_rule_company">
+        <field name="name">Subscription Request multi-company</field>
+        <field name="model_id" ref="cooperator.model_subscription_request" />
+        <field name="global" eval="True" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record model="ir.rule" id="subscription_register_rule_company">
+        <field name="name">Subscription Register multi-company</field>
+        <field name="model_id" ref="cooperator.model_subscription_register" />
+        <field name="global" eval="True" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record model="ir.rule" id="share_line_rule_company">
+        <field name="name">Share Line multi-company</field>
+        <field name="model_id" ref="cooperator.model_share_line" />
+        <field name="global" eval="True" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record model="ir.rule" id="operation_request_rule_company">
+        <field name="name">Operation Request multi-company</field>
+        <field name="model_id" ref="cooperator.model_operation_request" />
+        <field name="global" eval="True" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record model="ir.rule" id="cooperative_membership_rule_company">
+        <field name="name">Cooperative Membership multi-company</field>
+        <field name="model_id" ref="cooperator.model_cooperative_membership" />
+        <field name="global" eval="True" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+</odoo>
