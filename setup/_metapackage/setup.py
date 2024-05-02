@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo-addon-l10n_be_cooperator>=16.0dev,<16.1dev',
         'odoo-addon-l10n_be_cooperator_national_number>=16.0dev,<16.1dev',
         'odoo-addon-l10n_be_cooperator_portal>=16.0dev,<16.1dev',
+        'odoo-addon-l10n_be_cooperator_website_national_number>=16.0dev,<16.1dev',
         'odoo-addon-l10n_es_cooperator>=16.0dev,<16.1dev',
         'odoo-addon-l10n_fr_cooperator>=16.0dev,<16.1dev',
     ],
