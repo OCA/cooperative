@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo14-addon-cooperator_portal',
         'odoo14-addon-cooperator_website',
         'odoo14-addon-l10n_be_cooperator',
+        'odoo14-addon-l10n_be_cooperator_national_number',
         'odoo14-addon-l10n_be_cooperator_portal',
         'odoo14-addon-l10n_es_cooperator',
     ],

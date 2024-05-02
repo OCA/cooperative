@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [cooperator_portal](cooperator_portal/) | 14.0.1.0.2 |  | Show cooperator information in the website portal
 [cooperator_website](cooperator_website/) | 14.0.1.1.4 |  | This module adds the cooperator subscription form allowing to subscribe for shares online.
 [l10n_be_cooperator](l10n_be_cooperator/) | 14.0.1.2.7 |  | Cooperators Belgium Localization
+[l10n_be_cooperator_national_number](l10n_be_cooperator_national_number/) | 14.0.1.1.0 |  | Ask for Belgian National Number in Cooperative Subscription Request.
 [l10n_be_cooperator_portal](l10n_be_cooperator_portal/) | 14.0.1.0.0 |  | Give access to Tax Shelter Report in the portal.
 [l10n_es_cooperator](l10n_es_cooperator/) | 14.0.0.1.3 |  | Cooperator localization for Spain
 
