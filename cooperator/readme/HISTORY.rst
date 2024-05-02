@@ -3,7 +3,7 @@
 
 **Features**
 
-- Rework ``res.partner`` form view as has been done in version 16. (`#105 <https://github.com/OCA/cooperative/issues/105>`_)
+- Rework ``res.partner`` form view as has been done in version 16. (#105)
 
 
 **Bugfixes**
