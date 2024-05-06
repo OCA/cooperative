@@ -1,6 +1,8 @@
-# Copyright 2019 Coop IT Easy SCRL fs
-#   Robin Keunen <robin@coopiteasy.be>
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+# SPDX-FileCopyrightText: 2023 Coop IT Easy SC
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+from unittest import mock
 
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests.common import TransactionCase
@@ -8,6 +10,10 @@ from odoo.tests.common import TransactionCase
 from odoo.addons.cooperator.tests.cooperator_test_mixin import CooperatorTestMixin
 
 NATIONAL_NUMBER = 90010100123
+
+account_move_action_post = (
+    "odoo.addons.account.models.account_move.AccountMove.action_post"
+)
 
 
 class TestCooperatorNationalNumber(TransactionCase, CooperatorTestMixin):
@@ -72,6 +78,27 @@ class TestCooperatorNationalNumber(TransactionCase, CooperatorTestMixin):
         subscription_request = self.env["subscription.request"].create(vals)
         with self.assertRaises(UserError):
             subscription_request.validate_subscription_request()
+
+    @mock.patch(account_move_action_post)
+    def test_invalid_national_number_provided(self, account_move_action_post_mock):
+        """
+        Providing an invalid national number should raise a validation error.
+        """
+        self.set_national_number_required()
+        vals = self.get_dummy_subscription_requests_vals()
+        subscription_request = self.env["subscription.request"].create(vals)
+        subscription_request.national_number = "42"
+        with self.assertRaises(ValidationError):
+            subscription_request.validate_subscription_request()
+        # no capital release requests should be created or posted
+        capital_release_requests = self.env["account.move"].search(
+            [("subscription_request", "=", subscription_request.id)]
+        )
+        self.assertFalse(capital_release_requests)
+        # mocking account.move.create() would be better, but if it is called,
+        # the error is confusing: psycopg2.ProgrammingError: can't adapt type
+        # 'MagicMock'
+        account_move_action_post_mock.assert_not_called()
 
     def test_national_number_provided_not_required(self):
         """Expect no error when a number is given but not required."""
