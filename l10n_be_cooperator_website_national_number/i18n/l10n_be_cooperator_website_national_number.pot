@@ -17,3 +17,15 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_website_national_number.national_number_template
 msgid "National Number"
 msgstr ""
+
+#. module: l10n_be_cooperator_website_national_number
+#. odoo-python
+#: code:addons/l10n_be_cooperator_website_national_number/controllers/main.py:0
+#, python-format
+msgid "Some mandatory fields have not been filled."
+msgstr ""
+
+#. module: l10n_be_cooperator_website_national_number
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_website_national_number.national_number_template
+msgid "YY.MM.DD-NNN.CC"
+msgstr ""
