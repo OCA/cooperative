@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-01-05 10:38+0000\n"
+"PO-Revision-Date: 2024-05-06 13:12+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -943,7 +943,7 @@ msgstr "Cooperatori"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__country_id
 msgid "Country"
-msgstr "Paese"
+msgstr "Nazione"
 
 #. module: cooperator
 #: model:ir.actions.act_window,name:cooperator.action_view_create_subscription
