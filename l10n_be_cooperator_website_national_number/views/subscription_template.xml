@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+
     <template id="national_number_template" name="national_number_template">
-        <div
-            class="form-group field-national_number"
-            t-attf-class="form-group #{error and 'national_number' in error and 'has-error' or ''}"
-            name="national_number_container"
-        >
-            <label for="national_number">National Number</label>
+        <div class="mb-3 field-national_number" name="national_number_container">
+            <label for="national_number" class="form-label">National Number</label>
             <input
-                class="form-control form-control-sm"
-                id="national_number"
-                name="national_number"
+                t-attf-class="form-control form-control-sm{{ error and 'national_number' in error and ' is-invalid' or '' }}"
                 type="text"
-                t-att-readonly="logged"
+                name="national_number"
+                id="national_number"
                 t-att-required="national_number_required"
-                t-attf-value="#{national_number or ''}"
+                t-att-readonly="logged"
+                t-att-value="national_number"
+                placeholder="YY.MM.DD-NNN.CC"
             />
         </div>
     </template>
@@ -29,6 +27,7 @@
             position="after"
         >
             <t
+                t-if="display_national_number"
                 t-call="l10n_be_cooperator_website_national_number.national_number_template"
             />
         </xpath>
