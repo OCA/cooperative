@@ -6,19 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-05-06 13:12+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: l10n_fr_cooperator
 #: model:ir.model.fields.selection,name:l10n_fr_cooperator.selection__res_partner__legal_form__asso
 #: model:ir.model.fields.selection,name:l10n_fr_cooperator.selection__subscription_request__company_type__asso
 msgid "Association"
-msgstr ""
+msgstr "Associazione"
 
 #. module: l10n_fr_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_fr_cooperator.certificate_i18n_fr
@@ -93,12 +95,12 @@ msgstr ""
 #. module: l10n_fr_cooperator
 #: model:ir.model.fields,field_description:l10n_fr_cooperator.field_subscription_request__company_type
 msgid "Company type"
-msgstr ""
+msgstr "Tipo azienda"
 
 #. module: l10n_fr_cooperator
 #: model:ir.model,name:l10n_fr_cooperator.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contatto"
 
 #. module: l10n_fr_cooperator
 #: model:ir.model.fields.selection,name:l10n_fr_cooperator.selection__res_partner__legal_form__eurl
@@ -110,7 +112,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_fr_cooperator.field_res_partner__legal_form
 #: model:ir.model.fields,field_description:l10n_fr_cooperator.field_res_users__legal_form
 msgid "Legal form"
-msgstr ""
+msgstr "Modulo legale"
 
 #. module: l10n_fr_cooperator
 #: model:ir.model.fields.selection,name:l10n_fr_cooperator.selection__res_partner__legal_form__sa
@@ -127,4 +129,4 @@ msgstr ""
 #. module: l10n_fr_cooperator
 #: model:ir.model,name:l10n_fr_cooperator.model_subscription_request
 msgid "Subscription Request"
-msgstr ""
+msgstr "Richista iscrizione"
