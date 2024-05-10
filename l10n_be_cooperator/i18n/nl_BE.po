@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-04-02 18:35+0000\n"
+"PO-Revision-Date: 2024-05-10 11:36+0000\n"
 "Last-Translator: Carmen Bianca Bakker <carmen@carmenbianca.eu>\n"
 "Language-Team: none\n"
 "Language: nl_BE\n"
@@ -43,7 +43,7 @@ msgid ""
 ", donne droit à\n"
 "                        une réduction d'impôt à hauteur de"
 msgstr ""
-"geeft recht aan\n"
+"geeft recht op\n"
 "                        een belastingvermindering van"
 
 #. module: l10n_be_cooperator
@@ -89,7 +89,7 @@ msgid ""
 "                        Cher membre,"
 msgstr ""
 "<br/>\n"
-"                        Geacht lid,"
+"                        Geachte lid,"
 
 #. module: l10n_be_cooperator
 #: model:mail.template,body_html:l10n_be_cooperator.email_template_tax_shelter_certificate
@@ -197,9 +197,9 @@ msgid ""
 "                            145<sup>27</sup>, CIR 92 et à l'article 63<sup>12/3</sup>,\n"
 "                            AR/CIR 92."
 msgstr ""
-"Attest afgegeven in het kader van de belastingvermindering\n"
+"Attest overhandigd in het kader van de belastingvermindering\n"
 "                            voor de verwerving van nieuwe aandelen\n"
-"                            in startende ondernemingen zoals bedoeld in "
+"                            in startende ondernemingen zoals voorzien in "
 "artikel\n"
 "                            145<sup>27</sup>, WIB 92 en artikel 63<sup>12/"
 "3</sup>,\n"
@@ -235,12 +235,12 @@ msgstr "Bankrekeningnummer"
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid "CIR 92, est remplie."
-msgstr "WIB 92, is voldaan."
+msgstr "WIB 92, is vervuld."
 
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid "CIR 92, sont respectées,"
-msgstr "WIB 92, zijn voldaan,"
+msgstr "WIB 92, zijn vervuld,"
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_certificate_line__capital_after_sub
@@ -270,7 +270,7 @@ msgstr ""
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid "Cette attestation vaut donc comme certificat attestant :"
-msgstr "Dit attest dient daarom als bewijs:"
+msgstr "Dit attest toont aan:"
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__company_id
@@ -430,7 +430,7 @@ msgstr "Fiscaal jaar"
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid "For the board of"
-msgstr "Voor het bestuur van"
+msgstr "Voor de raad van bestuur van"
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_certificate_line__id
@@ -502,15 +502,15 @@ msgid ""
 "                        attestation certifiant que ces parts sont toujours en possession\n"
 "                        du souscripteur."
 msgstr ""
-"De belastingvermindering kan alleen worden gehandhaafd als de investeerder "
-"de aandelen van de coöperatie voor minimaal 4 jaar houdt, tenzij uittreding "
-"wordt opgelegd door externe omstandigheden (zoals bijvoorbeeld een "
-"faillissement). In het geval van vrijwillige uittreding vóór de periode van "
-"4 jaar, moet het belastingvoordeel terugbetaald worden naar rato van het "
-"aantal maanden tussen de uittreding en de 4 jaar. De coöperatie verplicht "
-"zich tot elk van de vier jaren volgend op het jaar van verkrijging een "
-"attest te verstrekken waaruit blijkt dat deze aandelen nog steeds in het "
-"bezit zijn van de inschrijver."
+"De belastingvermindering kan alleen worden gehandhaafd indien de "
+"investeerder de aandelen van de coöperatie voor minimaal 4 jaar houdt, "
+"tenzij uittreding wordt opgelegd door externe omstandigheden (zoals "
+"bijvoorbeeld een faillissement). In het geval van vrijwillige uittreding "
+"vóór de periode van 4 jaar, moet het belastingvoordeel terugbetaald worden "
+"in verhouding tot het aantal maanden tussen de uittreding en de 4 jaar. De "
+"coöperatie verbindt zich ertoe om jaarlijks gedurende de vier volgende jaren "
+"na het verkrijgen van de aandelen een attest te verstrekken waaruit blijkt "
+"dat deze aandelen nog steeds in het bezit zijn van de inschrijver."
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_res_partner__legal_form
@@ -544,15 +544,17 @@ msgid ""
 "Pour bénéficier de la réduction d'impôts, vous pouvez joindre\n"
 "                        cette lettre à votre déclaration fiscale pour les revenus"
 msgstr ""
-"Om te profiteren van de belastingvermindering kunt u deze brief meesturen "
-"met uw aangifte inkomstenbelasting van"
+"Om van de belastingvermindering te kunnen genieten kunt u deze brief hechten "
+"aan uw aangifte inkomstenbelasting van"
 
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "Pour toute information complémentaire, consultez le texte de\n"
 "                        l'Arrêté Royal."
-msgstr "Raadpleeg voor meer informatie de tekst van het Koninklijk Besluit."
+msgstr ""
+"Voor meer informatie, nodig ik u uit om de tekst van het koninklijk besluit "
+"te raadplegen."
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__previously_subscribed_eligible_lines
@@ -924,7 +926,7 @@ msgstr "voor een totaalbedrag van"
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid "que les conditions prévues au"
-msgstr "dat de voorwaarden in"
+msgstr "dat de voorwaarden van"
 
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
