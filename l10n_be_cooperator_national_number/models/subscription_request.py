@@ -32,26 +32,10 @@ class SubscriptionRequest(models.Model):
         )
 
     @api.model
-    def _get_be_national_register_number_id_category(self):
-        return self.env.ref(
-            "l10n_be_partner_identification.l10n_be_national_registry_number_category"
-        )
-
-    @api.model
-    def get_national_number_from_partner(self, partner):
-        national_number_id_category = (
-            self._get_be_national_register_number_id_category()
-        )
-        national_number = partner.id_numbers.filtered(
-            lambda rec: rec.category_id.id == national_number_id_category.id
-        )
-        return national_number.name
-
-    @api.model
     def check_be_national_register_number(self, national_number):
-        national_number_id_category = (
-            self._get_be_national_register_number_id_category()
-        )
+        national_number_id_category = self.env[
+            "res.partner"
+        ].get_be_national_register_number_id_category()
         # this function checks the value of id_number.name, not id_number
         # directly.
         id_number = namedtuple("id_number", ("name"))(national_number)
@@ -71,5 +55,5 @@ class SubscriptionRequest(models.Model):
 
     def set_person_info(self, partner):
         super().set_person_info(partner)
-        self.national_number = self.get_national_number_from_partner(partner)
+        self.national_number = partner.get_be_national_register_number()
         return True
