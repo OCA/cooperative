@@ -31,7 +31,7 @@ msgstr ""
 
 #. module: l10n_be_cooperator_national_number
 #. odoo-python
-#: code:addons/l10n_be_cooperator_national_number/models/company.py:0
+#: code:addons/l10n_be_cooperator_national_number/models/res_company.py:0
 #, python-format
 msgid ""
 "If the \"Require National Number\" toggle is enabled, then so must the "
