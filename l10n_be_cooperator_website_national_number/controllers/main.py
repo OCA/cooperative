@@ -21,24 +21,14 @@ class WebsiteSubscription(WebsiteSubscription):
                 values["national_number"] = national_number
         return values
 
-    def _get_display_national_number(self, is_company):
-        if is_company:
-            return False
-        return request.env.company.display_national_number
-
-    def _get_require_national_number(self, is_company):
-        if is_company:
-            return False
-        return request.env.company.require_national_number
-
     def fill_values(self, values, is_company, logged, load_from_user=False):
         values = super().fill_values(values, is_company, logged, load_from_user)
-        values["display_national_number"] = self._get_display_national_number(
-            is_company
-        )
-        values["national_number_required"] = self._get_require_national_number(
-            is_company
-        )
+        values[
+            "display_national_number"
+        ] = request.env.company.get_display_national_number(is_company)
+        values[
+            "national_number_required"
+        ] = request.env.company.get_require_national_number(is_company)
         return values
 
     def _additional_validate(self, kwargs, logged, values, post_file):
@@ -57,7 +47,7 @@ class WebsiteSubscription(WebsiteSubscription):
                 values["error_msg"] = str(ve)
         else:
             is_company = kwargs.get("is_company") == "on"
-            if not self._get_require_national_number(is_company):
+            if not request.env.company.get_require_national_number(is_company):
                 return True
             values["error_msg"] = _("Some mandatory fields have not been filled.")
         values["error"] = {"national_number"}

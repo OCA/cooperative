@@ -21,15 +21,17 @@ class SubscriptionRequest(models.Model):
 
     @api.depends("is_company", "company_id", "company_id.display_national_number")
     def _compute_display_national_number(self):
-        self.display_national_number = (
-            self.company_id.display_national_number and not self.is_company
-        )
+        for request in self:
+            request.display_national_number = (
+                request.company_id.get_display_national_number(request.is_company)
+            )
 
     @api.depends("is_company", "company_id", "company_id.require_national_number")
     def _compute_require_national_number(self):
-        self.require_national_number = (
-            self.company_id.require_national_number and not self.is_company
-        )
+        for request in self:
+            request.require_national_number = (
+                request.company_id.get_require_national_number(request.is_company)
+            )
 
     @api.model
     def _get_be_national_register_number_id_category(self):

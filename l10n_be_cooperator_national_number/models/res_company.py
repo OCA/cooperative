@@ -23,6 +23,18 @@ class ResCompany(models.Model):
                     )
                 )
 
+    def get_display_national_number(self, is_company):
+        self.ensure_one()
+        if is_company:
+            return False
+        return self.display_national_number
+
+    def get_require_national_number(self, is_company):
+        self.ensure_one()
+        if is_company:
+            return False
+        return self.require_national_number
+
     @api.onchange("display_national_number")
     def _onchange_display_national_number(self):
         if not self.display_national_number:

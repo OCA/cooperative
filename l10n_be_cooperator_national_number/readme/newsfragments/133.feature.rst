@@ -1,0 +1,2 @@
+Added ``get_display_national_number`` and ``get_require_national_number``
+convenience methods to ``res.company``.
