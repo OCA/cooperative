@@ -14,7 +14,7 @@ from odoo.addons.account.controllers.portal import PortalAccount, portal_pager
 
 class CooperatorPortal(PortalAccount):
     def __init__(self, *args, **kwargs):
-        super().__init__()
+        super().__init__(*args, **kwargs)
         # Class scope is accessible throughout the server even on
         # odoo instances that do not install this module.
 
