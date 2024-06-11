@@ -9,9 +9,9 @@
     "version": "16.0.1.0.1",
     "depends": [
         "l10n_be_cooperator_national_number",
-        "l10n_be_cooperator",
         "cooperator_website",
     ],
+    "auto_install": True,
     "author": "Coop IT Easy SC, Odoo Community Association (OCA)",
     "category": "Cooperative management",
     "website": "https://github.com/OCA/cooperative",
