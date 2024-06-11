@@ -1,2 +1,0 @@
-Added several convenience functions to get national number values on
-``res.partner``.
