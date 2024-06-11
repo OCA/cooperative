@@ -1,3 +1,11 @@
+16.0.1.0.1 (2024-06-11)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Bugfixes**
+
+- Correctly instantiate PortalAccount. (`#135 <https://github.com/OCA/cooperative/issues/135>`_)
+
+
 16.0.1.0.0 (2023-12-04)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
