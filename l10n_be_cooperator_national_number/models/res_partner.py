@@ -36,9 +36,8 @@ class ResPartner(models.Model):
         return None
 
     @api.model
-    def check_be_national_register_number(self, national_number, error=False):
-        """Verify whether the national number is valid. Returns True if invalid,
-        which is consistent with validate_l10n_be_national_registry_number.
+    def validate_be_national_register_number(self, national_number, error=False):
+        """Verify whether the national number is valid. Returns True if valid.
 
         If error is True, a ValidationError is raised instead.
         """
@@ -52,10 +51,10 @@ class ResPartner(models.Model):
         except ValidationError:
             if error:
                 raise
-            return True
-        return False
+            return False
+        return True
 
-    def update_belgian_national_number(self, national_number):
+    def update_be_national_register_number(self, national_number):
         self.ensure_one()
         result = None
         if national_number:

@@ -37,13 +37,13 @@ class SubscriptionRequest(models.Model):
         if self.require_national_number and not self.national_number:
             raise UserError(_("National Number is required."))
         if self.national_number:
-            self.env["res.partner"].check_be_national_register_number(
+            self.env["res.partner"].validate_be_national_register_number(
                 self.national_number, error=True
             )
         invoice = super().validate_subscription_request()
         if not self.is_company:
             partner = invoice.partner_id
-            partner.update_belgian_national_number(self.national_number)
+            partner.update_be_national_register_number(self.national_number)
         return invoice
 
     def set_person_info(self, partner):

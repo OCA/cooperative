@@ -1,3 +1,4 @@
 ``check_be_national_register_number`` moved from ``subscription.request`` to
-``res.partner``. Added ``error`` kwarg, and it is no longer necessary to call
-this method with ``sudo()``.
+``res.partner`` and renamed to ``validate_be_national_register_number``. Added
+``error`` kwarg, and it is no longer necessary to call this method with
+``sudo()``.

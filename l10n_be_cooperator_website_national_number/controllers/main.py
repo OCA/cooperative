@@ -36,10 +36,10 @@ class WebsiteSubscription(WebsiteSubscription):
             return result
         national_number = values.get("national_number")
         if national_number:
-            failed = request.env["res.partner"].check_be_national_register_number(
+            valid = request.env["res.partner"].validate_be_national_register_number(
                 values["national_number"]
             )
-            if failed:
+            if not valid:
                 values["error_msg"] = (
                     _("%s is not a valid Belgian national registration number")
                     % values["national_number"]
