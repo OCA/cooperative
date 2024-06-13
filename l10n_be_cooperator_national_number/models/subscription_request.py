@@ -2,7 +2,6 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-from collections import namedtuple
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
@@ -33,22 +32,14 @@ class SubscriptionRequest(models.Model):
                 request.company_id.get_require_national_number(request.is_company)
             )
 
-    @api.model
-    def check_be_national_register_number(self, national_number):
-        national_number_id_category = self.env[
-            "res.partner"
-        ].get_be_national_register_number_id_category()
-        # this function checks the value of id_number.name, not id_number
-        # directly.
-        id_number = namedtuple("id_number", ("name"))(national_number)
-        national_number_id_category.validate_id_number(id_number)
-
     def validate_subscription_request(self):
         self.ensure_one()
         if self.require_national_number and not self.national_number:
             raise UserError(_("National Number is required."))
         if self.national_number:
-            self.check_be_national_register_number(self.national_number)
+            self.env["res.partner"].check_be_national_register_number(
+                self.national_number, error=True
+            )
         invoice = super().validate_subscription_request()
         if not self.is_company:
             partner = invoice.partner_id

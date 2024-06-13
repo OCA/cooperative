@@ -2,7 +2,10 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+from collections import namedtuple
+
 from odoo import api, models
+from odoo.exceptions import ValidationError
 
 
 class ResPartner(models.Model):
@@ -31,6 +34,26 @@ class ResPartner(models.Model):
         if id_number:
             return id_number.name
         return None
+
+    @api.model
+    def check_be_national_register_number(self, national_number, error=False):
+        """Verify whether the national number is valid. Returns True if invalid,
+        which is consistent with validate_l10n_be_national_registry_number.
+
+        If error is True, a ValidationError is raised instead.
+        """
+        belgian_cat = self.sudo().get_be_national_register_number_id_category()
+        # The validation function expects an id_number record. We don't have
+        # that yet, so we'll mock one.
+        IdNumber = namedtuple("ResPartnerIdNumber", ["name"])
+        id_number = IdNumber(national_number)
+        try:
+            belgian_cat.validate_id_number(id_number)
+        except ValidationError:
+            if error:
+                raise
+            return True
+        return False
 
     def update_belgian_national_number(self, national_number):
         self.ensure_one()

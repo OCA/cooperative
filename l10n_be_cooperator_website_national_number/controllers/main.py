@@ -1,4 +1,3 @@
-from odoo.exceptions import ValidationError
 from odoo.http import request
 from odoo.tools.translate import _
 
@@ -37,14 +36,16 @@ class WebsiteSubscription(WebsiteSubscription):
             return result
         national_number = values.get("national_number")
         if national_number:
-            try:
-                # sudo is required to allow access to res.partner.id_category.
-                request.env[
-                    "subscription.request"
-                ].sudo().check_be_national_register_number(values["national_number"])
+            failed = request.env["res.partner"].check_be_national_register_number(
+                values["national_number"]
+            )
+            if failed:
+                values["error_msg"] = (
+                    _("%s is not a valid Belgian national registration number")
+                    % values["national_number"]
+                )
+            else:
                 return True
-            except ValidationError as ve:
-                values["error_msg"] = str(ve)
         else:
             is_company = kwargs.get("is_company") == "on"
             if not request.env.company.get_require_national_number(is_company):
