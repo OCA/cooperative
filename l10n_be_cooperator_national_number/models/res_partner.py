@@ -35,18 +35,20 @@ class ResPartner(models.Model):
     def update_belgian_national_number(self, national_number):
         self.ensure_one()
         result = None
-        if national_number:
-            existing = self.get_be_national_register_number_id_number()
-            # Update
-            if existing:
+        existing = self.get_be_national_register_number_id_number()
+        # Update
+        if existing:
+            if not national_number:
+                existing.unlink()
+            else:
                 existing.name = national_number
                 result = existing
-            # Create new
-            else:
-                values = {
-                    "name": national_number,
-                    "category_id": self.get_be_national_register_number_id_category().id,
-                    "partner_id": self.id,
-                }
-                result = self.env["res.partner.id_number"].create(values)
+        # Create new
+        elif national_number:
+            values = {
+                "name": national_number,
+                "category_id": self.get_be_national_register_number_id_category().id,
+                "partner_id": self.id,
+            }
+            result = self.env["res.partner.id_number"].create(values)
         return result
