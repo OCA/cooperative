@@ -1,2 +1,0 @@
-National register number is correctly pre-filled even when it is not required.
-Previously it was only pre-filled if it was required.

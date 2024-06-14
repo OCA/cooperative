@@ -27,7 +27,7 @@ addon | version | maintainers | summary
 [l10n_be_cooperator](l10n_be_cooperator/) | 16.0.1.2.1 |  | Cooperators Belgium Localization
 [l10n_be_cooperator_national_number](l10n_be_cooperator_national_number/) | 16.0.1.2.0 |  | Ask for Belgian National Number in Cooperative Subscription Request.
 [l10n_be_cooperator_portal](l10n_be_cooperator_portal/) | 16.0.1.0.0 |  | Give access to Tax Shelter Report in the portal.
-[l10n_be_cooperator_website_national_number](l10n_be_cooperator_website_national_number/) | 16.0.1.2.0 |  | Ask for Belgian National Number in Cooperative Subscription Request Frontend Form.
+[l10n_be_cooperator_website_national_number](l10n_be_cooperator_website_national_number/) | 16.0.1.2.1 |  | Ask for Belgian National Number in Cooperative Subscription Request Frontend Form.
 [l10n_es_cooperator](l10n_es_cooperator/) | 16.0.1.0.0 |  | Cooperator localization for Spain
 [l10n_fr_cooperator](l10n_fr_cooperator/) | 16.0.1.0.0 |  | This is the French localization for the Cooperators module
 
