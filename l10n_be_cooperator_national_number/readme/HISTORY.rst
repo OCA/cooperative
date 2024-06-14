@@ -1,3 +1,11 @@
+16.0.2.0.0 (2024-06-14)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Misc**
+
+- `#136 <https://github.com/OCA/cooperative/issues/136>`_, `#136 <https://github.com/OCA/cooperative/issues/136>`_
+
+
 16.0.1.3.0 (2024-06-14)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

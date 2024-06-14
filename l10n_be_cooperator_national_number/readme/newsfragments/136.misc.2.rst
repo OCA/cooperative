@@ -1,2 +1,0 @@
-``update_belgian_national_number`` renamed to
-``update_be_national_register_number``.
