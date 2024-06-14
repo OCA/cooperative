@@ -1,3 +1,11 @@
+16.0.1.3.0 (2024-06-14)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Bugfixes**
+
+- Allow removal of national number. (`#139 <https://github.com/OCA/cooperative/issues/139>`_)
+
+
 16.0.1.2.0 (2024-06-11)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
