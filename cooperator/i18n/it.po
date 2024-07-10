@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-05-17 12:35+0000\n"
+"PO-Revision-Date: 2024-07-10 08:58+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: cooperator
 #. odoo-python
@@ -44,6 +44,17 @@ msgid ""
 "contain sensitive data (employee home addresses, ...).\n"
 "- Other: Other address for the company (e.g. subsidiary, ...)"
 msgstr ""
+"- Contatto: utilizzarlo per organizzare i dettagli dei contatti dei "
+"dipendenti di una data azienda (es. CEO, CFO, ...).\n"
+"- Indirizzo fattura: indirizzo preferito per tutte le fatture. Selezionato "
+"in modo predefinito quando si fattura un ordine che appartiene a questa "
+"azienda.\n"
+"- Indirizzo consegna : indirizzo preferito per tutte le consegne. "
+"Selezionato in modo predefinito quando si consegna un ordine che appartiene "
+"a questa azienda.\n"
+"- Privato: gli indirizzi privati sono visibili solo da utenti autorizzati e "
+"contengono dati sensibili (indirizzo di casa del dipendente, ...).\n"
+"- Altro: altri indirizzi per l'azienda (es. filiali, ...)"
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_share_update_no_shares
@@ -65,6 +76,22 @@ msgid ""
 "</div>\n"
 "        "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hello\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
+"        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
+"        <br><br>\n"
+"        Confermiamo che l'adeguamento del vostro portafoglio azionario è "
+"stato eseguito con successo. Non detiene nessuna azione.\n"
+"        <br><br>\n"
+"        La ringraziamo per il supporto.\n"
+"        <br><br>\n"
+"        Sostenibilmente,\n"
+"    </p>\n"
+"</div>\n"
+"        "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_share_update
@@ -391,7 +418,7 @@ msgstr "<strong>Il tuo contratto: </strong>"
 #. module: cooperator
 #: model:ir.model.constraint,message:cooperator.constraint_cooperative_membership_company_id_cooperator_register_numbe_key
 msgid "A cooperator register number must be unique (per company)"
-msgstr ""
+msgstr "Il numero registrazione cooperatore deve essere univoco (per azienda)"
 
 #. module: cooperator
 #. odoo-python
@@ -403,7 +430,7 @@ msgstr "Una persona non può rappresentare due aziende."
 #. module: cooperator
 #: model:ir.model.constraint,message:cooperator.constraint_subscription_register_company_id_register_number_operation_key
 msgid "A register operation number must be unique (per company)"
-msgstr ""
+msgstr "Un numero operazione registro deve essere univoco (per azienda)"
 
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_account_chart_template
@@ -613,7 +640,7 @@ msgstr "Richiesta liquidazione capitale"
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_release_capital
 msgid "Capital Release Request: Sending"
-msgstr ""
+msgstr "Richiesta liquidazione capitale: invio"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_capital_release_mail_template
@@ -647,7 +674,7 @@ msgstr "Certificato {{ (object.cooperator_register_number or '') }}"
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_cooperative_membership__is_company
 msgid "Check if the contact is a company, otherwise it is a person"
-msgstr ""
+msgstr "Controlla se il contatto è un'azienda, altrimenti è una persona"
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_cooperative_membership__cooperator
@@ -1147,7 +1174,7 @@ msgstr "Modelli e-mail"
 #: code:addons/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "Email and Company Email must be different."
-msgstr ""
+msgstr "L'e-mail e la e-mail aziendale devono esere diverse."
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_register_filter
@@ -1263,7 +1290,7 @@ msgstr "Raggruppa per"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Ha un messaggio"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__already_cooperator
@@ -1340,7 +1367,7 @@ msgstr "Aumento numero di quote"
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperative_membership_view_search
 msgid "Individuals"
-msgstr ""
+msgstr "Persone"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.product_template_form_view
@@ -1431,7 +1458,7 @@ msgstr "Registrazione contabile"
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_account_move_line
 msgid "Journal Item"
-msgstr ""
+msgstr "Movimento contabile"
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_subscription_request__capital_release_request_date
@@ -1600,7 +1627,7 @@ msgstr "Tipo prossima attività"
 #: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_candidate_form
 #: model_terms:ir.actions.act_window,help:cooperator.action_partner_cooperator_form
 msgid "No contacts found"
-msgstr ""
+msgstr "Nessun contatto trovato"
 
 #. module: cooperator
 #. odoo-python
@@ -1608,6 +1635,7 @@ msgstr ""
 #, python-format
 msgid "No default share product found for this type of partner."
 msgstr ""
+"Nessun prodotto condiviso predefinito trovato per questo tipo di partner."
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperative_membership_view_tree
@@ -1803,7 +1831,7 @@ msgstr "Prezzo di vendita del prodotto al cliente."
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_product_template
 msgid "Product"
-msgstr ""
+msgstr "Prodotto"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
@@ -1996,6 +2024,8 @@ msgid ""
 "Sent to cooperators in case of share increase with their cooperator "
 "certificate in attachment"
 msgstr ""
+"Inviato ai cooperatori nel caso di aumento della quota con il certificato "
+"del cooperatore in allegato"
 
 #. module: cooperator
 #: model:mail.template,description:cooperator.email_template_share_transfer
@@ -2003,6 +2033,8 @@ msgid ""
 "Sent to cooperators in case of share transfer with their cooperator "
 "certificate in attachment"
 msgstr ""
+"Inviato ai cooperatori nel caso di trasferimento di quota con il certificato "
+"del cooperatore in allegato"
 
 #. module: cooperator
 #: model:mail.template,description:cooperator.email_template_share_update_no_shares
@@ -2010,6 +2042,8 @@ msgid ""
 "Sent to cooperators in case of share update and they have no remaining "
 "shares (ergo no attachment)"
 msgstr ""
+"Inviato ai cooperatori nel caso di aggiornamento della quota senza quote "
+"residue (quindi senza allegato)"
 
 #. module: cooperator
 #: model:mail.template,description:cooperator.email_template_share_update
@@ -2017,11 +2051,13 @@ msgid ""
 "Sent to cooperators in case of share update with their cooperator "
 "certificate in attachment"
 msgstr ""
+"Inviato ai cooperatori nel caso di aggiornamento della quota con il "
+"certificato del cooperatore in allegato"
 
 #. module: cooperator
 #: model:mail.template,description:cooperator.email_template_confirmation
 msgid "Sent to cooperators to confirm their subscription request"
-msgstr ""
+msgstr "Inviato ai cooperatori per confermare la loro richiesta di iscrizione"
 
 #. module: cooperator
 #: model:mail.template,description:cooperator.email_template_waiting_list
@@ -2029,16 +2065,20 @@ msgid ""
 "Sent to cooperators when their subscription request is added to the waiting "
 "list"
 msgstr ""
+"Inciato ai cooperatori quando la loro richiesta di iscrizione è aggiunta lla "
+"lista di attesa"
 
 #. module: cooperator
 #: model:mail.template,description:cooperator.email_template_release_capital
 msgid "Sent to cooperators with their capital release request in attachment"
 msgstr ""
+"Inviato ai cooperatori con la loro richiesta di liquidazione del capitale in "
+"allegato"
 
 #. module: cooperator
 #: model:mail.template,description:cooperator.email_template_certificate
 msgid "Sent to cooperators with their cooperator certificate in attachment"
-msgstr ""
+msgstr "Inviato ai cooperatori con il certificato del cooperatore in allegato"
 
 #. module: cooperator
 #: model:product.template,name:cooperator.product_template_share_type_1_demo
@@ -2053,7 +2093,7 @@ msgstr "Parte B - Lavoratore"
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_share_increase
 msgid "Share Increase: Payment Received Confirmation: Cooperator Certificate"
-msgstr ""
+msgstr "Aumento di quota: conferma ricezione pagamento: certificato cooperatore"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.product_template_form_view
@@ -2104,7 +2144,7 @@ msgstr "Tipo quota"
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_share_update_no_shares
 msgid "Share Update (No Remaining Shares): Cooperator Certificate"
-msgstr ""
+msgstr "Aggiornamento quota (nessuna quota residua): certificato cooperatore"
 
 #. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_share_update
@@ -2168,7 +2208,7 @@ msgstr "Nome tipo quota a"
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_share_update_no_shares_mail_template
 msgid "Share transfer (no remaining shares) email template"
-msgstr ""
+msgstr "Modello e-mail trasferimento quota (nessuna quota residua)"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_share_transfer_mail_template
@@ -2291,7 +2331,7 @@ msgstr "Conferma richiesta iscrizione"
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_waiting_list
 msgid "Subscription Request on Waiting List"
-msgstr ""
+msgstr "Richiesta iscrizione in lista di attesa"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
@@ -2417,12 +2457,12 @@ msgstr ""
 #: code:addons/cooperator/models/operation_request.py:0
 #, python-format
 msgid "The is_operation field of the subscription request must be true"
-msgstr ""
+msgstr "Il campo is_operation della richiesta di iscrizione deve essere true"
 
 #. module: cooperator
 #: model:ir.model.constraint,message:cooperator.constraint_share_line_share_number_is_positive
 msgid "The number of shares cannot be negative."
-msgstr ""
+msgstr "Il numero di quote non può essere negativo."
 
 #. module: cooperator
 #. odoo-python
@@ -2438,6 +2478,8 @@ msgstr ""
 #, python-format
 msgid "The source field of the subscription request must be set to operation"
 msgstr ""
+"Il campo origine della richiesta di iscrizione deve essere impostato a "
+"operazione"
 
 #. module: cooperator
 #. odoo-python
