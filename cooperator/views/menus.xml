@@ -112,6 +112,14 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         groups="cooperator_group_manager"
     />
     <menuitem
+        id="menu_cooperator_settings"
+        name="Settings"
+        action="action_cooperator_config"
+        parent="menu_cooperator_config"
+        sequence="0"
+    />
+
+    <menuitem
         name="Share type"
         id="menu_cooperator_share_product"
         action="product_template_action"
