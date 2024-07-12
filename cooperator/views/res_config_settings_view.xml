@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_cooperator_view_form" model="ir.ui.view">
+        <field name="name">Cooperators</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="50" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="///div[hasclass('settings')]" position="inside">
+                <div
+                    id="cooperator_settings_block"
+                    class="app_settings_block"
+                    data-string="Cooperators"
+                    string="Cooperators"
+                    data-key="cooperator"
+                    groups="cooperator.cooperator_group_user"
+                >
+                    <h2>General Settings</h2>
+                    <div class="row mt16 o_settings_container" id="general_settings">
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="create_user" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Create users for cooperators </span>
+                                <div class="text-muted">
+                                    Automatically create a portal user for cooperators
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="unmix_share_type" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    One share type per cooperator
+                                </span>
+                                <div class="text-muted">
+                                    Force cooperators to have only one type of share
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Maximum amount
+                                </span>
+                                <div class="text-muted">
+                                    Maximum authorised subscription amount
+                                </div>
+                                <div>
+                                    <field name="subscription_maximum_amount" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Default language
+                                </span>
+                                <div class="text-muted">
+                                    Default language in subscription forms
+                                </div>
+                                <div>
+                                    <field name="lang_id_default" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Default country
+                                </span>
+                                <div class="text-muted">
+                                    Default country in subscription forms
+                                </div>
+                                <div>
+                                    <field name="country_id_default" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Report template</h2>
+                    <div class="row mt16 o_settings_container" id="accounting_settings">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="display_logo1" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Display logo 1
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Logo 1
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                                <div>
+                                    <field name="bottom_logo1" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="display_logo2" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Display logo 2
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Logo 2
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                                <div>
+                                    <field name="bottom_logo2" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Board representative name
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                                <div>
+                                    <field name="board_representative" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Board representative signature
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                                <div>
+                                    <field name="signature_scan" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Accounting</h2>
+                    <div class="row mt16 o_settings_container" id="accounting_settings">
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Subscription Journal
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                                <div>
+                                    <field name="subscription_journal_id" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Cooperator Account
+                                </span>
+                                <div class="text-muted">
+                                    This account will be the default one as the receivable account
+                                    for
+                                    the cooperators </div>
+                                <div>
+                                    <field name="property_cooperator_account" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Default Payment Term
+                                </span>
+                                <div class="text-muted">
+                                    Default payment term to use for capital release requests
+                                </div>
+                                <div>
+                                    <field
+                                        name="capital_release_request_payment_term_default"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <h2>Website form</h2>
+                    <div
+                        class="row mt16 o_settings_container"
+                        id="website_form_settings"
+                    >
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="allow_id_card_upload" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Allow ID Card upload
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="display_data_policy_approval" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Display data policy </span>
+                                <div class="text-muted">
+                                    Choose to display a data policy checkbox on the cooperator
+                                    website form
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="data_policy_approval_required" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Require data policy approval
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Data policy text
+                                </span>
+                                <div class="text-muted">
+                                    Text to display aside the checkbox to approve data policy </div>
+                                <div>
+                                    <field name="data_policy_approval_text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="display_internal_rules_approval" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Display internal rules
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="internal_rules_approval_required" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Require internal rules approval
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Internal rules text
+                                </span>
+                                <div class="text-muted">
+                                    Text to display aside the checkbox to approve internal rules.
+                                </div>
+                                <div>
+                                    <field name="internal_rules_approval_text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="display_financial_risk_approval" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Display financial risk
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="financial_risk_approval_required" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Require financial risk approval
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Financial risk text
+                                </span>
+                                <div class="text-muted">
+                                    Text to display aside the checkbox to approve financial risk.
+                                </div>
+                                <div>
+                                    <field name="financial_risk_approval_text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="display_generic_rules_approval" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Display generic rules
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="generic_rules_approval_required" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Require generic rules approval
+                                </span>
+                                <div class="text-muted">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Generic rules text
+                                </span>
+                                <div class="text-muted">
+                                    Text to display aside the checkbox to approve the generic rules. </div>
+                                <div>
+                                    <field name="generic_rules_approval_text" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Email</h2>
+                    <div class="row mt16 o_settings_container" id="email_settings">
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Contact email
+                                </span>
+                                <div class="text-muted">
+                                    Contact email address for the cooperator
+                                </div>
+                                <div>
+                                    <field name="coop_email_contact" required="1" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Certificate email template
+                                </span>
+                                <div class="text-muted">
+                                    If left empty, the default global mail template will be used.
+                                </div>
+                                <div>
+                                    <field
+                                        name="cooperator_certificate_mail_template"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Certificate increase email template
+                                </span>
+                                <div class="text-muted">
+                                    If left empty, the default global mail template will be used.
+                                </div>
+                                <div>
+                                    <field
+                                        name="cooperator_certificate_increase_mail_template"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="send_certificate_email" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Send certificate email
+                                </span>
+                                <div class="text-muted">
+                                    Automatically send the cooperator certificate when validating
+                                    share payment
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Share confirmation email template
+                                </span>
+                                <div class="text-muted">
+                                    If left empty, the default global mail template will be used.
+                                </div>
+                                <div>
+                                    <field
+                                        name="cooperator_confirmation_mail_template"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="send_confirmation_email" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Send confirmation email
+                                </span>
+                                <div class="text-muted">
+                                    Automatically send a confirmation when a share subscription is
+                                    received.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Capital release email template
+                                </span>
+                                <div class="text-muted">
+                                    If left empty, the default global mail template will be used.
+                                </div>
+                                <div>
+                                    <field
+                                        name="cooperator_capital_release_mail_template"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="send_capital_release_email" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Send Capital Release email
+                                </span>
+                                <div class="text-muted">
+                                    Automatically send the a capital release email when a
+                                    subscription is validated.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Waiting list email template
+                                </span>
+                                <div class="text-muted">
+                                    If left empty, the default global mail template will be used.
+                                </div>
+                                <div>
+                                    <field
+                                        name="cooperator_waiting_list_mail_template"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="send_waiting_list_email" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Send Waiting List email
+                                </span>
+                                <div class="text-muted">
+                                    Automatically send an email when the subscription is put on the
+                                    waiting list.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Share transfer email template
+                                </span>
+                                <div class="text-muted">
+                                    If left empty, the default global mail template will be used.
+                                </div>
+                                <div>
+                                    <field
+                                        name="cooperator_share_transfer_mail_template"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Share transfer (no remaining shares) email template
+                                </span>
+                                <div class="text-muted">
+                                    If left empty, the default global mail template will be used.
+                                </div>
+                                <div>
+                                    <field
+                                        name="cooperator_share_update_no_shares_mail_template"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="send_share_transfer_email" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Send share transfer email
+                                </span>
+                                <div class="text-muted">
+                                    Automatically send an email to the cooperator when a share has
+                                    been transfered.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Share update email template
+                                </span>
+                                <div class="text-muted">
+                                    If left empty, the default global mail template will be used.
+                                </div>
+                                <div>
+                                    <field
+                                        name="cooperator_share_update_mail_template"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="send_share_update_email" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">
+                                    Send share update email
+                                </span>
+                                <div class="text-muted">
+                                    Automatically send an email to the cooperator when a share has
+                                    been updated.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
