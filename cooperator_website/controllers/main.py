@@ -138,8 +138,6 @@ class WebsiteSubscription(http.Controller):
             values["logged"] = "on"
             partner = request.env.user.partner_id
 
-            if partner.member or partner.old_member:
-                values["already_cooperator"] = "on"
             if partner.bank_ids:
                 values["iban"] = partner.bank_ids[0].acc_number
             values["address"] = partner.street
@@ -426,15 +424,6 @@ class WebsiteSubscription(http.Controller):
         if response is not True:
             return response
 
-        already_coop = False
-        if logged:
-            partner = request.env.user.partner_id
-            values["partner_id"] = partner.id
-            already_coop = partner.member
-        elif kwargs.get("already_cooperator") == "on":
-            already_coop = True
-
-        values["already_cooperator"] = already_coop
         values["is_company"] = is_company
 
         if kwargs.get("data_policy_approved", "off") == "on":
