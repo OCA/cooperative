@@ -163,7 +163,7 @@ class SubscriptionRequest(models.Model):
     def _compute_name(self):
         for sub_request in self:
             if sub_request.is_company:
-                sub_request.name = self.company_name
+                sub_request.name = sub_request.company_name
             else:
                 sub_request.name = " ".join(
                     part
