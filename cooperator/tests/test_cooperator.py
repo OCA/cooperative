@@ -9,7 +9,7 @@ from freezegun import freeze_time
 
 from odoo import fields
 from odoo.exceptions import AccessError, UserError, ValidationError
-from odoo.tests.common import TransactionCase, users
+from odoo.tests.common import Form, TransactionCase, users
 
 from .cooperator_test_mixin import CooperatorTestMixin
 
@@ -290,8 +290,8 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
 
     def test_create_multiple_subscriptions_from_non_cooperator_partner(self):
         """
-        Test that creating a subscription from a partner that has no parts yet
-        creates a subscription request with the correct type.
+        Test that creating a subscription from a partner is not member yet
+        creates a subscription request with type 'new'.
         """
         partner = self.env["res.partner"].create(
             {
@@ -301,12 +301,12 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         subscription_request = self.create_dummy_subscription_from_partner(partner)
         self.assertEqual(subscription_request.type, "new")
         subscription_request2 = self.create_dummy_subscription_from_partner(partner)
-        self.assertEqual(subscription_request2.type, "increase")
+        self.assertEqual(subscription_request2.type, "new")
 
     def test_create_multiple_subscriptions_from_non_cooperator_company_partner(self):
         """
-        Test that creating a subscription from a company partner that has no
-        parts yet creates a subscription request with the correct type.
+        Test that creating a subscription from a company partner is not member yet
+         creates a subscription request with the type 'new'.
         """
         partner = self.env["res.partner"].create(
             {
@@ -321,7 +321,7 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         subscription_request2 = self.create_dummy_subscription_from_company_partner(
             partner
         )
-        self.assertEqual(subscription_request2.type, "increase")
+        self.assertEqual(subscription_request2.type, "new")
 
     def test_create_subscription_from_cooperator_partner(self):
         """
@@ -891,6 +891,61 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
             partner.generic_rules_approved,
             cooperative_membership.generic_rules_approved,
         )
+
+    def test_partner_existing(self):
+        """
+        Test that selecting an existing partner automatically changes certain
+        fields to default values.
+        """
+        partner = self.env["res.partner"].create(
+            {
+                "firstname": "Test",
+                "lastname": "Partner",
+                "email": "test@example.com",
+                "birthdate_date": "2018-01-01",
+                "gender": "other",
+                "street": "Example Street 1",
+                "city": "Brussels",
+                "zip": "1000",
+                "country_id": self.env.ref("base.be").id,
+                "phone": "1234",
+                "lang": "en_US",
+            }
+        )
+        partner.create_cooperative_membership(self.env.company)
+        partner.member = True
+        with Form(self.env["subscription.request"]) as request_form:
+            self.assertEqual(request_form.type, "new")
+            request_form.partner_id = partner
+            self.assertEqual(request_form.type, "increase")
+            self.assertEqual(request_form.firstname, partner.firstname)
+            self.assertEqual(request_form.lastname, partner.lastname)
+            self.assertEqual(request_form.email, partner.email)
+            self.assertEqual(request_form.birthdate, partner.birthdate_date)
+            self.assertEqual(request_form.gender, partner.gender)
+            self.assertEqual(request_form.address, partner.street)
+            self.assertEqual(request_form.city, partner.city)
+            self.assertEqual(request_form.zip_code, partner.zip)
+            self.assertEqual(request_form.country_id, partner.country_id)
+            self.assertEqual(request_form.phone, partner.phone)
+            self.assertEqual(request_form.lang, partner.lang)
+
+            # This is to make sure that the form can be saved.
+            request_form.share_product_id = self.share_x
+
+    def test_constrain_type_if_already_cooperator(self):
+        """
+        If a partner is already a cooperator, check that type is 'increase'
+        """
+        partner = self.env["res.partner"].create({"name": "Test Partner"})
+        partner.create_cooperative_membership(self.env.company)
+        partner.member = True
+        vals = self.get_dummy_subscription_requests_vals()
+        subscription_request = self.env["subscription.request"].create(vals)
+        subscription_request.partner_id = partner
+        self.assertTrue(subscription_request.already_cooperator)
+        self.assertEqual(subscription_request.type, "increase")
+        subscription_request.validate_subscription_request()
 
     @freeze_time("2023-06-21")
     def test_partner_company_dependent_fields_with_membership(self):

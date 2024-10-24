@@ -116,18 +116,6 @@ class SubscriptionRequest(models.Model):
         company_id = vals.get("company_id", self.env.company.id)
         company_id = self.env["res.company"].browse(company_id)
         cooperative_membership = partner.get_cooperative_membership(company_id)
-        member = cooperative_membership and cooperative_membership.member
-        pending_requests_domain = [
-            ("company_id", "=", company_id.id),
-            ("partner_id", "=", partner.id),
-            ("state", "in", ("draft", "waiting", "done")),
-        ]
-        # we don't use partner.coop_candidate because we want to also
-        # handle draft and waiting requests.
-        if member or self.search(pending_requests_domain):
-            vals["type"] = "increase"
-        if member:
-            vals["already_cooperator"] = True
         if not cooperative_membership:
             cooperative_membership = partner.create_cooperative_membership(company_id)
         elif not cooperative_membership.cooperator:
@@ -171,6 +159,18 @@ class SubscriptionRequest(models.Model):
                     if part
                 )
 
+    @api.depends("partner_id.member")
+    def _compute_type(self):
+        for sub_request in self:
+            if sub_request.partner_id:
+                sub_request.already_cooperator = sub_request.partner_id.member
+                sub_request.type = (
+                    "increase" if sub_request.partner_id.member else "new"
+                )
+            else:
+                sub_request.already_cooperator = False
+                sub_request.type = "new"
+
     @api.depends("iban", "skip_iban_control")
     def _compute_is_valid_iban(self):
         for sub_request in self:
@@ -186,10 +186,12 @@ class SubscriptionRequest(models.Model):
                 sub_request.share_product_id.list_price * sub_request.ordered_parts
             )
 
+    # The field is technically kind of superfluous, but it's also handy as a
+    # shorthand.
     already_cooperator = fields.Boolean(
-        string="I'm already cooperator",
+        string="Already a cooperator",
         readonly=True,
-        states={"draft": [("readonly", False)]},
+        compute="_compute_type",
     )
 
     # previously, this was a normal field. it is now computed, and is used for
@@ -223,11 +225,13 @@ class SubscriptionRequest(models.Model):
     type = fields.Selection(
         [
             ("new", "New Cooperator"),
-            ("increase", "Increase number of share"),
+            ("increase", "Increase number of shares"),
         ],
+        string="Type of Subscription",
+        compute="_compute_type",
         default="new",
+        required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     state = fields.Selection(
         [
@@ -253,13 +257,13 @@ class SubscriptionRequest(models.Model):
         states={"draft": [("readonly", False)]},
     )
     iban = fields.Char(
-        string="Account Number",
+        string="Bank Account Number",
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
     partner_id = fields.Many2one(
         "res.partner",
-        string="Cooperator",
+        string="Existing Contact",
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
@@ -488,7 +492,6 @@ class SubscriptionRequest(models.Model):
 
     def set_person_info(self, partner):
         self.firstname = partner.firstname
-        self.name = partner.name
         self.lastname = partner.lastname
         self.email = partner.email
         self.birthdate = partner.birthdate_date
@@ -505,11 +508,8 @@ class SubscriptionRequest(models.Model):
         partner = self.partner_id
         if partner:
             self.is_company = partner.is_company
-            self.already_cooperator = partner.member
             if partner.bank_ids:
                 self.iban = partner.bank_ids[0].acc_number
-            if partner.member:
-                self.type = "increase"
             if partner.is_company:
                 self.company_name = partner.name
                 self.company_email = partner.email
@@ -752,14 +752,7 @@ class SubscriptionRequest(models.Model):
         if partner:
             return partner
         domain = []
-        if self.already_cooperator:
-            raise UserError(
-                _(
-                    "The checkbox already cooperator is"
-                    " checked please select a cooperator."
-                )
-            )
-        elif self.is_company and self.company_register_number:
+        if self.is_company and self.company_register_number:
             domain = [
                 (
                     "company_register_number",
