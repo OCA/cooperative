@@ -297,7 +297,7 @@ class WebsiteSubscription(http.Controller):
             return request.render(redirect, values)
 
         if not logged and email:
-            user = user_obj.sudo().search([("login", "=", email)])
+            user = user_obj.sudo().search([("login", "ilike", email)])
             if user:
                 values = self.fill_values(values, is_company, logged)
                 values.update(kwargs)
