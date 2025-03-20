@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-02-14 16:41+0000\n"
+"PO-Revision-Date: 2025-03-20 12:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.10.2\n"
 
 #. module: l10n_be_cooperator
 #: model:mail.template,body_html:l10n_be_cooperator.email_template_tax_shelter_certificate
@@ -317,7 +317,7 @@ msgstr "Cooperatore"
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__cooperator_number
 msgid "Cooperator number"
-msgstr "Nmero cooperatore"
+msgstr "Numero cooperatore"
 
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
@@ -716,7 +716,7 @@ msgstr "Richiesta sttoscrizione"
 #: model:ir.model,name:l10n_be_cooperator.model_tax_shelter_certificate
 #: model:mail.template,subject:l10n_be_cooperator.email_template_tax_shelter_certificate
 msgid "Tax Shelter Certificate"
-msgstr "Certiicato scudo fiscale"
+msgstr "Certificato scudo fiscale"
 
 #. module: l10n_be_cooperator
 #: model:ir.model,name:l10n_be_cooperator.model_certificate_line
@@ -727,13 +727,13 @@ msgstr "Riga certiicato scudo fiscale"
 #: model:ir.actions.act_window,name:l10n_be_cooperator.tax_shelter_certificate_action
 #: model:ir.ui.menu,name:l10n_be_cooperator.tax_shelter_certificate_menu
 msgid "Tax Shelter Certificates"
-msgstr "Certiicati scudo fiscale"
+msgstr "Certificati scudo fiscale"
 
 #. module: l10n_be_cooperator
 #: model:ir.model,name:l10n_be_cooperator.model_tax_shelter_declaration
 #: model:ir.ui.menu,name:l10n_be_cooperator.tax_shelter_declaration_menu
 msgid "Tax Shelter Declaration"
-msgstr "Dichirazione scudo fiscale"
+msgstr "Dichiarazione scudo fiscale"
 
 #. module: l10n_be_cooperator
 #: model:ir.actions.act_window,name:l10n_be_cooperator.tax_shelter_declaration_action
@@ -754,27 +754,27 @@ msgstr "Limite capitale scudo fiscale"
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_certificate_line__tax_shelter_certificate
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_certificate_view_form
 msgid "Tax shelter certificate"
-msgstr "Certiicato scudo fiscale"
+msgstr "Certificato scudo fiscale"
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_declaration__tax_shelter_certificates
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_certificate_tree
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_declaration_view_form
 msgid "Tax shelter certificates"
-msgstr "Certiicati scudo fiscale"
+msgstr "Certificati scudo fiscale"
 
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_declaration_view_form
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_declaration_view_tree
 msgid "Tax shelter declaration"
-msgstr "Dichirazione scudo fiscale"
+msgstr "Dichiarazione scudo fiscale"
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_certificate_line__tax_shelter
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_subscription_document
 msgid "Tax shelter eligible"
-msgstr "Scudo fiscale idoneo"
+msgstr "Idoneo allo scudo fiscale"
 
 #. module: l10n_be_cooperator
 #: model:ir.actions.server,name:l10n_be_cooperator.ir_cron_mail_tax_shelter_action_ir_actions_server
@@ -811,12 +811,12 @@ msgstr "Importo totale idoneo allo scudo fiscale"
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__total_amount_eligible_previously_subscribed
 msgid "Total eligible previously subscribed"
-msgstr "Totale idoneo prededentemente sottoscritto"
+msgstr "Totale idoneo precedentemente sottoscritto"
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__total_amount_previously_subscribed
 msgid "Total previously subscribed"
-msgstr "Totale prededentemente sottoscritto"
+msgstr "Totale precedentemente sottoscritto"
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__total_amount_resold
