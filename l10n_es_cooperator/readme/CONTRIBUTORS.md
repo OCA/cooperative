@@ -1,0 +1,7 @@
+- Coopdevs Treball SCCL
+  - Enrico Stano
+  - César López Ramírez
+  - Daniel Palomar
+  - Eugeni Chafer
+- [Som IT Cooperatiu SCCL](https://somit.coop):
+  - Nicolás Ramos

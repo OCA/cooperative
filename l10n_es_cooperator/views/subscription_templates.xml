@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="become_company_cooperator_es"
+        inherit_id="cooperator_website.becomecompanycooperator"
+        name="Become company cooperator"
+        priority="150"
+    >
+        <xpath expr="//label[@for='company_register_number']/.." position="replace" />
+        <!-- Remove Company type field -->
+        <xpath expr="//label[@for='company_type']/.." position="replace" />
+    </template>
+
+    <template id="iban_template_es" inherit_id="cooperator_website.iban_template">
+        <xpath expr="//div[@name='iban_template_container']" position="inside">
+            <div class="form-group" name="iban_container">
+                <label for="iban">Bank Account Number</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    name="iban"
+                    id="iban"
+                    required="True"
+                    t-att-readonly="logged"
+                    placeholder="ES9000246912501234567891"
+                />
+            </div>
+            <div class="form-group" name="vat_container">
+                <label for="vat">VAT</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    name="vat"
+                    placeholder="Y5643925S"
+                    required="is_company is True"
+                    invisible="is_company is False"
+                />
+            </div>
+        </xpath>
+    </template>
+
+    <template
+        id="become_cooperator_es_share_div"
+        inherit_id="cooperator_website.shares_template"
+        name="Removing Share div"
+    >
+        <xpath expr="//div[@name='share_div']" position="attributes">
+            <attribute name="invisible">True</attribute>
+        </xpath>
+    </template>
+</odoo>
