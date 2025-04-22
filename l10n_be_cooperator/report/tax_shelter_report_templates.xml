@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2023 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <template id="tax_shelter_report_line">
+        <t t-foreach="lines" t-as="line">
+            <tr>
+                <td class="text-start">
+                    <span t-field="line.type" />
+                </td>
+                <td class="text-start">
+                    <span t-if="line.tax_shelter">Yes</span>
+                    <span t-else="">No</span>
+                </td>
+                <td class="text-start">
+                    <span t-field="line.transaction_date" />
+                </td>
+                <td class="text-start">
+                    <span
+                        t-field="line.amount_subscribed"
+                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                    />
+                </td>
+                <td class="text-start">
+                    <span
+                        t-field="line.amount_subscribed_eligible"
+                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                    />
+                </td>
+            </tr>
+        </t>
+    </template>
+
+    <template id="tax_shelter_report_table">
+        <table
+            class="table table-sm o_main_table table-borderless"
+            name="taxshelter_line_table"
+        >
+            <thead>
+                <tr>
+                    <th class="text-start">Type</th>
+                    <th class="text-start">Tax Shelter Eligible</th>
+                    <th class="text-start">Date</th>
+                    <th class="text-start">Amount</th>
+                    <th class="text-start">Eligible Amount</th>
+                </tr>
+            </thead>
+            <tbody class="invoice_tbody">
+                <t t-out="0" />
+            </tbody>
+        </table>
+    </template>
+
+    <!--
+        the structure of this report comes from
+        account.report_invoice_document
+    -->
+    <template id="tax_shelter_report_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)" />
+            <t t-set="report_type" t-value="o.declaration_id.tax_shelter_type" />
+            <div class="row">
+                <div class="offset-col-6 col-6">
+                    <t t-set="address">
+                        <address
+                            class="mb-0"
+                            t-field="o.partner_id"
+                            t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'
+                        />
+                        <div t-if="o.partner_id.cooperator_register_number">
+                            Cooperator number:
+                            <span t-field="o.partner_id.cooperator_register_number" />
+                        </div>
+                    </t>
+                </div>
+            </div>
+            <div class="mt-5">
+                <div class="page" style="font-size: 10px !important;">
+                    <!-- TODO: Translate below to English -->
+                    <h2 style="font-size: 3em;">
+                        <span>Attestation Tax Shelter</span>
+                        <t t-if="is_shares_certificate">
+                            <br />
+                            <small style="font-size: 80%;">
+                                Attestation concernant une des quatre années suivant
+                                l'acquisition de parts
+                            </small>
+                        </t>
+                    </h2>
+                    <em>
+                        <t t-if="report_type in ('start_up_small', 'start_up_micro')">
+                            Attestation délivrée dans le cadre de la réduction d'impôt
+                            pour l'acquisition de nouvelles actions ou parts
+                            d'entreprises qui débutent prévue à l'article
+                            145<sup>26</sup>, CIR 92 et à l'article 63<sup>12/1</sup>,
+                            AR/CIR 92.
+                        </t>
+                        <t t-elif="report_type == 'scale_up'">
+                            Attestation délivrée dans le cadre de la réduction d'impôt
+                            pour l'acquisition de nouvelles actions ou parts
+                            d'entreprises en croissance prévue à l'article
+                            145<sup>27</sup>, CIR 92 et à l'article 63<sup>12/3</sup>,
+                            AR/CIR 92.
+                        </t>
+                    </em>
+                    <p>
+                        <br />
+                        Cher membre,
+                    </p>
+
+                    <t t-out="0" />
+
+                    <!-- TODO: Translate below to English -->
+                    <p>
+                        L'Article
+                        <t t-if="report_type in ('start_up_small', 'start_up_micro')">
+                            145<sup>26</sup>
+                        </t>
+                        <t t-elif="report_type == 'scale_up'">
+                            145<sup>27</sup>
+                        </t>, CIR 92 sur les revenus
+                        <span
+                            t-field="o.declaration_id.fiscal_year"
+                            t-options='{"widget": "char"}'
+                        />, donne droit à
+                        une réduction d'impôt à hauteur de
+                        <span t-field="o.declaration_id.tax_shelter_percentage" /> %
+                        du montant de la valeur des parts souscrites avant le
+                        <span t-field="o.declaration_id.date_to" />.
+                    </p>
+
+                    <p>
+                        Cette attestation vaut donc comme certificat attestant :
+                        <ul>
+                            <t t-if="is_shares_certificate">
+                                <li>
+                                    que les parts concernées sont toujours en possession
+                                    du souscripteur au
+                                    <span t-field="o.declaration_id.date_to" />,
+                                </li>
+                                <li>
+                                    et que la condition prévue à l’article
+                                    <t
+                                        t-if="report_type in ('start_up_small', 'start_up_micro')"
+                                    >
+                                        145<sup>26</sup>, § 3, alinéa 2,
+                                    </t>
+                                    <t t-elif="report_type == 'scale_up'">
+                                        145<sup>27</sup>, § 2, alinéa 4,
+                                    </t>
+                                    CIR 92, est remplie.
+                                </li>
+                            </t>
+                            <t t-else="">
+                                <li>
+                                    que les conditions prévues au
+                                    <t
+                                        t-if="report_type in ('start_up_small', 'start_up_micro')"
+                                    >
+                                        § 3, alinéa 1<sup>er</sup>, de l'article
+                                        145<sup>26</sup>,
+                                    </t>
+                                    <t t-elif="report_type == 'scale_up'">
+                                        § 1<sup>er</sup> et 2 de l'article
+                                        145<sup>27</sup>,
+                                    </t>
+                                    CIR 92, sont respectées,
+                                </li>
+                                <li>
+                                    et que le souscripteur est encore en possession des
+                                    parts au
+                                    <span t-field="o.declaration_id.date_to" />.
+                                </li>
+                            </t>
+                        </ul>
+                    </p>
+
+                    <p>
+                        Le maintien de la réduction d'impôt n'est possible que si
+                        l'investisseur conserve les parts de la coopérative pendant 4
+                        ans au minimum, sauf si la sortie est imposée par des conditions
+                        extérieures (telles que la faillite, par exemple). En cas de
+                        sortie volontaire avant la période de 4 ans, l'avantage fiscal
+                        devra être remboursé au prorata du nombre de mois entre la
+                        sortie et les 4 ans. La coopérative s'engage à fournir pour
+                        chacune des quatre années suivant l'année d'acquisition une
+                        attestation certifiant que ces parts sont toujours en possession
+                        du souscripteur.
+                    </p>
+
+                    <p>
+                        L'apport de capitaux par le chef d'entreprise lui-même ou par
+                        des administrateurs existants de la société ne permet pas de
+                        bénéficier du tax shelter.
+                    </p>
+
+                    <p>
+                        Pour bénéficier de la réduction d'impôts, vous pouvez joindre
+                        cette lettre à votre déclaration fiscale pour les revenus
+                        <span
+                            t-field="o.declaration_id.fiscal_year"
+                            t-options='{"widget": "char"}'
+                        />.
+                    </p>
+
+                    <p>
+                        Pour toute information complémentaire, consultez le texte de
+                        l'Arrêté Royal.
+                    </p>
+
+                    <div class="row">
+                        <div name="board_commitee">
+                            <p>
+                                For the board of <span t-field="o.company_id.name" />,
+                            </p>
+                            <p>
+                                <strong>
+                                    <span t-field="o.company_id.board_representative" />
+                                </strong>
+                            </p>
+                            <img
+                                t-if="o.company_id.signature_scan"
+                                class="w-50 mt-1"
+                                t-attf-style="{{ 'min-width: 100px; max-width: 250px' if report_type == 'pdf' else '' }}"
+                                t-att-src="'data:image/png;base64,%s' % o.company_id.signature_scan.decode()"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

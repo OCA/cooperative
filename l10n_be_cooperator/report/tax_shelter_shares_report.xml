@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2017 Open Architects Consulting SPRL
+SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <template id="tax_shelter_report_shares_document">
+        <t t-call="l10n_be_cooperator.tax_shelter_report_document">
+            <t t-set="is_shares_certificate" t-value="True" />
+            <p>
+                À la date du
+                <span t-field="o.partner_id.effective_date" />,
+                vous êtes devenu coopérateur de
+                <span t-field="o.company_id.name" />.
+            </p>
+
+            <t t-call="l10n_be_cooperator.tax_shelter_report_table">
+                <t t-call="l10n_be_cooperator.tax_shelter_report_line">
+                    <t t-set="lines" t-value="o.previously_subscribed_lines" />
+                </t>
+                <t t-call="l10n_be_cooperator.tax_shelter_report_line">
+                    <t t-set="lines" t-value="o.subscribed_lines" />
+                </t>
+                <tr t-foreach="o.resold_lines" t-as="l">
+                    <td class="text-start">
+                        <span t-field="l.type" />
+                    </td>
+                    <td />
+                    <td class="text-start">
+                        <span t-field="l.transaction_date" />
+                    </td>
+                    <td class="text-start">
+                        <span t-field="l.amount_resold" />
+                    </td>
+                    <td />
+                </tr>
+                <tr t-foreach="o.transfered_lines" t-as="l">
+                    <td class="text-start">
+                        <span t-field="l.type" />
+                    </td>
+                    <td />
+                    <td class="text-start">
+                        <span t-field="l.transaction_date" />
+                    </td>
+                    <td class="text-start">
+                        <span t-field="l.amount_transfered" />
+                    </td>
+                    <td />
+                </tr>
+            </t>
+        </t>
+    </template>
+
+    <template id="tax_shelter_shares_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang" />
+                <t
+                    t-call="l10n_be_cooperator.tax_shelter_report_shares_document"
+                    t-lang="o.partner_id.lang"
+                />
+            </t>
+        </t>
+    </template>
+
+</odoo>

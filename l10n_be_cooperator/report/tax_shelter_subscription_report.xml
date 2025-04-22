@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2017 Open Architects Consulting SPRL
+SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <template id="tax_shelter_report_subscription_document">
+        <t t-call="l10n_be_cooperator.tax_shelter_report_document">
+            <p>
+                Durant l'année
+                <span
+                    t-field="o.declaration_id.fiscal_year"
+                    t-options='{"widget": "char"}'
+                />
+                vous avez souscrit des parts de
+                <span t-field="o.company_id.name" />
+                pour un montant total de
+                <span
+                    t-field="o.total_amount_subscribed"
+                    t-options='{"widget": "float", "precision": 2}'
+                />
+                EUR.
+                <br />
+                Le montant éligible pour la réduction d'impôt est de
+                <span
+                    t-field="o.total_amount_eligible"
+                    t-options='{"widget": "float", "precision": 2}'
+                />
+                EUR.
+                <br />
+            </p>
+
+            <t t-call="l10n_be_cooperator.tax_shelter_report_table">
+                <t t-call="l10n_be_cooperator.tax_shelter_report_line">
+                    <t t-set="lines" t-value="o.previously_subscribed_lines" />
+                </t>
+                <t t-call="l10n_be_cooperator.tax_shelter_report_line">
+                    <t t-set="lines" t-value="o.subscribed_lines" />
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="tax_shelter_subscription_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang" />
+                <t
+                    t-call="l10n_be_cooperator.tax_shelter_report_subscription_document"
+                    t-lang="o.partner_id.lang"
+                />
+            </t>
+        </t>
+    </template>
+
+</odoo>

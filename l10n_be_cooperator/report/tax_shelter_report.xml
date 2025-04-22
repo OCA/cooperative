@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2017 Open Architects Consulting SPRL
+SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <record model="ir.actions.report" id="action_tax_shelter_subscription_report">
+        <field name="model">tax.shelter.certificate</field>
+        <field name="name">Tax shelter subscription report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >l10n_be_cooperator.tax_shelter_subscription_report</field>
+        <field
+            name="report_file"
+        >l10n_be_cooperator.tax_shelter_subscription_report</field>
+        <field name="multi">True</field>
+        <field name="binding_model_id" ref="model_tax_shelter_certificate" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <record model="ir.actions.report" id="action_tax_shelter_shares_report">
+        <field name="model">tax.shelter.certificate</field>
+        <field name="name">Tax shelter shares report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_be_cooperator.tax_shelter_shares_report</field>
+        <field name="report_file">l10n_be_cooperator.tax_shelter_shares_report</field>
+        <field name="multi">True</field>
+        <field name="binding_model_id" ref="model_tax_shelter_certificate" />
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
