@@ -1,0 +1,322 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* cooperator_website
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-03-17 23:56+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
+msgid "+32 456 926 5059"
+msgstr "+32 456 926 5059"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+msgid "0647980091"
+msgstr "0647980091"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
+msgid "1030"
+msgstr "1030"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
+msgid "1978-03-05"
+msgstr "1978-03-05"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
+msgid "<option value=\"\">Country...</option>"
+msgstr "<option value=\"\">País...</option>"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.cooperator_thanks
+msgid ""
+"<span>Your subscription has been <b>successfully</b> registered.</span>"
+msgstr "<span>Su suscripción ha sido <b>registrada con éxito</b>.</span>"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
+msgid "Address"
+msgstr "Dirección"
+
+#. module: cooperator_website
+#. odoo-python
+#: code:addons/cooperator_website/controllers/main.py:0
+#, python-format
+msgid ""
+"An account already exists for this email address. Please log in before "
+"filling in the form."
+msgstr ""
+"Ya existe una cuenta para esta dirección de correo electrónico. Inicie "
+"sesión antes de rellenar el formulario."
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.main_form_template
+msgid "Are you already a cooperator?"
+msgstr "¿Ya es usted colaborador?"
+
+#. module: cooperator_website
+#: model:website.menu,name:cooperator_website.menu_becomecooperator
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecooperator
+msgid "Become Cooperator"
+msgstr "Conviértase en colaborador"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+msgid "Become Cooperator as Company"
+msgstr "Convertirse en Cooperador como Empresa"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
+msgid "Bourdon"
+msgstr "Bordón"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
+msgid "Bruxelles"
+msgstr "Bruselas"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
+msgid "City"
+msgstr "Cuidad"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+msgid "Company Info"
+msgstr "Info de la empresa"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+msgid "Company Register Number"
+msgstr "Número de Registro de la Empresa"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+msgid "Company email"
+msgstr "Correo electrónico de la compañía"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+msgid "Company name"
+msgstr "Nombre de la compañía"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+msgid "Company type"
+msgstr "Tipo de compañía"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecooperator
+msgid "Confirm Email"
+msgstr "Confirmar correo electrónico"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+msgid "Contact Person"
+msgstr "Persona de Contacto"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
+msgid "Country"
+msgstr "País"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
+msgid "Date of birth"
+msgstr "Fecha de nacimiento"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
+msgid "Didier"
+msgstr "Didier"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.main_form_template
+msgid "Do you already have an account?"
+msgstr "¿Ya tiene una cuenta?"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.main_form_template
+msgid "Do you want to modify your personal information first?"
+msgstr "¿Desea modificar primero sus datos personales?"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecooperator
+msgid "Email"
+msgstr "Correo Electrónico"
+
+#. module: cooperator_website
+#. odoo-python
+#: code:addons/cooperator_website/controllers/main.py:0
+#, python-format
+msgid "Email and confirmation email addresses don't match."
+msgstr "Las direcciones de correo electrónico y de confirmación no coinciden."
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.rules_template
+msgid "Financial Risk"
+msgstr "Riesgo financiero"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
+msgid "First Name"
+msgstr "Nombre de pila"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+msgid "Function"
+msgstr "Función"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
+msgid "Gender"
+msgstr "Sexo"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.rules_template
+msgid "Generic Rules"
+msgstr "Normas Genéricas"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.rules_template
+msgid "Identity card scan"
+msgstr "Escaneado del carné de identidad"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.rules_template
+msgid "Internal Rules"
+msgstr "Normas Internas"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+msgid "Is a company?"
+msgstr "¿Es una empresa?"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
+msgid "Language"
+msgstr "Lenguaje"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
+msgid "Last Name"
+msgstr "Apellido"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.main_form_template
+msgid "Logged"
+msgstr "Registrada"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+msgid "Main Address"
+msgstr "Dirección Principal"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
+msgid "Phone"
+msgstr "Teléfono"
+
+#. module: cooperator_website
+#. odoo-python
+#: code:addons/cooperator_website/controllers/main.py:0
+#, python-format
+msgid "Please upload a scan of your ID card."
+msgstr "Por favor, suba una copia escaneada de su DNI."
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.rules_template
+msgid "Privacy Policy"
+msgstr "Política de Privacidad"
+
+#. module: cooperator_website
+#. odoo-python
+#: code:addons/cooperator_website/controllers/main.py:0
+#, python-format
+msgid "Provided IBAN is not valid."
+msgstr "El IBAN facilitado no es válido."
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.main_form_template
+msgid "Send"
+msgstr "Enviar"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.shares_template
+msgid "Share number"
+msgstr "Número de acciones"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.shares_template
+msgid "Share type"
+msgstr "Tipo de acción"
+
+#. module: cooperator_website
+#. odoo-python
+#: code:addons/cooperator_website/controllers/main.py:0
+#, python-format
+msgid "Some mandatory fields have not been filled."
+msgstr "No se han rellenado algunos campos obligatorios."
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+msgid "Super Cooperative"
+msgstr "Súper Cooperativa"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.shares_template
+msgid "Total"
+msgstr "Total"
+
+#. module: cooperator_website
+#. odoo-python
+#: code:addons/cooperator_website/controllers/main.py:0
+#, python-format
+msgid ""
+"You can't subscribe for an amount that exceeds {amount}{currency_symbol}."
+msgstr ""
+"No puede suscribirse por un importe superior a {amount}{currency_symbol}."
+
+#. module: cooperator_website
+#. odoo-python
+#: code:addons/cooperator_website/controllers/main.py:0
+#, python-format
+msgid "You can't subscribe to two different types of share."
+msgstr "No puede suscribirse a dos tipos de acciones diferentes."
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
+msgid "Zip / Postal Code"
+msgstr "CP / Código Postal"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+msgid "administration@mycoop.be"
+msgstr "administration@mycoop.be"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
+#: model_terms:ir.ui.view,arch_db:cooperator_website.becomecooperator
+msgid "didier.bourdon@mycoop.be"
+msgstr "didier.bourdon@mycoop.be"
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
+msgid "rue Van Hove 199"
+msgstr "calle Van Hove 199"
