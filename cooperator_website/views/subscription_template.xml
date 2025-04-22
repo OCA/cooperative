@@ -457,7 +457,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="email"
-                        placeholder="didier.bourdon@mycoop.be"
+                        placeholder="nicolas.dupont@mycoop.be"
                     />
                 </div>
                 <div
@@ -475,7 +475,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="confirm_email"
-                        placeholder="didier.bourdon@mycoop.be"
+                        placeholder="nicolas.dupont@mycoop.be"
                     />
                 </div>
                 <t t-call="cooperator_website.contact_template" />
@@ -593,7 +593,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="email"
-                        placeholder="didier.bourdon@mycoop.be"
+                        placeholder="nicolas.dupont@mycoop.be"
                     />
                 </div>
                 <t t-call="cooperator_website.contact_template" />
