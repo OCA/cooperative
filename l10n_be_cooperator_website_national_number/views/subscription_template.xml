@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="national_number_template" name="national_number_template">
+        <div class="mb-3 field-national_number" name="national_number_container">
+            <label for="national_number" class="form-label">National Number</label>
+            <input
+                t-attf-class="form-control form-control-sm{{ error and 'national_number' in error and ' is-invalid' or '' }}"
+                type="text"
+                name="national_number"
+                id="national_number"
+                t-att-required="national_number_required"
+                t-att-readonly="logged"
+                t-att-value="national_number"
+                placeholder="YY.MM.DD-NNN.CC"
+            />
+        </div>
+    </template>
+
+    <template
+        id="becomecooperator"
+        inherit_id="cooperator_website.becomecooperator"
+        name="becomecooperator"
+    >
+        <xpath
+            expr="//t[@t-call='cooperator_website.address_template']"
+            position="after"
+        >
+            <t
+                t-if="display_national_number"
+                t-call="l10n_be_cooperator_website_national_number.national_number_template"
+            />
+        </xpath>
+    </template>
+
+</odoo>
