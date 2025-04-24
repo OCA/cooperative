@@ -1,0 +1,56 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_be_cooperator_portal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_tax_shelter_certificate
+msgid "Declaration Year"
+msgstr ""
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_tax_shelter_certificate
+msgid "Draft Tax Shelter Certificate"
+msgstr ""
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.print_certificate_button
+msgid "Print {{ certificate_name }}"
+msgstr ""
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.print_shares_certificate_button
+msgid "Shares Certificate"
+msgstr ""
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.print_subscription_certificate_button
+msgid "Subscription Certificate"
+msgstr ""
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_home_menu_tax_shelter_certificate
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_home_tax_shelter_certificate
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_tax_shelter_certificate
+msgid "Tax Shelter Certificates"
+msgstr ""
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_tax_shelter_certificate
+msgid "There are currently no tax shelter certificates for your account."
+msgstr ""
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_tax_shelter_certificate
+msgid "Total Amount"
+msgstr ""

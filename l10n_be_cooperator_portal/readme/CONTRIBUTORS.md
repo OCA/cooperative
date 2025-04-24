@@ -1,0 +1,5 @@
+- [Coop IT Easy SC](https://coopiteasy.be):
+  - Rémy TAYMANS \<<remy@coopiteasy.be>\>
+  - Vincent VAN ROSSEM \<<vincent@coopiteasy.be>\>
+- [Som IT Cooperatiu SCCL](https://somit.coop):
+  - Nicolás Ramos \<<nicolas@somit.coop>\>

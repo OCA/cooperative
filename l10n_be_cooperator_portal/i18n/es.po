@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_be_cooperator_portal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-03-17 23:56+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_tax_shelter_certificate
+msgid "Declaration Year"
+msgstr "Año de la Declaración"
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_tax_shelter_certificate
+msgid "Draft Tax Shelter Certificate"
+msgstr "Proyecto de Certificado de Refugio Fiscal"
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.print_certificate_button
+msgid "Print {{ certificate_name }}"
+msgstr "Imprimir {{ certificate_name }}"
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.print_shares_certificate_button
+msgid "Shares Certificate"
+msgstr "Certificado de Acciones"
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.print_subscription_certificate_button
+msgid "Subscription Certificate"
+msgstr "Certificado de Suscripción"
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_home_menu_tax_shelter_certificate
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_home_tax_shelter_certificate
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_tax_shelter_certificate
+msgid "Tax Shelter Certificates"
+msgstr "Certificados de Protección Fiscal"
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_tax_shelter_certificate
+msgid "There are currently no tax shelter certificates for your account."
+msgstr "Actualmente no hay certificados de paraíso fiscal para su cuenta."
+
+#. module: l10n_be_cooperator_portal
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal.portal_my_tax_shelter_certificate
+msgid "Total Amount"
+msgstr "Importe Total"

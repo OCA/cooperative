@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <!-- Tax Shelter Certificate in the menu -->
+    <template
+        id="portal_my_home_menu_tax_shelter_certificate"
+        name="Portal layout: Cooperators Tax Shelter Certificate Menu Entries"
+        inherit_id="portal.portal_breadcrumbs"
+        priority="25"
+    >
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li
+                t-if="page_name == 'tax_shelter_certificate'"
+                t-attf-class="breadcrumb-item #{'active ' if not tax_shelter_certificate else ''}"
+            >
+                <a
+                    t-if="tax_shelter_certificate"
+                    t-attf-href="/my/tax_shelter_certificates?{{ keep_query() }}"
+                >Tax Shelter Certificates</a>
+                <t t-else="">Tax Shelter Certificates</t>
+            </li>
+            <li t-if="tax_shelter_certificate" class="breadcrumb-item active">
+                <t
+                    t-out="tax_shelter_certificate.declaration_id.name"
+                    t-if="tax_shelter_certificate.declaration_id.name"
+                />
+            </li>
+        </xpath>
+    </template>
+
+    <!-- Tax Shelter Certificate on the main page -->
+    <template
+        id="portal_my_home_tax_shelter_certificate"
+        name="Portal My Home: Cooperators Tax Shelter Certificate Entries"
+        inherit_id="portal.portal_my_home"
+        priority="25"
+    >
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Tax Shelter Certificates</t>
+                <t t-set="url" t-value="'/my/tax_shelter_certificates'" />
+                <t t-set="placeholder_count" t-value="'tax_shelter_count'" />
+            </t>
+        </xpath>
+    </template>
+
+    <template id="print_certificate_button">
+        <a
+            id="print_tax_shelter_subscription"
+            class="btn btn-secondary btn-block o_print_btn"
+            t-att-href="tax_shelter_certificate.get_portal_url(report_type='pdf', query_string='&amp;certificate_type=' + certificate_type)"
+            t-attf-title="Print {{ certificate_name }}"
+            target="_blank"
+        ><i class="fa fa-print" /> <t t-out="certificate_name" /></a>
+    </template>
+
+    <template id="print_subscription_certificate_button">
+        <t t-call="l10n_be_cooperator_portal.print_certificate_button">
+            <t t-set="certificate_type" t-value="'subscription'" />
+            <t t-set="certificate_name">Subscription Certificate</t>
+        </t>
+    </template>
+
+    <template id="print_shares_certificate_button">
+        <t t-call="l10n_be_cooperator_portal.print_certificate_button">
+            <t t-set="certificate_type" t-value="'shares'" />
+            <t t-set="certificate_name">Shares Certificate</t>
+        </t>
+    </template>
+
+    <!-- Tax Shelter Certificate page -->
+    <template id="portal_my_tax_shelter_certificate" name="My Tax Shelter Certificates">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True" />
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Tax Shelter Certificates</t>
+            </t>
+            <t t-if="not tax_shelter_certificates">
+                <p>There are currently no tax shelter certificates for your account.</p>
+            </t>
+            <t t-if="tax_shelter_certificates" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Declaration Year</th>
+
+                        <th class="text-end">Total Amount</th>
+                        <th />
+                    </tr>
+                </thead>
+                <t t-foreach="tax_shelter_certificates" t-as="tax_shelter_certificate">
+                    <tr>
+                        <td>
+                            <a
+                                t-att-href="tax_shelter_certificate.get_portal_url()"
+                                t-att-title="tax_shelter_certificate.declaration_id.name"
+                            >
+                                <t
+                                    t-out="tax_shelter_certificate.declaration_id.name"
+                                    t-if="tax_shelter_certificate.declaration_id.name"
+                                />
+                                <em t-else="">Draft Tax Shelter Certificate</em>
+                            </a>
+                        </td>
+                        <td class="text-end">
+                            <span
+                                t-field="tax_shelter_certificate.total_amount"
+                                t-options='{"widget": "monetary", "display_currency": company_id.currency_id}'
+                            />
+                        </td>
+                        <td class="text-end">
+                            <t
+                                t-call="l10n_be_cooperator_portal.print_subscription_certificate_button"
+                            />
+                            <t
+                                t-call="l10n_be_cooperator_portal.print_shares_certificate_button"
+                            />
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Tax Shelter Certificate Content -->
+    <template
+        id="portal_tax_shelter_page"
+        name="Tax Shelter Certificate"
+        inherit_id="portal.portal_sidebar"
+        primary="True"
+    >
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <div class="row mt16">
+                <!-- Sidebar -->
+                <t t-call="portal.portal_record_sidebar">
+                    <t t-set="classes" t-value="'col-lg-auto d-print-none'" />
+                    <t t-set="title">
+                        <h2 class="mb-0"><b
+                                t-field="tax_shelter_certificate.total_amount"
+                                data-id="total_amount"
+                                t-options='{"widget": "monetary", "display_currency": company_id.currency_id}'
+                            /> </h2>
+                    </t>
+
+                    <t t-set="entries">
+                        <ul
+                            class="list-group list-group-flush flex-wrap flex-row flex-lg-column"
+                        >
+                            <li class="list-group-item flex-grow-1">
+                                <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
+                                    <div class="btn-group flex-grow-1 mb-1">
+                                        <t
+                                            t-call="l10n_be_cooperator_portal.print_subscription_certificate_button"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
+                                    <div class="btn-group flex-grow-1 mb-1">
+                                        <t
+                                            t-call="l10n_be_cooperator_portal.print_shares_certificate_button"
+                                        />
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </t>
+                </t>
+
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

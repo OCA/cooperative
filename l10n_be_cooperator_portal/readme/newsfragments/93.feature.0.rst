@@ -1,0 +1,2 @@
+Add buttons in the list of tax shelter certificates to allow to print them
+directly without needing to open the page that only contains those buttons.
