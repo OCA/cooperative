@@ -1,0 +1,141 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* cooperator_portal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-05-06 13:12+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout
+msgid "<i class=\"fa fa-download\"/> Cooperator Certificate"
+msgstr "<i class=\"fa fa-download\"/> Certificato cooperatore"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_details_fields
+msgid "Bank Account Number"
+msgstr "Nmero conto bancario"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout
+msgid "Bank Account Number:"
+msgstr "Nmero conto bancario:"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_home_capital_release_request
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_home_menu_capital_release_request
+msgid "Capital Release Requests"
+msgstr "Richieste di versamento di capitale"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout
+msgid "Company Register Number:"
+msgstr "Numero registrazione azienda:"
+
+#. module: cooperator_portal
+#: model:ir.model,name:cooperator_portal.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout
+msgid "Cooperator Details"
+msgstr "Detttagli del cooperatore"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout
+msgid "Cooperator Entrance Date:"
+msgstr "Data ingresso cooperatore:"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout
+msgid "Cooperator Number:"
+msgstr "Numero cooperatore:"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_details_fields
+msgid "Date of Birth"
+msgstr "Data di nascita"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout
+msgid "Date of Birth:"
+msgstr "Data di nascita:"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout
+msgid "Download"
+msgstr "Scarica"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_details_fields
+msgid "Gender"
+msgstr "Genere"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout
+msgid "Gender:"
+msgstr "Genere:"
+
+#. module: cooperator_portal
+#: model:ir.model,name:cooperator_portal.model_account_move
+msgid "Journal Entry"
+msgstr "Registrazione contabile"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_details_fields
+msgid "Language"
+msgstr "Lingua"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout
+msgid "Legal Representative:"
+msgstr "Rappresentante legale:"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout
+msgid "Number of Shares:"
+msgstr "Numero di quote:"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_capital_release_requests
+msgid "Request #"
+msgstr "Nr. richiesta"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_capital_release_requests
+msgid "Request Date"
+msgstr "Data richiesta"
+
+#. module: cooperator_portal
+#. odoo-python
+#: code:addons/cooperator_portal/controllers/portal.py:0
+#, python-format
+msgid "The IBAN account number is not valid."
+msgstr "L'IBAN del conto non è valido."
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_capital_release_requests
+msgid "There are currently no capital release requests for your account."
+msgstr ""
+"Attualmente non ci sono richieste di versamento di capitale per il tuo conto."
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout
+msgid "Total Value of Shares:"
+msgstr "Valore totale quote:"
+
+#. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout
+msgid "You are an effective cooperator."
+msgstr "Siete un cooperatore effettivo."

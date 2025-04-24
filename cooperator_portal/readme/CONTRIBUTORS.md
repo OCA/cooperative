@@ -1,0 +1,3 @@
+- Coop IT Easy SC
+- [Som IT Cooperatiu SCCL](https://somit.coop):
+  - Nicolás Ramos
