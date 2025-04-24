@@ -1,0 +1,4 @@
+- [Coop IT Easy SC](https://github.com/OCA/cooperative):
+  - Carmen Bianca BAKKER
+- [Som IT Cooperatiu SCCL](https://somit.coop):
+  - Nicolás Ramos
