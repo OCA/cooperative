@@ -1,0 +1,46 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_be_cooperator_portal_national_number
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-06-15 19:37+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: l10n_be_cooperator_portal_national_number
+#: model:ir.model,name:l10n_be_cooperator_portal_national_number.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: l10n_be_cooperator_portal_national_number
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal_national_number.portal_my_details_fields
+msgid "National Number"
+msgstr "Codice fiscale"
+
+#. module: l10n_be_cooperator_portal_national_number
+#. odoo-python
+#: code:addons/l10n_be_cooperator_portal_national_number/controllers/portal.py:0
+#, python-format
+msgid "The national number is not valid."
+msgstr "Il codice fiscale non è valido."
+
+#. module: l10n_be_cooperator_portal_national_number
+#. odoo-python
+#: code:addons/l10n_be_cooperator_portal_national_number/controllers/portal.py:0
+#, python-format
+msgid "The national number is required."
+msgstr "È richiesto il codice fiscale."
+
+#. module: l10n_be_cooperator_portal_national_number
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_portal_national_number.portal_my_details_fields
+msgid "YY.MM.DD-NNN.CC"
+msgstr "YY.MM.DD-NNN.CC"
