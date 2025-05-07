@@ -189,7 +189,6 @@ class SubscriptionRequest(models.Model):
     already_cooperator = fields.Boolean(
         string="I'm already cooperator",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
 
     # previously, this was a normal field. it is now computed, and is used for
@@ -202,23 +201,19 @@ class SubscriptionRequest(models.Model):
         string="First name",
         readonly=True,
         required=True,
-        states={"draft": [("readonly", False)]},
     )
     lastname = fields.Char(
         string="Last name",
         readonly=True,
         required=True,
-        states={"draft": [("readonly", False)]},
     )
     birthdate = fields.Date(
         string="Date of birth",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     gender = fields.Selection(
         [("male", _("Male")), ("female", _("Female")), ("other", _("Other"))],
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     type = fields.Selection(
         [
@@ -227,7 +222,6 @@ class SubscriptionRequest(models.Model):
         ],
         default="new",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     state = fields.Selection(
         [
@@ -235,10 +229,6 @@ class SubscriptionRequest(models.Model):
             ("blocked", "Blocked"),
             ("done", "Done"),
             ("waiting", "Waiting"),
-            # fixme: this is only used when a subscription request is used for
-            # a transfer operation. once operation.request has been changed to
-            # not use a subscription request anymore, this state should be
-            # removed.
             ("transfer", "Transfer"),
             ("cancelled", "Cancelled"),
             ("paid", "Paid"),
@@ -250,18 +240,15 @@ class SubscriptionRequest(models.Model):
     email = fields.Char(
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     iban = fields.Char(
         string="Account Number",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     partner_id = fields.Many2one(
         "res.partner",
         string="Cooperator",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     share_product_id = fields.Many2one(
         "product.product",
@@ -274,49 +261,41 @@ class SubscriptionRequest(models.Model):
         domain="[('is_share', '=', True), ('company_id', 'in', (company_id, False))]",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
         check_company=True,
     )
     share_short_name = fields.Char(
         related="share_product_id.short_name",
         string="Share type name",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     share_unit_price = fields.Float(
         related="share_product_id.list_price",
         string="Share price",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     subscription_amount = fields.Monetary(
         compute="_compute_subscription_amount",
         string="Subscription amount",
         currency_field="company_currency_id",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     ordered_parts = fields.Integer(
         string="Number of Share",
         required=True,
         readonly=True,
         default=1,
-        states={"draft": [("readonly", False)]},
     )
     address = fields.Char(
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     city = fields.Char(
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     zip_code = fields.Char(
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     country_id = fields.Many2one(
         "res.country",
@@ -324,9 +303,8 @@ class SubscriptionRequest(models.Model):
         ondelete="restrict",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
-    phone = fields.Char(readonly=True, states={"draft": [("readonly", False)]})
+    phone = fields.Char(readonly=True)
     user_id = fields.Many2one(
         "res.users", string="Responsible", readonly=True, check_company=True
     )
@@ -335,7 +313,6 @@ class SubscriptionRequest(models.Model):
         compute="_compute_is_valid_iban",
         string="Valid IBAN?",
         store=True,
-        readonly=True,
     )
     skip_iban_control = fields.Boolean(
         string="Skip IBAN Control", help="Check to bypass iban format control."
@@ -345,14 +322,12 @@ class SubscriptionRequest(models.Model):
         string="Language",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
         default=lambda self: self.env.company.default_lang_id.code,
     )
     date = fields.Date(
         string="Subscription date request",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
         default=lambda _: date.today(),
     )
     company_id = fields.Many2one(
@@ -372,73 +347,60 @@ class SubscriptionRequest(models.Model):
     is_company = fields.Boolean(
         string="Is a company",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     is_operation = fields.Boolean(
         string="Is an operation",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     company_name = fields.Char(
         string="Company name",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     company_email = fields.Char(
         string="Company email",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     company_register_number = fields.Char(
         string="Company register number",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     company_type = fields.Selection(
         [],
         string="Company type",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     same_address = fields.Boolean(
         string="Same address",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     # todo remove activities_* fields
     #  + check if all fields are necessary
     activities_address = fields.Char(
         string="Activities address",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     activities_city = fields.Char(
         string="Activities city",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     activities_zip_code = fields.Char(
         string="Activities zip Code",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     activities_country_id = fields.Many2one(
         "res.country",
         string="Activities country",
         ondelete="restrict",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     contact_person_function = fields.Char(
         string="Function",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     operation_request_id = fields.Many2one(
         "operation.request",
         string="Operation Request",
         readonly=True,
-        states={"draft": [("readonly", False)]},
         check_company=True,
     )
     capital_release_request = fields.One2many(
@@ -446,14 +408,12 @@ class SubscriptionRequest(models.Model):
         "subscription_request",
         string="Capital release request",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     capital_release_request_date = fields.Date(
         string="Force the capital " "release request date",
         help="Keep empty to use the " "current date",
         copy=False,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     # todo : check all these sources are used
     source = fields.Selection(
@@ -465,7 +425,6 @@ class SubscriptionRequest(models.Model):
         ],
         default="website",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     data_policy_approved = fields.Boolean(default=False)
     internal_rules_approved = fields.Boolean(
@@ -483,6 +442,7 @@ class SubscriptionRequest(models.Model):
             "subscription.request.get_person_info() is deprecated. "
             "please use .set_person_info() instead.",
             DeprecationWarning,
+            stacklevel=2,
         )
         return self.set_person_info(partner)
 
@@ -574,7 +534,21 @@ class SubscriptionRequest(models.Model):
             )
 
     def get_journal(self):
-        return self.company_id.subscription_journal_id
+        journal_model = self.env["account.journal"]
+        journal = journal_model.search(
+            [("code", "=", "SUBJ"), ("company_id", "=", self.company_id.id)], limit=1
+        )
+        if not journal:
+            journal = journal_model.create(
+                {
+                    "name": _("Subscription Journal"),
+                    "code": "SUBJ",
+                    "type": "sale",
+                    "company_id": self.company_id.id,
+                }
+            )
+        self.company_id.subscription_journal_id = journal
+        return journal
 
     def get_accounting_account(self):
         account = self.company_id.property_cooperator_account
@@ -607,13 +581,28 @@ class SubscriptionRequest(models.Model):
         invoice_vals = self.get_invoice_vals(partner)
         if self.capital_release_request_date:
             invoice_vals["invoice_date"] = self.capital_release_request_date
+
+        # Ensure journal_id is set
+        if not invoice_vals.get("journal_id"):
+            invoice_vals["journal_id"] = self.get_journal().id
+
         invoice = self.env["account.move"].create(invoice_vals)
         vals = self._prepare_invoice_line(
             invoice.id, self.share_product_id, partner, self.ordered_parts
         )
+
+        # Asegurar que la cuenta está configurada correctamente
+        if not vals.get("account_id"):
+            vals["account_id"] = self.get_accounting_account().id
+
+        # Crear la línea de factura
         self.env["account.move.line"].with_context(check_move_validity=False).create(
             vals
         )
+
+        # En Odoo 17, necesitamos forzar el recálculo de los campos calculados
+        # Usamos invalidate_recordset() que es el método recomendado en Odoo 17
+        invoice.invalidate_recordset()
 
         # validate the capital release request
         invoice.action_post()

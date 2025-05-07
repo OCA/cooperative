@@ -5,7 +5,8 @@
 
 from datetime import datetime
 
-from odoo import fields, models
+from odoo import _, fields, models
+from odoo.exceptions import UserError
 
 
 class AccountMove(models.Model):
@@ -74,6 +75,8 @@ class AccountMove(models.Model):
 
         sub_reg_operation = self.company_id.get_next_register_operation_number()
 
+        sub_reg_line = None
+
         for line in self.invoice_line_ids:
             sub_reg_vals = self.get_subscription_register_vals(line, effective_date)
             sub_reg_vals["name"] = sub_reg_operation
@@ -87,13 +90,16 @@ class AccountMove(models.Model):
             if line.product_id.mail_template:
                 certificate_email_template = line.product_id.mail_template
 
-        self._send_certificate_mail(certificate_email_template, sub_reg_line)
+        if sub_reg_line:
+            self._send_certificate_mail(certificate_email_template, sub_reg_line)
 
         return True
 
     def post_process_confirm_paid(self, effective_date):
-        self.set_cooperator_effective(effective_date)
+        if self.payment_state not in ("paid", "in_payment"):
+            raise UserError(_("Invoice must be paid to confirm membership"))
 
+        self.set_cooperator_effective(effective_date)
         return True
 
     def get_refund_domain(self, invoice):

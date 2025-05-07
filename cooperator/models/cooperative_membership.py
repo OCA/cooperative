@@ -18,7 +18,8 @@ class CooperativeMembership(models.Model):
         (
             "company_id_partner_id_key",
             "unique (company_id, partner_id)",
-            "Only one cooperative membership record can exist per partner (per company)",
+            "Only one cooperative membership record "
+            "can exist per partner (per company)",
         ),
         (
             # "numbe" instead of "number" because the constraint name is

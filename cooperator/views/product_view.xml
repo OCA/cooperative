@@ -6,7 +6,6 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record id="product_template_form_view" model="ir.ui.view">
         <field name="name">product_template_form_view</field>
         <field name="model">product.template</field>
@@ -23,7 +22,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     invisible="True"
                 />
                 <div
-                    attrs="{'invisible':[('is_share','=',False)]}"
+                    invisible="is_share == False"
                     groups="cooperator.cooperator_group_user"
                 >
                     <field name="display_on_website" />
@@ -34,7 +33,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <page
                     string="Share Information"
                     name="share_information"
-                    attrs="{'invisible':[('is_share','=',False)]}"
+                    invisible="is_share == False"
                     groups="cooperator.cooperator_group_user"
                 >
                     <group>
@@ -54,7 +53,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </page>
         </field>
     </record>
-
     <record id="product_template_search_view" model="ir.ui.view">
         <field name="name">product_template_search_view</field>
         <field name="model">product.template</field>
@@ -70,27 +68,25 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </xpath>
         </field>
     </record>
-
     <record id="product_template_only_form_view" model="ir.ui.view">
         <field name="name">product.template.product.form</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view" />
         <field name="arch" type="xml">
             <field name="default_code" position="attributes">
-                <attribute name="attrs">{'required': [('is_share', '=',
-                    True)]}
-                </attribute>
+                <attribute name="required">is_share == True</attribute>
             </field>
         </field>
     </record>
-
     <record id="product_template_action" model="ir.actions.act_window">
         <field name="name">Share type</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">product.template</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="search_view_id" eval="False" /> <!-- Force empty -->
-        <field name="view_id" eval="False" /> <!-- Force empty -->
+        <field name="search_view_id" eval="False" />
+        <!-- Force empty -->
+        <field name="view_id" eval="False" />
+        <!-- Force empty -->
         <field name="domain">[('is_share','=',True)]</field>
         <field
             name="context"
@@ -101,17 +97,15 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </p>
         </field>
     </record>
-
-
     <!-- overriding product views to not display share product in the purchase and sale views-->
-
     <record id="product.product_normal_action" model="ir.actions.act_window">
         <field name="name">Product</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">product.product</field>
         <field name="view_mode">tree,form,kanban</field>
         <field name="search_view_id" ref="product.product_search_form_view" />
-        <field name="view_id" eval="False" /> <!-- Force empty -->
+        <field name="view_id" eval="False" />
+        <!-- Force empty -->
         <field name="domain">[('is_share','=',False)]</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
@@ -122,14 +116,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 a physical product, a consumable or a service you offer to
                 customers.
             </p>
-            <p>
-                The product form contains information to simplify the sale
-                process: price, notes in the quotation, accounting data,
-                procurement methods, etc.
-            </p>
         </field>
     </record>
-
     <record id="product.product_template_action" model="ir.actions.act_window">
         <field name="name">Products</field>
         <field name="type">ir.actions.act_window</field>
@@ -147,14 +135,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 a physical product, a consumable or a service you offer to
                 customers.
             </p>
-            <p>
-                The product form contains information to simplify the sale
-                process: price, notes in the quotation, accounting data,
-                procurement methods, etc.
-            </p>
         </field>
     </record>
-
     <!-- move this action to another module cause the original action has been
          moved to purchase module. So we want to avoid make purchase module installed
      <record id="product.product_normal_action_puchased" model="ir.actions.act_window">
@@ -180,5 +162,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
        </p>
      </field>
  </record> -->
-
 </odoo>

@@ -6,7 +6,6 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record id="view_move_form" model="ir.ui.view">
         <field name="name">account.move.form</field>
         <field name="model">account.move</field>
@@ -17,7 +16,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </field>
         </field>
     </record>
-
     <!--
         this is a modified copy of account.action_move_out_invoice_type, with a
         different name, domain and view, and more view modes.
@@ -35,24 +33,21 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a customer invoice
-            </p><p>
+            </p>
+            <p>
                 Create invoices, register payments and keep track of the discussions with your customers.
             </p>
         </field>
     </record>
-
     <!-- filter out capital release requests in normal invoice views -->
-
     <record id="account.action_move_out_invoice_type" model="ir.actions.act_window">
         <field
             name="domain"
         >[("move_type", "=", "out_invoice"), ("release_capital_request", "=", False)]</field>
     </record>
-
     <record id="account.action_move_out_refund_type" model="ir.actions.act_window">
         <field
             name="domain"
         >[("move_type", "=", "out_refund"), ("release_capital_request", "=", False)]</field>
     </record>
-
 </odoo>

@@ -5,7 +5,6 @@ SPDX-FileCopyrightText: 2023 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record id="cooperative_membership_view_tree" model="ir.ui.view">
         <field name="name">cooperative.membership.tree</field>
         <field name="model">cooperative.membership</field>
@@ -23,7 +22,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </tree>
         </field>
     </record>
-
     <record id="cooperative_membership_view_search" model="ir.ui.view">
         <field name="name">cooperative.membership.search</field>
         <field name="model">cooperative.membership</field>
@@ -66,12 +64,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </search>
         </field>
     </record>
-
     <record id="cooperator_register_action" model="ir.actions.act_window">
         <field name="name">Cooperator Register</field>
         <field name="res_model">cooperative.membership</field>
         <field name="view_mode">tree</field>
         <field name="domain">[("member", "=", True)]</field>
     </record>
-
 </odoo>

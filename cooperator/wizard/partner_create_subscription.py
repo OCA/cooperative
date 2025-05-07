@@ -22,9 +22,9 @@ class PartnerCreateSubscription(models.TransientModel):
             ("is_share", "=", True),
             ("default_share_product", "=", True),
         ]
-        active_id = self.env.context.get("active_id")
-        if active_id:
-            partner = self.env["res.partner"].browse(active_id)
+        partner_id = self.env.context.get("default_partner_id")
+        if partner_id:
+            partner = self.env["res.partner"].browse(partner_id)
             if partner.is_company:
                 domain.append(("by_company", "=", True))
             else:
@@ -67,8 +67,8 @@ class PartnerCreateSubscription(models.TransientModel):
 
     @api.model
     def _get_partner(self):
-        active_id = self.env.context.get("active_id")
-        return self.env["res.partner"].browse(active_id)
+        partner_id = self.env.context.get("default_partner_id")
+        return self.env["res.partner"].browse(partner_id)
 
     @api.model
     def _get_is_company(self):

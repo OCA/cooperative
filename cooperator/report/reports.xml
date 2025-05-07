@@ -6,7 +6,6 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record model="ir.actions.report" id="action_cooperator_invoices">
         <field name="model">account.move</field>
         <field name="name">Capital Release Request</field>
@@ -20,7 +19,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="binding_model_id" ref="model_account_move" />
         <field name="binding_type">report</field>
     </record>
-
     <record model="ir.actions.report" id="action_cooperator_subscription_report">
         <field name="model">subscription.register</field>
         <field name="name">Subscription Register</field>
@@ -31,7 +29,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="binding_model_id" ref="model_subscription_register" />
         <field name="binding_type">report</field>
     </record>
-
     <record model="ir.actions.report" id="action_cooperator_report_certificate">
         <field name="model">res.partner</field>
         <field name="name">Cooperator Certificate</field>
@@ -42,7 +39,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="binding_model_id" ref="model_res_partner" />
         <field name="binding_type">report</field>
     </record>
-
     <record model="ir.actions.report" id="action_report_cooperator_register">
         <field name="model">cooperative.membership</field>
         <field name="name">Cooperator Register</field>
@@ -53,5 +49,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="binding_model_id" ref="model_cooperative_membership" />
         <field name="binding_type">report</field>
     </record>
-
 </odoo>

@@ -6,7 +6,6 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <!--
         the structure of this report comes from
         account.report_invoice_document
@@ -30,20 +29,17 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     <h2>
                         <span>Cooperator Certificate</span>
                     </h2>
-
                     <p name="certificate_generation_date" class="mt-4 mb-4">
                         <span>Certificate generated on</span>
                         <span
                             t-out="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"
                         />
                     </p>
-
                     <p name="label_coop_number" class="mt-4 mb-4">
                         <span t-field="o.name" />
                         is recorded in the register of cooperators under number
                         <span t-field="o.cooperator_register_number" />.
                     </p>
-
                     <table
                         class="table table-sm o_main_table table-borderless"
                         name="share_line_table"
@@ -94,7 +90,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             </t>
                         </tbody>
                     </table>
-
                     <div class="clearfix mb-4">
                         <div name="total_table" id="total" class="row">
                             <div
@@ -124,11 +119,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             </div>
                         </div>
                     </div>
-
                     <div class="row" style="margin-top: 8rem">
                         <div name="board_commitee">
                             <p>
-                                For the board of <span t-field="o.env.company.name" />,
+                                For the board of
+                                <span t-field="o.env.company.name" />,
                             </p>
                             <p>
                                 <strong>
@@ -149,7 +144,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </div>
         </t>
     </template>
-
     <template id="report_cooperator_certificate">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
@@ -161,5 +155,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </t>
         </t>
     </template>
-
 </odoo>

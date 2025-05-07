@@ -5,7 +5,6 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record id="view_validate_subscription_request" model="ir.ui.view">
         <field name="name">Validate subscription request</field>
         <field name="model">validate.subscription.request</field>
@@ -26,8 +25,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </form>
         </field>
     </record>
-
-    <record model="ir.actions.act_window" id="action_account_invoice_confirm">
+    <record
+        id="action_view_validate_subscription_request"
+        model="ir.actions.act_window"
+    >
         <field name="name">Validate subscription request</field>
         <field name="res_model">validate.subscription.request</field>
         <field name="binding_model_id" ref="model_subscription_request" />
@@ -35,5 +36,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
-
 </odoo>

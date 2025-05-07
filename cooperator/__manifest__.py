@@ -8,7 +8,7 @@
 {
     "name": "Cooperators",
     "summary": "Manage your cooperators",
-    "version": "16.0.1.1.1",
+    "version": "17.0.1.0.0",
     "depends": [
         "account",
         "base_iban",
@@ -57,4 +57,5 @@
         "demo/users.xml",
     ],
     "application": True,
+    "maintainers": ["nicolasramos"],
 }

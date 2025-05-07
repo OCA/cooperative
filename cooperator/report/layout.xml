@@ -5,7 +5,6 @@ SPDX-FileCopyrightText: 2019 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <template
         id="external_layout_standard"
         name="Cooperator Template Layout"
@@ -52,5 +51,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <t t-else="">$0</t>
         </xpath>
     </template>
-
 </odoo>

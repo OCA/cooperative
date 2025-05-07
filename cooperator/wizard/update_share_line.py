@@ -12,8 +12,8 @@ class ShareLineUpdateInfo(models.TransientModel):
 
     @api.model
     def _get_share_line(self):
-        active_id = self.env.context.get("active_id")
-        return self.env["share.line"].browse(active_id)
+        subscription_id = self.env.context.get("default_subscription_id")
+        return self.env["share.line"].browse(subscription_id)
 
     @api.model
     def _get_effective_date(self):
@@ -30,7 +30,6 @@ class ShareLineUpdateInfo(models.TransientModel):
     )
 
     def update(self):
-
         line = self.share_line
         cooperator = line.partner_id
 

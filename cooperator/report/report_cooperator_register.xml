@@ -6,7 +6,6 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <!--
         the structure of this report comes from
         account.report_invoice_document
@@ -19,13 +18,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         <h2>
                             <span>Cooperator Register</span>
                         </h2>
-
                         <p name="register_generation_date" class="mt-4 mb-4">
                             <span
                                 t-out="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"
                             />
                         </p>
-
                         <table
                             class="table table-sm o_main_table table-borderless"
                             name="share_line_table"
@@ -116,5 +113,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </t>
         </t>
     </template>
-
 </odoo>

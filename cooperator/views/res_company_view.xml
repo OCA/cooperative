@@ -6,7 +6,6 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record model="ir.ui.view" id="view_company_form">
         <field name="name">res.company.form.easymy.coop</field>
         <field name="inherit_id" ref="base.view_company_form" />
@@ -48,21 +47,21 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     <field name="send_confirmation_email" />
                     <field
                         name="cooperator_confirmation_mail_template"
-                        attrs="{'invisible': [('send_confirmation_email', '=', False)]}"
+                        invisible="send_confirmation_email == False"
                     />
                     <field name="send_capital_release_email" />
                     <field
                         name="cooperator_capital_release_mail_template"
-                        attrs="{'invisible': [('send_capital_release_email', '=', False)]}"
+                        invisible="send_capital_release_email == False"
                     />
                     <field name="send_certificate_email" />
                     <field
                         name="cooperator_certificate_mail_template"
-                        attrs="{'invisible': [('send_certificate_email', '=', False)]}"
+                        invisible="send_certificate_email == False"
                     />
                     <field
                         name="cooperator_certificate_increase_mail_template"
-                        attrs="{'invisible': [('send_certificate_email', '=', False)]}"
+                        invisible="send_certificate_email == False"
                     />
                     <!-- TODO: Should there be a send toggle for this one? -->
                     <field name="cooperator_waiting_list_mail_template" />
@@ -72,5 +71,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </group>
         </field>
     </record>
-
 </odoo>

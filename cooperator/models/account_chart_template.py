@@ -6,6 +6,7 @@ from odoo import models
 
 
 class AccountChartTemplate(models.Model):
+    _name = "cooperator.account_chart_template"
     _inherit = "account.chart.template"
 
     def _load(self, company):
