@@ -1,83 +1,15 @@
-from datetime import date, datetime, timedelta
+from datetime import date
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
+
+from odoo.addons.cooperator.tests.cooperator_test_mixin import CooperatorTestMixin
 
 
-class TestSubscriptionRequest(SavepointCase):
-    def setUp(self):
-        super().setUp()
-        self.env = self.env(context=dict(self.env.context, tracking_disable=True))
-        self.company = self.env.user.company_id
-        self.company.coop_email_contact = "coop_email@example.org"
-        self.demo_partner = self.env.ref("base.partner_demo")
-
-        self.subscription_journal = self.env["account.journal"].create(
-            {
-                "name": "Subscriptions Test",
-                "code": "SUBJT",
-                "type": "sale",
-            }
-        )
-
-        self.share_x = self.env["product.product"].create(
-            {
-                "name": "Share X - Founder",
-                "short_name": "Part X",
-                "is_share": True,
-                "by_individual": True,
-                "by_company": False,
-                "list_price": 50,
-            }
-        )
-        self.share_y = self.env["product.product"].create(
-            {
-                "name": "Share Y - Worker",
-                "short_name": "Part Y",
-                "is_share": True,
-                "default_share_product": True,
-                "by_individual": True,
-                "by_company": True,
-                "list_price": 25,
-            }
-        )
-        self.subscription_request_1 = self.env["subscription.request"].create(
-            {
-                "firstname": "John",
-                "lastname": "Doe",
-                "email": "john@test.com",
-                "address": "Cooperation Street",
-                "zip_code": "1111",
-                "city": "Brussels",
-                "lang": "en_US",
-                "country_id": self.env.ref("base.be").id,
-                "date": datetime.now() - timedelta(days=12),
-                "source": "manual",
-                "ordered_parts": 3,
-                "share_product_id": self.share_y.id,
-                "data_policy_approved": True,
-                "internal_rules_approved": True,
-                "financial_risk_approved": True,
-                "generic_rules_approved": True,
-                "gender": "male",
-                "iban": "09898765454",
-                "birthdate": date(1990, 9, 21),
-                "skip_iban_control": True,
-            }
-        )
-        self.bank_journal = self.env["account.journal"].create(
-            {"name": "Bank", "type": "bank", "code": "BNK67"}
-        )
-        self.payment_method = self.env.ref("account.account_payment_method_manual_in")
-
-        self.share_line = self.env["share.line"].create(
-            {
-                "share_product_id": self.share_x.id,
-                "share_number": 2,
-                "share_unit_price": 50,
-                "partner_id": self.demo_partner.id,
-                "effective_date": datetime.now() - timedelta(days=120),
-            }
-        )
+class TestSubscriptionRequest(TransactionCase, CooperatorTestMixin):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.set_up_cooperator_test_data()
 
     def test_create_subscription_without_partner(self):
         subscription_request = self.env["subscription.request"].create(
