@@ -65,6 +65,13 @@ class CooperatorTestMixin:
                 "skip_iban_control": True,
             }
         )
+        if not cls.company.chart_template_id:
+            # no default chart template has been loaded. this can happen if
+            # the database was initialized with a localization module. load
+            # the first chart template found.
+            cls.env["account.chart.template"].search([], limit=1).try_loading(
+                cls.company
+            )
 
     @classmethod
     def create_company(cls, name):
