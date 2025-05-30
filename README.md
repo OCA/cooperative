@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [cooperator_documentation](cooperator_documentation/) | 16.0.1.0.0 | [![carmenbianca](https://github.com/carmenbianca.png?size=30px)](https://github.com/carmenbianca) | Add a link to the documentation of the module to the menu bar.
 [cooperator_portal](cooperator_portal/) | 16.0.1.0.1 |  | Show cooperator information in the website portal
 [cooperator_website](cooperator_website/) | 16.0.1.0.0 |  | This module adds the cooperator subscription form allowing to subscribe for shares online.
+[cooperator_website_recaptcha](cooperator_website_recaptcha/) | 16.0.1.0.0 |  | Add reCAPTCHA to Subscription Request Form
 [l10n_be_cooperator](l10n_be_cooperator/) | 16.0.1.2.1 |  | Cooperators Belgium Localization
 [l10n_be_cooperator_national_number](l10n_be_cooperator_national_number/) | 16.0.2.0.0 |  | Ask for Belgian National Number in Cooperative Subscription Request.
 [l10n_be_cooperator_portal](l10n_be_cooperator_portal/) | 16.0.1.0.0 |  | Give access to Tax Shelter Report in the portal.
