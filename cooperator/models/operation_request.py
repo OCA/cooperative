@@ -95,8 +95,8 @@ class OperationRequest(models.Model):
     # list of subscription requests while it is not a real one and it sends an
     # email message to the receiver when it is created. instead, a partner
     # should be created. the problem with using a partner, though, (besides
-    # creating a partner that might never be used if the the operation is
-    # never executed) is that it cannot hold the extra values coming from the
+    # creating a partner that might never be used if the operation is never
+    # executed) is that it cannot hold the extra values coming from the
     # subscription request and not stored on the partner or on the
     # cooperative.membership, like the iban (is it the only one?). should we
     # use a separate model that would be used here and in subscription.request
@@ -105,11 +105,8 @@ class OperationRequest(models.Model):
         "subscription.request",
         "operation_request_id",
         string="Share Receiver Info",
-        help="In case on a transfer of"
-        " share. If the share receiver"
-        " isn't a effective member then a"
-        " subscription form should"
-        " be filled.",
+        help="For transfer operations: if the share receiver isn't a "
+        "(former) member then a subscription form must be filled.",
     )
     receiver_not_member = fields.Boolean(string="Receiver is not a member")
     company_id = fields.Many2one(
@@ -313,6 +310,13 @@ class OperationRequest(models.Model):
             cert_email_template.send_mail(
                 self.partner_id.id, email_layout_xmlid="mail.mail_notification_layout"
             )
+
+    @api.onchange("share_product_id", "quantity")
+    def _onchange_shares(self):
+        for rec in self:
+            for sr in rec.subscription_request:
+                sr.share_product_id = rec.share_product_id
+                sr.ordered_parts = rec.quantity
 
     def get_subscription_register_vals(self, effective_date):
         return {

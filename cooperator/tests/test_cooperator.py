@@ -9,7 +9,7 @@ from freezegun import freeze_time
 
 from odoo import fields
 from odoo.exceptions import AccessError, UserError, ValidationError
-from odoo.tests.common import TransactionCase, users
+from odoo.tests.common import Form, TransactionCase, users
 
 from .cooperator_test_mixin import CooperatorTestMixin
 
@@ -1233,6 +1233,38 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         seq_number = self._get_last_register_sequence_value()
         self.assertEqual(register_entry.name, str(seq_number))
         self.assertEqual(register_entry.register_number_operation, seq_number)
+
+    @freeze_time("2023-06-21")
+    def test_transfer_operation_form(self):
+        """
+        Test that the subscription request created during a share transfer
+        operation is updated with the correct values.
+        """
+        cooperator = self.create_dummy_cooperator()
+        f = Form(self.env["operation.request"])
+        f.operation_type = "transfer"
+        f.receiver_not_member = True
+        with f.subscription_request.new() as sr:
+            sr.firstname = "first name 2"
+            sr.lastname = "last name 2"
+            sr.email = "email2@example.net"
+            subscription_request_vals = self.get_dummy_subscription_requests_vals()
+            sr.country_id = self.env["res.country"].browse(
+                subscription_request_vals["country_id"]
+            )
+            for field in ["address", "zip_code", "city", "lang", "iban"]:
+                setattr(sr, field, subscription_request_vals[field])
+        f.partner_id = cooperator
+        f.share_product_id = self.share_y
+        f.quantity = 1
+        operation_request = f.save()
+        self.assertEqual(operation_request.subscription_request.state, "transfer")
+        self.assertEqual(
+            operation_request.subscription_request.share_product_id, self.share_y
+        )
+        self.assertEqual(operation_request.subscription_request.ordered_parts, 1)
+        operation_request.submit_operation()
+        operation_request.approve_operation()
 
     @freeze_time("2023-06-21")
     def test_transfer_operation_existing_cooperator(self):
