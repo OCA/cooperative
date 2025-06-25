@@ -7,6 +7,7 @@ from . import account_chart_template
 from . import account_journal
 from . import account_move
 from . import account_move_line
+from . import account_payment
 from . import cooperative_membership
 from . import mail_template
 from . import operation_request

@@ -76,23 +76,15 @@ class CooperatorPortal(PortalAccount):
             values["capital_release_request_count"] = capital_release_request_count
         return values
 
-    def _invoice_get_page_view_values(self, invoice, access_token, **kwargs):
-        if not invoice.release_capital_request:
-            return super()._invoice_get_page_view_values(
-                invoice, access_token, **kwargs
-            )
-        # page_name is needed for the breadcrumbs
-        values = {
-            "page_name": "capital_release_request",
-            "invoice": invoice,
-        }
-        return self._get_page_view_values(
-            invoice,
-            access_token,
-            values,
-            "my_capital_release_requests_history",
-            False,
-            **kwargs
+    def _get_page_view_values(
+        self, document, access_token, values, session_history, no_breadcrumbs, **kwargs
+    ):
+        invoice = values.get("invoice")
+        if invoice is not None and invoice.release_capital_request:
+            values["page_name"] = "capital_release_request"
+            session_history = "my_capital_release_requests_history"
+        return super()._get_page_view_values(
+            document, access_token, values, session_history, no_breadcrumbs, **kwargs
         )
 
     def _get_invoices_domain(self):
