@@ -80,7 +80,7 @@ class WebsiteSubscription(http.Controller):
     def display_become_cooperator_page(self, **kwargs):
         values = {}
         logged = False
-        if request.env.user.login != "public":
+        if not request.website.is_public_user():
             logged = True
             partner = request.env.user.partner_id
             if partner.is_company:
@@ -106,7 +106,7 @@ class WebsiteSubscription(http.Controller):
         values = {}
         logged = False
 
-        if request.env.user.login != "public":
+        if not request.website.is_public_user():
             logged = True
         values = self.fill_values(values, True, logged, True)
 
@@ -134,7 +134,7 @@ class WebsiteSubscription(http.Controller):
 
     def get_values_from_user(self, values, is_company):
         # the subscriber is connected
-        if request.env.user.login != "public":
+        if not request.website.is_public_user():
             values["logged"] = "on"
             partner = request.env.user.partner_id
 
