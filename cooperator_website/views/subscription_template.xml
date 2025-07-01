@@ -328,7 +328,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         id="ordered_parts"
                         step="1"
                         min="1"
-                        value="1"
+                        t-att-value="ordered_parts or 1"
                         class="form-control form-control-sm"
                     />
                 </div>
