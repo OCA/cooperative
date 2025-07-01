@@ -40,7 +40,7 @@ _COOP_FORM_FIELD = [
     "country_id",
     "phone",
     "lang",
-    "nb_parts",
+    "ordered_parts",
     "total_parts",
     "error_msg",
 ]
@@ -63,7 +63,7 @@ _COMPANY_FORM_FIELD = [
     "country_id",
     "phone",
     "lang",
-    "nb_parts",
+    "ordered_parts",
     "total_parts",
     "error_msg",
     "company_type",
