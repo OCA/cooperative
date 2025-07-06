@@ -1,0 +1,153 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* cooperator_website_payment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment_confirmation_status
+msgid "<b>Communication: </b>"
+msgstr "<b>Communication : </b>"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "<span>Confirmed</span>"
+msgstr "<span>Confirmée</span>"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "<span>Subscription</span>"
+msgstr "<span>Souscription</span>"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment_confirmation_status
+msgid ""
+"<span>Unfortunately your subscription can not be confirmed as the amount of "
+"your payment does not match the amount of your subscription.\n"
+"                        Please contact the responsible of the cooperative "
+"for more information.</span>"
+msgstr ""
+"<span>Malheureusement, il est impossible de confirmer votre commande, "
+"puisque votre paiement ne couvre pas le montant total de "
+"votre souscription.\n"
+"                        Veuillez contacter le responsable de la coopérative "
+"pour avoir plus d'informations.</span>"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "<strong>Payment Information:</strong>"
+msgstr "<strong>Informations de paiement :</strong>"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment
+msgid "<strong>The payment operation has failed:</strong>"
+msgstr "<strong>L'opération de paiement a échoué :</strong>"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "<strong>Total:</strong>"
+msgstr "<strong>Total :</strong>"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid ""
+"A confirmation message with your cooperator certificate has been sent to you "
+"by email (to"
+msgstr ""
+"Un message de confirmation contenant votre certificat de coopérateur vous a "
+"été envoyé par courriel (à"
+
+#. module: cooperator_website_payment
+#: model:ir.model.fields,field_description:cooperator_website_payment.field_subscription_request__access_warning
+msgid "Access warning"
+msgstr "Avertissement d'accès"
+
+#. module: cooperator_website_payment
+#: model:ir.model.fields,help:cooperator_website_payment.field_subscription_request__access_url
+msgid "Customer Portal URL"
+msgstr "URL du portail client"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment_confirmation_status
+msgid "Edit"
+msgstr "Modifier"
+
+#. module: cooperator_website_payment
+#: model:ir.model,name:cooperator_website_payment.model_account_move
+msgid "Journal Entry"
+msgstr "Pièce comptable"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment_confirmation_status
+msgid "Or scan me with your banking app."
+msgstr "Ou scannez-moi avec votre application bancaire."
+
+#. module: cooperator_website_payment
+#: model:ir.model,name:cooperator_website_payment.model_payment_transaction
+msgid "Payment Transaction"
+msgstr "Transaction de paiement"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment
+msgid "Please select a payment method"
+msgstr "Veuillez sélectionner une méthode de paiement"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment
+msgid "Please try again."
+msgstr "Veuillez réessayer."
+
+#. module: cooperator_website_payment
+#: model:ir.model.fields,field_description:cooperator_website_payment.field_subscription_request__access_url
+msgid "Portal Access URL"
+msgstr "URL d'accès au portail"
+
+#. module: cooperator_website_payment
+#: model:ir.model.fields,field_description:cooperator_website_payment.field_subscription_request__access_token
+msgid "Security Token"
+msgstr "Jeton de sécurité"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "Sign Up"
+msgstr "S'inscrire"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "Subscription - Confirmed"
+msgstr "Souscription - Confirmé"
+
+#. module: cooperator_website_payment
+#: model:ir.model,name:cooperator_website_payment.model_subscription_request
+msgid "Subscription Request"
+msgstr "Demande de souscription"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment
+msgid "Subscription amount:"
+msgstr "Montant de la souscription :"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "Thank you for your subscription."
+msgstr "Merci pour votre souscription."
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment_confirmation_status
+msgid "Your payment has been authorized."
+msgstr "Votre paiement a été autorisé."
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "to access your personal data."
+msgstr "pour accéder à vos données personnelles."

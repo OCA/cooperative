@@ -1,0 +1,1 @@
+* If the user goes back to the payment page after a successful payment, they will normally be redirected to the confirmation page, but if they somehow manage to display the payment page, the system will not prevent them from making a new payment.

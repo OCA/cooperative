@@ -1,0 +1,143 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* cooperator_website_payment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment_confirmation_status
+msgid "<b>Communication: </b>"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "<span>Confirmed</span>"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "<span>Subscription</span>"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment_confirmation_status
+msgid ""
+"<span>Unfortunately your subscription can not be confirmed as the amount of your payment does not match the amount of your subscription.\n"
+"                        Please contact the responsible of the cooperative for more information.</span>"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "<strong>Payment Information:</strong>"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment
+msgid "<strong>The payment operation has failed:</strong>"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "<strong>Total:</strong>"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid ""
+"A confirmation message with your cooperator certificate has been sent to you"
+" by email (to"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model:ir.model.fields,field_description:cooperator_website_payment.field_subscription_request__access_warning
+msgid "Access warning"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model:ir.model.fields,help:cooperator_website_payment.field_subscription_request__access_url
+msgid "Customer Portal URL"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment_confirmation_status
+msgid "Edit"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model:ir.model,name:cooperator_website_payment.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment_confirmation_status
+msgid "Or scan me with your banking app."
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model:ir.model,name:cooperator_website_payment.model_payment_transaction
+msgid "Payment Transaction"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment
+msgid "Please select a payment method"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment
+msgid "Please try again."
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model:ir.model.fields,field_description:cooperator_website_payment.field_subscription_request__access_url
+msgid "Portal Access URL"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model:ir.model.fields,field_description:cooperator_website_payment.field_subscription_request__access_token
+msgid "Security Token"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "Sign Up"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "Subscription - Confirmed"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model:ir.model,name:cooperator_website_payment.model_subscription_request
+msgid "Subscription Request"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment
+msgid "Subscription amount:"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "Thank you for your subscription."
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment_confirmation_status
+msgid "Your payment has been authorized."
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model_terms:ir.ui.view,arch_db:cooperator_website_payment.confirmation
+msgid "to access your personal data."
+msgstr ""

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2024 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <template id="payment" name="Select Payment Method">
+        <t t-call="website.layout">
+            <div id="wrap" class="o_portal_wrap">
+                <div class="container oe_cooperator">
+                    <div class="row justify-content-center">
+                        <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
+                            <div t-if="error" class="alert alert-danger">
+                                <strong>The payment operation has failed:</strong>
+                                <t t-out="error" />
+                                Please try again.
+                            </div>
+                            <h2
+                                class="mt-4 text-center"
+                            >Please select a payment method</h2>
+                            <p class="text-center">Subscription amount: <strong
+                                    t-out="amount"
+                                    t-options="{'widget': 'monetary', 'display_currency': currency}"
+                                /></p>
+                            <t t-call="payment.checkout" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- this is a copy of website_sale.payment_confirmation_status with some changes -->
+    <template id="payment_confirmation_status">
+        <div class="oe_website_sale_tx_status mt-3" t-att-data-invoice-id="invoice.id">
+            <t t-set="payment_tx_id" t-value="invoice.get_portal_last_transaction()" />
+            <div
+                t-attf-class="card #{
+                (payment_tx_id.state == 'pending' and 'bg-info') or
+                (payment_tx_id.state == 'done' and invoice.amount_total == payment_tx_id.amount and 'alert-success') or
+                (payment_tx_id.state == 'done' and invoice.amount_total != payment_tx_id.amount and 'bg-warning') or
+                (payment_tx_id.state == 'authorized' and 'alert-success') or
+                'bg-danger'}"
+            >
+                <div class="card-header">
+                    <a
+                        role="button"
+                        groups="base.group_system"
+                        class="btn btn-sm btn-link text-white float-end"
+                        target="_blank"
+                        aria-label="Edit"
+                        title="Edit"
+                        t-att-href="'/web#model=%s&amp;id=%s&amp;action=%s&amp;view_type=form' % ('payment.provider', payment_tx_id.provider_id.id, 'payment.action_payment_provider')"
+                    >
+                        <i class="fa fa-pencil" />
+                    </a>
+                    <t t-if="payment_tx_id.state == 'pending'">
+                        <t t-out="payment_tx_id.provider_id.sudo().pending_msg" />
+                    </t>
+                    <t t-if="payment_tx_id.state == 'done'">
+                        <span
+                            t-if='payment_tx_id.provider_id.sudo().done_msg'
+                            t-out="payment_tx_id.provider_id.sudo().done_msg"
+                        />
+                    </t>
+                    <t
+                        t-if="payment_tx_id.state == 'done' and invoice.amount_total != payment_tx_id.amount"
+                    >
+                        <span
+                        >Unfortunately your subscription can not be confirmed as the amount of your payment does not match the amount of your subscription.
+                        Please contact the responsible of the cooperative for more information.</span>
+                    </t>
+                    <t t-if="payment_tx_id.state == 'cancel'">
+                        <t t-out="payment_tx_id.provider_id.sudo().cancel_msg" />
+                    </t>
+                    <t t-if="payment_tx_id.state == 'authorized'">
+                        <t
+                            t-if="payment_tx_id.provider_id.sudo().auth_msg"
+                            t-out="payment_tx_id.provider_id.sudo().auth_msg"
+                        />
+                        <span t-else="">Your payment has been authorized.</span>
+                    </t>
+                    <t t-if="payment_tx_id.state == 'error'">
+                        <span t-esc="payment_tx_id.state_message" />
+                    </t>
+                </div>
+                <t t-if="payment_tx_id.provider_code == 'custom'">
+                    <div t-if="invoice.payment_reference" class="card-body">
+                        <b>Communication: </b><span t-esc='invoice.payment_reference' />
+                    </div>
+                    <div t-if="payment_tx_id.provider_id.sudo().qr_code">
+                        <t
+                            t-set="qr_code"
+                            t-value="payment_tx_id.company_id.partner_id.bank_ids[:1].build_qr_code_base64(invoice.amount_total, invoice.payment_reference, None, payment_tx_id.currency_id, payment_tx_id.partner_id)"
+                        />
+                        <div class="card-body" t-if="qr_code">
+                            <h3>Or scan me with your banking app.</h3>
+                            <img
+                                class="border border-dark rounded"
+                                t-att-src="qr_code"
+                            />
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
+
+    <!-- this is a copy of website_sale.confirmation with some changes -->
+    <template id="confirmation">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Subscription - Confirmed</t>
+            <div id="wrap">
+                <div class="container py-2">
+                    <h1><span>Subscription</span> <em t-field="invoice.name" /> <t
+                            t-if="invoice.payment_state == 'paid'"
+                        ><span>Confirmed</span></t></h1>
+
+                    <div class="row">
+                        <div class="col-12 col-xl">
+                            <div class="oe_cart">
+                                <t
+                                    t-set="payment_tx_id"
+                                    t-value="invoice.get_portal_last_transaction()"
+                                />
+                                <t t-if="payment_tx_id.state == 'done'">
+                                    <div class="thanks_msg">
+                                        <h2>Thank you for your subscription.</h2>
+                                        <p
+                                        >A confirmation message with your cooperator certificate has been sent to you by email (to <strong
+                                                t-out="invoice.partner_id.email"
+                                            />).</p>
+                                    </div>
+                                </t>
+                                <t
+                                    t-if="request.env['res.users']._get_signup_invitation_scope() == 'b2c' and request.website.is_public_user()"
+                                >
+                                    <p class="alert alert-info mt-3" role="status">
+                                        <a
+                                            role="button"
+                                            t-att-href='invoice.partner_id.signup_prepare() and invoice.partner_id.with_context(relative_url=True).signup_url'
+                                            class='btn btn-primary'
+                                        >Sign Up</a>
+                                         to access your personal data.
+                                    </p>
+                                </t>
+                                <div
+                                    class="oe_structure clearfix mt-3"
+                                    id="oe_structure_cooperator_website_payment_confirmation_1"
+                                />
+                                <h3 class="text-start mt-3">
+                                    <strong>Payment Information:</strong>
+                                </h3>
+                                <t
+                                    t-set="payment_tx_id"
+                                    t-value="invoice.get_portal_last_transaction()"
+                                />
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2">
+                                                <t
+                                                    t-esc="payment_tx_id.provider_id.display_as or payment_tx_id.provider_id.name"
+                                                />
+                                            </td>
+                                            <td class="text-end" width="100">
+                                                <strong>Total:</strong>
+                                            </td>
+                                            <td class="text-end" width="100">
+                                                <strong
+                                                    t-field="payment_tx_id.amount"
+                                                    t-options="{'widget': 'monetary', 'display_currency': invoice.currency_id}"
+                                                />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <t
+                                    t-call="cooperator_website_payment.payment_confirmation_status"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>
