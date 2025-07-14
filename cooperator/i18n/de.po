@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-07-14 09:00+0000\n"
+"Last-Translator: Victor Champonnois <victor@coopiteasy.be>\n"
 "Language-Team: none\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: cooperator
 #. odoo-python
@@ -38,6 +40,17 @@ msgid ""
 "- Private: Private addresses are only visible by authorized users and contain sensitive data (employee home addresses, ...).\n"
 "- Other: Other address for the company (e.g. subsidiary, ...)"
 msgstr ""
+"- Kontakt: Verwenden Sie dies, um die Kontaktdaten der Mitarbeiter eines "
+"bestimmten Unternehmens zu organisieren (z. B. CEO, CFO ...)\n"
+"- Rechnungsadresse: Bevorzugte Adresse für alle Rechnungen. Wird "
+"standardmäßig ausgewählt, wenn Sie einen Auftrag in Rechnung stellen, der zu "
+"diesem Unternehmen gehört.\n"
+"- Lieferadresse: Bevorzugte Adresse für alle Lieferungen. Wird standardmäßig "
+"ausgewählt, wenn Sie einen Auftrag liefern, der zu diesem Unternehmen gehört."
+"\n"
+"- Privat: Privatadressen sind nur für autorisierte Benutzer sichtbar und "
+"enthalten sensible Daten (Privatadressen von Mitarbeitern ...).\n"
+"- Andere: Andere Adresse für das Unternehmen (z. B. Niederlassung ...)."
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_share_update_no_shares
@@ -76,6 +89,23 @@ msgid ""
 "</div>\n"
 "        "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"   <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"       Hallo\n"
+"       <t t-if=\"object.is_company\" t-out="
+"\"object.get_representative().firstname\"></t>\n"
+"       <t t-else=\"\" t-out=\"object.firstname\"></t>!\n"
+"       <br><br>\n"
+"       Du hast darum gebeten, dir deine Anteile erstatten zu lassen oder sie "
+"der Genossenschaft zu überlassen.\n"
+"       <br><br>\n"
+"       Im Anhang findest du die entsprechende Bestätigung. <t t-out="
+"\"object.env.company.name\"></t>.\n"
+"       <br><br>\n"
+"       Mit solidarischen Grüßen,\n"
+"   </p>\n"
+"</div>\n"
+"        "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_share_transfer
@@ -151,6 +181,21 @@ msgid ""
 "</div>\n"
 "        "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"   <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"       Hallo\n"
+"       <t t-out=\"object.firstname\"></t>!\n"
+"       <br><br>\n"
+"       Vielen Dank für deine Anfrage zur Zeichnung von Geschäftsanteilen! "
+"Wir prüfen sie gerade und melden uns so bald wie möglich mit einer "
+"Bestätigung zur Zahlung bei dir.\n"
+"       <br><br>\n"
+"      Bei Fragen kontaktiere uns bitte zeitnah.\n"
+"       <br><br>\n"
+"       Mit solidarischen Grüßen,\n"
+"   </p>\n"
+"</div>\n"
+"        "
 
 #. module: cooperator
 #: model:mail.template,body_html:cooperator.email_template_confirmation
@@ -260,7 +305,7 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_account_chart_template
 msgid "Account Chart Template"
-msgstr ""
+msgstr "Kontenplanvorlage"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__iban
@@ -326,7 +371,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_res_partner__type
 #: model:ir.model.fields,field_description:cooperator.field_res_users__type
 msgid "Address Type"
-msgstr ""
+msgstr "Adresstyp"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__allow_id_card_upload
@@ -464,7 +509,7 @@ msgstr ""
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_release_capital
 msgid "Capital Release Request: Sending"
-msgstr ""
+msgstr "Aufforderung zur Einzahlung der gezeichneten Anteile"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_capital_release_mail_template
@@ -564,7 +609,7 @@ msgstr ""
 #: model:ir.model,name:cooperator.model_res_company
 #: model_terms:ir.ui.view,arch_db:cooperator.cooperative_membership_view_search
 msgid "Companies"
-msgstr ""
+msgstr "Unternehmen"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_cooperative_membership__company_id
@@ -624,7 +669,7 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__coop_email_contact
@@ -977,7 +1022,7 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_mail_template
 msgid "Email Templates"
-msgstr ""
+msgstr "E-Mail-Vorlagen"
 
 #. module: cooperator
 #. odoo-python
@@ -1195,7 +1240,7 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_account_invoice_report
 msgid "Invoices Statistics"
-msgstr ""
+msgstr "Rechnungsstatistiken"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_is_follower
@@ -1256,12 +1301,12 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Journalbuchung"
 
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_account_move_line
 msgid "Journal Item"
-msgstr ""
+msgstr "Buchungszeile"
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_subscription_request__capital_release_request_date
@@ -1599,12 +1644,13 @@ msgstr ""
 #: model:mail.template,subject:cooperator.email_template_certificate
 #: model:mail.template,subject:cooperator.email_template_share_increase
 msgid "Payment Received Confirmation"
-msgstr ""
+msgstr "Bestätigung des Zahlungseingangs"
 
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_certificate
 msgid "Payment Received Confirmation: Cooperator Certificate"
 msgstr ""
+"Bestätigung des Zahlungseingangs: Bestätigung über deine gezeichneten Anteile"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__phone
@@ -1631,7 +1677,7 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_product_template
 msgid "Product"
-msgstr ""
+msgstr "Produkt"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
@@ -1831,32 +1877,34 @@ msgid ""
 "Sent to cooperators in case of share transfer with their cooperator "
 "certificate in attachment"
 msgstr ""
+"Du hast Anteile erhalten – hier ist deine Bestätigung\n"
+"(Die Person, die Anteile erhält, bekommt eine E-Mail.)"
 
 #. module: cooperator
 #: model:mail.template,description:cooperator.email_template_share_update_no_shares
 msgid ""
 "Sent to cooperators in case of share update and they have no remaining "
 "shares (ergo no attachment)"
-msgstr ""
+msgstr "Aktualisierung deiner Anteile – Du hältst derzeit keine Anteile mehr"
 
 #. module: cooperator
 #: model:mail.template,description:cooperator.email_template_share_update
 msgid ""
 "Sent to cooperators in case of share update with their cooperator "
 "certificate in attachment"
-msgstr ""
+msgstr "Aktualisierung deiner Anteile – Versand der Bestätigung"
 
 #. module: cooperator
 #: model:mail.template,description:cooperator.email_template_confirmation
 msgid "Sent to cooperators to confirm their subscription request"
-msgstr ""
+msgstr "Bestätigung der Anfrage zur Zeichnung von Genossenschaftsanteilen"
 
 #. module: cooperator
 #: model:mail.template,description:cooperator.email_template_waiting_list
 msgid ""
 "Sent to cooperators when their subscription request is added to the waiting "
 "list"
-msgstr ""
+msgstr "Deine Anfrage ist in Bearbeitung – wir melden uns bald bei dir."
 
 #. module: cooperator
 #: model:mail.template,description:cooperator.email_template_release_capital
@@ -1914,12 +1962,12 @@ msgstr ""
 #. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_share_transfer
 msgid "Share Transfer Confirmation"
-msgstr ""
+msgstr "Bestätigung der Übertragung von Anteilen"
 
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_share_transfer
 msgid "Share Transfer: Cooperator Certificate"
-msgstr ""
+msgstr "Bestätigung der Übertragung von Anteilen"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__share_product
@@ -1932,18 +1980,18 @@ msgstr ""
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_share_update_no_shares
 msgid "Share Update (No Remaining Shares): Cooperator Certificate"
-msgstr ""
+msgstr "Bestätigung der Aktualisierung deiner Anteile"
 
 #. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_share_update
 #: model:mail.template,subject:cooperator.email_template_share_update_no_shares
 msgid "Share Update Confirmation"
-msgstr ""
+msgstr "Aktualisierung deiner Anteile"
 
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_share_update
 msgid "Share Update: Cooperator Certificate"
-msgstr ""
+msgstr "Aktualisierung deiner Anteile"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_confirmation_mail_template
@@ -2104,18 +2152,18 @@ msgstr ""
 #. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_waiting_list
 msgid "Subscription Request Added to Waiting List"
-msgstr ""
+msgstr "Deine Anfrage ist in Bearbeitung – wir melden uns bald bei dir."
 
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_confirmation
 #: model:mail.template,subject:cooperator.email_template_confirmation
 msgid "Subscription Request Confirmation"
-msgstr ""
+msgstr "Bestätigung der Anfrage zur Zeichnung von Genossenschaftsanteilen"
 
 #. module: cooperator
 #: model:mail.template,name:cooperator.email_template_waiting_list
 msgid "Subscription Request on Waiting List"
-msgstr ""
+msgstr "Deine Anfrage ist in Bearbeitung – wir melden uns bald bei dir."
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
