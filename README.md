@@ -31,6 +31,7 @@ addon | version | maintainers | summary
 [l10n_be_cooperator_portal](l10n_be_cooperator_portal/) | 16.0.1.0.0 |  | Give access to Tax Shelter Report in the portal.
 [l10n_be_cooperator_portal_national_number](l10n_be_cooperator_portal_national_number/) | 16.0.1.0.0 | <a href='https://github.com/carmenbianca'><img src='https://github.com/carmenbianca.png' width='32' height='32' style='border-radius:50%;' alt='carmenbianca'/></a> | Add the ability to change national number on the account portal.
 [l10n_be_cooperator_website_national_number](l10n_be_cooperator_website_national_number/) | 16.0.2.0.0 |  | Ask for Belgian National Number in Cooperative Subscription Request Frontend Form.
+[l10n_de_cooperator](l10n_de_cooperator/) | 16.0.1.0.0 |  | German localization for Cooperators module
 [l10n_es_cooperator](l10n_es_cooperator/) | 16.0.1.0.1 |  | Cooperator localization for Spain
 [l10n_fr_cooperator](l10n_fr_cooperator/) | 16.0.1.0.0 |  | This is the French localization for the Cooperators module
 
