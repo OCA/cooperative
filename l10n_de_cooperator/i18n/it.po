@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_de_cooperator
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: l10n_de_cooperator
+#: model:ir.model.fields.selection,name:l10n_de_cooperator.selection__res_partner__legal_form__ag
+#: model:ir.model.fields.selection,name:l10n_de_cooperator.selection__subscription_request__company_type__ag
+msgid "AG"
+msgstr ""
+
+#. module: l10n_de_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_de_cooperator.iban_template_de
+msgid "Bank Account Number"
+msgstr ""
+
+#. module: l10n_de_cooperator
+#: model:ir.model.fields,field_description:l10n_de_cooperator.field_subscription_request__company_type
+msgid "Company type"
+msgstr ""
+
+#. module: l10n_de_cooperator
+#: model:ir.model,name:l10n_de_cooperator.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: l10n_de_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_de_cooperator.iban_template_de
+msgid "DE12 3456 7890 1234 5678 90"
+msgstr ""
+
+#. module: l10n_de_cooperator
+#: model:ir.model.fields.selection,name:l10n_de_cooperator.selection__res_partner__legal_form__gmbh
+#: model:ir.model.fields.selection,name:l10n_de_cooperator.selection__subscription_request__company_type__gmbh
+msgid "GmbH"
+msgstr ""
+
+#. module: l10n_de_cooperator
+#: model:ir.model.fields,field_description:l10n_de_cooperator.field_res_partner__legal_form
+#: model:ir.model.fields,field_description:l10n_de_cooperator.field_res_users__legal_form
+msgid "Legal form"
+msgstr ""
+
+#. module: l10n_de_cooperator
+#: model:ir.model.fields.selection,name:l10n_de_cooperator.selection__res_partner__legal_form__sdpr
+#: model:ir.model.fields.selection,name:l10n_de_cooperator.selection__subscription_request__company_type__sdpr
+msgid "Stiftung des privaten Rechts"
+msgstr ""
+
+#. module: l10n_de_cooperator
+#: model:ir.model,name:l10n_de_cooperator.model_subscription_request
+msgid "Subscription Request"
+msgstr ""
+
+#. module: l10n_de_cooperator
+#: model:ir.model.fields.selection,name:l10n_de_cooperator.selection__res_partner__legal_form__eg
+#: model:ir.model.fields.selection,name:l10n_de_cooperator.selection__subscription_request__company_type__eg
+msgid "eG"
+msgstr ""
