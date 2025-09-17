@@ -22,9 +22,11 @@ def update_records_module_category_cooperator_management(env):
     openupgrade.logged_query(
         env.cr,
         """
-            INSERT INTO res_groups_users_rel (gid, uid)
-            SELECT gid, uid FROM res_groups_users_rel_module_category_cooperator_management
-            ON CONFLICT DO NOTHING;""",
+        INSERT INTO res_groups_users_rel (gid, uid)
+        SELECT gid, uid
+        FROM res_groups_users_rel_module_category_cooperator_management
+        ON CONFLICT DO NOTHING;
+        """,
     )
 
 
