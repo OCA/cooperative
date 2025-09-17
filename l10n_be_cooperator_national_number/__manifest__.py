@@ -9,6 +9,9 @@
     "category": "Cooperative management",
     "website": "https://github.com/OCA/cooperative",
     "license": "AGPL-3",
-    "data": ["views/subscription_request_view.xml", "views/res_company_view.xml"],
+    "data": [
+        "views/subscription_request_view.xml",
+        "views/res_config_settings.xml",
+    ],
     "demo": [],
 }
