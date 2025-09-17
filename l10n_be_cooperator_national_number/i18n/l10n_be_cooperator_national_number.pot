@@ -14,8 +14,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_be_cooperator_national_number
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_national_number.res_config_settings_cooperator_view_form
+msgid "Add a national number field on share subscription"
+msgstr ""
+
+#. module: l10n_be_cooperator_national_number
 #: model:ir.model,name:l10n_be_cooperator_national_number.model_res_company
 msgid "Companies"
+msgstr ""
+
+#. module: l10n_be_cooperator_national_number
+#: model:ir.model,name:l10n_be_cooperator_national_number.model_res_config_settings
+msgid "Config Settings"
 msgstr ""
 
 #. module: l10n_be_cooperator_national_number
@@ -25,6 +35,7 @@ msgstr ""
 
 #. module: l10n_be_cooperator_national_number
 #: model:ir.model.fields,field_description:l10n_be_cooperator_national_number.field_res_company__display_national_number
+#: model:ir.model.fields,field_description:l10n_be_cooperator_national_number.field_res_config_settings__display_national_number
 #: model:ir.model.fields,field_description:l10n_be_cooperator_national_number.field_subscription_request__display_national_number
 msgid "Display National Number"
 msgstr ""
@@ -40,6 +51,7 @@ msgstr ""
 
 #. module: l10n_be_cooperator_national_number
 #: model:ir.model.fields,field_description:l10n_be_cooperator_national_number.field_subscription_request__national_number
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_national_number.res_config_settings_cooperator_view_form
 msgid "National Number"
 msgstr ""
 
@@ -52,7 +64,9 @@ msgstr ""
 
 #. module: l10n_be_cooperator_national_number
 #: model:ir.model.fields,field_description:l10n_be_cooperator_national_number.field_res_company__require_national_number
+#: model:ir.model.fields,field_description:l10n_be_cooperator_national_number.field_res_config_settings__require_national_number
 #: model:ir.model.fields,field_description:l10n_be_cooperator_national_number.field_subscription_request__require_national_number
+#: model_terms:ir.ui.view,arch_db:l10n_be_cooperator_national_number.res_config_settings_cooperator_view_form
 msgid "Require National Number"
 msgstr ""
 
