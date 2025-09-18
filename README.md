@@ -27,7 +27,7 @@ addon | version | maintainers | summary
 [cooperator_website](cooperator_website/) | 16.0.1.0.0 |  | This module adds the cooperator subscription form allowing to subscribe for shares online.
 [cooperator_website_recaptcha](cooperator_website_recaptcha/) | 16.0.1.0.0 |  | Add reCAPTCHA to Subscription Request Form
 [l10n_be_cooperator](l10n_be_cooperator/) | 16.0.1.2.1 |  | Cooperators Belgium Localization
-[l10n_be_cooperator_national_number](l10n_be_cooperator_national_number/) | 16.0.2.1.0 |  | Ask for Belgian National Number in Cooperative Subscription Request.
+[l10n_be_cooperator_national_number](l10n_be_cooperator_national_number/) | 16.0.2.1.1 |  | Ask for Belgian National Number in Cooperative Subscription Request.
 [l10n_be_cooperator_portal](l10n_be_cooperator_portal/) | 16.0.1.0.0 |  | Give access to Tax Shelter Report in the portal.
 [l10n_be_cooperator_portal_national_number](l10n_be_cooperator_portal_national_number/) | 16.0.1.0.0 | <a href='https://github.com/carmenbianca'><img src='https://github.com/carmenbianca.png' width='32' height='32' style='border-radius:50%;' alt='carmenbianca'/></a> | Add the ability to change national number on the account portal.
 [l10n_be_cooperator_website_national_number](l10n_be_cooperator_website_national_number/) | 16.0.2.0.0 |  | Ask for Belgian National Number in Cooperative Subscription Request Frontend Form.
