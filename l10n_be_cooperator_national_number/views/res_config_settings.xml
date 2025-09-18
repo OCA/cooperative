@@ -23,16 +23,6 @@
                         </div>
                         <div class="mt16">
                             <div class="content-group" id="send_default">
-                                <!--
-                                <div>
-                                    <field name="display_national_number" />
-                                    <label
-                                        for="display_national_number"
-                                        string="Display"
-                                        class="col-2 o_light_label"
-                                    />
-                                </div>
-                                -->
                                 <div
                                     attrs="{'invisible': [('display_national_number', '=', False)]}"
                                 >
