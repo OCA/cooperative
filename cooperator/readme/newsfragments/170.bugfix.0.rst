@@ -1,0 +1,1 @@
+Fix default value of ``subscription.request.country_id``.

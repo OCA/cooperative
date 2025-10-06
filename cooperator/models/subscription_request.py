@@ -325,7 +325,7 @@ class SubscriptionRequest(models.Model):
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
-        default=lambda self: self.env.company.default_country_id.code,
+        default=lambda self: self.env.company.default_country_id,
     )
     phone = fields.Char(readonly=True, states={"draft": [("readonly", False)]})
     user_id = fields.Many2one(
