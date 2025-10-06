@@ -1,0 +1,2 @@
+Fix transfer operation to non-member: update share fields values of the internal subscription request of a transfer operation to a non-member when these values are changed in the form.
+This ensures that the values are correct even if the subscription request is created before the values are set.
