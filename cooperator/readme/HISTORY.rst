@@ -1,3 +1,12 @@
+16.0.1.2.2 (2025-10-06)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Bugfixes**
+
+- Use image widget for ``signature_scan``. (`#170 <https://github.com/OCA/cooperative/issues/170>`_)
+- Fix default value of ``subscription.request.country_id``. (`#170 <https://github.com/OCA/cooperative/issues/170>`_)
+
+
 16.0.1.2.1 (2025-10-06)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
