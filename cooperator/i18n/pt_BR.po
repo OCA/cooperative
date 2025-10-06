@@ -1452,6 +1452,13 @@ msgid "For the board of"
 msgstr "Para o conselho de"
 
 #. module: cooperator
+#: model:ir.model.fields,help:cooperator.field_operation_request__subscription_request
+msgid ""
+"For transfer operations: if the share receiver isn't a (former) member then "
+"a subscription form must be filled."
+msgstr ""
+
+#. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
 msgid "Force cooperators to have only one type of share"
 msgstr ""
@@ -1590,15 +1597,6 @@ msgstr "Se marcado, algumas mensagens têm erro de entrega."
 #: model:ir.model.fields,help:cooperator.field_res_config_settings__cooperator_waiting_list_mail_template
 msgid "If left empty, the default global mail template will be used."
 msgstr "Se deixado vazio, o modelo de e-mail global padrão será usado."
-
-#. module: cooperator
-#: model:ir.model.fields,help:cooperator.field_operation_request__subscription_request
-msgid ""
-"In case on a transfer of share. If the share receiver isn't a effective "
-"member then a subscription form should be filled."
-msgstr ""
-"No caso de transferência de cota. Se o recebedor da cota não for um membro "
-"efetivo, então um formulário de assinatura deve ser preenchido."
 
 #. module: cooperator
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__type__increase
@@ -2026,6 +2024,7 @@ msgstr "Número da Operação"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__operation_request_id
+#: model:ir.ui.menu,name:cooperator.menu_cooperator_operation_request
 msgid "Operation Request"
 msgstr "Solicitação de Operação"
 
@@ -2044,7 +2043,6 @@ msgstr "Quantidade da Operação"
 #. module: cooperator
 #: model:ir.actions.act_window,name:cooperator.operation_request_action
 #: model:ir.model,name:cooperator.model_operation_request
-#: model:ir.ui.menu,name:cooperator.menu_cooperator_operation_request
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
 msgid "Operation request"
 msgstr "Solicitação de Operação"
@@ -3206,6 +3204,13 @@ msgid ""
 msgstr ""
 "{{ object.company_id.name }} Solicitação de Liberação de Capital (Ref "
 "{{ object.name or 'n/a' }})"
+
+#~ msgid ""
+#~ "In case on a transfer of share. If the share receiver isn't a effective "
+#~ "member then a subscription form should be filled."
+#~ msgstr ""
+#~ "No caso de transferência de cota. Se o recebedor da cota não for um "
+#~ "membro efetivo, então um formulário de assinatura deve ser preenchido."
 
 #~ msgid "Cooperative"
 #~ msgstr "Cooperativa"

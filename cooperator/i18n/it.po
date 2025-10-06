@@ -277,8 +277,8 @@ msgstr ""
 "        <br><br>\n"
 "        Grazie per la richiesta di iscrizione. Al momento non ci son "
 "progetti di raccolta fondi, pertanto site stati aggiunti nella lista di "
-"attesa. Vi contatteremo appena verranno riaperte le richieste di iscrizione."
-"\n"
+"attesa. Vi contatteremo appena verranno riaperte le richieste di "
+"iscrizione.\n"
 "        <br><br>\n"
 "        Non esitate a contattarci per qualsiasi chiarimento.\n"
 "        <br><br>\n"
@@ -1492,6 +1492,13 @@ msgid "For the board of"
 msgstr "Per il consiglio di"
 
 #. module: cooperator
+#: model:ir.model.fields,help:cooperator.field_operation_request__subscription_request
+msgid ""
+"For transfer operations: if the share receiver isn't a (former) member then "
+"a subscription form must be filled."
+msgstr ""
+
+#. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
 msgid "Force cooperators to have only one type of share"
 msgstr "Forza i cooperatori ad avere un solo tipo di quota"
@@ -1632,15 +1639,6 @@ msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 msgid "If left empty, the default global mail template will be used."
 msgstr ""
 "Se lasciato voto, verrà utilizzato il modello e-mail globale predefinito."
-
-#. module: cooperator
-#: model:ir.model.fields,help:cooperator.field_operation_request__subscription_request
-msgid ""
-"In case on a transfer of share. If the share receiver isn't a effective "
-"member then a subscription form should be filled."
-msgstr ""
-"In caso di trasferimento della quota. Se il ricevitore della quota non è un "
-"membro effettivo allora deve essere compilato un modulo di iscrizione."
 
 #. module: cooperator
 #: model:ir.model.fields.selection,name:cooperator.selection__subscription_request__type__increase
@@ -2066,6 +2064,7 @@ msgstr "Numero operazione"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__operation_request_id
+#: model:ir.ui.menu,name:cooperator.menu_cooperator_operation_request
 msgid "Operation Request"
 msgstr "Rchiesta operazione"
 
@@ -2084,7 +2083,6 @@ msgstr "Ammontare operazioni"
 #. module: cooperator
 #: model:ir.actions.act_window,name:cooperator.operation_request_action
 #: model:ir.model,name:cooperator.model_operation_request
-#: model:ir.ui.menu,name:cooperator.menu_cooperator_operation_request
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
 msgid "Operation request"
 msgstr "Rchiesta operazione"
@@ -3269,6 +3267,13 @@ msgid ""
 msgstr ""
 "{{ object.company_id.name }} chiede di liquidare capitale (Rif {{ object."
 "name or 'n/a' }})"
+
+#~ msgid ""
+#~ "In case on a transfer of share. If the share receiver isn't a effective "
+#~ "member then a subscription form should be filled."
+#~ msgstr ""
+#~ "In caso di trasferimento della quota. Se il ricevitore della quota non è "
+#~ "un membro effettivo allora deve essere compilato un modulo di iscrizione."
 
 #~ msgid "Cooperative"
 #~ msgstr "Cooperativa"
