@@ -1,3 +1,11 @@
+16.0.1.2.3 (2025-10-06)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Bugfixes**
+
+- Fix display of image fields in settings. (`#171 <https://github.com/OCA/cooperative/issues/171>`_)
+
+
 16.0.1.2.2 (2025-10-06)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
