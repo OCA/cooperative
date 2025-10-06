@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ===========
 Cooperators
 ===========
@@ -17,7 +13,7 @@ Cooperators
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fcooperative-lightgray.png?logo=github
@@ -105,12 +101,57 @@ memberships of all companies or only the ones in which the user is â€œlogged inâ
 Changelog
 =========
 
+16.0.1.2.0 (2025-09-17)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Move settings from company form to main settings. (`#140 <https://github.com/OCA/cooperative/issues/140>`_)
+
+
+16.0.1.1.2 (2025-05-30)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Bugfixes**
+
+- Fix tests with a localization module: previously, when initializing a
+  database with a localization module, the default company would use the
+  account chart template from that module. Now, it doesn't use any. Fix the
+  tests by loading the first chart template found on the default company. (`#161 <https://github.com/OCA/cooperative/issues/161>`_)
+
+
+16.0.1.1.1 (2024-10-22)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Bugfixes**
+
+- Fix computation of name of subscription requests for companies when
+  processing multiple records. (`#144 <https://github.com/OCA/cooperative/issues/144>`_)
+
+
+16.0.1.1.0 (2024-05-06)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Deprecations and Removals**
+
+- Deprecate ``subscription.request.get_person_info()`` method in favor of new
+  ``.set_person_info()`` method.
+
+
 16.0.1.0.2 (2024-03-12)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 **Bugfixes**
 
 - Remove duplicated member field in ``res.partner`` form view. (`#47 <https://github.com/OCA/cooperative/issues/47>`_)
+
+
+16.0.1.0.1 (2024-02-01)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Refactor cooperative.membership preparation code. (`#101 <https://github.com/OCA/cooperative/issues/101>`_)
 
 
 16.0.1.0.0 (2023-11-29)
