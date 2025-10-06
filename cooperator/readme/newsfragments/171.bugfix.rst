@@ -1,0 +1,1 @@
+Fix display of image fields in settings.
