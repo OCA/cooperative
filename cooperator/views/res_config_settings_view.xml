@@ -144,7 +144,11 @@
                                     Board representative signature
                                 </span>
                                 <div class="mt16">
-                                    <field name="signature_scan" />
+                                    <field
+                                        name="signature_scan"
+                                        widget="image"
+                                        class="float-start oe_avatar"
+                                    />
                                 </div>
                             </div>
                         </div>
