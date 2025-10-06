@@ -104,7 +104,11 @@
                                 >
                                     <div class="content-group">
                                         <div>
-                                            <field name="bottom_logo1" />
+                                            <field
+                                                name="bottom_logo1"
+                                                widget="image"
+                                                class="oe_avatar float-none"
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +127,11 @@
                                 >
                                     <div class="content-group">
                                         <div>
-                                            <field name="bottom_logo2" />
+                                            <field
+                                                name="bottom_logo2"
+                                                widget="image"
+                                                class="oe_avatar float-none"
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -147,7 +155,7 @@
                                     <field
                                         name="signature_scan"
                                         widget="image"
-                                        class="float-start oe_avatar"
+                                        class="oe_avatar float-none"
                                     />
                                 </div>
                             </div>
