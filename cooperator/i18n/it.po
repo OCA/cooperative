@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-09-29 17:43+0000\n"
+"PO-Revision-Date: 2025-10-07 12:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -1497,6 +1497,8 @@ msgid ""
 "For transfer operations: if the share receiver isn't a (former) member then "
 "a subscription form must be filled."
 msgstr ""
+"Per le operazioni di trasferimento: se il destinatario delle azioni non è un "
+"(ex) socio, è necessario compilare un modulo di sottoscrizione."
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
