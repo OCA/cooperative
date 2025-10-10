@@ -7,9 +7,14 @@
 {
     "name": "Cooperators Switzerland",
     "summary": "Cooperators Switzerland localization",
-    "version": "16.0.1.0.0",
+    "version": "16.0.2.0.0",
     "license": "AGPL-3",
-    "depends": ["cooperator", "cooperator_website", "l10n_ch"],
+    "depends": [
+        "cooperator",
+        "cooperator_website",
+        "l10n_ch",
+        "l10n_ch_partner_company_type",
+    ],
     "author": "Coop IT Easy SC, Odoo Community Association (OCA)",
     "category": "Cooperative management",
     "website": "https://github.com/OCA/cooperative",
