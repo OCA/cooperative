@@ -410,8 +410,8 @@ class SubscriptionRequest(models.Model):
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
-    company_type = fields.Selection(
-        [],
+    partner_company_type_id = fields.Many2one(
+        "res.partner.company.type",
         string="Company type",
         readonly=True,
         states={"draft": [("readonly", False)]},
@@ -642,7 +642,7 @@ class SubscriptionRequest(models.Model):
             "name": self.company_name,
             "is_company": self.is_company,
             "company_register_number": self.company_register_number,
-            "legal_form": self.company_type,
+            "partner_company_type_id": self.partner_company_type_id.id,
             "street": self.address,
             "zip": self.zip_code,
             "city": self.city,

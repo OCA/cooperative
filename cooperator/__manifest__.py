@@ -8,7 +8,7 @@
 {
     "name": "Cooperators",
     "summary": "Manage your cooperators",
-    "version": "16.0.1.4.0",
+    "version": "16.0.2.0.0",
     "depends": [
         "account",
         "base_iban",
@@ -16,6 +16,7 @@
         "web",
         # todo split into cooperator_partner_firstname
         "partner_firstname",
+        "partner_company_type",
         # todo split into cooperator partner_contact_birthdate
         "partner_contact_birthdate",
         # todo split into cooperator_partner_contact_gender
