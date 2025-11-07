@@ -533,20 +533,24 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     />
                 </div>
                 <div class="mb-3 field-company_type" name="company_type_container">
-                    <label for="company_type" class="form-label">Company type</label>
+                    <label
+                        for="partner_company_type_id"
+                        class="form-label"
+                    >Company type</label>
                     <select
-                        name="company_type"
-                        t-attf-class="form-select form-select-sm{{ error and 'company_type' in error and ' is-invalid' or '' }}"
+                        t-attf-class="form-select form-select-sm{{ error and 'partner_company_type_id' in error and ' is-invalid' or '' }}"
+                        id="partner_company_type_id"
+                        name="partner_company_type_id"
                         required="true"
                         t-att-readonly="logged"
                     >
                         <option value="" />
-                        <t t-foreach="company_types or []" t-as="type">
+                        <t t-foreach="partner_company_type_ids or []" t-as="type">
                             <option
-                                t-att-value="type[0]"
-                                t-att-selected="type[0] == company_type"
+                                t-att-value="type.id"
+                                t-att-selected="type.id == partner_company_type_id"
                             >
-                                <t t-out="type[1]" />
+                                <t t-out="type.display_name" />
                             </option>
                         </t>
                     </select>
