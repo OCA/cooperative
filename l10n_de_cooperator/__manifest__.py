@@ -5,7 +5,7 @@
 {
     "name": "Cooperators Germany",
     "summary": "German localization for Cooperators module",
-    "version": "16.0.1.0.0",
+    "version": "16.0.2.0.0",
     "category": "Cooperative management",
     "website": "https://github.com/OCA/cooperative",
     "author": "Coop IT Easy SC, Odoo Community Association (OCA)",
@@ -13,6 +13,7 @@
     "depends": [
         "cooperator_website",
         "l10n_de",
+        "l10n_de_partner_company_type",
     ],
     "data": [
         "views/subscription_template.xml",
