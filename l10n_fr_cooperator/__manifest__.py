@@ -4,8 +4,13 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).#
 {
     "name": "Cooperator France Localization",
-    "version": "16.0.1.0.0",
-    "depends": ["cooperator", "cooperator_website", "l10n_fr"],
+    "version": "16.0.2.0.0",
+    "depends": [
+        "cooperator",
+        "cooperator_website",
+        "l10n_fr",
+        "l10n_fr_partner_company_type",
+    ],
     "author": "Coop IT Easy SC, Odoo Community Association (OCA)",
     "category": "Cooperative management",
     "website": "https://github.com/OCA/cooperative",
@@ -15,6 +20,7 @@
     """,
     "data": [
         "views/certificate_template.xml",
+        "views/subscription_template.xml",
     ],
     "installable": True,
     "auto-install": True,
