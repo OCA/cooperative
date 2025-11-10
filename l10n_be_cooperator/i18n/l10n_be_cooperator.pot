@@ -240,6 +240,12 @@ msgid "Contact"
 msgstr ""
 
 #. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__sc
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__sc
+msgid "Cooperative"
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__partner_id
 msgid "Cooperator"
 msgstr ""
@@ -462,6 +468,12 @@ msgid "Number of shares"
 msgstr ""
 
 #. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__snc
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__snc
+msgid "Partnership"
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__access_url
 msgid "Portal Access URL"
 msgstr ""
@@ -527,12 +539,6 @@ msgid "SA / SAS"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__sc
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__sc
-msgid "SC"
-msgstr ""
-
-#. module: l10n_be_cooperator
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__scrl
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__scrl
 msgid "SCRL"
@@ -542,12 +548,6 @@ msgstr ""
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__scomm
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__scomm
 msgid "SComm"
-msgstr ""
-
-#. module: l10n_be_cooperator
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__snc
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__snc
-msgid "SNC"
 msgstr ""
 
 #. module: l10n_be_cooperator
