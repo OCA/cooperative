@@ -1,0 +1,1 @@
+Adapt subscription form to changes in ``cooperator_website`` and fix layout of bank account number and VAT fields.
