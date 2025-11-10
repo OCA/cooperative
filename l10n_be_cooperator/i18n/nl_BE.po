@@ -71,7 +71,8 @@ msgstr "145<sup>27</sup>, § 2, lid 4,"
 msgid ""
 "<br/>\n"
 "                            <small style=\"font-size: 80%;\">\n"
-"                                Attestation concernant une des quatre années suivant\n"
+"                                Attestation concernant une des quatre années "
+"suivant\n"
 "                                l'acquisition de parts\n"
 "                            </small>"
 msgstr ""
@@ -99,13 +100,17 @@ msgid ""
 "        Hello\n"
 "        <t t-out=\"object.partner_id.firstname\"></t>,\n"
 "        <br><br>\n"
-"        You have subscribed to some shares of <t t-out=\"object.company_id.name\"></t>\n"
-"        during the year <t t-out=\"object.declaration_id.fiscal_year\"></t>.\n"
+"        You have subscribed to some shares of <t t-out=\"object.company_id."
+"name\"></t>\n"
+"        during the year <t t-out=\"object.declaration_id.fiscal_year\"></"
+"t>.\n"
 "        You can benefit from the tax shelter, it means a tax reduction of\n"
-"        <span t-field=\"object.declaration_id.tax_shelter_percentage\"></span>% on\n"
+"        <span t-field=\"object.declaration_id.tax_shelter_percentage\"></"
+"span>% on\n"
 "        the invested amount.\n"
 "        For this you will find in attachment the documents certifying that\n"
-"        you've suscribed to <t t-out=\"object.company_id.name\"></t> shares.\n"
+"        you've suscribed to <t t-out=\"object.company_id.name\"></t> "
+"shares.\n"
 "        <br><br>\n"
 "        For any additional questions, please contact\n"
 "        <t t-out=\"object.company_id.coop_email_contact\"></t>\n"
@@ -122,8 +127,8 @@ msgstr ""
 "        <br><br>\n"
 "        Je hebt je ingeschreven op aandelen van <t t-out=\"object.company_id."
 "name\"></t>\n"
-"        gedurende het jaar <t t-out=\"object.declaration_id.fiscal_year\""
-"></t>.\n"
+"        gedurende het jaar <t t-out=\"object.declaration_id.fiscal_year\"></"
+"t>.\n"
 "        Je kunt van de tax shelter profiteren. Dat betekent een "
 "belastingaftrek van\n"
 "        <span t-field=\"object.declaration_id.tax_shelter_percentage\"></"
@@ -192,34 +197,38 @@ msgstr "Bedrag overgemaakt"
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "Attestation délivrée dans le cadre de la réduction d'impôt\n"
-"                            pour l'acquisition de nouvelles actions ou parts\n"
+"                            pour l'acquisition de nouvelles actions ou "
+"parts\n"
 "                            d'entreprises en croissance prévue à l'article\n"
-"                            145<sup>27</sup>, CIR 92 et à l'article 63<sup>12/3</sup>,\n"
+"                            145<sup>27</sup>, CIR 92 et à l'article "
+"63<sup>12/3</sup>,\n"
 "                            AR/CIR 92."
 msgstr ""
 "Attest overhandigd in het kader van de belastingvermindering\n"
 "                            voor de verwerving van nieuwe aandelen\n"
 "                            in startende ondernemingen zoals voorzien in "
 "artikel\n"
-"                            145<sup>27</sup>, WIB 92 en artikel 63<sup>12/"
-"3</sup>,\n"
+"                            145<sup>27</sup>, WIB 92 en artikel 63<sup>12/3</"
+"sup>,\n"
 "                            KB/WIB 92."
 
 #. module: l10n_be_cooperator
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "Attestation délivrée dans le cadre de la réduction d'impôt\n"
-"                            pour l'acquisition de nouvelles actions ou parts\n"
+"                            pour l'acquisition de nouvelles actions ou "
+"parts\n"
 "                            d'entreprises qui débutent prévue à l'article\n"
-"                            145<sup>26</sup>, CIR 92 et à l'article 63<sup>12/1</sup>,\n"
+"                            145<sup>26</sup>, CIR 92 et à l'article "
+"63<sup>12/1</sup>,\n"
 "                            AR/CIR 92."
 msgstr ""
 "Attest afgegeven in het kader van de belastingvermindering\n"
 "                            voor de verwerving van nieuwe aandelen\n"
 "                            in startende ondernemingen zoals bedoeld in "
 "artikel\n"
-"                            145<sup>26</sup>, WIB 92 en artikel 63<sup>12/"
-"1</sup>,\n"
+"                            145<sup>26</sup>, WIB 92 en artikel 63<sup>12/1</"
+"sup>,\n"
 "                            KB/WIB 92."
 
 #. module: l10n_be_cooperator
@@ -292,6 +301,12 @@ msgstr ""
 #: model:ir.model,name:l10n_be_cooperator.model_res_partner
 msgid "Contact"
 msgstr "Contact"
+
+#. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__sc
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__sc
+msgid "Cooperative"
+msgstr ""
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__partner_id
@@ -460,7 +475,8 @@ msgstr "Artikel"
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "L'apport de capitaux par le chef d'entreprise lui-même ou par\n"
-"                        des administrateurs existants de la société ne permet pas de\n"
+"                        des administrateurs existants de la société ne "
+"permet pas de\n"
 "                        bénéficier du tax shelter."
 msgstr ""
 "De inbreng van kapitaal door de bestuurder van de vennootschap zelf of door "
@@ -492,14 +508,22 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "Le maintien de la réduction d'impôt n'est possible que si\n"
-"                        l'investisseur conserve les parts de la coopérative pendant 4\n"
-"                        ans au minimum, sauf si la sortie est imposée par des conditions\n"
-"                        extérieures (telles que la faillite, par exemple). En cas de\n"
-"                        sortie volontaire avant la période de 4 ans, l'avantage fiscal\n"
-"                        devra être remboursé au prorata du nombre de mois entre la\n"
-"                        sortie et les 4 ans. La coopérative s'engage à fournir pour\n"
-"                        chacune des quatre années suivant l'année d'acquisition une\n"
-"                        attestation certifiant que ces parts sont toujours en possession\n"
+"                        l'investisseur conserve les parts de la coopérative "
+"pendant 4\n"
+"                        ans au minimum, sauf si la sortie est imposée par "
+"des conditions\n"
+"                        extérieures (telles que la faillite, par exemple). "
+"En cas de\n"
+"                        sortie volontaire avant la période de 4 ans, "
+"l'avantage fiscal\n"
+"                        devra être remboursé au prorata du nombre de mois "
+"entre la\n"
+"                        sortie et les 4 ans. La coopérative s'engage à "
+"fournir pour\n"
+"                        chacune des quatre années suivant l'année "
+"d'acquisition une\n"
+"                        attestation certifiant que ces parts sont toujours "
+"en possession\n"
 "                        du souscripteur."
 msgstr ""
 "De belastingvermindering kan alleen worden gehandhaafd indien de "
@@ -534,6 +558,12 @@ msgid "Number of shares"
 msgstr "Aantal aandelen"
 
 #. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__snc
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__snc
+msgid "Partnership"
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__access_url
 msgid "Portal Access URL"
 msgstr ""
@@ -542,7 +572,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_document
 msgid ""
 "Pour bénéficier de la réduction d'impôts, vous pouvez joindre\n"
-"                        cette lettre à votre déclaration fiscale pour les revenus"
+"                        cette lettre à votre déclaration fiscale pour les "
+"revenus"
 msgstr ""
 "Om van de belastingvermindering te kunnen genieten kunt u deze brief hechten "
 "aan uw aangifte inkomstenbelasting van"
@@ -603,12 +634,6 @@ msgid "SA / SAS"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__sc
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__sc
-msgid "SC"
-msgstr "CV"
-
-#. module: l10n_be_cooperator
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__scrl
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__scrl
 msgid "SCRL"
@@ -619,12 +644,6 @@ msgstr "CVBA"
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__scomm
 msgid "SComm"
 msgstr ""
-
-#. module: l10n_be_cooperator
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__snc
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__snc
-msgid "SNC"
-msgstr "VOF"
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__sprl
@@ -967,3 +986,9 @@ msgstr "artikel 145<sup>26</sup>, § 3, eerste lid,"
 #: model_terms:ir.ui.view,arch_db:l10n_be_cooperator.tax_shelter_report_shares_document
 msgid "À la date du"
 msgstr "Op"
+
+#~ msgid "SC"
+#~ msgstr "CV"
+
+#~ msgid "SNC"
+#~ msgstr "VOF"

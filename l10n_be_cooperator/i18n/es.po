@@ -301,6 +301,12 @@ msgid "Contact"
 msgstr "Contacto"
 
 #. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__sc
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__sc
+msgid "Cooperative"
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__partner_id
 msgid "Cooperator"
 msgstr "Cooperador"
@@ -556,6 +562,12 @@ msgid "Number of shares"
 msgstr "Número de acciones"
 
 #. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__snc
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__snc
+msgid "Partnership"
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__access_url
 msgid "Portal Access URL"
 msgstr "URL de Acceso al Portal"
@@ -626,12 +638,6 @@ msgid "SA / SAS"
 msgstr "SA / SAS"
 
 #. module: l10n_be_cooperator
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__sc
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__sc
-msgid "SC"
-msgstr "SC"
-
-#. module: l10n_be_cooperator
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__scrl
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__scrl
 msgid "SCRL"
@@ -642,12 +648,6 @@ msgstr "SCRL"
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__scomm
 msgid "SComm"
 msgstr "SComm"
-
-#. module: l10n_be_cooperator
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__snc
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__snc
-msgid "SNC"
-msgstr "SNC"
 
 #. module: l10n_be_cooperator
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__sprl
@@ -995,6 +995,12 @@ msgstr ""
 msgid "À la date du"
 msgstr "En la fecha de"
 
+#~ msgid "SC"
+#~ msgstr "SC"
+
+#~ msgid "SNC"
+#~ msgstr "SNC"
+
 #~ msgid "Validate Declaration"
 #~ msgstr "Validar Declaración"
 
@@ -1061,8 +1067,8 @@ msgstr "En la fecha de"
 #~ "        Hola\n"
 #~ "        <t t-out=\"object.partner_id.firstname\"></t>,\n"
 #~ "        <br><br>\n"
-#~ "        Ha suscrito unas acciones de <t t-out=\"object.company_id.name"
-#~ "\"></t>\n"
+#~ "        Ha suscrito unas acciones de <t t-out=\"object.company_id."
+#~ "name\"></t>\n"
 #~ "        durante el año <t t-out=\"object.declaration_id.fiscal_year\"></"
 #~ "t>.\n"
 #~ "        Puede beneficiarse del paraíso fiscal, supone una reducción de "

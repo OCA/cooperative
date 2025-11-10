@@ -111,8 +111,9 @@ msgstr ""
 "        Bonjour\n"
 "        <t t-out=\"object.partner_id.firstname\"></t>,\n"
 "        <br><br>\n"
-"        Vous avez souscrit à des parts de <t t-out=\"object.company_id.name"
-"\"></t> durant l'année <t t-out=\"object.declaration_id.fiscal_year\"></t>.\n"
+"        Vous avez souscrit à des parts de <t t-out=\"object.company_id."
+"name\"></t> durant l'année <t t-out=\"object.declaration_id.fiscal_year\"></"
+"t>.\n"
 "        Vous pouvez bénéficier du tax shelter, c'est-à-dire d'une réduction "
 "d'impôts de\n"
 "        <span t-field=\"object.declaration_id.tax_shelter_percentage\"></"
@@ -270,6 +271,12 @@ msgstr "Calculé"
 #. module: l10n_be_cooperator
 #: model:ir.model,name:l10n_be_cooperator.model_res_partner
 msgid "Contact"
+msgstr ""
+
+#. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__sc
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__sc
+msgid "Cooperative"
 msgstr ""
 
 #. module: l10n_be_cooperator
@@ -506,6 +513,12 @@ msgid "Number of shares"
 msgstr "Nombre de parts"
 
 #. module: l10n_be_cooperator
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__snc
+#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__snc
+msgid "Partnership"
+msgstr ""
+
+#. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_tax_shelter_certificate__access_url
 msgid "Portal Access URL"
 msgstr "URL d'accès au portail"
@@ -572,12 +585,6 @@ msgid "SA / SAS"
 msgstr ""
 
 #. module: l10n_be_cooperator
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__sc
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__sc
-msgid "SC"
-msgstr ""
-
-#. module: l10n_be_cooperator
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__scrl
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__scrl
 msgid "SCRL"
@@ -587,12 +594,6 @@ msgstr ""
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__scomm
 #: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__scomm
 msgid "SComm"
-msgstr ""
-
-#. module: l10n_be_cooperator
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__res_partner__legal_form__snc
-#: model:ir.model.fields.selection,name:l10n_be_cooperator.selection__subscription_request__company_type__snc
-msgid "SNC"
 msgstr ""
 
 #. module: l10n_be_cooperator
