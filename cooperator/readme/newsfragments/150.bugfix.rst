@@ -1,0 +1,1 @@
+Rename obsolete occurrences of the ``blocked`` ``subscription.request`` state still present as ``block``.

@@ -51,7 +51,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     string="Unblock"
                     aria-label="Unblock"
                     name="unblock_subscription_request"
-                    states="block"
+                    states="blocked"
                     groups="cooperator.cooperator_group_user"
                 />
             </tree>
@@ -80,7 +80,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         string="Cancel"
                         type="object"
                         name="cancel_subscription_request"
-                        states="draft,waiting,done,block"
+                        states="draft,waiting,done,blocked"
                         groups="cooperator.cooperator_group_user"
                     />
                     <field
