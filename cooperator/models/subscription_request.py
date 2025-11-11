@@ -865,17 +865,17 @@ class SubscriptionRequest(models.Model):
         self.ensure_one()
         if self.state != "draft":
             raise ValidationError(_("Only draft requests can be blocked."))
-        self.write({"state": "block"})
+        self.write({"state": "blocked"})
 
     def unblock_subscription_request(self):
         self.ensure_one()
-        if self.state != "block":
+        if self.state != "blocked":
             raise ValidationError(_("Only blocked requests can be unblocked."))
         self.write({"state": "draft"})
 
     def cancel_subscription_request(self):
         self.ensure_one()
-        if self.state not in ("draft", "waiting", "done", "block"):
+        if self.state not in ("draft", "waiting", "done", "blocked"):
             raise ValidationError(_("You cannot cancel a request in this " "state."))
         self.write({"state": "cancelled"})
 
