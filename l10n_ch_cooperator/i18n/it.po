@@ -1,0 +1,94 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_ch_cooperator
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: l10n_ch_cooperator
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__res_partner__legal_form__asso
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__subscription_request__company_type__asso
+msgid "Association"
+msgstr ""
+
+#. module: l10n_ch_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_ch_cooperator.iban_template_ch
+msgid "Bank Account Number"
+msgstr ""
+
+#. module: l10n_ch_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_ch_cooperator.iban_template_ch
+msgid "CH48523080767127"
+msgstr ""
+
+#. module: l10n_ch_cooperator
+#: model:ir.model.fields,field_description:l10n_ch_cooperator.field_subscription_request__company_type
+msgid "Company type"
+msgstr ""
+
+#. module: l10n_ch_cooperator
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__res_partner__legal_form__edp
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__subscription_request__company_type__edp
+msgid "Company under public law"
+msgstr ""
+
+#. module: l10n_ch_cooperator
+#: model:ir.model,name:l10n_ch_cooperator.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: l10n_ch_cooperator
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__res_partner__legal_form__sc
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__subscription_request__company_type__sc
+msgid "Cooperative"
+msgstr ""
+
+#. module: l10n_ch_cooperator
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__res_partner__legal_form__fond
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__subscription_request__company_type__fond
+msgid "Foundation"
+msgstr ""
+
+#. module: l10n_ch_cooperator
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__res_partner__legal_form__ei
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__subscription_request__company_type__ei
+msgid "Individual company"
+msgstr ""
+
+#. module: l10n_ch_cooperator
+#: model:ir.model.fields,field_description:l10n_ch_cooperator.field_res_partner__legal_form
+#: model:ir.model.fields,field_description:l10n_ch_cooperator.field_res_users__legal_form
+msgid "Legal form"
+msgstr ""
+
+#. module: l10n_ch_cooperator
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__res_partner__legal_form__snc
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__subscription_request__company_type__snc
+msgid "Partnership"
+msgstr ""
+
+#. module: l10n_ch_cooperator
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__res_partner__legal_form__sa
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__subscription_request__company_type__sa
+msgid "SA / SAS"
+msgstr ""
+
+#. module: l10n_ch_cooperator
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__res_partner__legal_form__sarl
+#: model:ir.model.fields.selection,name:l10n_ch_cooperator.selection__subscription_request__company_type__sarl
+msgid "SARL"
+msgstr ""
+
+#. module: l10n_ch_cooperator
+#: model:ir.model,name:l10n_ch_cooperator.model_subscription_request
+msgid "Subscription Request"
+msgstr ""
