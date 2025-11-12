@@ -1,3 +1,11 @@
+16.0.1.2.4 (2025-11-12)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Bugfixes**
+
+- Rename obsolete occurrences of the ``blocked`` ``subscription.request`` state still present as ``block``. (`#150 <https://github.com/OCA/cooperative/issues/150>`_)
+
+
 16.0.1.2.3 (2025-10-06)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
