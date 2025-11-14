@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-06-21 13:27+0000\n"
+"PO-Revision-Date: 2025-11-14 18:43+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -2799,13 +2799,13 @@ msgstr "Resoconto registro iscrizione"
 #. module: cooperator
 #: model:ir.model,name:cooperator.model_subscription_request
 msgid "Subscription Request"
-msgstr "Richista iscrizione"
+msgstr "Richiesta iscrizione"
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
 msgid "Subscription Requests"
-msgstr "Richiste iscrizione"
+msgstr "Richieste iscrizione"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__subscription_amount
@@ -2831,7 +2831,7 @@ msgstr "Registro iscrizione"
 #: model:ir.model.fields,field_description:cooperator.field_res_partner__subscription_request_ids
 #: model:ir.model.fields,field_description:cooperator.field_res_users__subscription_request_ids
 msgid "Subscription request"
-msgstr "Richista iscrizione"
+msgstr "Richiesta iscrizione"
 
 #. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_waiting_list
