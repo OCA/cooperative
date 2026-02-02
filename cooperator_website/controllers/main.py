@@ -263,6 +263,11 @@ class WebsiteSubscription(http.Controller):
         """
         return True
 
+    def get_share_minimum_quantity(self, share):
+        if share.force_min_qty:
+            return share.minimum_quantity
+        return 1
+
     def validation(  # noqa: C901 (method too complex)
         self, kwargs, logged, values, post_file
     ):
@@ -341,6 +346,17 @@ class WebsiteSubscription(http.Controller):
                     values["error"] = {"iban"}
                     return request.render(redirect, values)
 
+        share = self.get_selected_share(kwargs)
+        # check subscription respect min qty of shares
+        min_qty = self.get_share_minimum_quantity(share)
+        share_qty = int(kwargs.get("ordered_parts"))
+        if share_qty <= min_qty:
+            values = self.fill_values(values, is_company, logged)
+            values["error_msg"] = _(
+                "Number of shares must be at least {min_qty}."
+            ).format(min_qty=min_qty)
+            return request.render(redirect, values)
+
         # check the subscription's amount
         max_amount = company.subscription_maximum_amount
         if logged:
@@ -348,14 +364,13 @@ class WebsiteSubscription(http.Controller):
             if partner.member:
                 max_amount = max_amount - partner.total_value
                 if company.unmix_share_type:
-                    share = self.get_selected_share(kwargs)
                     if partner.cooperator_type != share.default_code:
                         values = self.fill_values(values, is_company, logged)
                         values["error_msg"] = _(
                             "You can't subscribe to two different types of share."
                         )
                         return request.render(redirect, values)
-        total_amount = float(kwargs.get("total_parts"))
+        total_amount = share_qty * share.list_price
 
         if max_amount > 0 and total_amount > max_amount:
             values = self.fill_values(values, is_company, logged)
