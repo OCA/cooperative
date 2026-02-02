@@ -849,8 +849,10 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         self.assertFalse(partner.coop_candidate)
         self.assertFalse(partner.old_member)
         self.assertNotEqual(partner.cooperator_register_number, 0)
-        self.assertEqual(partner.number_of_share, 2)
-        self.assertEqual(partner.total_value, 50)
+        self.assertEqual(partner.number_of_share, vals["ordered_parts"])
+        self.assertEqual(
+            partner.total_value, vals["ordered_parts"] * self.share_y.list_price
+        )
         self.assertEqual(partner.cooperator_type, "share_y")
         self.assertEqual(partner.effective_date, date(2023, 6, 21))
         # fixme: these should probably be true. see comment in
@@ -918,8 +920,10 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         self.assertFalse(partner.coop_candidate)
         self.assertFalse(partner.old_member)
         self.assertNotEqual(partner.cooperator_register_number, 0)
-        self.assertEqual(partner.number_of_share, 2)
-        self.assertEqual(partner.total_value, 50)
+        self.assertEqual(partner.number_of_share, vals["ordered_parts"])
+        self.assertEqual(
+            partner.total_value, vals["ordered_parts"] * self.share_y.list_price
+        )
         self.assertEqual(partner.cooperator_type, "share_y")
         self.assertEqual(partner.effective_date, date(2023, 6, 21))
         self.assertTrue(partner.data_policy_approved)
@@ -1196,12 +1200,13 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
                 "source": "operation",
             }
         )
+        transfer_qty = 1
         operation_request = self.env["operation.request"].create(
             {
                 "operation_type": "transfer",
                 "partner_id": cooperator.id,
                 "share_product_id": self.share_y.id,
-                "quantity": 1,
+                "quantity": transfer_qty,
                 "receiver_not_member": True,
                 "subscription_request": [
                     fields.Command.create(subscription_request_vals)
@@ -1213,7 +1218,10 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         operation_request.approve_operation()
         last_register_id = self._get_last_register_id()
         operation_request.execute_operation()
-        self.assertEqual(cooperator.number_of_share, 1)
+        self.assertEqual(
+            cooperator.number_of_share,
+            subscription_request_vals["ordered_parts"] - transfer_qty,
+        )
         new_cooperator = self.env["res.partner"].search(
             [("email", "=", "email2@example.net")]
         )
@@ -1254,15 +1262,18 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
             )
             for field in ["address", "zip_code", "city", "lang", "iban"]:
                 setattr(sr, field, subscription_request_vals[field])
+        transfer_qty = 1
         f.partner_id = cooperator
         f.share_product_id = self.share_y
-        f.quantity = 1
+        f.quantity = transfer_qty
         operation_request = f.save()
         self.assertEqual(operation_request.subscription_request.state, "transfer")
         self.assertEqual(
             operation_request.subscription_request.share_product_id, self.share_y
         )
-        self.assertEqual(operation_request.subscription_request.ordered_parts, 1)
+        self.assertEqual(
+            operation_request.subscription_request.ordered_parts, transfer_qty
+        )
         operation_request.submit_operation()
         operation_request.approve_operation()
 
@@ -1288,25 +1299,32 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         new_cooperator = self.env["res.partner"].search(
             [("email", "=", "email2@example.net")]
         )
+        transfer_qty = 1
         operation_request = self.env["operation.request"].create(
             {
                 "operation_type": "transfer",
                 "partner_id": cooperator.id,
                 "partner_id_to": new_cooperator.id,
                 "share_product_id": self.share_y.id,
-                "quantity": 1,
+                "quantity": transfer_qty,
             }
         )
         operation_request.submit_operation()
         operation_request.approve_operation()
         last_register_id = self._get_last_register_id()
         operation_request.execute_operation()
-        self.assertEqual(cooperator.number_of_share, 1)
-        self.assertEqual(new_cooperator.number_of_share, 3)
+        self.assertEqual(
+            cooperator.number_of_share,
+            subscription_request_vals["ordered_parts"] - transfer_qty,
+        )
+        self.assertEqual(
+            new_cooperator.number_of_share,
+            subscription_request_vals["ordered_parts"] + transfer_qty,
+        )
         register_entry = self._get_new_register_records(last_register_id)
         self.assertEqual(register_entry.partner_id, cooperator)
         self.assertEqual(register_entry.partner_id_to, new_cooperator)
-        self.assertEqual(register_entry.quantity, 1)
+        self.assertEqual(register_entry.quantity, transfer_qty)
         self.assertEqual(register_entry.share_product_id, self.share_y)
         self.assertEqual(register_entry.type, "transfer")
         self.assertEqual(register_entry.share_unit_price, self.share_y.list_price)

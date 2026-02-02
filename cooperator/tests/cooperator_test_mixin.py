@@ -36,6 +36,8 @@ class CooperatorTestMixin:
                 "categ_id": company_share_category.id,
                 "is_share": True,
                 "default_share_product": True,
+                "force_min_qty": True,
+                "minimum_quantity": 2,
                 "by_individual": True,
                 "by_company": True,
                 "list_price": 25,
