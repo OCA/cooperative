@@ -333,7 +333,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 </div>
             </div>
             <div class="col-md-3 col-6" name="total_parts_container">
-                <div id="share_price" style="display: none;" />
                 <label for="total_parts" class="form-label">Total</label>
                 <div class="input-group input-group-sm mb-3 has-validation">
                     <span class="input-group-text" t-out="company.currency_id.symbol" />

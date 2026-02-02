@@ -1,0 +1,1 @@
+Fix the validation of the minimum number of shares on the website form.
