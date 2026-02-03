@@ -9,41 +9,46 @@ odoo.define("cooperator.oe_cooperator", function (require) {
         var ajax = require("web.ajax");
 
         $(".oe_cooperator").each(function () {
-            var oe_cooperator = this;
+            var $oe_cooperator = $(this);
+            var $share_product_id = $oe_cooperator.find("#share_product_id");
+            var $ordered_parts = $oe_cooperator.find("#ordered_parts");
+            var share_price = 0;
+            var min_qty = 0;
 
-            $("#share_product_id").change(function () {
-                var share_product_id = $("#share_product_id").val();
+            $share_product_id.on("change", function () {
+                var share_product_id = $share_product_id.val();
                 ajax.jsonRpc("/subscription/get_share_product", "call", {
                     share_product_id: share_product_id,
                 }).then(function (data) {
-                    $("#share_price").text(data[share_product_id].list_price);
-                    $("#ordered_parts").val(data[share_product_id].min_qty);
-                    if (data[share_product_id].force_min_qty === true) {
-                        $("#ordered_parts").data("min", data[share_product_id].min_qty);
+                    var share_product = data[share_product_id];
+                    share_price = share_product.list_price;
+                    min_qty = share_product.min_qty;
+                    var suggested_qty = min_qty;
+                    if (!share_product.force_min_qty) {
+                        min_qty = 1;
                     }
-                    $("#ordered_parts").change();
-                    var $share_price = $("#share_price").text();
-                    $('input[name="total_parts"]').val(
-                        $("#ordered_parts").val() * $share_price
-                    );
-                    $('input[name="total_parts"]').change();
+                    $ordered_parts.attr("min", min_qty);
+                    if ($ordered_parts.val() < suggested_qty) {
+                        $ordered_parts.val(suggested_qty);
+                    }
+                    // Update the share quantity and the total price by
+                    // triggering the event which will call the function
+                    // below.
+                    $ordered_parts.trigger("change");
                 });
             });
 
-            $(oe_cooperator).on("change", "#ordered_parts", function (event) {
-                var $share_price = $("#share_price").text();
-                var $link = $(event.currentTarget);
-                var quantity = $link[0].value;
-                var total_part = quantity * $share_price;
-                $("#total_parts").val(total_part);
-                return false;
+            $ordered_parts.on("change", function () {
+                var quantity = $ordered_parts.val();
+                if (quantity < min_qty) {
+                    quantity = min_qty;
+                    $ordered_parts.val(quantity);
+                }
+                $('input[name="total_parts"]').val(quantity * share_price);
             });
 
-            $(oe_cooperator).on("focusout", "input.js_quantity", function () {
-                $("a.js_add_cart_json").trigger("click");
-            });
-
-            $("#share_product_id").trigger("change");
+            // Compute initial values.
+            $share_product_id.trigger("change");
         });
     });
 });
