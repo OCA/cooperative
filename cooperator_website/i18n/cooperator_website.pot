@@ -224,6 +224,13 @@ msgid "Main Address"
 msgstr ""
 
 #. module: cooperator_website
+#. odoo-python
+#: code:addons/cooperator_website/controllers/main.py:0
+#, python-format
+msgid "Number of shares must be at least {min_qty}."
+msgstr ""
+
+#. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
 msgid "Phone"
 msgstr ""
