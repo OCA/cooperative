@@ -43,8 +43,7 @@ msgstr "<option value=\"\">Nazione...</option>"
 
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.cooperator_thanks
-msgid ""
-"<span>Your subscription has been <b>successfully</b> registered.</span>"
+msgid "<span>Your subscription has been <b>successfully</b> registered.</span>"
 msgstr "<span>La sua iscrizione è stata registrata <b>con successo</b>.</span>"
 
 #. module: cooperator_website
@@ -229,6 +228,13 @@ msgid "Main Address"
 msgstr "Indirizzo principale"
 
 #. module: cooperator_website
+#. odoo-python
+#: code:addons/cooperator_website/controllers/main.py:0
+#, python-format
+msgid "Number of shares must be at least {min_qty}."
+msgstr ""
+
+#. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
 msgid "Phone"
 msgstr "Telefono"
@@ -291,8 +297,8 @@ msgstr "Totale"
 msgid ""
 "You can't subscribe for an amount that exceeds {amount}{currency_symbol}."
 msgstr ""
-"Non è possibile sottoscrivere un valore superiore a "
-"{amount}{currency_symbol}."
+"Non è possibile sottoscrivere un valore superiore a {amount}"
+"{currency_symbol}."
 
 #. module: cooperator_website
 #. odoo-python
