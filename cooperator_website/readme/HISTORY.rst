@@ -1,3 +1,11 @@
+16.0.1.0.1 (2026-02-03)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Bugfixes**
+
+- Fix the validation of the minimum number of shares on the website form. (`#174 <https://github.com/OCA/cooperative/issues/174>`_)
+
+
 16.0.1.0.0 (2023-12-04)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
