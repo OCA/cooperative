@@ -45,8 +45,7 @@ msgstr "<option value=\"\">País...</option>"
 
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.cooperator_thanks
-msgid ""
-"<span>Your subscription has been <b>successfully</b> registered.</span>"
+msgid "<span>Your subscription has been <b>successfully</b> registered.</span>"
 msgstr ""
 "<span>La vostra sol·licitud ha estat <b>registrada correctament</b>.</span>"
 
@@ -227,6 +226,13 @@ msgstr ""
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
 msgid "Main Address"
+msgstr ""
+
+#. module: cooperator_website
+#. odoo-python
+#: code:addons/cooperator_website/controllers/main.py:0
+#, python-format
+msgid "Number of shares must be at least {min_qty}."
 msgstr ""
 
 #. module: cooperator_website
