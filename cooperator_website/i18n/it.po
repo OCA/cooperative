@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-07-10 08:58+0000\n"
+"PO-Revision-Date: 2026-02-04 08:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
@@ -232,7 +232,7 @@ msgstr "Indirizzo principale"
 #: code:addons/cooperator_website/controllers/main.py:0
 #, python-format
 msgid "Number of shares must be at least {min_qty}."
-msgstr ""
+msgstr "Il numero di quote deve essere almeno {min_qty}."
 
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
