@@ -74,7 +74,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="birthdate"
-                        placeholder="1978-03-05"
+                        t-att-max="datetime.date.today().strftime('%Y-%m-%d')"
+                        min="1000-01-01"
                     />
                 </div>
             </div>

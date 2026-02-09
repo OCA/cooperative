@@ -1,0 +1,1 @@
+Ensure that the date of birth entered on the subscription form has at least 4 digits and is not in the future.

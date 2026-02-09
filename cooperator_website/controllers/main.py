@@ -5,7 +5,7 @@
 
 import base64
 import re
-from datetime import datetime
+from datetime import date, datetime
 from urllib.parse import urljoin
 
 from odoo import http
@@ -325,6 +325,22 @@ class WebsiteSubscription(http.Controller):
 
         # There's no issue with the email, so we can remember the confirmation email
         values["confirm_email"] = email
+
+        # check the birthdate
+        birthdate = date.fromisoformat(kwargs["birthdate"])
+        if birthdate > date.today():
+            values["error_msg"] = _("Date of birth cannot be in the future.")
+        min_date = date(1000, 1, 1)
+        if birthdate < min_date:
+            values["error_msg"] = _(
+                "Please enter the full birth year with all digits "
+                "(e.g., 1990, not 90)."
+            )
+        if "error_msg" in values:
+            # error message is set: the birthdate is incorrect
+            values = self.fill_values(values, is_company, logged)
+            values["error"] = {"birthdate"}
+            return request.render(redirect, values)
 
         company = request.website.company_id
         if company.allow_id_card_upload:
