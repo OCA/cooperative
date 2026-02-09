@@ -53,6 +53,21 @@ class SubscriptionRequest(models.Model):
             required_fields.append("generic_rules_approved")
         return required_fields
 
+    @api.constrains("birthdate")
+    def _check_birthdate(self):
+        for request in self:
+            if request.birthdate:
+                if request.birthdate > date.today():
+                    raise ValidationError(_("Date of birth cannot be in the future."))
+                min_date = date(1000, 1, 1)
+                if request.birthdate < min_date:
+                    raise ValidationError(
+                        _(
+                            "Please enter the full birth year with all digits "
+                            "(e.g., 1990, not 90)."
+                        )
+                    )
+
     @api.constrains("share_product_id", "is_company")
     def _check_share_available_to_user(self):
         for request in self:
