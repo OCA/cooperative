@@ -1,3 +1,11 @@
+16.0.1.0.2 (2026-02-13)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Bugfixes**
+
+- Fix validation error when the number of shares is equal to the minimum quantity. (`#177 <https://github.com/OCA/cooperative/issues/177>`_)
+
+
 16.0.1.0.1 (2026-02-03)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
