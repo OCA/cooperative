@@ -1,0 +1,1 @@
+Fix validation error when the number of shares is equal to the minimum quantity.
