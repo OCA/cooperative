@@ -350,7 +350,7 @@ class WebsiteSubscription(http.Controller):
         # check subscription respect min qty of shares
         min_qty = self.get_share_minimum_quantity(share)
         share_qty = int(kwargs.get("ordered_parts"))
-        if share_qty <= min_qty:
+        if share_qty < min_qty:
             values = self.fill_values(values, is_company, logged)
             values["error_msg"] = _(
                 "Number of shares must be at least {min_qty}."
