@@ -1004,6 +1004,13 @@ msgid "Date of birth"
 msgstr ""
 
 #. module: cooperator
+#. odoo-python
+#: code:addons/cooperator/models/subscription_request.py:0
+#, python-format
+msgid "Date of birth cannot be in the future."
+msgstr ""
+
+#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__default_capital_release_request_payment_term
 #: model:ir.model.fields,field_description:cooperator.field_res_config_settings__capital_release_request_payment_term_default
 msgid "Default Payment Term"
@@ -1900,6 +1907,13 @@ msgstr ""
 msgid ""
 "Please define income account for this product: \"{name}\" (id: {id}) - or "
 "for its category: \"{category}\"."
+msgstr ""
+
+#. module: cooperator
+#. odoo-python
+#: code:addons/cooperator/models/subscription_request.py:0
+#, python-format
+msgid "Please enter the full birth year with all digits (e.g., 1990, not 90)."
 msgstr ""
 
 #. module: cooperator
