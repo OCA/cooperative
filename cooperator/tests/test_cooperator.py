@@ -1634,3 +1634,15 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         self.assertEqual(inactive_user.company_ids, self.env.company)
         self.assertEqual(inactive_user.company_id, self.env.company)
         self.assertTrue(inactive_user.active)
+
+    @users("user-cooperator")
+    def test_cooperator_birthdate_constraint(self):
+        """
+        Test that the birthdate is correctly validated on subscription request
+        """
+        self.subscription_request_1.validate_subscription_request()
+        with self.assertRaises(ValidationError):
+            self.subscription_request_1.birthdate = "0080-01-01"
+        date_tomorrow = date.today() + timedelta(days=1)
+        with self.assertRaises(ValidationError):
+            self.subscription_request_1.birthdate = date_tomorrow
