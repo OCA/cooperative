@@ -29,11 +29,6 @@ msgid "1030"
 msgstr ""
 
 #. module: cooperator_website
-#: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
-msgid "1978-03-05"
-msgstr ""
-
-#. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
 msgid "<option value=\"\">Country...</option>"
 msgstr ""
@@ -136,6 +131,13 @@ msgid "Date of birth"
 msgstr ""
 
 #. module: cooperator_website
+#. odoo-python
+#: code:addons/cooperator_website/controllers/main.py:0
+#, python-format
+msgid "Date of birth cannot be in the future."
+msgstr ""
+
+#. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
 msgid "Didier"
 msgstr ""
@@ -233,6 +235,13 @@ msgstr ""
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
 msgid "Phone"
+msgstr ""
+
+#. module: cooperator_website
+#. odoo-python
+#: code:addons/cooperator_website/controllers/main.py:0
+#, python-format
+msgid "Please enter the full birth year with all digits (e.g., 1990, not 90)."
 msgstr ""
 
 #. module: cooperator_website
