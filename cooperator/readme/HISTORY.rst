@@ -1,3 +1,11 @@
+16.0.1.3.0 (2026-02-23)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Ensure that the birthdate field of subscription requests has at least 4 digits and is not in the future. (`#176 <https://github.com/OCA/cooperative/issues/176>`_)
+
+
 16.0.1.2.4 (2025-11-12)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
