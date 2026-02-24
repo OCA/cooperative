@@ -1896,6 +1896,11 @@ msgid "Payment Received Confirmation: Cooperator Certificate"
 msgstr ""
 
 #. module: cooperator
+#: model:ir.model,name:cooperator.model_account_payment
+msgid "Payments"
+msgstr ""
+
+#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__phone
 msgid "Phone"
 msgstr ""
