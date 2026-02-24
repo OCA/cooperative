@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-02-04 08:37+0000\n"
+"PO-Revision-Date: 2026-02-24 10:09+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -139,7 +139,7 @@ msgstr "Data di nascita"
 #: code:addons/cooperator_website/controllers/main.py:0
 #, python-format
 msgid "Date of birth cannot be in the future."
-msgstr ""
+msgstr "La data di nascita non può essere nel futuro."
 
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
@@ -246,7 +246,7 @@ msgstr "Telefono"
 #: code:addons/cooperator_website/controllers/main.py:0
 #, python-format
 msgid "Please enter the full birth year with all digits (e.g., 1990, not 90)."
-msgstr ""
+msgstr "Inserire l'anno di nascita con tutte le cifre (es. 1990, non 90)."
 
 #. module: cooperator_website
 #. odoo-python
