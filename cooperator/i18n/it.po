@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-11-14 18:43+0000\n"
+"PO-Revision-Date: 2026-02-24 10:09+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: cooperator
 #. odoo-python
@@ -1225,7 +1225,7 @@ msgstr "Data di nascita"
 #: code:addons/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "Date of birth cannot be in the future."
-msgstr ""
+msgstr "La data di nascita non può essere nel futuro."
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__default_capital_release_request_payment_term
@@ -2147,7 +2147,7 @@ msgstr ""
 #: code:addons/cooperator/models/subscription_request.py:0
 #, python-format
 msgid "Please enter the full birth year with all digits (e.g., 1990, not 90)."
-msgstr ""
+msgstr "Inserire l'anno di nascita con tutte le cifre (es. 1990, non 90)."
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_operation_request__share_to_unit_price
