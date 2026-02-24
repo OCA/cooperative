@@ -6,7 +6,7 @@
 
 {
     "name": "Cooperator Portal",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.1.0",
     "depends": [
         "cooperator",
         "portal",
