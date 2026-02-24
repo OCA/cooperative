@@ -1,3 +1,17 @@
+16.0.1.2.0 (2026-02-24)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Pass created subscription request to ``.get_subscription_response()`` to allow for dependent modules to access it. (`#163 <https://github.com/OCA/cooperative/issues/163>`_)
+
+
+**Bugfixes**
+
+- Correctly detect whether a user is logged in when displaying the subscription form. This was only working correctly with the first company. (`#163 <https://github.com/OCA/cooperative/issues/163>`_)
+- Ensure that the number of parts field can correctly be passed as an argument to the subscription form and that its value is kept in case of errors when submitting the form. (`#163 <https://github.com/OCA/cooperative/issues/163>`_)
+
+
 16.0.1.1.0 (2026-02-23)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
