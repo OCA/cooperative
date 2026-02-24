@@ -74,10 +74,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             attrs="{'invisible': ['|', ('parent_id', '=', False), ('is_company', '=', True)]}"
                         />
                         <field
-                            name="legal_form"
-                            attrs="{'invisible': [('is_company', '=', False)]}"
-                        />
-                        <field
                             name="company_register_number"
                             attrs="{'invisible': [('is_company', '=', False)], 'readonly': [('id', '!=', False)]}"
                         />

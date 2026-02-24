@@ -120,7 +120,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                 attrs="{'invisible': [('is_company', '=', False)], 'required': [('is_company', '=', True)]}"
                             />
                             <field
-                                name="company_type"
+                                name="partner_company_type_id"
                                 attrs="{'invisible': [('is_company', '=', False)]}"
                             />
                             <field

@@ -10,11 +10,12 @@
 {
     "name": "Cooperators Belgium",
     "summary": "Cooperators Belgium Localization",
-    "version": "16.0.1.2.1",
+    "version": "16.0.2.0.0",
     "depends": [
         "cooperator",
         "cooperator_website",
         "l10n_be",
+        "l10n_be_partner_company_type",
     ],
     "author": "Coop IT Easy SC, Odoo Community Association (OCA)",
     "category": "Cooperative management",

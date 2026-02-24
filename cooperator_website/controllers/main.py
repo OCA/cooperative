@@ -66,7 +66,7 @@ _COMPANY_FORM_FIELD = [
     "ordered_parts",
     "total_parts",
     "error_msg",
-    "company_type",
+    "partner_company_type_id",
 ]
 
 
@@ -152,7 +152,7 @@ class WebsiteSubscription(http.Controller):
                 values["company_register_number"] = partner.company_register_number
                 values["company_name"] = partner.name
                 values["company_email"] = partner.email
-                values["company_type"] = partner.legal_form
+                values["partner_company_type_id"] = partner.partner_company_type_id.id
                 # contact person values
                 representative = partner.get_representative()
                 values["firstname"] = representative.firstname
@@ -186,11 +186,19 @@ class WebsiteSubscription(http.Controller):
             values["is_company"] = "on"
         if logged:
             values["logged"] = "on"
+
         values["countries"] = self.get_countries()
+        if company.default_country_id:
+            country_id = company.default_country_id.id
+        else:
+            country_id = company.country_id.id
+        if not values.get("country_id"):
+            values["country_id"] = country_id
+
         values["langs"] = self.get_langs()
         values["products"] = products
-        fields_desc = sub_req_obj.sudo().fields_get(["company_type", "gender"])
-        values["company_types"] = fields_desc["company_type"]["selection"]
+        values["partner_company_type_ids"] = self.get_company_types(country_id)
+        fields_desc = sub_req_obj.sudo().fields_get(["gender"])
         values["genders"] = fields_desc["gender"]["selection"]
         values["company"] = company
 
@@ -201,16 +209,6 @@ class WebsiteSubscription(http.Controller):
                     break
             if not values.get("share_product_id", False) and products:
                 values["share_product_id"] = products[0].id
-        if not values.get("country_id"):
-            if company.default_country_id:
-                values["country_id"] = company.default_country_id.id
-            else:
-                values["country_id"] = "20"
-        if not values.get("activities_country_id"):
-            if company.default_country_id:
-                values["activities_country_id"] = company.default_country_id.id
-            else:
-                values["activities_country_id"] = "20"
         if not values.get("lang"):
             if company.default_lang_id:
                 values["lang"] = company.default_lang_id.code
@@ -236,17 +234,23 @@ class WebsiteSubscription(http.Controller):
     def get_products_share(self, is_company):
         product_obj = request.env["product.template"]
         products = product_obj.sudo().get_web_share_products(is_company)
-
         return products
 
     def get_countries(self):
         countries = request.env["res.country"].sudo().search([])
-
         return countries
 
     def get_langs(self):
         langs = request.env["res.lang"].sudo().search([])
         return langs
+
+    def get_company_types(self, country_id):
+        company_types = (
+            request.env["res.partner.company.type"]
+            .sudo()
+            .search([("country_ids", "in", country_id)])
+        )
+        return company_types
 
     def get_selected_share(self, kwargs):
         prod_obj = request.env["product.template"]
