@@ -44,6 +44,16 @@ Known issues / Roadmap
 
 * If the user goes back to the payment page after a successful payment, they will normally be redirected to the confirmation page, but if they somehow manage to display the payment page, the system will not prevent them from making a new payment.
 
+Changelog
+=========
+
+16.0.1.0.0 (2026-02-24)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Initial release: enable direct online payment of cooperative shares during the subscription process. (`#163 <https://github.com/OCA/cooperative/issues/163>`_)
+
 Bug Tracker
 ===========
 
