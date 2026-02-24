@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2025 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+
+    <template
+        id="report_invoice_document"
+        inherit_id="cooperator.report_invoice_document"
+    >
+        <!-- remove contact if it is a public user -->
+        <xpath
+            expr="//div[@id='informations']/div[@name='contact']"
+            position="attributes"
+        >
+            <attribute name="t-if">not o.user_id._is_public()</attribute>
+        </xpath>
+    </template>
+
+</odoo>

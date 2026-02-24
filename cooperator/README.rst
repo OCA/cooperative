@@ -105,6 +105,19 @@ memberships of all companies or only the ones in which the user is â€œlogged inâ
 Changelog
 =========
 
+16.0.1.4.0 (2026-02-24)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Allow to pay capital release requests in the portal. (`#163 <https://github.com/OCA/cooperative/issues/163>`_)
+
+
+**Bugfixes**
+
+- Fix rare access error that can happen when querying share types. (`#163 <https://github.com/OCA/cooperative/issues/163>`_)
+
+
 16.0.1.3.0 (2026-02-23)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

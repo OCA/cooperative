@@ -1,3 +1,11 @@
+16.0.1.1.0 (2026-02-24)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Allow to pay capital release requests in the portal. (`#163 <https://github.com/OCA/cooperative/issues/163>`_)
+
+
 16.0.1.0.1 (2024-06-11)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

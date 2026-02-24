@@ -40,7 +40,7 @@ _COOP_FORM_FIELD = [
     "country_id",
     "phone",
     "lang",
-    "nb_parts",
+    "ordered_parts",
     "total_parts",
     "error_msg",
 ]
@@ -63,7 +63,7 @@ _COMPANY_FORM_FIELD = [
     "country_id",
     "phone",
     "lang",
-    "nb_parts",
+    "ordered_parts",
     "total_parts",
     "error_msg",
     "company_type",
@@ -80,7 +80,7 @@ class WebsiteSubscription(http.Controller):
     def display_become_cooperator_page(self, **kwargs):
         values = {}
         logged = False
-        if request.env.user.login != "public":
+        if not request.website.is_public_user():
             logged = True
             partner = request.env.user.partner_id
             if partner.is_company:
@@ -106,7 +106,7 @@ class WebsiteSubscription(http.Controller):
         values = {}
         logged = False
 
-        if request.env.user.login != "public":
+        if not request.website.is_public_user():
             logged = True
         values = self.fill_values(values, True, logged, True)
 
@@ -134,7 +134,7 @@ class WebsiteSubscription(http.Controller):
 
     def get_values_from_user(self, values, is_company):
         # the subscriber is connected
-        if request.env.user.login != "public":
+        if not request.website.is_public_user():
             values["logged"] = "on"
             partner = request.env.user.partner_id
 
@@ -497,16 +497,16 @@ class WebsiteSubscription(http.Controller):
                     "[^0-9a-zA-Z]+", "", kwargs.get("company_register_number")
                 )
 
-        subscription_id = sub_req_obj.sudo().create(values)
+        subscription_request = sub_req_obj.sudo().create(values)
+        values["subscription_request"] = subscription_request
 
-        if subscription_id:
-            for field_value in post_file:
-                attachment_value = {
-                    "name": field_value.filename,
-                    "res_model": "subscription.request",
-                    "res_id": subscription_id,
-                    "datas": base64.encodebytes(field_value.read()),
-                }
-                attach_obj.sudo().create(attachment_value)
+        for field_value in post_file:
+            attachment_value = {
+                "name": field_value.filename,
+                "res_model": "subscription.request",
+                "res_id": subscription_request,
+                "datas": base64.encodebytes(field_value.read()),
+            }
+            attach_obj.sudo().create(attachment_value)
 
         return self.get_subscription_response(values, kwargs)
