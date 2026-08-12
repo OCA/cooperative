@@ -13,21 +13,15 @@ from odoo.addons.account.controllers.portal import PortalAccount, portal_pager
 
 
 class CooperatorPortal(PortalAccount):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Class scope is accessible throughout the server even on
-        # odoo instances that do not install this module.
-
-        # Therefore : bring back to instance scope if not already
-        #  if "MANDATORY_BILLING_FIELDS" in vars(self):
-        if "MANDATORY_BILLING_FIELDS" not in vars(self):
-            self.MANDATORY_BILLING_FIELDS = (
-                PortalAccount.MANDATORY_BILLING_FIELDS.copy()
-            )
-
-        self.MANDATORY_BILLING_FIELDS.extend(
-            ["iban", "birthdate_date", "gender", "lang"]
-        )
+    def _get_mandatory_fields(self):
+        # since v18 the billing field lists are methods instead of
+        # class attributes
+        return super()._get_mandatory_fields() + [
+            "iban",
+            "birthdate_date",
+            "gender",
+            "lang",
+        ]
 
     def _prepare_portal_layout_values(self):
         values = super()._prepare_portal_layout_values()
@@ -68,23 +62,29 @@ class CooperatorPortal(PortalAccount):
                 request.env["account.move"].search_count(
                     self._get_capital_release_requests_domain()
                 )
-                if request.env["account.move"].check_access_rights(
-                    "read", raise_exception=False
-                )
+                if request.env["account.move"].has_access("read")
                 else 0
             )
             values["capital_release_request_count"] = capital_release_request_count
         return values
 
-    def _get_page_view_values(
-        self, document, access_token, values, session_history, no_breadcrumbs, **kwargs
-    ):
-        invoice = values.get("invoice")
-        if invoice is not None and invoice.release_capital_request:
-            values["page_name"] = "capital_release_request"
-            session_history = "my_capital_release_requests_history"
-        return super()._get_page_view_values(
-            document, access_token, values, session_history, no_breadcrumbs, **kwargs
+    def _invoice_get_page_view_values(self, invoice, access_token, **kwargs):
+        if not invoice.release_capital_request:
+            return super()._invoice_get_page_view_values(
+                invoice, access_token, **kwargs
+            )
+        # page_name is needed for the breadcrumbs
+        values = {
+            "page_name": "capital_release_request",
+            "invoice": invoice,
+        }
+        return self._get_page_view_values(
+            invoice,
+            access_token,
+            values,
+            "my_capital_release_requests_history",
+            False,
+            **kwargs,
         )
 
     def _get_invoices_domain(self):
@@ -137,7 +137,7 @@ class CooperatorPortal(PortalAccount):
         return res
 
     # this method is a copy of PortalAccount.portal_my_invoices() from the
-    # account module in odoo 16, with a few changes. please update accordingly
+    # account module in odoo 18, with a few changes. please update accordingly
     # when porting to newer versions.
     @route(
         [
@@ -169,7 +169,10 @@ class CooperatorPortal(PortalAccount):
 
         # content according to pager and archive selected
         invoices = values["invoices"](pager["offset"])
-        request.session["my_capital_release_requests_history"] = invoices.ids[:100]
+        # since v18 the lazy loader returns a list of dicts with payment info
+        request.session["my_capital_release_requests_history"] = [
+            entry["invoice"].id for entry in invoices
+        ][:100]
 
         values.update(
             {
@@ -197,8 +200,14 @@ class CooperatorPortal(PortalAccount):
     def portal_my_capital_release_request_detail(
         self, invoice_id, access_token=None, report_type=None, download=False, **kw
     ):
+        # keyword arguments: account_payment redefines the positional
+        # signature of portal_my_invoice_detail in v18
         return self.portal_my_invoice_detail(
-            invoice_id, access_token, report_type, download, **kw
+            invoice_id,
+            access_token=access_token,
+            report_type=report_type,
+            download=download,
+            **kw,
         )
 
     @route(

@@ -11,7 +11,5 @@ class AccountMove(models.Model):
     def _compute_access_url(self):
         result = super()._compute_access_url()
         for move in self.filtered(lambda move: move.release_capital_request):
-            move.access_url = "/my/capital_release_requests/{move_id}".format(
-                move_id=move.id
-            )
+            move.access_url = f"/my/capital_release_requests/{move.id}"
         return result

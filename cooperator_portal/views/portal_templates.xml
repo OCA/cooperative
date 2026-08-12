@@ -8,7 +8,6 @@ SPDX-FileContributor: Houssine Bakkali <houssine@coopiteasy.be>
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <template
         id="portal_my_details_fields"
         inherit_id="portal.portal_my_details_fields"
@@ -84,80 +83,80 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </template>
 
     <!-- Add cooperator information -->
-    <template id="portal_layout" inherit_id="portal.portal_layout">
+    <template id="portal_layout" inherit_id="portal.side_content">
         <xpath expr="//div[hasclass('o_portal_my_details')]" position="after">
             <div class="o_portal_my_details_coop mt-3" t-if="coop_membership.member">
                 <h4>Cooperator Details</h4>
                 <hr class="mt-1 mb-1" />
                 You are an effective cooperator.
                 <div t-if="coop_membership.cooperator_register_number">
-                    <label>Cooperator Number:</label>
-                    <span t-field="coop_membership.cooperator_register_number" />
-                </div>
+                <label>Cooperator Number:</label>
+                <span t-field="coop_membership.cooperator_register_number" />
+            </div>
                 <div t-if="coop_membership.effective_date">
-                    <label>Cooperator Entrance Date:</label>
-                    <span t-field="coop_membership.effective_date" />
-                </div>
+                <label>Cooperator Entrance Date:</label>
+                <span t-field="coop_membership.effective_date" />
+            </div>
                 <div t-if="coop_membership.number_of_share">
-                    <label>Number of Shares:</label>
-                    <span t-field="coop_membership.number_of_share" />
-                </div>
+                <label>Number of Shares:</label>
+                <span t-field="coop_membership.number_of_share" />
+            </div>
                 <div t-if="coop_membership.share_ids">
-                    <t t-foreach="coop_membership.share_ids" t-as="share">
+                <t t-foreach="coop_membership.share_ids" t-as="share">
                         <span t-field="share.effective_date" />:
                         <span t-field="share.share_number" />
                         x
                         <span t-field="share.share_short_name" />
                         (<span
-                            t-field="share.share_unit_price"
-                            t-options='{"widget": "monetary", "display_currency": coop_membership.company_id.currency_id}'
-                        />):
+                    t-field="share.share_unit_price"
+                    t-options='{"widget": "monetary", "display_currency": coop_membership.company_id.currency_id}'
+                />):
                         <span
-                            t-field="share.total_amount_line"
-                            t-options='{"widget": "monetary", "display_currency": coop_membership.company_id.currency_id}'
-                        />
+                    t-field="share.total_amount_line"
+                    t-options='{"widget": "monetary", "display_currency": coop_membership.company_id.currency_id}'
+                />
                     </t>
-                </div>
+            </div>
                 <div t-if="coop_membership.total_value">
-                    <label>Total Value of Shares:</label>
-                    <span
-                        t-field="coop_membership.total_value"
-                        t-options='{"widget": "monetary", "display_currency": coop_membership.company_id.currency_id}'
-                    />
-                </div>
+                <label>Total Value of Shares:</label>
+                <span
+                    t-field="coop_membership.total_value"
+                    t-options='{"widget": "monetary", "display_currency": coop_membership.company_id.currency_id}'
+                />
+            </div>
                 <div t-if="coop_partner.gender">
-                    <label>Gender:</label>
-                    <span t-field="coop_partner.gender" />
-                </div>
+                <label>Gender:</label>
+                <span t-field="coop_partner.gender" />
+            </div>
                 <div t-if="coop_partner.birthdate_date">
-                    <label>Date of Birth:</label>
-                    <span t-field="coop_partner.birthdate_date" />
-                </div>
+                <label>Date of Birth:</label>
+                <span t-field="coop_partner.birthdate_date" />
+            </div>
                 <div t-if="coop_bank and coop_bank.acc_number">
-                    <label>Bank Account Number:</label>
-                    <span t-field="coop_bank.acc_number" />
-                </div>
+                <label>Bank Account Number:</label>
+                <span t-field="coop_bank.acc_number" />
+            </div>
                 <div
-                    t-if="coop_partner.is_company and coop_partner.company_register_number"
-                >
-                    <label>Company Register Number:</label>
-                    <span t-field="coop_partner.company_register_number" />
-                </div>
+                t-if="coop_partner.is_company and coop_partner.company_register_number"
+            >
+                <label>Company Register Number:</label>
+                <span t-field="coop_partner.company_register_number" />
+            </div>
                 <div
-                    t-if="coop_partner.is_company and coop_partner.get_representative()"
-                >
-                    <label>Legal Representative:</label>
-                    <t t-out="coop_partner.get_representative().name" />
-                </div>
+                t-if="coop_partner.is_company and coop_partner.get_representative()"
+            >
+                <label>Legal Representative:</label>
+                <t t-out="coop_partner.get_representative().name" />
+            </div>
                 <div class="o_download_pdf btn-toolbar flex-sm-nowrap mt-2">
-                    <div class="btn-group flex-grow-1 me-1 mb-1">
-                        <a
-                            class="btn btn-secondary btn-block o_download_btn"
-                            href="/my/cooperator_certificate/pdf"
-                            title="Download"
-                        ><i class="fa fa-download" /> Cooperator Certificate</a>
-                    </div>
+                <div class="btn-group flex-grow-1 me-1 mb-1">
+                    <a
+                        class="btn btn-secondary btn-block o_download_btn"
+                        href="/my/cooperator_certificate/pdf"
+                        title="Download"
+                    ><i class="fa fa-download" /> Cooperator Certificate</a>
                 </div>
+            </div>
             </div>
         </xpath>
     </template>
@@ -225,5 +224,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <th>Request Date</th>
         </xpath>
     </template>
-
 </odoo>
