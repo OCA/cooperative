@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- contact_template e usado tanto por becomecooperator (PF)
+         quanto por becomecompanycooperator (PJ) -->
+    <template
+        id="contact_template_br"
+        inherit_id="cooperator_website.contact_template"
+        name="CPF/CNPJ no formulario de cooperado"
+        priority="150"
+    >
+        <xpath expr="//div[@name='lastname_container']/../.." position="after">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3 field-vat" name="vat_container">
+                        <label for="vat" class="form-label">CPF/CNPJ</label>
+                        <input
+                            t-attf-class="form-control form-control-sm{{ error and 'vat' in error and ' is-invalid' or '' }}"
+                            id="vat"
+                            type="text"
+                            name="vat"
+                            required="true"
+                            t-att-readonly="logged"
+                            t-att-value="vat"
+                            placeholder="000.000.000-00"
+                        />
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Razao social so faz sentido para pessoa juridica -->
+    <template
+        id="become_company_cooperator_br"
+        inherit_id="cooperator_website.becomecompanycooperator"
+        name="Razao social no formulario PJ"
+        priority="150"
+    >
+        <xpath expr="//div[@name='company_name_container']" position="after">
+            <div class="mb-3 field-legal_name" name="legal_name_container">
+                <label for="legal_name" class="form-label">Razao Social</label>
+                <input
+                    t-attf-class="form-control form-control-sm{{ error and 'legal_name' in error and ' is-invalid' or '' }}"
+                    id="legal_name"
+                    type="text"
+                    name="legal_name"
+                    t-att-value="legal_name"
+                    placeholder="Empresa Exemplo Ltda"
+                />
+            </div>
+        </xpath>
+        <!-- company_register_number e preenchido a partir do CNPJ no backend,
+             entao o campo sai do formulario publico -->
+        <xpath expr="//label[@for='company_register_number']/.." position="replace" />
+    </template>
+</odoo>
