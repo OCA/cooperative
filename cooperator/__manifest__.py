@@ -8,7 +8,7 @@
 {
     "name": "Cooperators",
     "summary": "Manage your cooperators",
-    "version": "16.0.1.4.0",
+    "version": "18.0.1.0.0",
     "depends": [
         "account",
         "base_iban",
@@ -40,7 +40,7 @@
         "views/operation_request_view.xml",
         "views/account_move_views.xml",
         "views/product_view.xml",
-        "views/res_config_settings_view.xml",
+        "views/res_company_view.xml",
         "views/account_journal_views.xml",
         "views/cooperative_membership_view.xml",
         "views/menus.xml",

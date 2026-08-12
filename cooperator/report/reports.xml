@@ -6,14 +6,15 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record model="ir.actions.report" id="action_cooperator_invoices">
         <field name="model">account.move</field>
         <field name="name">Capital Release Request</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">cooperator.report_invoice</field>
         <field name="report_file">cooperator.report_invoice</field>
-        <field name="print_report_name">object._get_report_base_filename()</field>
+        <field
+            name="print_report_name"
+        >(object.name or 'capital_release_request').replace('/', '_') + (object.state == 'draft' and '_draft' or '')</field>
         <field
             name="attachment"
         >(object.state == "posted") and ((object.name or "SUBJ").replace("/", "_") + ".pdf")</field>
@@ -40,6 +41,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="report_file">cooperator.report_cooperator_certificate</field>
         <field name="multi" eval="True" />
         <field name="binding_model_id" ref="model_res_partner" />
+        <field
+            name="print_report_name"
+        >'Certificate ' + str(object.cooperator_register_number or '')</field>
         <field name="binding_type">report</field>
     </record>
 
@@ -53,5 +57,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="binding_model_id" ref="model_cooperative_membership" />
         <field name="binding_type">report</field>
     </record>
-
 </odoo>

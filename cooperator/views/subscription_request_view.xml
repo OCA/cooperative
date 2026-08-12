@@ -6,12 +6,11 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record id="subscription_request_tree" model="ir.ui.view">
-        <field name="name">subscription.request.tree</field>
+        <field name="name">subscription.request.list</field>
         <field name="model">subscription.request</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="firstname" />
                 <field name="lastname" />
                 <field name="company_name" />
@@ -36,14 +35,14 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     string="Validate"
                     aria-label="Validate"
                     name="validate_subscription_request"
-                    attrs="{'invisible':['|',('state','not in',['draft','waiting']),('is_valid_iban','=',False)]}"
+                    invisible="state not in ('draft', 'waiting') or not is_valid_iban"
                 />
                 <button
                     type="object"
                     string="Block"
                     aria-label="Block"
                     name="block_subscription_request"
-                    states="draft"
+                    invisible="state != 'draft'"
                     groups="cooperator.cooperator_group_user"
                 />
                 <button
@@ -51,10 +50,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     string="Unblock"
                     aria-label="Unblock"
                     name="unblock_subscription_request"
-                    states="blocked"
+                    invisible="state != 'blocked'"
                     groups="cooperator.cooperator_group_user"
                 />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -68,19 +67,19 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         string="Validate"
                         type="object"
                         name="validate_subscription_request"
-                        attrs="{'invisible':['|',('state','not in',['draft','waiting']),('is_valid_iban','=',False)]}"
+                        invisible="state not in ('draft', 'waiting') or not is_valid_iban"
                     />
                     <button
                         string="Waiting list"
                         type="object"
                         name="put_on_waiting_list"
-                        states="draft"
+                        invisible="state != 'draft'"
                     />
                     <button
                         string="Cancel"
                         type="object"
                         name="cancel_subscription_request"
-                        states="draft,waiting,done,blocked"
+                        invisible="state not in ('draft', 'waiting', 'done', 'blocked')"
                         groups="cooperator.cooperator_group_user"
                     />
                     <field
@@ -94,16 +93,20 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         name="web_ribbon"
                         text="Archived"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active"
                     />
                     <field name="active" invisible="True" />
                     <group>
                         <group>
                             <field name="is_valid_iban" invisible="True" />
-                            <field name="already_cooperator" />
+                            <field
+                                name="already_cooperator"
+                                readonly="state != 'draft'"
+                            />
                             <field
                                 name="is_company"
                                 groups="cooperator.cooperator_group_manager"
+                                readonly="state != 'draft'"
                             />
                             <field
                                 name="is_company"
@@ -113,55 +116,82 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             <field name="is_operation" invisible="True" />
                             <field
                                 name="company_name"
-                                attrs="{'invisible': [('is_company', '=', False)], 'required': [('is_company', '=', True)]}"
+                                invisible="not is_company"
+                                required="is_company"
+                                readonly="state != 'draft'"
                             />
                             <field
                                 name="company_email"
-                                attrs="{'invisible': [('is_company', '=', False)], 'required': [('is_company', '=', True)]}"
+                                invisible="not is_company"
+                                required="is_company"
+                                readonly="state != 'draft'"
                             />
                             <field
                                 name="company_type"
-                                attrs="{'invisible': [('is_company', '=', False)]}"
+                                invisible="not is_company"
+                                readonly="state != 'draft'"
                             />
                             <field
                                 name="company_register_number"
-                                attrs="{'invisible': [('is_company', '=', False)], 'required': [('is_company', '=', True)]}"
+                                invisible="not is_company"
+                                required="is_company"
+                                readonly="state != 'draft'"
                             />
-                            <field name="firstname" />
-                            <field name="lastname" />
-                            <field name="birthdate" />
-                            <field name="gender" />
-                            <field name="email" />
-                            <field name="phone" />
+                            <field name="firstname" readonly="state != 'draft'" />
+                            <field name="lastname" readonly="state != 'draft'" />
+                            <field name="birthdate" readonly="state != 'draft'" />
+                            <field name="gender" readonly="state != 'draft'" />
+                            <field name="email" readonly="state != 'draft'" />
+                            <field name="phone" readonly="state != 'draft'" />
                             <field
                                 name="contact_person_function"
-                                attrs="{'invisible':[('is_company','=',False)]}"
+                                invisible="not is_company"
+                                readonly="state != 'draft'"
                             />
                             <!-- todo highlight iban if not valid -->
-                            <field name="iban" />
-                            <field name="address" />
-                            <field name="zip_code" />
-                            <field name="city" />
-                            <field name="country_id" options="{'no_create':True}" />
+                            <field name="iban" readonly="state != 'draft'" />
+                            <field name="address" readonly="state != 'draft'" />
+                            <field name="zip_code" readonly="state != 'draft'" />
+                            <field name="city" readonly="state != 'draft'" />
+                            <field
+                                name="country_id"
+                                options="{'no_create':True}"
+                                readonly="state != 'draft'"
+                            />
                         </group>
                         <group>
                             <field
                                 name="capital_release_request_date"
                                 groups="cooperator.cooperator_group_manager"
+                                readonly="state != 'draft'"
                             />
-                            <field name="date" />
-                            <field name="source" />
-                            <field name="ordered_parts" />
+                            <field name="date" readonly="state != 'draft'" />
+                            <field name="source" readonly="state != 'draft'" />
+                            <field name="ordered_parts" readonly="state != 'draft'" />
                             <field
                                 name="share_product_id"
                                 options="{'no_create':True}"
+                                readonly="state != 'draft'"
                             />
-                            <field name="share_short_name" />
-                            <field name="share_unit_price" />
-                            <field name="subscription_amount" />
-                            <field name="partner_id" options="{'no_create':True}" />
-                            <field name="type" />
-                            <field name="lang" />
+                            <field
+                                name="share_short_name"
+                                readonly="state != 'draft'"
+                            />
+                            <field
+                                name="share_unit_price"
+                                readonly="state != 'draft'"
+                            />
+                            <field
+                                name="subscription_amount"
+                                readonly="state != 'draft'"
+                            />
+                            <field
+                                name="partner_id"
+                                options="{'no_create':True}"
+                                readonly="state != 'draft'"
+                            />
+                            <field name="type" readonly="state != 'draft'" />
+                            <field name="lang" readonly="state != 'draft'" />
                             <field name="skip_iban_control" />
                             <field name="internal_rules_approved" />
                             <field name="data_policy_approved" />
@@ -170,7 +200,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             <field
                                 name="company_id"
                                 groups="base.group_multi_company"
-                                attrs="{'readonly': [('id', '!=', False)]}"
+                                readonly="id"
                             />
                             <field
                                 name="company_id"
@@ -184,8 +214,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             name="capital_release_request"
                             string="Capital release request"
                         >
-                            <field name="capital_release_request">
-                                <tree options="{'no_create':True}">
+                            <field
+                                name="capital_release_request"
+                                readonly="state != 'draft'"
+                            >
+                                <list options="{'no_create':True}">
                                     <field name="state" invisible="True" />
                                     <field string="Cooperator" name="partner_id" />
                                     <field name="invoice_date" />
@@ -198,16 +231,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                     <field name="amount_total_signed" />
                                     <field name="amount_residual_signed" />
                                     <field name="payment_state" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="activity_ids" widget="mail_activity" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
@@ -281,7 +310,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         string="Update info"
                         name="%(action_view_update_share_line_info)d"
                         type="action"
-                        context="{'default_active_id': active_id}"
+                        context="{'default_active_id': id}"
                         groups="cooperator.cooperator_group_manager"
                     />
                 </header>
@@ -305,10 +334,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </record>
 
     <record id="share_line_tree" model="ir.ui.view">
-        <field name="name">share.line.tree</field>
+        <field name="name">share.line.list</field>
         <field name="model">share.line</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="partner_id" />
                 <field name="share_product_id" />
                 <field name="share_number" />
@@ -316,7 +345,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <field name="share_unit_price" />
                 <field name="effective_date" />
                 <field name="total_amount_line" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -348,5 +377,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="name">Share Lines</field>
         <field name="res_model">share.line</field>
     </record>
-
 </odoo>

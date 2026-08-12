@@ -6,7 +6,6 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <!--
         the structure of this report comes from
         account.report_invoice_document
@@ -70,5 +69,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </t>
         </t>
     </template>
-
 </odoo>

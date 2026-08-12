@@ -192,9 +192,8 @@ class PartnerCreateSubscription(models.TransientModel):
         if not self._get_email():
             coop_vals["email"] = self.email
 
-        if not self._get_register_number():
-            if self.is_company:
-                coop_vals["company_register_number"] = self.register_number
+        if not self._get_register_number() and self.is_company:
+            coop_vals["company_register_number"] = self.register_number
 
         if self.is_company and not self._get_representative():
             representative = False
@@ -226,7 +225,6 @@ class PartnerCreateSubscription(models.TransientModel):
                     represent_vals = {
                         "firstname": self.representative_firstname,
                         "lastname": self.representative_lastname,
-                        "cooperator": True,
                         "email": self.representative_email,
                         "parent_id": cooperator.id,
                         "representative": True,
@@ -250,7 +248,7 @@ class PartnerCreateSubscription(models.TransientModel):
 
         return {
             "type": "ir.actions.act_window",
-            "view_mode": "form,tree",
+            "view_mode": "form,list",
             "res_model": "subscription.request",
             "res_id": new_sub_req.id,
             "target": "current",

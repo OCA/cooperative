@@ -53,21 +53,6 @@ class SubscriptionRequest(models.Model):
             required_fields.append("generic_rules_approved")
         return required_fields
 
-    @api.constrains("birthdate")
-    def _check_birthdate(self):
-        for request in self:
-            if request.birthdate:
-                if request.birthdate > date.today():
-                    raise ValidationError(_("Date of birth cannot be in the future."))
-                min_date = date(1000, 1, 1)
-                if request.birthdate < min_date:
-                    raise ValidationError(
-                        _(
-                            "Please enter the full birth year with all digits "
-                            "(e.g., 1990, not 90)."
-                        )
-                    )
-
     @api.constrains("share_product_id", "is_company")
     def _check_share_available_to_user(self):
         for request in self:
@@ -150,18 +135,20 @@ class SubscriptionRequest(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        records = self.browse()
+        # adapt every vals dict first, then create in a single batch: one
+        # ORM create for N records instead of N creates defeating the
+        # batching of computes and inserts
         for vals in vals_list:
             partner = self._find_partner_from_create_vals(vals)
             if partner:
                 self._adapt_create_vals_and_membership_from_partner(vals, partner)
-            subscription_request = super().create(vals)
-            # TODO: This should probably not be in the create method. There may need
-            # to be a stage after draft in which this e-mail is sent, or the e-mail
-            # should exclusively be sent from `cooperator_website`. See #73 for
-            # some comments, and for a reverted implementation of the extra state.
-            subscription_request._send_confirmation_mail()
-            records += subscription_request
+        records = super().create(vals_list)
+        # TODO: This should probably not be in the create method. There may need
+        # to be a stage after draft in which this e-mail is sent, or the e-mail
+        # should exclusively be sent from `cooperator_website`. See #73 for
+        # some comments, and for a reverted implementation of the extra state.
+        for record in records:
+            record._send_confirmation_mail()
         return records
 
     def check_iban(self, iban):
@@ -178,7 +165,7 @@ class SubscriptionRequest(models.Model):
     def _compute_name(self):
         for sub_request in self:
             if sub_request.is_company:
-                sub_request.name = sub_request.company_name
+                sub_request.name = self.company_name
             else:
                 sub_request.name = " ".join(
                     part
@@ -203,8 +190,6 @@ class SubscriptionRequest(models.Model):
 
     already_cooperator = fields.Boolean(
         string="I'm already cooperator",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
 
     # previously, this was a normal field. it is now computed, and is used for
@@ -215,25 +200,17 @@ class SubscriptionRequest(models.Model):
     )
     firstname = fields.Char(
         string="First name",
-        readonly=True,
         required=True,
-        states={"draft": [("readonly", False)]},
     )
     lastname = fields.Char(
         string="Last name",
-        readonly=True,
         required=True,
-        states={"draft": [("readonly", False)]},
     )
     birthdate = fields.Date(
         string="Date of birth",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     gender = fields.Selection(
-        [("male", _("Male")), ("female", _("Female")), ("other", _("Other"))],
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        [("male", "Male"), ("female", "Female"), ("other", "Other")],
     )
     type = fields.Selection(
         [
@@ -241,8 +218,6 @@ class SubscriptionRequest(models.Model):
             ("increase", "Increase number of share"),
         ],
         default="new",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     state = fields.Selection(
         [
@@ -264,19 +239,13 @@ class SubscriptionRequest(models.Model):
     )
     email = fields.Char(
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     iban = fields.Char(
         string="Account Number",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     partner_id = fields.Many2one(
         "res.partner",
         string="Cooperator",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     share_product_id = fields.Many2one(
         "product.product",
@@ -288,61 +257,42 @@ class SubscriptionRequest(models.Model):
         # non-current company.
         domain="[('is_share', '=', True), ('company_id', 'in', (company_id, False))]",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         check_company=True,
     )
     share_short_name = fields.Char(
         related="share_product_id.short_name",
         string="Share type name",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     share_unit_price = fields.Float(
         related="share_product_id.list_price",
         string="Share price",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     subscription_amount = fields.Monetary(
         compute="_compute_subscription_amount",
         string="Subscription amount",
         currency_field="company_currency_id",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     ordered_parts = fields.Integer(
         string="Number of Share",
         required=True,
-        readonly=True,
         default=1,
-        states={"draft": [("readonly", False)]},
     )
     address = fields.Char(
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     city = fields.Char(
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     zip_code = fields.Char(
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     country_id = fields.Many2one(
         "res.country",
         string="Country",
         ondelete="restrict",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-        default=lambda self: self.env.company.default_country_id,
     )
-    phone = fields.Char(readonly=True, states={"draft": [("readonly", False)]})
+    phone = fields.Char()
     user_id = fields.Many2one(
         "res.users", string="Responsible", readonly=True, check_company=True
     )
@@ -360,15 +310,11 @@ class SubscriptionRequest(models.Model):
         _lang_get,
         string="Language",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         default=lambda self: self.env.company.default_lang_id.code,
     )
     date = fields.Date(
         string="Subscription date request",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         default=lambda _: date.today(),
     )
     company_id = fields.Many2one(
@@ -387,89 +333,59 @@ class SubscriptionRequest(models.Model):
     )
     is_company = fields.Boolean(
         string="Is a company",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     is_operation = fields.Boolean(
         string="Is an operation",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     company_name = fields.Char(
         string="Company name",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     company_email = fields.Char(
         string="Company email",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     company_register_number = fields.Char(
         string="Company register number",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     company_type = fields.Selection(
         [],
         string="Company type",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     same_address = fields.Boolean(
         string="Same address",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     # todo remove activities_* fields
     #  + check if all fields are necessary
     activities_address = fields.Char(
         string="Activities address",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     activities_city = fields.Char(
         string="Activities city",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     activities_zip_code = fields.Char(
         string="Activities zip Code",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     activities_country_id = fields.Many2one(
         "res.country",
         string="Activities country",
         ondelete="restrict",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     contact_person_function = fields.Char(
         string="Function",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     operation_request_id = fields.Many2one(
         "operation.request",
         string="Operation Request",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         check_company=True,
     )
     capital_release_request = fields.One2many(
         "account.move",
         "subscription_request",
         string="Capital release request",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     capital_release_request_date = fields.Date(
         string="Force the capital " "release request date",
         help="Keep empty to use the " "current date",
         copy=False,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     # todo : check all these sources are used
     source = fields.Selection(
@@ -480,8 +396,6 @@ class SubscriptionRequest(models.Model):
             ("operation", "Operation"),
         ],
         default="website",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     data_policy_approved = fields.Boolean(default=False)
     internal_rules_approved = fields.Boolean(
@@ -499,6 +413,7 @@ class SubscriptionRequest(models.Model):
             "subscription.request.get_person_info() is deprecated. "
             "please use .set_person_info() instead.",
             DeprecationWarning,
+            stacklevel=2,
         )
         return self.set_person_info(partner)
 
@@ -538,7 +453,7 @@ class SubscriptionRequest(models.Model):
 
     # fixme: this is very specific and should not be here.
     # declare this function in order to be overriden
-    def get_eater_vals(self, partner, share_product_id):  # noqa
+    def get_eater_vals(self, partner, share_product_id):
         return {}
 
     def _prepare_invoice_line(self, move_id, product, partner, qty):
@@ -641,6 +556,9 @@ class SubscriptionRequest(models.Model):
         partner_vals = {
             "name": self.company_name,
             "is_company": self.is_company,
+            # partner_firstname decide pelo company_type nos vals; sem ele o
+            # nome da empresa seria dividido em firstname/lastname
+            "company_type": "company",
             "company_register_number": self.company_register_number,
             "legal_form": self.company_type,
             "street": self.address,
@@ -782,7 +700,7 @@ class SubscriptionRequest(models.Model):
                     "=",
                     self.company_register_number,
                 )
-            ]  # noqa
+            ]
         elif not self.is_company:
             domain = self._get_partner_domain()
 

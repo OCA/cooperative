@@ -6,12 +6,11 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record id="operation_request_tree" model="ir.ui.view">
-        <field name="name">operation.request.tree</field>
+        <field name="name">operation.request.list</field>
         <field name="model">operation.request</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="request_date" />
                 <field name="effective_date" />
                 <field name="partner_id" />
@@ -20,7 +19,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <field name="user_id" />
                 <field name="state" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -34,37 +33,37 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         string="Submit"
                         type="object"
                         name="submit_operation"
-                        states="draft"
+                        invisible="state != 'draft'"
                     />
                     <button
                         string="Approve"
                         type="object"
                         name="approve_operation"
-                        states="waiting"
+                        invisible="state != 'waiting'"
                     />
                     <button
                         string="Refuse"
                         type="object"
                         name="refuse_operation"
-                        states="waiting"
+                        invisible="state != 'waiting'"
                     />
                     <button
                         string="Cancel"
                         type="object"
                         name="cancel_operation"
-                        states="draft,waiting,approved"
+                        invisible="state not in ('draft', 'waiting', 'approved')"
                     />
                     <button
                         string="Draft"
                         type="object"
                         name="reset_to_draft"
-                        states="waiting,cancelled"
+                        invisible="state not in ('waiting', 'cancelled')"
                     />
                     <button
                         string="Execute"
                         type="object"
                         name="execute_operation"
-                        states="approved"
+                        invisible="state != 'approved'"
                     />
                     <field
                         name="state"
@@ -76,57 +75,49 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <sheet>
                     <group>
                         <group>
-                            <field
-                                name="request_date"
-                                attrs="{'readonly':[('state','!=','draft')]}"
-                            />
-                            <field
-                                name="effective_date"
-                                attrs="{'readonly':[('state','!=','draft')]}"
-                            />
-                            <field
-                                name="operation_type"
-                                attrs="{'readonly':[('state','!=','draft')]}"
-                            />
+                            <field name="request_date" readonly="state != 'draft'" />
+                            <field name="effective_date" readonly="state != 'draft'" />
+                            <field name="operation_type" readonly="state != 'draft'" />
                             <field
                                 name="receiver_not_member"
-                                attrs="{'invisible':[('operation_type','!=','transfer')], 'readonly':[('state','!=','draft')]}"
+                                invisible="operation_type != 'transfer'"
+                                readonly="state != 'draft'"
                             />
                             <field
                                 name="partner_id"
                                 options="{'no_create':True}"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                             />
                             <field
                                 name="partner_id_to"
                                 options="{'no_create':True}"
-                                attrs="{'invisible':['|',('operation_type','!=','transfer'), ('receiver_not_member','=',True)], 'readonly':[('state','!=','draft')]}"
+                                invisible="operation_type != 'transfer' or receiver_not_member"
+                                readonly="state != 'draft'"
                             />
                         </group>
                         <group>
                             <field name="user_id" />
                             <field
                                 name="share_product_id"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                                 options="{'no_create':True}"
                             />
                             <field name="share_short_name" readonly="True" />
                             <field
                                 name="share_to_product_id"
-                                attrs="{'invisible':[('operation_type','!=','convert')],'required':[('operation_type','=','convert')],'readonly':[('state','!=','draft')]}"
+                                invisible="operation_type != 'convert'"
+                                required="operation_type == 'convert'"
+                                readonly="state != 'draft'"
                                 options="{'no_create':True}"
                             />
                             <field name="share_to_short_name" readonly="True" />
-                            <field
-                                name="quantity"
-                                attrs="{'readonly':[('state','!=','draft')]}"
-                            />
+                            <field name="quantity" readonly="state != 'draft'" />
                             <field name="share_unit_price" readonly="True" />
                             <field name="subscription_amount" readonly="True" />
                             <field
                                 name="company_id"
                                 groups="base.group_multi_company"
-                                attrs="{'readonly': [('id', '!=', False)]}"
+                                readonly="id"
                             />
                             <field
                                 name="company_id"
@@ -138,10 +129,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     <group>
                         <field
                             name="subscription_request"
-                            attrs="{'invisible':['|',('operation_type','!=','transfer'),('receiver_not_member','=',False)]}"
+                            invisible="operation_type != 'transfer' or not receiver_not_member"
                             context="{'default_is_operation': True, 'default_ordered_parts': quantity, 'default_share_product_id': share_product_id, 'default_source': 'operation'}"
                         >
-                            <tree>
+                            <list>
                                 <field name="firstname" />
                                 <field name="lastname" />
                                 <field name="birthdate" />
@@ -149,7 +140,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                 <field name="email" />
                                 <field name="iban" />
                                 <field name="state" invisible="True" />
-                            </tree>
+                            </list>
                             <form string="Subscription Requests">
                                 <sheet>
                                     <group>
@@ -201,5 +192,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="res_model">operation.request</field>
         <field name="view_id" ref="operation_request_tree" />
     </record>
-
 </odoo>

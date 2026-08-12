@@ -5,7 +5,6 @@ SPDX-FileCopyrightText: 2023 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record model="ir.rule" id="subscription_request_rule_company">
         <field name="name">Subscription Request multi-company</field>
         <field name="model_id" ref="cooperator.model_subscription_request" />
@@ -40,5 +39,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="global" eval="True" />
         <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
-
 </odoo>

@@ -3,8 +3,8 @@ Manage cooperators of a cooperative.
 A basic flow can be the following:
 
 - Create subscription request for a person (moral or physical)
-- Validate subscription request, a capital release request (an invoice: `account.move`).
-  This invoice is sent to the future cooperator.
+- Validate subscription request, a capital release request (an invoice:
+  account.move). This invoice is sent to the future cooperator.
 - Payment of the cooperator is registered and the capital Release
   request is marked as paid.
 - A new cooperator (a special partner) is created, and the right type
@@ -26,5 +26,6 @@ Features:
 
 Configurations:
 
-- on the company, set a default payment term for the capital release requests.
+- on the company, set a default payment term for the capital release
+  requests.
 - on the company, set the cooperator account.
