@@ -6,48 +6,49 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-10-28 12:23+0000\n"
-"Last-Translator: Eugeni Chafer <eugeni@chafer.cat>\n"
+"Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
 
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
 msgid "+32 456 926 5059"
-msgstr "+34 456 926 505"
+msgstr ""
 
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.becomecompanycooperator
-#, fuzzy
 msgid "0647980091"
-msgstr "0647980091"
+msgstr ""
 
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
-#, fuzzy
 msgid "1030"
-msgstr "1030"
+msgstr ""
+
+#. module: cooperator_website
+#: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
+msgid "1978-03-05"
+msgstr ""
 
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
 msgid "<option value=\"\">Country...</option>"
-msgstr "<option value=\"\">País...</option>"
+msgstr ""
 
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.cooperator_thanks
-msgid "<span>Your subscription has been <b>successfully</b> registered.</span>"
+msgid ""
+"<span>Your subscription has been <b>successfully</b> registered.</span>"
 msgstr ""
-"<span>La vostra sol·licitud ha estat <b>registrada correctament</b>.</span>"
 
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
 msgid "Address"
-msgstr "Adreça"
+msgstr ""
 
 #. module: cooperator_website
 #. odoo-python
@@ -133,13 +134,6 @@ msgstr ""
 #. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
 msgid "Date of birth"
-msgstr ""
-
-#. module: cooperator_website
-#. odoo-python
-#: code:addons/cooperator_website/controllers/main.py:0
-#, python-format
-msgid "Date of birth cannot be in the future."
 msgstr ""
 
 #. module: cooperator_website
@@ -231,22 +225,8 @@ msgid "Main Address"
 msgstr ""
 
 #. module: cooperator_website
-#. odoo-python
-#: code:addons/cooperator_website/controllers/main.py:0
-#, python-format
-msgid "Number of shares must be at least {min_qty}."
-msgstr ""
-
-#. module: cooperator_website
 #: model_terms:ir.ui.view,arch_db:cooperator_website.contact_template
 msgid "Phone"
-msgstr ""
-
-#. module: cooperator_website
-#. odoo-python
-#: code:addons/cooperator_website/controllers/main.py:0
-#, python-format
-msgid "Please enter the full birth year with all digits (e.g., 1990, not 90)."
 msgstr ""
 
 #. module: cooperator_website
@@ -335,6 +315,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:cooperator_website.address_template
 msgid "rue Van Hove 199"
 msgstr ""
-
-#~ msgid "1978-03-05"
-#~ msgstr "05-03-1978"

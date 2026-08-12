@@ -6,7 +6,6 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <template id="contact_template" name="contact_template">
         <div class="row">
             <div class="col-md-6">
@@ -74,8 +73,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="birthdate"
-                        t-att-max="datetime.date.today().strftime('%Y-%m-%d')"
-                        min="1000-01-01"
+                        placeholder="1978-03-05"
                     />
                 </div>
             </div>
@@ -328,12 +326,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         id="ordered_parts"
                         step="1"
                         min="1"
-                        t-att-value="ordered_parts or 1"
+                        value="1"
                         class="form-control form-control-sm"
                     />
                 </div>
             </div>
             <div class="col-md-3 col-6" name="total_parts_container">
+                <div id="share_price" style="display: none;" />
                 <label for="total_parts" class="form-label">Total</label>
                 <div class="input-group input-group-sm mb-3 has-validation">
                     <span class="input-group-text" t-out="company.currency_id.symbol" />
@@ -409,10 +408,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             >
                                 <label>
                                     <input
-                                        type="checkbox"
-                                        t-att-checked="logged"
-                                        name="logged"
-                                    />
+                                    type="checkbox"
+                                    t-att-checked="logged"
+                                    name="logged"
+                                />
                                     Logged
                                 </label>
                             </div>
@@ -423,10 +422,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             >
                                 <label>
                                     <input
-                                        type="checkbox"
-                                        t-att-checked="already_cooperator"
-                                        name="already_cooperator"
-                                    />
+                                    type="checkbox"
+                                    t-att-checked="already_cooperator"
+                                    name="already_cooperator"
+                                />
                                     Are you already a cooperator?
                                 </label>
                             </div>
@@ -494,11 +493,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <div class="mb-3" style="display: none;" name="is_company_container">
                     <label>
                         <input
-                            type="checkbox"
-                            t-att-value="is_company"
-                            checked="checked"
-                            name="is_company"
-                        />
+                        type="checkbox"
+                        t-att-value="is_company"
+                        checked="checked"
+                        name="is_company"
+                    />
                         Is a company?
                     </label>
                 </div>
@@ -636,11 +635,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <xpath expr="/t[@t-name='website.contactus_thanks']" position="attributes">
             <attribute name="name">Thanks (Cooperator)</attribute>
         </xpath>
-        <xpath
-            expr="//div[@id='wrap']/section/div/div/div[1]/h5/span[2]"
-            position="replace"
-        >
-            <span>Your subscription has been <b>successfully</b> registered.</span>
+        <xpath expr="//p[hasclass('lead') and hasclass('mb-0')]" position="replace">
+            <p class="lead mb-0">Your subscription has been <b
+            >successfully</b> registered.</p>
         </xpath>
     </template>
 
@@ -650,5 +647,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="parent_id" ref="website.main_menu" />
         <field name="sequence" type="int">65</field>
     </record>
-
 </odoo>

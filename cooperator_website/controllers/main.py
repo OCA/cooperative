@@ -5,7 +5,7 @@
 
 import base64
 import re
-from datetime import date, datetime
+from datetime import datetime
 from urllib.parse import urljoin
 
 from odoo import http
@@ -40,7 +40,7 @@ _COOP_FORM_FIELD = [
     "country_id",
     "phone",
     "lang",
-    "ordered_parts",
+    "nb_parts",
     "total_parts",
     "error_msg",
 ]
@@ -63,7 +63,7 @@ _COMPANY_FORM_FIELD = [
     "country_id",
     "phone",
     "lang",
-    "ordered_parts",
+    "nb_parts",
     "total_parts",
     "error_msg",
     "company_type",
@@ -80,7 +80,7 @@ class WebsiteSubscription(http.Controller):
     def display_become_cooperator_page(self, **kwargs):
         values = {}
         logged = False
-        if not request.website.is_public_user():
+        if request.env.user.login != "public":
             logged = True
             partner = request.env.user.partner_id
             if partner.is_company:
@@ -106,7 +106,7 @@ class WebsiteSubscription(http.Controller):
         values = {}
         logged = False
 
-        if not request.website.is_public_user():
+        if request.env.user.login != "public":
             logged = True
         values = self.fill_values(values, True, logged, True)
 
@@ -134,7 +134,7 @@ class WebsiteSubscription(http.Controller):
 
     def get_values_from_user(self, values, is_company):
         # the subscriber is connected
-        if not request.website.is_public_user():
+        if request.env.user.login != "public":
             values["logged"] = "on"
             partner = request.env.user.partner_id
 
@@ -211,9 +211,8 @@ class WebsiteSubscription(http.Controller):
                 values["activities_country_id"] = company.default_country_id.id
             else:
                 values["activities_country_id"] = "20"
-        if not values.get("lang"):
-            if company.default_lang_id:
-                values["lang"] = company.default_lang_id.code
+        if not values.get("lang") and company.default_lang_id:
+            values["lang"] = company.default_lang_id.code
 
         values.update(
             {
@@ -263,14 +262,7 @@ class WebsiteSubscription(http.Controller):
         """
         return True
 
-    def get_share_minimum_quantity(self, share):
-        if share.force_min_qty:
-            return share.minimum_quantity
-        return 1
-
-    def validation(  # noqa: C901 (method too complex)
-        self, kwargs, logged, values, post_file
-    ):
+    def validation(self, kwargs, logged, values, post_file):
         user_obj = request.env["res.users"]
         sub_req_obj = request.env["subscription.request"]
 
@@ -292,7 +284,7 @@ class WebsiteSubscription(http.Controller):
             email = kwargs.get("company_email")
         # Check that required field from model subscription_request exists
         required_fields = sub_req_obj.sudo().get_required_field()
-        error = {field for field in required_fields if not values.get(field)}  # noqa
+        error = {field for field in required_fields if not values.get(field)}
 
         if error:
             values = self.fill_values(values, is_company, logged)
@@ -326,30 +318,13 @@ class WebsiteSubscription(http.Controller):
         # There's no issue with the email, so we can remember the confirmation email
         values["confirm_email"] = email
 
-        # check the birthdate
-        birthdate = date.fromisoformat(kwargs["birthdate"])
-        if birthdate > date.today():
-            values["error_msg"] = _("Date of birth cannot be in the future.")
-        min_date = date(1000, 1, 1)
-        if birthdate < min_date:
-            values["error_msg"] = _(
-                "Please enter the full birth year with all digits "
-                "(e.g., 1990, not 90)."
-            )
-        if "error_msg" in values:
-            # error message is set: the birthdate is incorrect
-            values = self.fill_values(values, is_company, logged)
-            values["error"] = {"birthdate"}
-            return request.render(redirect, values)
-
         company = request.website.company_id
-        if company.allow_id_card_upload:
-            if not post_file:
-                values = self.fill_values(values, is_company, logged)
-                values.update(kwargs)
-                values["error_msg"] = _("Please upload a scan of your ID card.")
-                values["error"] = {"identity_card_scan"}
-                return request.render(redirect, values)
+        if company.allow_id_card_upload and not post_file:
+            values = self.fill_values(values, is_company, logged)
+            values.update(kwargs)
+            values["error_msg"] = _("Please upload a scan of your ID card.")
+            values["error"] = {"identity_card_scan"}
+            return request.render(redirect, values)
 
         if "iban" in required_fields:
             iban = kwargs.get("iban")
@@ -362,17 +337,6 @@ class WebsiteSubscription(http.Controller):
                     values["error"] = {"iban"}
                     return request.render(redirect, values)
 
-        share = self.get_selected_share(kwargs)
-        # check subscription respect min qty of shares
-        min_qty = self.get_share_minimum_quantity(share)
-        share_qty = int(kwargs.get("ordered_parts"))
-        if share_qty < min_qty:
-            values = self.fill_values(values, is_company, logged)
-            values["error_msg"] = _(
-                "Number of shares must be at least {min_qty}."
-            ).format(min_qty=min_qty)
-            return request.render(redirect, values)
-
         # check the subscription's amount
         max_amount = company.subscription_maximum_amount
         if logged:
@@ -380,13 +344,14 @@ class WebsiteSubscription(http.Controller):
             if partner.member:
                 max_amount = max_amount - partner.total_value
                 if company.unmix_share_type:
+                    share = self.get_selected_share(kwargs)
                     if partner.cooperator_type != share.default_code:
                         values = self.fill_values(values, is_company, logged)
                         values["error_msg"] = _(
                             "You can't subscribe to two different types of share."
                         )
                         return request.render(redirect, values)
-        total_amount = share_qty * share.list_price
+        total_amount = float(kwargs.get("total_parts"))
 
         if max_amount > 0 and total_amount > max_amount:
             values = self.fill_values(values, is_company, logged)
@@ -425,13 +390,13 @@ class WebsiteSubscription(http.Controller):
             }
         }
 
-    @http.route(  # noqa: C901 (method too complex)
+    @http.route(
         ["/subscription/subscribe_share"],
         type="http",
         auth="public",
         website=True,
-    )  # noqa: C901 (method too complex)
-    def share_subscription(self, **kwargs):  # noqa: C901 (method too complex)
+    )
+    def share_subscription(self, **kwargs):
         sub_req_obj = request.env["subscription.request"]
         attach_obj = request.env["ir.attachment"]
 
@@ -448,7 +413,7 @@ class WebsiteSubscription(http.Controller):
                 values[field_name] = field_value
             # allow to add some free fields or blacklisted field like ID
             elif field_name not in _TECHNICAL:
-                post_description.append("{}: {}".format(field_name, field_value))
+                post_description.append(f"{field_name}: {field_value}")
 
         logged = kwargs.get("logged") == "on"
         is_company = kwargs.get("is_company") == "on"
@@ -491,22 +456,21 @@ class WebsiteSubscription(http.Controller):
 
         values["share_product_id"] = self.get_selected_share(kwargs).id
 
-        if is_company:
-            if kwargs.get("company_register_number"):
-                values["company_register_number"] = re.sub(
-                    "[^0-9a-zA-Z]+", "", kwargs.get("company_register_number")
-                )
+        if is_company and kwargs.get("company_register_number"):
+            values["company_register_number"] = re.sub(
+                "[^0-9a-zA-Z]+", "", kwargs.get("company_register_number")
+            )
 
-        subscription_request = sub_req_obj.sudo().create(values)
-        values["subscription_request"] = subscription_request
+        subscription_id = sub_req_obj.sudo().create(values)
 
-        for field_value in post_file:
-            attachment_value = {
-                "name": field_value.filename,
-                "res_model": "subscription.request",
-                "res_id": subscription_request,
-                "datas": base64.encodebytes(field_value.read()),
-            }
-            attach_obj.sudo().create(attachment_value)
+        if subscription_id:
+            for field_value in post_file:
+                attachment_value = {
+                    "name": field_value.filename,
+                    "res_model": "subscription.request",
+                    "res_id": subscription_id,
+                    "datas": base64.encodebytes(field_value.read()),
+                }
+                attach_obj.sudo().create(attachment_value)
 
         return self.get_subscription_response(values, kwargs)
