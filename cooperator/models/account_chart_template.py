@@ -5,10 +5,10 @@
 from odoo import models
 
 
-class AccountChartTemplate(models.Model):
+class AccountChartTemplate(models.AbstractModel):
     _inherit = "account.chart.template"
 
-    def _load(self, company):
-        result = super()._load(company)
+    def _load(self, template_code, company, install_demo, force_create=True):
+        result = super()._load(template_code, company, install_demo, force_create)
         company._init_cooperator_data()
         return result

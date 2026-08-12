@@ -5,7 +5,6 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record id="view_validate_subscription_request" model="ir.ui.view">
         <field name="name">Validate subscription request</field>
         <field name="model">validate.subscription.request</field>
@@ -35,5 +34,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
-
 </odoo>

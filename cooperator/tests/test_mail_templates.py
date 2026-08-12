@@ -5,11 +5,12 @@
 from freezegun import freeze_time
 
 from odoo import fields
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase, tagged
 
 from .cooperator_test_mixin import CooperatorTestMixin
 
 
+@tagged("post_install", "-at_install")
 class TestMailTemplates(TransactionCase, CooperatorTestMixin):
     @classmethod
     def setUpClass(cls):
@@ -70,6 +71,19 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
         self.assertIn("on behalf of dummy company", message.body_html)
         self.assertFalse(message.attachment_ids)
 
+    def test_confirmation_mail_for_company_without_email(self):
+        """A company subscription request without a company email must not
+        crash the confirmation mail rendering (the email_to expression used
+        to evaluate ``", " + False``)."""
+        vals = self.get_dummy_company_subscription_requests_vals()
+        vals.pop("company_email", None)
+        last_mail_id = self._get_last_mail_id()
+        request = self.env["subscription.request"].create(vals)
+        self.assertTrue(request)
+        message = self._get_new_mail_messages(last_mail_id)
+        self.assertEqual(len(message), 1)
+        self.assertEqual(message.email_to, vals["email"])
+
     def _test_mail_template_capital_release_request(self, subscription_request):
         last_mail_id = self._get_last_mail_id()
         subscription_request.validate_subscription_request()
@@ -77,7 +91,9 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
         self.assertEqual(len(message), 1)
         self.assertEqual(message.recipient_ids, subscription_request.partner_id)
         self.assertEqual(
-            message.subject, "YourCompany Capital Release Request (Ref SUBJ/2023/001)"
+            message.subject,
+            f"{subscription_request.company_id.name} "
+            "Capital Release Request (Ref SUBJ/2023/001)",
         )
         self.assertIn("Hello first name,", message.body_html)
         self.assertEqual(len(message.attachment_ids), 1)
@@ -142,9 +158,8 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
         # should be .pdf but pdf generation is disabled in test mode.
         self.assertEqual(
             message.attachment_ids.name,
-            "Certificate {number}.html".format(
-                number=subscription_request.partner_id.cooperator_register_number
-            ),
+            "Certificate "
+            f"{subscription_request.partner_id.cooperator_register_number}.html",
         )
 
     def test_mail_template_certificate(self):
@@ -178,9 +193,7 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
         # should be .pdf but pdf generation is disabled in test mode.
         self.assertEqual(
             message.attachment_ids.name,
-            "Certificate {number}.html".format(
-                number=cooperator.cooperator_register_number
-            ),
+            f"Certificate {cooperator.cooperator_register_number}.html",
         )
 
     def test_mail_template_share_increase(self):
@@ -240,9 +253,7 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
         # should be .pdf but pdf generation is disabled in test mode.
         self.assertEqual(
             message.attachment_ids.name,
-            "Certificate {number}.html".format(
-                number=cooperator.cooperator_register_number
-            ),
+            f"Certificate {cooperator.cooperator_register_number}.html",
         )
         message = messages[1]
         if subscription_request_vals.get("is_company"):
@@ -259,9 +270,7 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
         # should be .pdf but pdf generation is disabled in test mode.
         self.assertEqual(
             message.attachment_ids.name,
-            "Certificate {number}.html".format(
-                number=new_cooperator.cooperator_register_number
-            ),
+            f"Certificate {new_cooperator.cooperator_register_number}.html",
         )
 
     def test_mail_template_share_transfer(self):
@@ -399,9 +408,7 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
         # should be .pdf but pdf generation is disabled in test mode.
         self.assertEqual(
             message.attachment_ids.name,
-            "Certificate {number}.html".format(
-                number=cooperator.cooperator_register_number
-            ),
+            f"Certificate {cooperator.cooperator_register_number}.html",
         )
         message = messages[1]
         self.assertEqual(message.recipient_ids, new_cooperator)
@@ -411,9 +418,7 @@ class TestMailTemplates(TransactionCase, CooperatorTestMixin):
         # should be .pdf but pdf generation is disabled in test mode.
         self.assertEqual(
             message.attachment_ids.name,
-            "Certificate {number}.html".format(
-                number=new_cooperator.cooperator_register_number
-            ),
+            f"Certificate {new_cooperator.cooperator_register_number}.html",
         )
 
     def test_mail_template_share_transfer_existing_cooperator(self):

@@ -5,4 +5,5 @@
 from . import test_cooperator
 from . import test_cooperator_security
 from . import test_mail_templates
-from . import test_portal_payment
+from . import test_model_gaps
+from . import test_wizards

@@ -18,7 +18,8 @@ class CooperativeMembership(models.Model):
         (
             "company_id_partner_id_key",
             "unique (company_id, partner_id)",
-            "Only one cooperative membership record can exist per partner (per company)",
+            "Only one cooperative membership record can exist per partner "
+            "(per company)",
         ),
         (
             # "numbe" instead of "number" because the constraint name is
@@ -169,7 +170,7 @@ class CooperativeMembership(models.Model):
         string="Cooperator Number",
         readonly=True,
         copy=False,
-        group_operator=None,
+        aggregator=None,
     )
     number_of_share = fields.Integer(
         compute=_compute_share_info,
@@ -219,10 +220,12 @@ class CooperativeMembership(models.Model):
         # company_register_number could be falsy or be only made of whitespace.
         if not company_register_number:
             return self.browse()
+        # company_register_number lives on res.partner, not on the
+        # membership model; searching it directly crashes
         cooperator = self.search(
             [
                 ("cooperator", "=", True),
-                ("company_register_number", "=", company_register_number),
+                ("partner_id.company_register_number", "=", company_register_number),
             ],
             limit=1,
         )

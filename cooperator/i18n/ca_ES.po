@@ -50,8 +50,8 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hello\n"
-"        <t t-if=\"object.is_company\" t-"
-"out=\"object.get_representative().firstname\"></t>\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
 "        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
 "        <br><br>\n"
 "        We confirm that the adaptation on your shares portfolio has been "
@@ -71,16 +71,16 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hello\n"
-"        <t t-if=\"object.is_company\" t-"
-"out=\"object.get_representative().firstname\"></t>\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
 "        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
 "        <br><br>\n"
 "        We confirm that the adaptation on your shares portfolio has been "
 "performed succesfully. Your cooperator certificate has been adapted "
 "accordingly.\n"
 "        <br><br>\n"
-"        Please find in attachment your <t t-"
-"out=\"object.env.company.name\"></t> cooperator certificate.\n"
+"        Please find in attachment your <t t-out=\"object.env.company.name"
+"\"></t> cooperator certificate.\n"
 "        <br><br>\n"
 "        Sustainably yours,\n"
 "    </p>\n"
@@ -90,8 +90,8 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hola\n"
-"        <t t-if=\"object.is_company\" t-"
-"out=\"object.get_representative().firstname\"></t>\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
 "        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
 "        <br><br>\n"
 "        Confirmem els canvis de participacions que has fet recentment. Hem "
@@ -111,15 +111,15 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hello\n"
-"        <t t-if=\"object.is_company\" t-"
-"out=\"object.get_representative().firstname\"></t>\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
 "        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
 "        <br><br>\n"
 "        We confirm that the shares have been transferred to you. If you were "
 "not already a cooperator, you are now a shareholder of our cooperative.\n"
 "        <br><br>\n"
-"        Please find in attachment your <t t-"
-"out=\"object.env.company.name\"></t> cooperator certificate.\n"
+"        Please find in attachment your <t t-out=\"object.env.company.name"
+"\"></t> cooperator certificate.\n"
 "        <br><br>\n"
 "        Sustainably yours,\n"
 "    </p>\n"
@@ -129,8 +129,8 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hola\n"
-"        <t t-if=\"object.is_company\" t-"
-"out=\"object.get_representative().firstname\"></t>\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
 "        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
 "        <br><br>\n"
 "        Et confirmem que se t'han transferit participacions de la "
@@ -150,15 +150,15 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hello\n"
-"        <t t-if=\"object.is_company\" t-"
-"out=\"object.get_representative().firstname\"></t>\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
 "        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
 "        <br><br>\n"
 "        We confirm the reception of your payment for the new share(s) you "
 "have taken.\n"
 "        <br><br>\n"
-"        Please find in attachment your <t t-"
-"out=\"object.env.company.name\"></t> cooperator certificate.\n"
+"        Please find in attachment your <t t-out=\"object.env.company.name"
+"\"></t> cooperator certificate.\n"
 "        <br><br>\n"
 "        Sustainably yours,\n"
 "    </p>\n"
@@ -168,8 +168,8 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hola\n"
-"        <t t-if=\"object.is_company\" t-"
-"out=\"object.get_representative().firstname\"></t>\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
 "        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
 "        <br><br>\n"
 "        Hem rebut el teu pagament per les noves participacions que has "
@@ -189,15 +189,15 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hello\n"
-"        <t t-if=\"object.is_company\" t-"
-"out=\"object.get_representative().firstname\"></t>\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
 "        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
 "        <br><br>\n"
 "        We confirm the reception of your payment. You are now a shareholder "
 "of our cooperative.\n"
 "        <br><br>\n"
-"        Please find in attachment your <t t-"
-"out=\"object.env.company.name\"></t> cooperator certificate.\n"
+"        Please find in attachment your <t t-out=\"object.env.company.name"
+"\"></t> cooperator certificate.\n"
 "        <br><br>\n"
 "        Sustainably yours,\n"
 "    </p>\n"
@@ -207,8 +207,8 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hola\n"
-"        <t t-if=\"object.is_company\" t-"
-"out=\"object.get_representative().firstname\"></t>\n"
+"        <t t-if=\"object.is_company\" t-out=\"object.get_representative()."
+"firstname\"></t>\n"
 "        <t t-else=\"\" t-out=\"object.firstname\"></t>,\n"
 "        <br><br>\n"
 "        Hem rebut el teu pagament. Ja ets soci/a de la cooperativa!</p>\n"
@@ -249,9 +249,9 @@ msgid ""
 "        Hello\n"
 "        <t t-out=\"object.firstname\"></t>,\n"
 "        <br><br>\n"
-"        We have received your subscription request<t t-"
-"if=\"object.is_company\"> on behalf of <t t-out=\"object.company_name\"></"
-"t></t>. Thank you for your support.\n"
+"        We have received your subscription request<t t-if=\"object.is_company"
+"\"> on behalf of <t t-out=\"object.company_name\"></t></t>. Thank you for "
+"your support.\n"
 "        <br><br>\n"
 "        Your request will be soon processed by our team. If all the provided "
 "information is correct you will soon receive the payment information in "
@@ -269,9 +269,9 @@ msgstr ""
 "        Hola\n"
 "        <t t-out=\"object.firstname\"></t>,\n"
 "        <br><br>\n"
-"        Hem rebut la teva soŀlicitud de subscripció<t t-"
-"if=\"object.is_company\"> en nom de <t t-out=\"object.company_name\"></t></"
-"t>. Moltes gràcies pel teu suport!\n"
+"        Hem rebut la teva soŀlicitud de subscripció<t t-if=\"object."
+"is_company\"> en nom de <t t-out=\"object.company_name\"></t></t>. Moltes "
+"gràcies pel teu suport!\n"
 "        <br><br>\n"
 "        Processarem aviat la teva soŀlicitud. Si és correcta tota la "
 "informació que ens has proporcionat, rebràs un altre correu amb la "
@@ -318,78 +318,6 @@ msgstr ""
 "    </p>\n"
 "</div>\n"
 "        "
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"<span class=\"o_form_label\">\n"
-"                                    Board representative name\n"
-"                                </span>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"<span class=\"o_form_label\">\n"
-"                                    Board representative signature\n"
-"                                </span>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"<span class=\"o_form_label\">\n"
-"                                    Contact Email\n"
-"                                </span>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"<span class=\"o_form_label\">\n"
-"                                    Cooperator Account\n"
-"                                </span>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"<span class=\"o_form_label\">\n"
-"                                    Default Country\n"
-"                                </span>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"<span class=\"o_form_label\">\n"
-"                                    Default Language\n"
-"                                </span>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"<span class=\"o_form_label\">\n"
-"                                    Default Payment Term\n"
-"                                </span>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"<span class=\"o_form_label\">\n"
-"                                    Maximum amount\n"
-"                                </span>"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"<span class=\"o_form_label\">\n"
-"                                    Subscription Journal\n"
-"                                </span>"
-msgstr ""
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_certificate_document
@@ -469,11 +397,6 @@ msgid "Account Number"
 msgstr "Número de compte"
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Accounting"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__message_needaction
 msgid "Action Needed"
 msgstr ""
@@ -536,8 +459,6 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__allow_id_card_upload
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__allow_id_card_upload
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
 msgid "Allow ID Card upload"
 msgstr ""
 
@@ -591,11 +512,6 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Automatically create a portal user for cooperators"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__bank_account
 msgid "Bank account"
 msgstr "Compte bancari"
@@ -612,25 +528,21 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__board_representative
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__board_representative
 msgid "Board representative name"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__signature_scan
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__signature_scan
 msgid "Board representative signature"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__bottom_logo1
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__bottom_logo1
 msgid "Bottom logo 1"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__bottom_logo2
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__bottom_logo2
 msgid "Bottom logo 2"
 msgstr ""
 
@@ -679,18 +591,12 @@ msgid "Capital Release Request"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Capital Release Request Email Message"
-msgstr ""
-
-#. module: cooperator
 #: model:mail.template,name:cooperator.email_template_release_capital
 msgid "Capital Release Request: Sending"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_capital_release_mail_template
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__cooperator_capital_release_mail_template
 msgid "Capital release email template"
 msgstr ""
 
@@ -701,19 +607,12 @@ msgid "Capital release request"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Certificate Email Message"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_certificate_mail_template
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__cooperator_certificate_mail_template
 msgid "Certificate email template"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_certificate_increase_mail_template
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__cooperator_certificate_increase_mail_template
 msgid "Certificate increase email template"
 msgstr ""
 
@@ -758,28 +657,24 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__display_data_policy_approval
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__display_data_policy_approval
 msgid ""
 "Choose to display a data policy checkbox on the cooperator website form."
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__display_financial_risk_approval
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__display_financial_risk_approval
 msgid ""
 "Choose to display a financial risk checkbox on the cooperator website form."
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__display_internal_rules_approval
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__display_internal_rules_approval
 msgid ""
 "Choose to display an internal rules checkbox on the cooperator website form."
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__display_generic_rules_approval
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__display_generic_rules_approval
 msgid ""
 "Choose to display generic rules checkbox on the cooperator website form."
 msgstr ""
@@ -850,11 +745,6 @@ msgid "Company type"
 msgstr "Tipus de companyia"
 
 #. module: cooperator
-#: model:ir.model,name:cooperator.model_res_config_settings
-msgid "Config Settings"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_config
 #: model_terms:ir.ui.view,arch_db:cooperator.product_template_form_view
 msgid "Configuration"
@@ -866,13 +756,7 @@ msgid "Contact"
 msgstr "Contacte"
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Contact email address for cooperators"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__coop_email_contact
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__coop_email_contact
 msgid "Contact email address for the cooperator"
 msgstr ""
 
@@ -905,6 +789,11 @@ msgstr ""
 #: code:addons/cooperator/models/operation_request.py:0
 #, python-format
 msgid "Converting just part of the shares is not yet implemented"
+msgstr ""
+
+#. module: cooperator
+#: model_terms:ir.ui.view,arch_db:cooperator.view_company_form
+msgid "Cooperative"
 msgstr ""
 
 #. module: cooperator
@@ -947,7 +836,6 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__property_cooperator_account
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__property_cooperator_account
 msgid "Cooperator Account"
 msgstr ""
 
@@ -1017,7 +905,6 @@ msgstr ""
 #. module: cooperator
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_cooperator
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_main
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
 #: model_terms:ir.ui.view,arch_db:cooperator.view_res_partner_filter
 msgid "Cooperators"
 msgstr ""
@@ -1053,13 +940,7 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__create_user
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__create_user
 msgid "Create user for cooperator"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Create users for cooperators"
 msgstr ""
 
 #. module: cooperator
@@ -1087,33 +968,7 @@ msgid "Created on"
 msgstr "Creat el"
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Custom Email Template"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Custom Email Template For New Cooperators"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Custom Email Template For Share Increase"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Custom Email Template With No Remaining Shares"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Data Policy"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__data_policy_approval_text
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__data_policy_approval_text
 msgid "Data Policy Approval Text"
 msgstr ""
 
@@ -1123,61 +978,27 @@ msgid "Data Policy Approved"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Data Policy Text"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__birthdate
 msgid "Date of birth"
 msgstr ""
 
 #. module: cooperator
-#. odoo-python
-#: code:addons/cooperator/models/subscription_request.py:0
-#, python-format
-msgid "Date of birth cannot be in the future."
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__default_capital_release_request_payment_term
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__capital_release_request_payment_term_default
 msgid "Default Payment Term"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"Default account to use as the receivable\n"
-"                                    account for the share payments"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__default_country_id
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__country_id_default
 msgid "Default country"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Default country in subscription forms"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__default_lang_id
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__lang_id_default
 msgid "Default lang"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Default language in subscription forms"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__default_capital_release_request_payment_term
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__capital_release_request_payment_term_default
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
 msgid "Default payment term to use for capital release requests"
 msgstr ""
 
@@ -1189,25 +1010,21 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__display_data_policy_approval
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__display_data_policy_approval
 msgid "Display Data Policy Approval"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__display_financial_risk_approval
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__display_financial_risk_approval
 msgid "Display Financial Risk Approval"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__display_generic_rules_approval
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__display_generic_rules_approval
 msgid "Display Generic Rules Approval"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__display_internal_rules_approval
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__display_internal_rules_approval
 msgid "Display Internal Rules Approval"
 msgstr ""
 
@@ -1224,30 +1041,12 @@ msgid "Display Name"
 msgstr "Mostrar Nom"
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Display a logo on the PDF reports"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Display a second logo on the PDF reports"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"Display information about the financial risk on the cooperator website form"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__display_logo1
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__display_logo1
 msgid "Display logo 1"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__display_logo2
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__display_logo2
 msgid "Display logo 2"
 msgstr ""
 
@@ -1255,21 +1054,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_product_product__display_on_website
 #: model:ir.model.fields,field_description:cooperator.field_product_template__display_on_website
 msgid "Display on website"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Display the data policy on the cooperator website form"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Display the generic rules on the cooperator website form"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Display the internal rules on the cooperator website form"
 msgstr ""
 
 #. module: cooperator
@@ -1315,7 +1099,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:cooperator.field_partner_create_subscription__email
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__email
 #: model_terms:ir.ui.view,arch_db:cooperator.report_cooperator_register
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
 msgid "Email"
 msgstr "Correu electrònic"
 
@@ -1357,24 +1140,13 @@ msgid "Female"
 msgstr "Dona"
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Financial Risk"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__financial_risk_approval_text
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__financial_risk_approval_text
 msgid "Financial Risk Approval Text"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__financial_risk_approved
 msgid "Financial Risk Approved"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Financial Risk Information Text"
 msgstr ""
 
 #. module: cooperator
@@ -1403,18 +1175,6 @@ msgid "For the board of"
 msgstr ""
 
 #. module: cooperator
-#: model:ir.model.fields,help:cooperator.field_operation_request__subscription_request
-msgid ""
-"For transfer operations: if the share receiver isn't a (former) member then "
-"a subscription form must be filled."
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Force cooperators to have only one type of share"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_product_product__force_min_qty
 #: model:ir.model.fields,field_description:cooperator.field_product_template__force_min_qty
 msgid "Force minimum quantity?"
@@ -1436,29 +1196,13 @@ msgid "Gender"
 msgstr "Gènere"
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "General Settings"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Generic Rules"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__generic_rules_approval_text
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__generic_rules_approval_text
 msgid "Generic Rules Approval Text"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__generic_rules_approved
 msgid "Generic Rules Approved"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Generic Rules Text"
 msgstr ""
 
 #. module: cooperator
@@ -1513,7 +1257,6 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__unmix_share_type
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__unmix_share_type
 msgid ""
 "If checked, A cooperator will be authorised to have only one type of share"
 msgstr ""
@@ -1537,15 +1280,14 @@ msgstr ""
 #: model:ir.model.fields,help:cooperator.field_res_company__cooperator_share_update_mail_template
 #: model:ir.model.fields,help:cooperator.field_res_company__cooperator_share_update_no_shares_mail_template
 #: model:ir.model.fields,help:cooperator.field_res_company__cooperator_waiting_list_mail_template
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__cooperator_capital_release_mail_template
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__cooperator_certificate_increase_mail_template
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__cooperator_certificate_mail_template
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__cooperator_confirmation_mail_template
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__cooperator_share_transfer_mail_template
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__cooperator_share_update_mail_template
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__cooperator_share_update_no_shares_mail_template
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__cooperator_waiting_list_mail_template
 msgid "If left empty, the default global mail template will be used."
+msgstr ""
+
+#. module: cooperator
+#: model:ir.model.fields,help:cooperator.field_operation_request__subscription_request
+msgid ""
+"In case on a transfer of share. If the share receiver isn't a effective "
+"member then a subscription form should be filled."
 msgstr ""
 
 #. module: cooperator
@@ -1564,19 +1306,8 @@ msgid "Info"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Internal Rules"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__internal_rules_approval_text
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__internal_rules_approval_text
 msgid "Internal Rules Approval Text"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Internal Rules Text"
 msgstr ""
 
 #. module: cooperator
@@ -1621,25 +1352,21 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__data_policy_approval_required
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__data_policy_approval_required
 msgid "Is data policy approval required?"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__financial_risk_approval_required
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__financial_risk_approval_required
 msgid "Is financial risk approval required?"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__generic_rules_approval_required
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__generic_rules_approval_required
 msgid "Is generic rules approval required?"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__internal_rules_approval_required
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__internal_rules_approval_required
 msgid "Is internal rules approval required?"
 msgstr ""
 
@@ -1734,16 +1461,6 @@ msgid "Legal form"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Logo 1"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Logo 2"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.actions.act_window,name:cooperator.mail_template_action
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_templates
 msgid "Mail Templates"
@@ -1785,8 +1502,6 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__subscription_maximum_amount
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__subscription_maximum_amount
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
 msgid "Maximum authorised subscription amount"
 msgstr ""
 
@@ -1928,11 +1643,6 @@ msgid "Old cooperator"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "One share type per cooperator"
-msgstr ""
-
-#. module: cooperator
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
 #, python-format
@@ -1971,7 +1681,6 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_subscription_request__operation_request_id
-#: model:ir.ui.menu,name:cooperator.menu_cooperator_operation_request
 msgid "Operation Request"
 msgstr ""
 
@@ -1990,6 +1699,7 @@ msgstr ""
 #. module: cooperator
 #: model:ir.actions.act_window,name:cooperator.operation_request_action
 #: model:ir.model,name:cooperator.model_operation_request
+#: model:ir.ui.menu,name:cooperator.menu_cooperator_operation_request
 #: model_terms:ir.ui.view,arch_db:cooperator.operation_request_form
 msgid "Operation request"
 msgstr ""
@@ -2036,13 +1746,6 @@ msgstr "Telèfon"
 msgid ""
 "Please define income account for this product: \"{name}\" (id: {id}) - or "
 "for its category: \"{category}\"."
-msgstr ""
-
-#. module: cooperator
-#. odoo-python
-#: code:addons/cooperator/models/subscription_request.py:0
-#, python-format
-msgid "Please enter the full birth year with all digits (e.g., 1990, not 90)."
 msgstr ""
 
 #. module: cooperator
@@ -2118,11 +1821,6 @@ msgid "Release of capital request"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Report template"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.ui.menu,name:cooperator.menu_cooperator_main_reporting
 msgid "Reporting"
 msgstr "Informes"
@@ -2166,11 +1864,6 @@ msgstr ""
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.view_subscription_request_filter
 msgid "Request type"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Require Approval"
 msgstr ""
 
 #. module: cooperator
@@ -2225,84 +1918,31 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__send_capital_release_email
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__send_capital_release_email
 msgid "Send Capital Release email"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__send_share_transfer_email
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__send_share_transfer_email
 msgid "Send Share Transfer Email"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__send_share_update_email
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__send_share_update_email
 msgid "Send Share Update Email"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__send_waiting_list_email
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__send_waiting_list_email
 msgid "Send Waiting List email"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"Send a confirmation email message when a\n"
-"                                    subscription is received"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"Send an email message containing the\n"
-"                                    capital release request when a\n"
-"                                    subscription is validated"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"Send an email message containing the\n"
-"                                    cooperator certificate after a share\n"
-"                                    transfer"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"Send an email message containing the\n"
-"                                    cooperator certificate after a "
-"successful\n"
-"                                    payment"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"Send an email message containing the\n"
-"                                    cooperator certificate when shares of a\n"
-"                                    cooperator are updated"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid ""
-"Send an email message when a subscription\n"
-"                                    is put on the waiting list"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__send_certificate_email
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__send_certificate_email
 msgid "Send certificate email"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__send_confirmation_email
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__send_confirmation_email
 msgid "Send confirmation email"
 msgstr ""
 
@@ -2357,12 +1997,6 @@ msgid "Sent to cooperators with their cooperator certificate in attachment"
 msgstr ""
 
 #. module: cooperator
-#: model:ir.actions.act_window,name:cooperator.action_cooperator_config
-#: model:ir.ui.menu,name:cooperator.menu_cooperator_settings
-msgid "Settings"
-msgstr ""
-
-#. module: cooperator
 #: model:product.template,name:cooperator.product_template_share_type_1_demo
 msgid "Share A - Founder"
 msgstr ""
@@ -2406,18 +2040,8 @@ msgid "Share Receiver Info"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Share Subscription Confirmation Email Message"
-msgstr ""
-
-#. module: cooperator
 #: model:mail.template,subject:cooperator.email_template_share_transfer
 msgid "Share Transfer Confirmation"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Share Transfer Email Message"
 msgstr ""
 
 #. module: cooperator
@@ -2451,7 +2075,6 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_confirmation_mail_template
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__cooperator_confirmation_mail_template
 msgid "Share confirmation email template"
 msgstr ""
 
@@ -2500,13 +2123,11 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_share_update_no_shares_mail_template
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__cooperator_share_update_no_shares_mail_template
 msgid "Share transfer (no remaining shares) email template"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_share_transfer_mail_template
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__cooperator_share_transfer_mail_template
 msgid "Share transfer email template"
 msgstr ""
 
@@ -2530,18 +2151,12 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_share_update_mail_template
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__cooperator_share_update_mail_template
 msgid "Share update email template"
 msgstr ""
 
 #. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.view_partner_form
 msgid "Shares"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Shares Update Email Message"
 msgstr ""
 
 #. module: cooperator
@@ -2597,7 +2212,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/cooperator/models/subscription_request.py:0
 #: model:ir.model.fields,field_description:cooperator.field_res_company__subscription_journal_id
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__subscription_journal_id
 #, python-format
 msgid "Subscription Journal"
 msgstr ""
@@ -2678,25 +2292,21 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__data_policy_approval_text
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__data_policy_approval_text
 msgid "Text to display aside the checkbox to approve data policy."
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__financial_risk_approval_text
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__financial_risk_approval_text
 msgid "Text to display aside the checkbox to approve financial risk."
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__internal_rules_approval_text
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__internal_rules_approval_text
 msgid "Text to display aside the checkbox to approve internal rules."
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__generic_rules_approval_text
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__generic_rules_approval_text
 msgid "Text to display aside the checkbox to approve the generic rules."
 msgstr ""
 
@@ -2776,18 +2386,7 @@ msgid ""
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "These are our generic rules…"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "These are our internal rules…"
-msgstr ""
-
-#. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_res_company__property_cooperator_account
-#: model:ir.model.fields,help:cooperator.field_res_config_settings__property_cooperator_account
 msgid ""
 "This account will be the default one as the receivable account for the "
 "cooperators"
@@ -2800,16 +2399,6 @@ msgstr ""
 msgid ""
 "This contact person is already defined for another company. Please select "
 "another contact"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "This is our data policy…"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "This is the financial risk…"
 msgstr ""
 
 #. module: cooperator
@@ -2946,7 +2535,6 @@ msgstr "Preu unitari"
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__unmix_share_type
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__unmix_share_type
 msgid "Unmix share type"
 msgstr ""
 
@@ -3011,18 +2599,12 @@ msgid "Waiting"
 msgstr ""
 
 #. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Waiting List Email Message"
-msgstr ""
-
-#. module: cooperator
 #: model_terms:ir.ui.view,arch_db:cooperator.subscription_request_view_form
 msgid "Waiting list"
 msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__cooperator_waiting_list_mail_template
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__cooperator_waiting_list_mail_template
 msgid "Waiting list email template"
 msgstr ""
 
@@ -3039,11 +2621,6 @@ msgstr ""
 #. module: cooperator
 #: model:ir.model.fields,help:cooperator.field_subscription_request__website_message_ids
 msgid "Website communication history"
-msgstr ""
-
-#. module: cooperator
-#: model_terms:ir.ui.view,arch_db:cooperator.res_config_settings_cooperator_view_form
-msgid "Website form"
 msgstr ""
 
 #. module: cooperator
@@ -3091,7 +2668,6 @@ msgstr ""
 
 #. module: cooperator
 #: model:ir.model.fields,field_description:cooperator.field_res_company__logo_url
-#: model:ir.model.fields,field_description:cooperator.field_res_config_settings__logo_url
 msgid "logo url"
 msgstr ""
 

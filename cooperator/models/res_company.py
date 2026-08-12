@@ -200,12 +200,18 @@ class ResCompany(models.Model):
     @api.model
     def _get_cooperator_mail_template_fields(self):
         return {
-            "cooperator_confirmation_mail_template": "cooperator.email_template_confirmation",
+            "cooperator_confirmation_mail_template": (
+                "cooperator.email_template_confirmation"
+            ),
             "cooperator_capital_release_mail_template": (
                 "cooperator.email_template_release_capital"
             ),
-            "cooperator_waiting_list_mail_template": "cooperator.email_template_waiting_list",
-            "cooperator_certificate_mail_template": "cooperator.email_template_certificate",
+            "cooperator_waiting_list_mail_template": (
+                "cooperator.email_template_waiting_list"
+            ),
+            "cooperator_certificate_mail_template": (
+                "cooperator.email_template_certificate"
+            ),
             "cooperator_certificate_increase_mail_template": (
                 "cooperator.email_template_share_increase"
             ),
@@ -215,7 +221,9 @@ class ResCompany(models.Model):
             "cooperator_share_update_no_shares_mail_template": (
                 "cooperator.email_template_share_update_no_shares"
             ),
-            "cooperator_share_update_mail_template": "cooperator.email_template_share_update",
+            "cooperator_share_update_mail_template": (
+                "cooperator.email_template_share_update"
+            ),
         }
 
     def _get_cooperator_template(self, name):
@@ -295,9 +303,7 @@ class ResCompany(models.Model):
                     )
 
     def _accounting_data_initialized(self):
-        return self.chart_template_id or self.env[
-            "account.chart.template"
-        ].existing_accounting(self)
+        return bool(self.chart_template) or self.root_id._existing_accounting()
 
     def _init_cooperator_data(self):
         """
@@ -339,12 +345,13 @@ class ResCompany(models.Model):
                 # same remark as in _init_cooperator_data()
                 continue
             if not company.property_cooperator_account:
-                company.property_cooperator_account = account_account_model.create(
-                    {
-                        "code": "416101",
-                        "name": "Cooperators",
-                        "account_type": "asset_receivable",
-                        "reconcile": True,
-                        "company_id": company.id,
-                    }
+                company.property_cooperator_account = (
+                    account_account_model.with_company(company).create(
+                        {
+                            "code": "416101",
+                            "name": "Cooperators",
+                            "account_type": "asset_receivable",
+                            "reconcile": True,
+                        }
+                    )
                 )

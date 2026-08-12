@@ -22,7 +22,7 @@ from . import share_type
 
 
 def company_dependent_related_field(delegate, name, field_type, **kwargs):
-    delegate_field_name = ".".join([delegate, name])
+    delegate_field_name = f"{delegate}.{name}"
 
     def _compute(self):
         for record in self:
@@ -64,7 +64,7 @@ class ResPartner(models.Model):
     def _get_report_base_filename(self):
         self.ensure_one()
         if self.member:
-            return "Cooperator Certificate - %s" % self.name
+            return f"Cooperator Certificate - {self.name}"
         else:
             return "unknown"
 

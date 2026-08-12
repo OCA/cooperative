@@ -30,7 +30,6 @@ class ShareLineUpdateInfo(models.TransientModel):
     )
 
     def update(self):
-
         line = self.share_line
         cooperator = line.partner_id
 

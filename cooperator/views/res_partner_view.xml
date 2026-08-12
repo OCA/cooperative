@@ -6,7 +6,6 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">view_partner_form</field>
         <field name="model">res.partner</field>
@@ -18,7 +17,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         string="Create Subscription"
                         name="%(action_view_create_subscription)d"
                         type="action"
-                        context="{'default_active_id': active_id}"
+                        context="{'default_active_id': id}"
                         groups="cooperator.cooperator_group_user"
                     />
                 </header>
@@ -29,57 +28,46 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     <field name="cooperator" invisible="true" />
                     <group
                         groups="cooperator.cooperator_group_user"
-                        attrs="{'invisible': [('cooperator', '=', False)]}"
+                        invisible="not cooperator"
                     >
                         <field
                             name="cooperator_register_number"
-                            attrs="{'invisible': [('member', '=', False)]}"
+                            invisible="not member"
                         />
                         <field name="coop_candidate" />
                         <field name="member" />
-                        <field
-                            name="cooperator_type"
-                            attrs="{'invisible': [('member', '=', False)]}"
-                        />
-                        <field
-                            name="effective_date"
-                            attrs="{'invisible': [('member', '=', False)]}"
-                        />
+                        <field name="cooperator_type" invisible="not member" />
+                        <field name="effective_date" invisible="not member" />
                     </group>
                     <group
                         name="approvals"
                         groups="cooperator.cooperator_group_user"
-                        attrs="{'invisible': [('cooperator', '=', False)]}"
+                        invisible="not cooperator"
                     >
                         <field
                             name="internal_rules_approved"
-                            attrs="{'readonly': [('cooperator', '=', False)]}"
+                            readonly="not cooperator"
                         />
-                        <field
-                            name="data_policy_approved"
-                            attrs="{'readonly': [('cooperator', '=', False)]}"
-                        />
+                        <field name="data_policy_approved" readonly="not cooperator" />
                         <field
                             name="financial_risk_approved"
-                            attrs="{'readonly': [('cooperator', '=', False)]}"
+                            readonly="not cooperator"
                         />
                         <field
                             name="generic_rules_approved"
-                            attrs="{'readonly': [('cooperator', '=', False)]}"
+                            readonly="not cooperator"
                         />
                     </group>
                     <group>
                         <field
                             name="representative"
-                            attrs="{'invisible': ['|', ('parent_id', '=', False), ('is_company', '=', True)]}"
+                            invisible="not parent_id or is_company"
                         />
-                        <field
-                            name="legal_form"
-                            attrs="{'invisible': [('is_company', '=', False)]}"
-                        />
+                        <field name="legal_form" invisible="not is_company" />
                         <field
                             name="company_register_number"
-                            attrs="{'invisible': [('is_company', '=', False)], 'readonly': [('id', '!=', False)]}"
+                            invisible="not is_company"
+                            readonly="id"
                         />
                     </group>
                 </group>
@@ -89,7 +77,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <page
                     string="Shares"
                     name="share"
-                    attrs="{'invisible': [('member', '=', False)]}"
+                    invisible="not member"
                     groups="cooperator.cooperator_group_user"
                 >
                     <group>
@@ -97,7 +85,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         <field name="total_value" />
                     </group>
                     <field name="share_ids">
-                        <tree create="false">
+                        <list create="false">
                             <field name="effective_date" />
                             <field name="share_short_name" />
                             <field name="share_number" sum="Total of shares" />
@@ -110,17 +98,17 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                 name="company_id"
                                 groups="base.group_multi_company"
                             />
-                        </tree>
+                        </list>
                     </field>
                 </page>
                 <page
                     string="Share subscriptions"
                     name="share_subscription"
-                    attrs="{'invisible': [('cooperator', '=', False)]}"
+                    invisible="not cooperator"
                     groups="cooperator.cooperator_group_user"
                 >
                     <field name="subscription_request_ids">
-                        <tree create="false" delete="false" edit="false">
+                        <list create="false" delete="false" edit="false">
                             <field name="share_short_name" />
                             <field name="ordered_parts" sum="Total of shares" />
                             <field name="share_unit_price" />
@@ -134,7 +122,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                 name="company_id"
                                 groups="base.group_multi_company"
                             />
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </page>
@@ -192,7 +180,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <record id="action_partner_cooperator_form" model="ir.actions.act_window">
         <field name="name">Contacts</field>
         <field name="res_model">res.partner</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="context">
             {
                 "create": False,
@@ -207,7 +195,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <record id="action_partner_cooperator_candidate_form" model="ir.actions.act_window">
         <field name="name">Contacts</field>
         <field name="res_model">res.partner</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="context">
             {
                 "create": False,
@@ -222,7 +210,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <record id="action_company_representative_form" model="ir.actions.act_window">
         <field name="name">Contacts</field>
         <field name="res_model">res.partner</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="context">
             {
                 "create": False,
@@ -233,16 +221,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <p class="o_view_nocontent_neutral_face">No contacts found</p>
         </field>
     </record>
-
-    <record id="remove_partner_follower" model="ir.ui.view">
-        <field name="name">res.partner.remove.follower.inherit</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="mail.res_partner_view_form_inherit_mail" />
-        <field name="arch" type="xml">
-            <field name="message_follower_ids" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </field>
-        </field>
-    </record>
-
 </odoo>

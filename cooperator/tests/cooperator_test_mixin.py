@@ -36,8 +36,6 @@ class CooperatorTestMixin:
                 "categ_id": company_share_category.id,
                 "is_share": True,
                 "default_share_product": True,
-                "force_min_qty": True,
-                "minimum_quantity": 2,
                 "by_individual": True,
                 "by_company": True,
                 "list_price": 25,
@@ -67,13 +65,6 @@ class CooperatorTestMixin:
                 "skip_iban_control": True,
             }
         )
-        if not cls.company.chart_template_id:
-            # no default chart template has been loaded. this can happen if
-            # the database was initialized with a localization module. load
-            # the first chart template found.
-            cls.env["account.chart.template"].search([], limit=1).try_loading(
-                cls.company
-            )
 
     @classmethod
     def create_company(cls, name):
@@ -83,7 +74,9 @@ class CooperatorTestMixin:
             }
         )
         # apply the same account chart template as the main company
-        cls.company.chart_template_id.try_loading(company)
+        cls.env["account.chart.template"].try_loading(
+            cls.company.chart_template, company
+        )
         return company
 
     @classmethod
@@ -129,7 +122,9 @@ class CooperatorTestMixin:
                         0,
                         {
                             "name": invoice.payment_reference,
-                            "account_id": invoice.company_id.property_cooperator_account.id,
+                            "account_id": (
+                                invoice.company_id.property_cooperator_account.id
+                            ),
                             "credit": amount,
                         },
                     ),

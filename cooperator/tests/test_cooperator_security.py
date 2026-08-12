@@ -3,11 +3,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 from odoo.exceptions import AccessError
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase, tagged
 
 from .cooperator_test_mixin import CooperatorTestMixin
 
 
+@tagged("post_install", "-at_install")
 class TestCooperatorSecurity(TransactionCase, CooperatorTestMixin):
     @classmethod
     def setUpClass(cls):

@@ -5,7 +5,6 @@ SPDX-FileCopyrightText: 2019 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record id="res_partner_user_cooperator_demo" model="res.partner">
         <field name="name">User cooperator</field>
         <field name="is_company" eval="False" />
@@ -42,5 +41,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             eval="[(4, ref('cooperator.cooperator_group_manager'))]"
         />
     </record>
-
 </odoo>

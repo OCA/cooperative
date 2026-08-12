@@ -6,11 +6,10 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record id="mail_template_action" model="ir.actions.act_window">
         <field name="name">Mail Templates</field>
         <field name="res_model">mail.template</field>
-        <field name="view_mode">form,tree</field>
+        <field name="view_mode">form,list</field>
         <field name="domain">[('is_cooperator_template','=',True)]</field>
         <field name="view_id" ref="mail.email_template_tree" />
         <field name="search_view_id" ref="mail.view_email_template_search" />
@@ -26,5 +25,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </field>
         </field>
     </record>
-
 </odoo>

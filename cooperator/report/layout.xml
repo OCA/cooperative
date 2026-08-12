@@ -5,7 +5,6 @@ SPDX-FileCopyrightText: 2019 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <template
         id="external_layout_standard"
         name="Cooperator Template Layout"
@@ -13,21 +12,15 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         primary="True"
         priority="100"
     >
-        <!-- remove horizontal line above footer -->
-        <xpath
-            expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div"
-            position="attributes"
-        >
-            <attribute name="style" />
+        <!-- remove horizontal line above footer (border-top class in v18) -->
+        <xpath expr="//div[hasclass('o_footer_content')]" position="attributes">
+            <attribute name="class">o_footer_content d-flex pt-2</attribute>
         </xpath>
         <!--
             display logos on the right side of the footer according to the
             company properties
         -->
-        <xpath
-            expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div"
-            position="replace"
-        >
+        <xpath expr="//div[hasclass('o_footer_content')]" position="replace">
             <t t-if="company.display_logo1 or company.display_logo2">
                 <div style="font-size: 0.8em;">
                     <div class="row">
@@ -52,5 +45,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <t t-else="">$0</t>
         </xpath>
     </template>
-
 </odoo>

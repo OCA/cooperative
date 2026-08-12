@@ -6,12 +6,11 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <record id="subscription_register_tree" model="ir.ui.view">
-        <field name="name">subscription.register.tree</field>
+        <field name="name">subscription.register.list</field>
         <field name="model">subscription.register</field>
         <field name="arch" type="xml">
-            <tree create="false">
+            <list create="false">
                 <field name="register_number_operation" />
                 <field name="date" />
                 <field name="partner_id" />
@@ -21,7 +20,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <field name="total_amount_line" sum="Total amount" />
                 <field name="type" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -41,10 +40,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         <field name="total_amount_line" />
                     </group>
                     <group>
-                        <field
-                            name="partner_id_to"
-                            attrs="{'invisible':[('type','!=','transfer')]}"
-                        />
+                        <field name="partner_id_to" invisible="type != 'transfer'" />
                         <field name="type" />
                         <field name="share_to_short_name" />
                         <field name="quantity_to" />
@@ -111,5 +107,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="view_id" ref="subscription_register_tree" />
         <field name="search_view_id" ref="view_subscription_register_filter" />
     </record>
-
 </odoo>
