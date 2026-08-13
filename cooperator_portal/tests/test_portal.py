@@ -8,6 +8,7 @@ import re
 from odoo.tests.common import HttpCase, TransactionCase, tagged
 
 from odoo.addons.cooperator.tests.cooperator_test_mixin import CooperatorTestMixin
+from odoo.addons.cooperator_portal.controllers.portal import CooperatorPortal
 
 CSRF_RE = re.compile(r'name="csrf_token"\s+value="([^"]+)"')
 PORTAL_PASSWORD = "portal_test_password"
@@ -58,11 +59,36 @@ class TestCooperatorPortalModels(TransactionCase, CooperatorTestMixin):
         invoice._compute_access_url()
         self.assertEqual(invoice.access_url, f"/my/invoices/{invoice.id}")
 
-    def test_partner_write_drops_iban_key(self):
-        # upstream portal writes the whole form dict to res.partner;
-        # the iban key must be silently dropped
-        self.cooperator.write({"iban": "BE71096123456769", "city": "Namur"})
-        self.assertEqual(self.cooperator.city, "Namur")
+    def test_form_field_names_are_all_partner_fields(self):
+        # portal.account() writes the values built from both lists on the
+        # partner, so a name that is not a res.partner field raises ValueError
+        # and breaks /my/account. `iban` used to be in the mandatory list and
+        # did exactly that.
+        controller = CooperatorPortal()
+        partner_fields = self.env["res.partner"]._fields
+        unknown = [
+            name
+            for name in controller._get_mandatory_fields()
+            + controller._get_optional_fields()
+            if name not in partner_fields and name != "zipcode"
+        ]
+        self.assertFalse(unknown, f"not res.partner fields: {unknown}")
+
+    def test_portal_only_fields_stay_out_of_the_mandatory_list(self):
+        # This is the one that matters for the shop: since v18 website_sale
+        # merges _get_mandatory_fields() into the required fields of its
+        # address form, which has no input for any of these. The server then
+        # rejects the checkout, and the address form javascript crashes while
+        # marking them required. Being real res.partner fields is not enough,
+        # so this cannot be folded into the test above.
+        controller = CooperatorPortal()
+        mandatory = controller._get_mandatory_fields()
+        leaked = [f for f in controller._cooperator_portal_fields if f in mandatory]
+        self.assertFalse(
+            leaked,
+            f"{leaked} would be required in the shop address form, which has no "
+            f"input for them. Keep them in _get_optional_fields().",
+        )
 
 
 @tagged("post_install", "-at_install")
@@ -171,6 +197,24 @@ class TestCooperatorPortalHttp(HttpCase, CooperatorTestMixin):
         )
         self.assertEqual(response.status_code, 200)
         self.assertIn("not valid", response.text)
+
+    def test_account_still_requires_the_cooperator_fields(self):
+        # They were moved out of the mandatory list so that they do not reach
+        # the shop address form, which must not make them optional here.
+        self._login()
+        page = self.url_open("/my/account")
+        csrf_token = CSRF_RE.search(page.text).group(1)
+        for field_name in CooperatorPortal._cooperator_portal_fields:
+            before = self.cooperator.read([field_name])[0][field_name]
+            payload = self._account_payload(csrf_token)
+            payload[field_name] = ""
+            response = self.url_open("/my/account", data=payload)
+            self.assertEqual(response.status_code, 200)
+            self.cooperator.invalidate_recordset()
+            # validation refused the empty value, so nothing was written
+            self.assertEqual(
+                self.cooperator.read([field_name])[0][field_name], before, field_name
+            )
 
 
 @tagged("post_install", "-at_install")

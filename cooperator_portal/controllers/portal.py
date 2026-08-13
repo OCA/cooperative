@@ -13,15 +13,26 @@ from odoo.addons.account.controllers.portal import PortalAccount, portal_pager
 
 
 class CooperatorPortal(PortalAccount):
-    def _get_mandatory_fields(self):
-        # since v18 the billing field lists are methods instead of
-        # class attributes
-        return super()._get_mandatory_fields() + [
-            "iban",
-            "birthdate_date",
-            "gender",
-            "lang",
-        ]
+    # Fields this module adds to the portal details form, and which the
+    # cooperator has to fill in. They are NOT added to _get_mandatory_fields():
+    # since v18, website_sale merges that list into the required fields of the
+    # shop address form, which does not have an input for any of them. The
+    # checkout would then fail, in two different ways:
+    #
+    #  - the server reads every name of the list from the partner, so a name
+    #    that is not a res.partner field raises ValueError. `iban` did that: it
+    #    is a form field, stored on res.partner.bank by `account` below;
+    #  - the address form javascript looks each name up in the form to mark it
+    #    required. `lang` collides with the DOM property HTMLElement.lang, so
+    #    the lookup returns a string instead of an input and _getInputLabel()
+    #    crashes on `input.parentElement`.
+    #
+    # They go in the optional list, which website_sale does not use, so that
+    # portal.account() still writes them, and they are required here instead.
+    _cooperator_portal_fields = ["birthdate_date", "gender", "lang"]
+
+    def _get_optional_fields(self):
+        return super()._get_optional_fields() + self._cooperator_portal_fields
 
     def _prepare_portal_layout_values(self):
         values = super()._prepare_portal_layout_values()
@@ -108,9 +119,18 @@ class CooperatorPortal(PortalAccount):
         )
 
     def details_form_validate(self, data):
+        # Take `iban` out of the data before the generic validation: it is not
+        # a partner field, so it would be reported as an unknown field and then
+        # written on the partner. `data` is the controller's own copy of the
+        # posted values, so `account` below still sees the submitted account
+        # number.
+        iban = data.pop("iban", None)
         error, error_message = super().details_form_validate(data)
+        # Required on the portal form only, see _cooperator_portal_fields
+        for field_name in self._cooperator_portal_fields:
+            if not data.get(field_name):
+                error[field_name] = "missing"
         sub_req_model = request.env["subscription.request"]
-        iban = data.get("iban")
         valid = sub_req_model.check_iban(iban)
 
         if not valid:
