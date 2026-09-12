@@ -162,6 +162,22 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </xpath>
     </template>
 
+    <template id="portal_my_security" inherit_id="portal.portal_my_security">
+        <xpath
+            expr="//button[@data-bs-target='#portal_deactivate_account_modal']"
+            position="attributes"
+        >
+            <attribute name="class" add="disabled" separator=" " />
+         </xpath>
+        <xpath
+            expr="//button[@data-bs-target='#portal_deactivate_account_modal']"
+            position="after"
+        >
+            <small class="text-muted d-block mt-1">
+                To close your cooperator account, please contact your cooperative's administrator.
+            </small>
+         </xpath>
+    </template>
     <template
         id="portal_my_home_menu_capital_release_request"
         name="Portal layout : capital release request menu entries"

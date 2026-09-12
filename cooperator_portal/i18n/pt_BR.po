@@ -22,6 +22,15 @@ msgid "<i class=\"fa fa-download\"/> Cooperator Certificate"
 msgstr "<i class=\"fa fa-download\"/> Certificado de Cooperado"
 
 #. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_security
+msgid ""
+"<small class=\"text-muted d-block mt-1\">\n"
+"                To close your cooperator account, please contact your "
+"cooperative's administrator.\n"
+"            </small>"
+msgstr ""
+
+#. module: cooperator_portal
 #: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_details_fields
 msgid "Bank Account Number"
 msgstr "Número da Conta Bancária"
@@ -127,7 +136,8 @@ msgstr "O número da conta IBAN não é válido."
 #. module: cooperator_portal
 #: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_capital_release_requests
 msgid "There are currently no capital release requests for your account."
-msgstr "Atualmente, não há solicitações de liberação de capital para sua conta."
+msgstr ""
+"Atualmente, não há solicitações de liberação de capital para sua conta."
 
 #. module: cooperator_portal
 #: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_layout

@@ -20,6 +20,15 @@ msgid "<i class=\"fa fa-download\"/> Cooperator Certificate"
 msgstr ""
 
 #. module: cooperator_portal
+#: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_security
+msgid ""
+"<small class=\"text-muted d-block mt-1\">\n"
+"                To close your cooperator account, please contact your "
+"cooperative's administrator.\n"
+"            </small>"
+msgstr ""
+
+#. module: cooperator_portal
 #: model_terms:ir.ui.view,arch_db:cooperator_portal.portal_my_details_fields
 msgid "Bank Account Number"
 msgstr ""
