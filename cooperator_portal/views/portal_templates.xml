@@ -162,6 +162,39 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </xpath>
     </template>
 
+    <template id="portal_my_security" inherit_id="portal.portal_my_security">
+        <xpath
+            expr="//button[@data-bs-target='#portal_deactivate_account_modal']"
+            position="attributes"
+        >
+            <attribute name="class" add="disabled" separator=" " />
+        </xpath>
+        <xpath
+            expr="//button[@data-bs-target='#portal_deactivate_account_modal']"
+            position="after"
+        >
+            <small class="text-muted d-block mt-1">
+                To close your cooperator account, please contact your cooperative's administrator.
+            </small>
+         </xpath>
+        <xpath expr="//div[hasclass('modal-content')]" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('modal-content')]" position="before">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5
+                        class="modal-title"
+                    >Account deletion is restricted for standard users</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" />
+                </div>
+                <div class="modal-body">
+                    Please contact your cooperative's administrator
+                </div>
+            </div>
+        </xpath>
+    </template>
+
     <template
         id="portal_my_home_menu_capital_release_request"
         name="Portal layout : capital release request menu entries"

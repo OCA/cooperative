@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 from odoo import _
-from odoo.http import request, route
+from odoo.http import Response, request, route
 from odoo.osv import expression
 
 from odoo.addons.account.controllers.portal import PortalAccount, portal_pager
@@ -135,6 +135,16 @@ class CooperatorPortal(PortalAccount):
                         {"partner_id": partner.id, "acc_number": iban}
                     )
         return res
+
+    @route(
+        "/my/deactivate_account",
+        type="http",
+        auth="user",
+        website=True,
+        methods=["POST"],
+    )
+    def deactivate_account(self, validation, password, **post):
+        return Response(status=403)
 
     # this method is a copy of PortalAccount.portal_my_invoices() from the
     # account module in odoo 16, with a few changes. please update accordingly
