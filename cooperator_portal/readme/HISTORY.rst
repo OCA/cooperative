@@ -1,3 +1,11 @@
+16.0.1.2.0 (2026-10-02)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Features**
+
+- Forbid user account deletion from the portal. (`#186 <https://github.com/OCA/cooperative/issues/186>`_)
+
+
 16.0.1.1.0 (2026-02-24)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

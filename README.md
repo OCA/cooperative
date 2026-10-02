@@ -24,7 +24,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [cooperator](cooperator/) | 16.0.1.4.0 |  | Manage your cooperators
 [cooperator_documentation](cooperator_documentation/) | 16.0.1.0.0 | <a href='https://github.com/carmenbianca'><img src='https://github.com/carmenbianca.png' width='32' height='32' style='border-radius:50%;' alt='carmenbianca'/></a> | Add a link to the documentation of the module to the menu bar.
-[cooperator_portal](cooperator_portal/) | 16.0.1.1.0 |  | Show cooperator information in the website portal
+[cooperator_portal](cooperator_portal/) | 16.0.1.2.0 |  | Show cooperator information in the website portal
 [cooperator_website](cooperator_website/) | 16.0.1.2.0 |  | This module adds the cooperator subscription form allowing to subscribe for shares online.
 [cooperator_website_payment](cooperator_website_payment/) | 16.0.1.0.0 |  | Enable direct online payment of cooperative shares
 [cooperator_website_recaptcha](cooperator_website_recaptcha/) | 16.0.1.0.0 |  | Add reCAPTCHA to Subscription Request Form
