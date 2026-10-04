@@ -1,0 +1,1 @@
+Use the ``partner_company_type`` module to define company types instead of using a custom selection field.

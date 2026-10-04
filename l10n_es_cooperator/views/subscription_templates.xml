@@ -6,45 +6,40 @@
         name="Become company cooperator"
         priority="150"
     >
-        <xpath expr="//label[@for='company_register_number']/.." position="replace" />
+        <xpath
+            expr="//div[@name='company_register_number_container']"
+            position="replace"
+        />
         <!-- Remove Company type field -->
-        <xpath expr="//label[@for='company_type']/.." position="replace" />
+        <xpath expr="//div[@name='company_type_container']" position="replace" />
     </template>
 
     <template id="iban_template_es" inherit_id="cooperator_website.iban_template">
         <xpath expr="//div[@name='iban_template_container']" position="inside">
 
-            <div
-                class="form-group field-bank_account"
-                t-attf-class="form-group #{error and 'iban' in error and 'has-error' or ''}"
-                name="iban_container"
-            >
-                <label for="iban">Bank Account Number</label>
+            <div class="mb-3 field-bank_account" name="iban_container">
+                <label for="iban" class="form-label">Bank Account Number</label>
                 <input
-                    class="form-control form-control-sm"
+                    t-attf-class="form-control form-control-sm{{ error and 'iban' in error and ' is-invalid' or '' }}"
                     type="text"
                     name="iban"
                     id="iban"
                     required="True"
                     t-att-readonly="logged"
-                    t-attf-value="#{iban or ''}"
+                    t-att-value="iban"
                     placeholder="ES9000246912501234567891"
                 />
-
             </div>
-            <div
-                class="form-group"
-                t-attf-class="form-group #{error and 'vat' in error and 'has-error' or ''}"
-                name="vat_container"
-            >
-                <label for="vat">VAT</label>
+            <div class="mb-3 field-vat" name="vat_container">
+                <label for="vat" class="form-label">VAT</label>
                 <input
+                    t-attf-class="form-control form-control-sm{{ error and 'vat' in error and ' is-invalid' or '' }}"
                     type="text"
-                    class="form-control form-control-sm"
                     name="vat"
-                    placeholder="Y5643925S"
+                    id="vat"
                     required="True"
-                    t-attf-value="#{vat or ''}"
+                    t-att-value="vat"
+                    placeholder="Y5643925S"
                 />
             </div>
         </xpath>
