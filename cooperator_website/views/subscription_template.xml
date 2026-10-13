@@ -20,7 +20,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="firstname"
-                        placeholder="Didier"
                     />
                 </div>
             </div>
@@ -35,7 +34,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="lastname"
-                        placeholder="Bourdon"
                     />
                 </div>
             </div>
@@ -90,7 +88,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 required="true"
                 t-att-readonly="logged"
                 t-att-value="phone"
-                placeholder="+32 456 926 5059"
+                placeholder="+12 345 67 89 01"
             />
         </div>
         <div class="mb-3 field-lang" name="lang_container">
@@ -133,7 +131,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 required="true"
                 t-att-readonly="logged"
                 t-att-value="address"
-                placeholder="rue Van Hove 199"
             />
         </div>
         <div class="row">
@@ -148,7 +145,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="city"
-                        placeholder="Bruxelles"
+                        placeholder="Brussels"
                     />
                 </div>
             </div>
@@ -163,7 +160,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="zip_code"
-                        placeholder="1030"
                     />
                 </div>
             </div>
@@ -457,7 +453,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="email"
-                        placeholder="didier.bourdon@mycoop.be"
                     />
                 </div>
                 <div
@@ -475,7 +470,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="confirm_email"
-                        placeholder="didier.bourdon@mycoop.be"
                     />
                 </div>
                 <t t-call="cooperator_website.contact_template" />
@@ -517,7 +511,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="company_register_number"
-                        placeholder="0647980091"
                     />
                 </div>
                 <div class="mb-3 field-company_name" name="company_name_container">
@@ -529,7 +522,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="company_name"
-                        placeholder="Super Cooperative"
                     />
                 </div>
                 <div class="mb-3 field-company_type" name="company_type_container">
@@ -554,12 +546,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <div class="mb-3 field-company_email" name="company_email_container">
                     <label for="company_email" class="form-label">Company email</label>
                     <input
-                        type="text"
+                        type="email"
                         t-attf-class="form-control form-control-sm{{ error and 'company_email' in error and ' is-invalid' or '' }}"
                         name="company_email"
                         required="true"
                         t-att-value="company_email"
-                        placeholder="administration@mycoop.be"
                     />
                 </div>
                 <div
@@ -569,13 +560,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 >
                     <label for="confirm_email" class="form-label">Confirm Email</label>
                     <input
-                        type="confirm_email"
+                        type="email"
                         t-attf-class="form-control form-control-sm{{ error and 'confirm_email' in error and ' is-invalid' or '' }}"
                         name="confirm_email"
                         t-att-required="not logged"
                         t-att-readonly="logged"
                         t-att-value="confirm_email"
-                        placeholder="administration@mycoop.be"
                     />
                 </div>
                 <t t-call="cooperator_website.iban_template" />
@@ -593,7 +583,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         required="true"
                         t-att-readonly="logged"
                         t-att-value="email"
-                        placeholder="didier.bourdon@mycoop.be"
                     />
                 </div>
                 <t t-call="cooperator_website.contact_template" />
