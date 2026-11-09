@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-11-28 11:42+0000\n"
+"PO-Revision-Date: 2026-11-09 15:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: l10n_be_cooperator
 #: model:mail.template,body_html:l10n_be_cooperator.email_template_tax_shelter_certificate
@@ -836,7 +836,7 @@ msgstr "Totale trasferito"
 #. module: l10n_be_cooperator
 #: model:ir.model.fields,field_description:l10n_be_cooperator.field_certificate_line__transaction_date
 msgid "Transaction date"
-msgstr "Data transizione"
+msgstr "Data transazione"
 
 #. module: l10n_be_cooperator
 #: selection:certificate.line,type:0
